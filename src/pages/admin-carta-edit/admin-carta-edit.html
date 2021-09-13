@@ -1,0 +1,45 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title> {{crPr.selectedProduct.titulo }} </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="" padding>
+    <ion-list>
+        <ion-list-header>
+         <font color="black">   Editar: {{ crPr.selectedProduct.titulo }}</font>
+        </ion-list-header>
+        <ion-input type="hidden" [(ngModel)]="crPr.selectedProduct.key"></ion-input>
+        <ion-input type="hidden" [(ngModel)]="crPr.selectedProduct.uid"></ion-input>
+        <ion-item>
+            <ion-label  style="color:black" floating>Nombre</ion-label>
+            <ion-input style="color:black" type="text" [(ngModel)]="crPr.selectedProduct.titulo"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label style="color:black" floating>Categoria</ion-label>
+            <ion-input  style="color:black" type="text" [(ngModel)]="crPr.selectedProduct.categoria"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label style="color:black" floating>Precio</ion-label>
+            <ion-input style="color:black" type="number" [(ngModel)]="crPr.selectedProduct.precio"></ion-input>
+        </ion-item>
+        <ion-item class="fond">
+            <ion-label style="color:black" floating>Nota</ion-label>
+            <ion-textarea style="color:black" class="fond" placeholder="Descripción" [(ngModel)]="crPr.selectedProduct.nota" name="nota" autocomplete="on" autocorrect="on"></ion-textarea>
+        </ion-item>
+        <!-- <ion-item>
+            <button (click)="editCartaImg(crPr.selectedProduct.key, crPr.selectedProduct.uid )"><img [src]="crPr.selectedProduct.img" alt=""></button>
+        </ion-item> -->
+        <ion-row>
+            <ion-col>
+                <button class="md-trash" color="warning" ion-button block (click)="SaveCartaItem()">Guardar edición</button>
+            </ion-col>
+        </ion-row>
+
+
+    </ion-list>
+</ion-content>

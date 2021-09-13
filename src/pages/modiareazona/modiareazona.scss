@@ -1,0 +1,17 @@
+page-modiareazona {
+    .style1 {
+        color: #ffffff;
+        margin-top: 15%;
+    }
+    .toolbar-background {
+        background-image: url('../assets/imgs/proriat.png')!important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+}
+
+.alert-md [aria-checked=false] .alert-radio-label{
+    color:#a09560;
+}

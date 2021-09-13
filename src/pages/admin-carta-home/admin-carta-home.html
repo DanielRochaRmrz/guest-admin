@@ -1,0 +1,44 @@
+<ion-header>
+
+    <ion-navbar  hideBackButton>
+        <ion-row>
+  
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+                  </ion-col>
+              <ion-col col-8>
+                <ion-title>Carta CRUD</ion-title>
+              </ion-col>
+          </ion-row>
+          
+        </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="" padding>
+    <ion-fab left bottom>
+        <button ion-fab color="light"><ion-icon name="arrow-dropright"></ion-icon></button>
+        <ion-fab-list side="right">
+            <button ion-fab (click)="goCartaAdd()">
+          <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-fab-list>
+    </ion-fab>
+    <ion-list>
+        <ion-list-header style="height: 110px;">
+            <div class="">
+                <br>  <font color="black">Menú </font><br> 
+                <span>  <font color="black" style="opacity: .6;"> __________________________</font></span><br>
+                <font color="black" style="opacity: .8;">Listado de bebidas</font> 
+            </div>
+                   </ion-list-header>
+                   
+        <ion-item   style="margin-top:20px" *ngFor="let cartaItem of cartas" (click)="selectCartaItem(cartaItem)">
+          
+            <p><b>{{cartaItem.titulo}}</b></p>
+            <p>{{cartaItem.categoria}}</p>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

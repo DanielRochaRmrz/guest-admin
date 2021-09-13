@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar class="borde" hideBackButton >
+        <ion-row>
+            <ion-col col-2 >
+            <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white">
+            </ion-icon>
+        </ion-col>
+      
+
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento"> PERFIL </div>
+                <div class="sucursal">Sucursal</div>
+            </ion-col>
+            <ion-col>
+                <div align='end'>
+                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Mis datos
+        </ion-list-header>
+        <ion-item>{{_userEmpleado.displayName}}</ion-item>
+        <ion-item>{{_userEmpleado.correo}} </ion-item>
+        <ion-item *ngIf="_userEmpleado.active == 'true'">Estado:
+            <ion-badge item-end color="sec">Activo</ion-badge>
+        </ion-item>
+        <ion-item *ngIf="_userEmpleado.active == 'false'">Estado:
+            <ion-badge item-end color="red">No Activo</ion-badge>
+        </ion-item>
+    </ion-list>
+    <ion-row>
+        <ion-col>
+            <button class="md-trash" color="warning" ion-button block (click)="changePass(_userEmpleado.correo)"> <font color="white">Restablecer/Cambiar Contraseña  </font> </button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <!--<ion-col>
+            <button class="md-trash" color="dark" ion-button block (click)="logout()">Cerrar sesión</button>
+        </ion-col>-->
+    </ion-row>
+
+</ion-content>

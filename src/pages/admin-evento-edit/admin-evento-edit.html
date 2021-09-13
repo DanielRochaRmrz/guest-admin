@@ -1,0 +1,155 @@
+<!-- <ion-header>
+
+    <ion-navbar>
+        <ion-title> {{ _cap.selectedEventoItem.titulo }} </ion-title>
+    </ion-navbar>
+
+</ion-header> -->
+
+<ion-header>
+
+    <ion-navbar class="borde"  hideBackButton>
+        <ion-row>
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+                  </ion-col>
+             <a href="" ><img src="./assets/img/icons/icons.png" alt=""></a>
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento">{{ _cap.selectedEventoItem.titulo }}</div>
+                <div class="sucursal">Sucursal</div>
+            </ion-col>
+            <ion-col>
+                <div align='end'>
+                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col>
+            <p class="lugar">
+                EDICIÓN DE EVENTO
+                <br>
+                <img src="./assets/content/line-hori.png" style="width: 40%;" alt="">
+            </p>
+            <p class="descrip">
+                Para mejorar la experiencia del usuario Ghest , le recomendamos subir imagenes en formato PNG
+            </p>
+        </ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
+
+    <br>
+
+    <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+            <button style="background-color: transparent;" (click)="editEventoImg(_cap.selectedEventoItem.key, _cap.selectedEventoItem.uid)">
+                <!-- <img [src]="_cap.selectedEventoItem.img" class="imgEvento" alt=""> -->
+                        
+                <!-- <div *ngIf="user.provider == 'facebook'"> -->
+                                     
+                    <img   src="{{_cap.selectedEventoItem.img}}"  style="border-radius:50%;">
+                    <!-- <img   src="https://firebasestorage.googleapis.com/v0/b/guestreservation-8b24b.appspot.com/o/evento%2F1544207260131.jpg?alt=media&token=e6f38a14-0f01-4d14-aef7-d17d3446fd56"  style="border-radius:50%;"> -->
+                                                                                                          
+   <!-- </div>
+                                            <div *ngIf="user.provider == 'google'">
+                                                    <img src="{{_cap.selectedEventoItem.img}}?type=large&width=720&height=720"
+                                                        style="width:85%;border-radius:50%;">
+                                                             </div> -->
+                                           
+
+            </button>
+            <img src="./assets/content/Ellipse.png" class="camara" alt="">
+            <!-- <div *ngIf="imagenPreview">
+                <img [src]="imagenPreview" class="imgEvento">
+            </div> -->
+            <!-- <img src="./assets/content/1.jpg" class="imgEvento" alt=""> -->
+        </ion-col>
+        <ion-col></ion-col>
+    </ion-row>
+
+    <ion-list>
+        <ion-list-header>
+            Editar: {{ _cap.selectedEventoItem.titulo }}
+        </ion-list-header>
+        <ion-input type="hidden" [(ngModel)]="_cap.selectedEventoItem.uid"></ion-input>
+        <ion-input type="hidden" [(ngModel)]="_cap.selectedEventoItem.key"></ion-input>
+        <ion-item>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input type="text" class="letra" [(ngModel)]="_cap.selectedEventoItem.titulo"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Fecha</ion-label>
+            <ion-input type="date" class="letra" [(ngModel)]="_cap.selectedEventoItem.fecha"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Hora inicio</ion-label>
+            <ion-input type="time" class="letra" [(ngModel)]="_cap.selectedEventoItem.hora"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Hora fin</ion-label>
+            <ion-input type="time" class="letra" [(ngModel)]="_cap.selectedEventoItem.hora_fin"></ion-input>
+        </ion-item>
+
+        <!--<ion-item>
+            <ion-label>Categoría</ion-label>
+            <ion-select [(ngModel)]="_cap.selectedEventoItem.categoria">
+                <ion-option value="Deportivo">Deportivo</ion-option>
+                <ion-option value="Cultural">Cultural</ion-option>
+                <ion-option value="Académico">Académico</ion-option>
+                <ion-option value="Recreativo">Recreativo</ion-option>
+                <ion-option value="Social">Social</ion-option>
+                <ion-option value="Festival">Festival</ion-option>
+                <ion-option value="Homenaje">Homenaje</ion-option>
+                <ion-option value="Reconocimiento">Reconocimiento</ion-option>
+                <ion-option value="Feria">Feria</ion-option>
+                <ion-option value="Cumpleaños">Cumpleaños</ion-option>
+                <ion-option value="Familiy">Familiy Day</ion-option>
+                <ion-option value="Simposio">Simposio</ion-option>
+                <ion-option value="Otro">Otro</ion-option>
+            </ion-select>
+        </ion-item>-->
+
+        <ion-item>
+            <ion-label floating>Lugar</ion-label>
+            <ion-input type="text" class="letra" [(ngModel)]="_cap.selectedEventoItem.lugar"></ion-input>
+        </ion-item>
+
+        <ion-card class="cardDes">
+            <!-- <ion-item class="fond" no-lines>
+                <ion-textarea class="fond" placeholder="Descripción" [(ngModel)]="obs" name="obs" autocomplete="on"
+                    autocorrect="on"></ion-textarea>
+            </ion-item> -->
+            <ion-item class="fond">
+                <ion-textarea class="fond" placeholder="Descripción" [(ngModel)]="obs" name="obs" autocomplete="on"
+                autocorrect="on"></ion-textarea>
+            </ion-item>
+        </ion-card>
+
+
+        <!-- <ion-item>
+            <button (click)="editEventoImg(_cap.selectedEventoItem.key, _cap.selectedEventoItem.uid)"><img [src]="_cap.selectedEventoItem.img" alt=""></button>
+        </ion-item> -->
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col>
+                <button class="md-trash" ion-button (click)="saveEventoItem()">Guardar edición</button>
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+
+
+    </ion-list>
+</ion-content>

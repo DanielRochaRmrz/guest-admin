@@ -1,0 +1,82 @@
+page-admin-evento-edit {
+
+    //Nuevo
+    .toolbar-background {
+        background-image: url('../assets/content/encabezado3.jpg')!important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .borde {
+        margin-top: 0em;
+        color: #FD9530;
+    }
+    
+    ion-icon{
+        color: #fff;
+    }
+
+    .AdminEvento {
+        color: #fff;
+    }
+
+    .sucursal {
+        color: #fff;
+        opacity: 0.8;
+    }
+
+    .imgLi {
+        width: 2px;
+    }
+
+    ion-list .item {
+        color: #000;
+    }
+
+    .lugar {
+        color: #474646;
+        text-transform: uppercase;
+    }
+
+    .descrip {
+        color: #474646;
+        opacity: 0.8;
+        margin-top: -4%;
+    }
+
+    .imgEvento {
+        // width: 50%;
+        border-radius: 50%;
+        height: 110px;
+    }
+    
+    .imagen_perfil {
+        height: 200px;
+        width: 200px;
+        margin-top: -3px;
+        margin-bottom: -3px;
+        border-radius: 250px;
+    }
+
+    .camara {
+        margin-top: -15px;
+        margin-left: 40%;
+    }
+
+    .letra {
+        color: #474646;
+        opacity: 0.8;
+    }
+
+    .cardDes {
+        border-radius: 15px;
+    }
+
+    .md-trash {
+        background-color: #FD9530;
+        color: #fff;
+        border-radius: 25px;
+    }
+
+}

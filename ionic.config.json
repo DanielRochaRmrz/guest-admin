@@ -1,0 +1,7 @@
+{
+    "name": "guest-admin",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "ionic-angular"
+}

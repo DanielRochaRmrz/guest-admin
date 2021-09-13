@@ -1,0 +1,105 @@
+<ion-header>
+
+    <ion-navbar class="borde" hideBackButton >
+        <ion-row>
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+                  </ion-col>
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento">Administrar de Eventos</div>
+                <div class="sucursal">Sucursal</div>
+            </ion-col>
+            <ion-col>
+                <div align='end'>
+                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col>
+            <p class="lugar">
+                Eventos
+                <br>
+                <img src="./assets/content/line-hori.png" style="width: 40%;" alt="">
+            </p>
+            <p class="descrip">
+                Administración de Eventos
+            </p>
+        </ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col>
+            <ion-card class="cuadro">
+                EVENTOS
+            </ion-card>
+            <ion-card class="descripcion">
+                <!-- <ion-item *ngFor="let evento of eventos | async" (click)=" selectEventoItem(evento)" no-line> -->
+                    <ion-item *ngFor="let evento of eventoss" (click)=" selectEventoItem(evento)" no-line>
+                    <ion-avatar item-start>
+                        <img [src]="evento.img">
+                    </ion-avatar>
+                    
+                    <h2>
+                        {{evento.titulo}}</h2>
+                    <p>{{evento.categoria}}</p>
+                </ion-item>
+            </ion-card>
+        </ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
+
+    <!-- <ion-list>
+
+        <ion-list-header>
+            Administración de eventos
+        </ion-list-header>
+        <ion-item *ngFor="let evento of eventos | async" (click)=" selectEventoItem(evento)">
+            <ion-avatar item-start>
+                <img [src]="evento.img">
+            </ion-avatar>
+            <h2>{{evento.titulo}}</h2>
+            <p>{{evento.categoria}}</p>
+        </ion-item>
+    </ion-list> -->
+    <!-- <ion-fab left bottom>
+        <button ion-fab color="light">
+            <ion-icon name="arrow-dropright"></ion-icon>
+        </button>
+        <ion-fab-list side="right">
+            <button ion-fab (click)="mostrar_modal()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-fab-list>
+
+    </ion-fab> -->
+
+</ion-content>
+<ion-footer no-border>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-3>
+            </ion-col>
+            <ion-col col-6>
+                <div text-center>
+                    <button ion-button round block class="crear" (click)="mostrar_modal()">Crear Evento</button>
+                </div>
+            </ion-col>
+            <ion-col col-3>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

@@ -1,0 +1,150 @@
+<ion-header>
+
+    <ion-navbar class="borde">
+        <ion-row>
+            <ion-col col-1 align="center">
+                <!-- <img src="./assets/content/line2.png" class="imgLi" alt=""> -->
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento">Detalle de la reservación</div>
+                <div class="sucursal">Sucursal</div>
+            </ion-col>
+            <ion-col>
+                <div align='end'>
+                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="fondo_admin" style="background: #fff;">
+
+    <div text-center>
+        <h2 style="color: black;"> Reservación</h2>
+    </div>
+
+    <ion-card class="fon">
+        <ion-card-header class="titulo">
+            Datos del cliente
+        </ion-card-header>
+        <ion-card-content class="fon">
+            <ion-list class="fon">
+                <ion-item class="fon">
+                    <ion-avatar item-start>
+                        <!-- <div *ngIf="miUser.provider == 'facebook'">
+                            <div *ngIf="miUser.status_foto == 0">
+                                <img src="{{cliente.photoURL}}" style="width:40%;border-radius:50%;">
+                            </div>
+                            <div *ngIf="miUser.status_foto == 1">
+                                <img src="{{cliente.photoURL}}" style="width: 43px;height: 46px;border-radius:50%;">
+                            </div>
+                        </div>
+                        <div *ngIf="miUser.provider == 'google'">
+                            <div *ngIf="miUser.status_foto == 0">
+                                <img src="{{cliente.photoURL}}?type=large&width=720&height=720" style="width:85%;border-radius:50%;">
+                            </div>
+                            <div *ngIf="miUser.status_foto == 1">
+                                <img src="{{cliente.photoURL}}" style="width: 43px;height: 46px;border-radius: 50%;">
+                            </div>
+                        </div> -->
+                        <img [src]="cliente?.photoURL" class="url">
+                    </ion-avatar>
+                    <h1>{{ cliente.displayName }}</h1>
+                    <h2>{{ cliente.email }} </h2>
+                    <p>{{ cliente.phoneNumber }} </p>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="fon">
+        <ion-card-header class="titulo">
+            Reservación
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list class="fon">
+                <ion-item class="fon">
+                    <ion-avatar item-start>
+                        <img src="../assets/imgs/icons/book.png">
+                    </ion-avatar>
+                    <h2>{{ reservacion.fechaR_ | date: 'fullDate' }}</h2>
+                    <h2>{{ reservacion.hora }} </h2>
+                </ion-item>
+                <ion-card-header class="titulo">Detalle de Área</ion-card-header>
+                <ion-item class="fon">
+                    <ion-avatar item-start>
+                        <img src="../assets/imgs/icons/admin-historial.png">
+                    </ion-avatar>
+                    <ion-grid>
+                        <!--<ion-row>
+                            <ion-col>
+                                <div><b>Área:</b></div>
+                            </ion-col>
+                            <ion-col>
+                                <div>
+                                    <p>{{ area.nombre }} </p>
+                                </div>
+                            </ion-col>
+                        </ion-row>-->
+                        <ion-row>
+                            <ion-col>
+                                <div> <b>Zona:</b> </div>
+                            </ion-col>
+                            <ion-col>
+                                <div>
+                                    <p>{{ zona.nombre }} </p>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <div> <b>Mesa:</b> </div>
+                            </ion-col>
+                            <ion-col>
+                                <div>
+                                    <p *ngFor="let mesa of mesas"> {{ mesa.no_mesa }} , </p>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <div> <b>No. personas:</b> </div>
+                            </ion-col>
+                            <ion-col>
+                                <div>
+                                    <p> {{ reservacion.numPersonas }} </p>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ng-container *ngIf="evento">
+                    <ion-card-header class="titulo">Evento</ion-card-header>
+                    <ion-item class="fon">
+                        <ion-avatar item-start>
+                            <img src="../assets/imgs/icons/admin-evento.png">
+                        </ion-avatar>
+                        <p>{{ evento.titulo }}</p>
+                        <p>{{ evento.categoria }} </p>
+                        <p>{{ evento.hora }} </p>
+                    </ion-item>
+                </ng-container>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="fon">
+        <ion-card-header class="titulo">Carta</ion-card-header>
+        <ion-card-content>
+            <ion-list class="fon">
+                <ion-item class="fon" *ngFor="let product of productos">
+                    <!-- <ion-avatar item-start>
+                        <img [src]="product?.img">
+                    </ion-avatar> -->
+                    <h2>{{ product.producto }} </h2>
+                    <b>{{ product.cantidad }} </b>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

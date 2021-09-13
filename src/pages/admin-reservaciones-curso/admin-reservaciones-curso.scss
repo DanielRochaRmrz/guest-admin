@@ -1,0 +1,151 @@
+page-admin-reservaciones-curso {
+
+    //Nuevo
+    .toolbar-background {
+        background-image: url('../assets/content/encabezado3.jpg')!important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .borde {
+        margin-top: 0em;
+        color: #FD9530;
+    }
+    
+    ion-icon{
+        color: #fff;
+    }
+
+    .AdminEvento {
+        color: #fff;
+    }
+
+    .sucursal {
+        color: #fff;
+        opacity: 0.8;
+    }
+
+    .imgLi {
+        width: 2px;
+    }
+
+    .adv2 {
+        width: 30%;
+    }
+
+    .aviso {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .momento {
+        text-align: center;
+        font-size: 15px;
+        opacity: 0.8;
+    }
+
+    .list-avatar-page {
+        ion-note {
+            font-size: 12px;
+            align-self: flex-start;
+            margin-top: 14px;
+        }
+    }
+    .adv {
+        height: 35px;
+        width: 35px;
+    }
+
+    .lugar {
+        color: #474646;
+        text-transform: uppercase;
+    }
+
+    .descrip {
+        color: #474646;
+        opacity: 0.8;
+        margin-top: -4%;
+        text-transform: uppercase;
+    }
+
+    .cuadro {
+        background-color: #FD9530;
+        color: #fff;
+        font-size: larger;
+        width: 70%;
+        border-radius: 15px;
+        text-align: center;
+        height: 25%;
+        text-transform: uppercase;
+    }
+
+    .descripcion {
+        background-color: #e6e5e3;
+        border-radius: 15px;
+        margin-top: -7%;
+    }
+
+    .proximas {
+        margin-top: 1px;
+    }
+
+    .imgEvent {
+        border-radius: 50%;
+        width: 70px;
+        height: 70px
+    }
+
+    .tituloE {
+        font-size: 10px;
+        margin-top: 5px;
+        text-transform: uppercase;
+        text-align: center;
+        margin-left: -2px;
+    }
+
+    .imgL {
+        width: 10%;
+    }
+
+    .fechaR {
+        margin-top: 5px;
+    }
+
+    .btnDetalle {
+        color: #fff;
+        height: 25px;
+        background: #FD9530;
+    }
+
+    .hora {
+        font-size: 10px;
+    }
+
+    .imgElli {
+        width: 40%;
+    }
+
+    .status {
+        font-size: 10px;
+    }
+
+    .aceptado {
+        font-size: 10px;
+    }
+
+  .list-avatar-page {
+      ion-note {
+          font-size: 12px;
+          align-self: flex-start;
+          margin-top: 14px;
+      }
+  }
+  .adv {
+      height: 35px;
+      width: 35px;
+  }
+
+}

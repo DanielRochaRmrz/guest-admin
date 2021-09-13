@@ -1,0 +1,70 @@
+<ion-menu [content]="content">
+  <ion-content class="menu-content" padding>
+
+    <ion-row>
+      <ion-col col-3></ion-col>
+      <ion-col align="center">
+        <!-- <h4>Menú</h4> -->
+        <br><br><br>
+        <div>
+          <div class="margen3_app">
+            <!--<img class="imagen_perfil" [src]="user.imagen">-->
+            <img class="imagen_perfil" src="../assets/content/user.png">
+          </div>
+          <br><br><br>
+          <div class="margen2_app">
+            <h6>{{user.nombre}}Administrador</h6>
+          </div>
+          <!--<div class="margen1_app">
+                <img class="cate" src="../assets/imgs/icons/gold_guest.png">
+            </div>-->
+        </div>
+      </ion-col>
+      <ion-col col-3></ion-col>
+    </ion-row>
+
+    <!-- <div class="borde"></div> -->
+    <div class="margen4_app">
+      <ion-list class="menu-list">
+        <!--<button ion-item (click)="irHome( home )">
+                    <img class="home" src="../assets/imgs/icons/home.png">  Home
+                  </button>-->
+        <!-- <button ion-item (click)="irNosotros( nosotros )">
+                  <img class="home" src="../assets/imgs/icons/corona.png">  Nosotros
+                  </button> -->
+        <!--<button ion-item (click)="irReservacion( reservacion )">
+                    <img class="home" src="../assets/imgs/icons/time.png"> Reservaciones
+                  </button>
+                <button ion-item (click)="irMisreservaciones( reservaciones )">
+                        <img class="home" src="../assets/imgs/icons/sucursal.png">  Mis Reservaciones
+               </button>
+                <button ion-item (click)="irCarta( carta )">
+                    <img class="home" src="../assets/imgs/icons/champagne.png">  Carta Móvil
+                  </button>
+                <button ion-item (click)="irPerfil( perfil )">
+                    <img class="home" src="../assets/imgs/icons/profile.png"> Perfil
+                  </button>
+                <button ion-item (click)="irHistorial( historial )">
+                    <img class="home" src="../assets/imgs/icons/book.png">  Historial
+                  </button>-->
+        <ion-footer>
+
+          <!-- <button style="text-align: right" ion-item (click)="salir()">
+            <img class="home" src="../assets/imgs/icons/turn-off.png"> Cerrar Sesión
+          </button> -->
+          <button
+            style="border-radius: 10px;color:#ffff;width:50px;width:130px;height:30px;margin-left:50px;margin-top:30px"
+            block (click)="salir()">
+            <img src="../assets/imgs/icons/icono negro-03.png" style="width:20px" alt="">
+            <font color="black"> Salir </font>
+          </button>
+        </ion-footer>
+
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-menu>
+
+
+
+<ion-nav [root]="rootPage" #content></ion-nav>

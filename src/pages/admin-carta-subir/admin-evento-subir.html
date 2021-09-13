@@ -1,0 +1,77 @@
+<ion-header>
+
+    <ion-navbar  hideBackButton>
+        <ion-row>
+  
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+                  </ion-col>
+              <ion-col col-8>
+                <ion-title>{{ titulo | placeHolder:'Crear nueva bebida' }}</ion-title>
+              </ion-col>
+          </ion-row>
+          
+        
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="" padding>
+    <div >
+        <div style="text-align: center">
+
+            <img class="icon" height="43px" width="43px" src="../assets/imgs/icons/corona.png" item-start><br> Importante!!
+        </div>
+        <br>  <font color="black"> Para mejor la experiencia del usuario Guest, le recomendamos subir imágenes en formato PNG.
+        </font>
+        </div>
+    <br><br>
+    <ion-list>
+
+        <ion-item>
+            <ion-label floating>Titulo</ion-label>
+            <ion-input type="text" [(ngModel)]="titulo"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Categoria</ion-label>
+            <ion-input type="text" [(ngModel)]="categoria"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Precio</ion-label>
+            <ion-input type="number" [(ngModel)]="precio"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-textarea class="fond" placeholder="Descripción" [(ngModel)]="nota" name="nota" autocomplete="on" autocorrect="on"></ion-textarea>
+        </ion-item>
+        <!--<ion-item *ngIf="imagenPreview">
+            <img [src]="imagenPreview">
+        </ion-item>-->
+    </ion-list>
+    <ion-grid>
+        <!-- <ion-row>
+            <ion-col>
+                <button color="dark" ion-button block icon-left (click)="seleccionar_foto()">
+            <ion-icon name="photos"></ion-icon>
+              Seleccionar
+        </button>
+            </ion-col>
+
+        </ion-row> -->
+        <ion-buttons end>
+            <button color="warning" ion-button [disabled]="titulo.length <= 1 " (click)="crear_post()">
+              Crear post
+            </button>
+        </ion-buttons>
+        <!--
+
+        <ion-row>
+            <ion-col>
+                <button ion-button block icon-left (click)="mostrar_camara()">
+            <ion-icon name="camera"></ion-icon>
+              Camara
+        </button>
+            </ion-col>
+
+        </ion-row> -->
+    </ion-grid>
+</ion-content>

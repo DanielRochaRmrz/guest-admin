@@ -1,0 +1,41 @@
+<ion-header>
+
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+            </ion-col>
+            <ion-col col-8>
+                <ion-title>Editar Imagen</ion-title>
+            </ion-col>
+        </ion-row>
+
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngIf="imagenPreview">
+            <img [src]="imagenPreview" class="imagenCarga">
+        </ion-item>
+    </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button color="warning" ion-button block icon-left (click)="seleccionarFoto()">
+        <ion-icon name="photos"></ion-icon>
+         <font color="white">Seleccionar  </font>  
+    </button>
+            </ion-col>
+
+        </ion-row>
+        <ion-buttons end>
+            <button color="warning" ion-button [disabled]="imagenPreview.length <= 1" (click)="editarImagen(sucursal.uid)">
+         
+         <font color="white"> Editar imagen</font>       
+        </button>
+        </ion-buttons>
+    </ion-grid>
+</ion-content>

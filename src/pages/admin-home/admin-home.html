@@ -1,0 +1,391 @@
+<ion-header>
+
+    <ion-navbar class="borde" hideBackButton>
+        <ion-row>
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+
+                <div *ngIf="_sucursal?.type == 'a'">
+                    <div class="AdminEvento" (click)="goPerfilSucursal(_sucursal.uid)">
+                        {{ _sucursal?.displayName }}
+                    </div>
+                    <div class="sucursal" (click)="goPerfilSucursal(_sucursal.uid)"> Ver perfil</div>
+                </div>
+
+                <div *ngIf="_userEmpleado?.type == 'e' || _userEmpleado?.type == 'master' ">
+                    <div class="AdminEvento" (click)="goPerfilEmpleado(_userEmpleado.uid)">
+                        {{ _userEmpleado?.displayName }}
+                    </div>
+                    <div class="sucursal" (click)="goPerfilEmpleado(_userEmpleado.uid)"> Ver perfil</div>
+                </div>
+
+                <div class="centrart" *ngIf="_userEmpleado?.type == 'e'">
+                    <!-- <h3>Bienvenido</h3> -->
+                    <p>{{ _userEmpleado?.displayName }} </p>
+                </div>
+                <div class="centrart" *ngIf="_userEmpleado?.type == 'coordinacion'">
+                    <!-- <h3>Bienvenido</h3> -->
+                    <p>{{ _userEmpleado?.displayName }} </p>
+                </div>
+                <div class="centrart" *ngIf="_userEmpleado?.type == 'rp'">
+                    <!-- <h3>Bienvenido</h3> -->
+                    <p>{{ _userEmpleado?.displayName }} </p>
+                </div>
+                <div class="centrart" *ngIf="_userEmpleado?.type == 'capitan_mesero'">
+                    <!-- <h3>Bienvenido</h3> -->
+                    <p>{{ _userEmpleado?.displayName }} </p>
+                </div>
+
+                <!-- <div class="AdminEvento">{{ _cap.selectedEventoItem.titulo }}</div>
+                <div class="sucursal">Sucursal</div> -->
+            </ion-col>
+            <ion-col>
+                <div align='end'>
+                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+
+</ion-header>
+<ion-content class="fondo_admin card-background-page">
+    <br>
+    <ion-row>
+        <ion-col col-4></ion-col>
+        <ion-col col-4 align="center">
+            <img src="./assets/content/logo.png" alt="">
+        </ion-col>
+        <ion-col col-4></ion-col>
+    </ion-row>
+
+    <div class="bienvenido" *ngIf="_userEmpleado?.type == 'e'">
+        <h3>¡Bienvenido!</h3>
+    </div>
+    <div class="bienvenido" *ngIf="_userEmpleado?.type == 'coordinacion'">
+        <h3>¡Bienvenido!</h3>
+    </div>
+    <div class="bienvenido" *ngIf="_userEmpleado?.type == 'rp'">
+        <h3>¡Bienvenido!</h3>
+    </div>
+    <div class="bienvenido" *ngIf="_userEmpleado?.type == 'capitan_mesero'">
+        <h3>¡Bienvenido!</h3>
+    </div>
+
+    <br>
+
+    <!-- (listo) -->
+    <ng-container *ngIf="_sucursal">
+
+        <ion-row>
+            <ion-col align="center">
+                <ion-row>
+                    <ion-col col-1>
+                    </ion-col>
+                    <ion-col>
+                        <img src="./assets/content/icono1.png" (click)="goMonitorear(menu)" class="imgRes4" alt="">
+                        <button ion-button full class="nombreCar4" (click)="goMonitorear(menu)" text-wrap>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reservaciones próximas
+                        </button>
+                        <!-- <ion-card class="nombreCar" (click)="goMonitorear(menu)">
+                            <p style="margin-top: -14px;">&nbsp;</p>
+                            &nbsp;&nbsp;Reservaciones próximas
+                        </ion-card> -->
+                    </ion-col>
+                    <ion-col col-1></ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col align="center">
+                <ion-row>
+                    <ion-col col-1>
+                    </ion-col>
+                    <ion-col>
+                        <img src="./assets/content/icono4.png" (click)="goMonitorearCurso('home')" class="imgRes4" alt="">
+                        <button ion-button full class="nombreCar4" (click)="goMonitorearCurso('home')" text-wrap>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reservaciones en curso
+                        </button>
+                        <!-- <ion-card class="nombreCar" (click)="goMonitorearCurso()">
+                            <p style="margin-top: -14px;">&nbsp;</p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reservaciones en curso
+                        </ion-card> -->
+                    </ion-col>
+                    <ion-col col-1>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col>
+                <img src="./assets/content/icono3.png" class="imgRes3" alt="">
+                <button ion-button full class="nombreCar3" (click)="goUsers()">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Administración de usuarios
+                </button>
+            </ion-col>
+            <ion-col col-1></ion-col>
+        </ion-row> -->
+
+        <br> <br> <br>
+
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col align="center">
+                <p style="color: #fff;">{{this.totalReservaciones2}} EN CURSO</p>
+                <img src="../assets/content/curso.png">
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+
+    </ng-container>
+
+    <br>
+
+
+    <!-- Tablero de reservaciones para los usuarios  corrdinacion (listo)-->
+    <ng-container *ngIf="_userEmpleado?.type == 'coordinacion' || _userEmpleado?.type == 'rp'">
+        <ion-row>
+            <ion-col align="center">
+                <ion-row>
+                    <ion-col col-1></ion-col>
+                    <ion-col>
+                        <img src="./assets/content/icono1.png" (click)="goMonitorear(menu)" class="imgRes4" alt="">
+                        <button ion-button full class="nombreCar4" (click)="goMonitorear(menu)" text-wrap>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reservaciones próximas
+                        </button>
+                        <!-- <ion-card class="nombreCar" (click)="goMonitorear(menu)">
+                            <p style="margin-top: -14px;">&nbsp;</p>
+                            Reservaciones próximas
+                        </ion-card> -->
+                    </ion-col>
+                    <ion-col col-1></ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col align="center">
+                <ion-row>
+                    <ion-col col-1></ion-col>
+                    <ion-col>
+                        <img src="./assets/content/icono4.png" (click)="goMonitorearCurso('home')" class="imgRes4" alt="">
+                        <button ion-button full class="nombreCar4" (click)="goMonitorearCurso('home')" text-wrap>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reservaciones en curso
+                        </button>
+                        <!-- <ion-card class="nombreCar4" (click)="goMonitorearCurso()">
+                            <p style="margin-top: -14px;">&nbsp;</p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Reservaciones en curso
+                        </ion-card> -->
+                    </ion-col>
+                    <ion-col col-1></ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <br> <br> <br>
+
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col align="center">
+                <p style="color: #fff;">{{this.totalReservaciones2}} EN CURSO</p>
+                <img src="../assets/content/curso.png">
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+
+    </ng-container>
+
+
+    <ion-grid>
+        <ion-list-header class="accesoA" no-lines>
+            Accesos para administrar
+        </ion-list-header>
+    </ion-grid>
+
+
+    <br><br>
+    <!-- Solo para el usuario coordinacion (listo) -->
+    <!-- <div *ngIf="_userEmpleado?.type == 'coordinacion'"> -->
+    <div *ngIf="_userEmpleado?.type == 'master'">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <div>
+                        <ion-row>
+                            <ion-col col-1></ion-col>
+                            <ion-col col-10>
+                                <img src="./assets/content/icono1.png" class="imgRes3" alt="">
+                                <button ion-button full class="nombreCar3" (click)="goSucursal()">
+                                    &nbsp; &nbsp; &nbsp; Sucursales registradas
+                                </button>
+                            </ion-col>
+                            <ion-col col-1></ion-col>
+                        </ion-row>
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <div>
+                        <ion-row>
+                            <ion-col col-1></ion-col>
+                            <ion-col col-10>
+                                <img src="./assets/content/icono2.png" class="imgRes3" alt="">
+                                <button ion-button full class="nombreCar3" (click)="goListaUsuariosEmpleados('master')">
+                                    Usuarios registrados
+                                </button>
+                            </ion-col>
+                            <ion-col col-1></ion-col>
+                        </ion-row>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <!--Termina. Solo para el usuario master -->
+
+
+
+    <ion-grid>
+        <!-- <ion-list-header class="accesoA" no-lines>
+            Accesos para administrar
+        </ion-list-header> -->
+
+        <ion-row *ngIf="_sucursal?.type == 'a' || _userEmpleado?.type == 'coordinacion'">
+            <ion-col>
+                <div>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10>
+                            <img src="./assets/content/icono3.png" class="imgRes3" alt="">
+                            <button ion-button full class="nombreCar3" (click)="goUsers()">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Administración de usuarios
+                            </button>
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10>
+                            <img src="./assets/content/icono3.png" class="imgRes3" alt="">
+                            <button ion-button full class="nombreCar3" (click)="goCarta()" text-center>
+                                &nbsp;&nbsp;&nbsp; Administrar carta móvil</button>
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+        </ion-row>
+        <!--ACESSOS PARA USUARIO RP (listo)-->
+
+
+        <!--ACCESOS USUARIO COORDINACION (listo)-->
+        <ion-row *ngIf="_userEmpleado?.type == 'coordinacion' || _sucursal?.type == 'a'">
+            <ion-col>
+                <div>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10>
+                            <img src="./assets/content/icono3.png" class="imgRes3" alt="">
+                            <button ion-button full class="nombreCar3" (click)="goEventos()">
+                                Administrar eventos
+                            </button>
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+
+            <!-- <ion-col>
+                <div>
+                    <ion-row>
+                       
+                    </ion-row>
+                </div>
+            </ion-col> -->
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <div>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10>
+                            <img src="./assets/content/icono2.png" class="imgRes3" alt="">
+                            <button ion-button full class="nombreCar3" (click)="goReservacion()">
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Configuraciones
+                            </button>
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+            <ion-col *ngIf="_sucursal?.type == 'a' || _userEmpleado?.type == 'coordinacion'">
+                <div>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10>
+                            <img src="./assets/content/icono3.png" class="imgRes3" alt="">
+                            <a href="https://guestreservation-8b24b.web.app" target="_blank">
+                                <button ion-button full class="nombreCar3">
+                                    Administrar Croquis
+                                </button>
+                            </a>
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="_sucursal?.type == 'a'">
+            <ion-col>
+                <div>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10>
+                            <img src="./assets/content/icono3.png" class="imgRes3" alt="">
+                            <button ion-button full class="nombreCar3" (click)="goCorteHistorial(this.sucursal)">
+                                Cortes
+                            </button>
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                    </ion-row>
+                    <!-- <button class="cl" ion-item (click)="goCorteHistorial(this.sucursal)">
+                        <ion-icon><img class="home" src="../assets/imgs/icons/corona.png"> </ion-icon>
+                        <h4>Cortes {{ this.sucursal.type }}</h4>
+                    </button> -->
+                </div>
+            </ion-col>
+
+            <ion-col>
+                <div>
+                    <ion-row>
+                        <ion-col col-1></ion-col>
+                        <ion-col col-10>
+                            <img src="./assets/content/icono3.png" class="imgRes3" alt="">
+                            <a href="https://guestreservation-8b24b.web.app" target="_blank">
+                                <button ion-button full class="nombreCar3">
+                                    Administrar Productos
+                                </button>
+                            </a>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </ion-col>
+
+
+
+        </ion-row>
+
+    </ion-grid>
+
+
+    <br><br><br>
+    <div class="atras" text-center no-lines>
+        <button class="blancos" ion-button round
+            style="min-width: 200px; padding: 10px 16px; height: 85%;font-size: 15px;" (click)="salir()">Cerrar
+            Sesión</button>
+        <br>
+    </div>
+</ion-content>

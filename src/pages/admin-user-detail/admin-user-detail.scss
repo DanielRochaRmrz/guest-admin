@@ -1,0 +1,66 @@
+page-admin-user-detail {
+    // ion-content {
+    //     // background-image: url('../assets/imgs/fondoblanco2.png');
+    //     background-repeat: no-repeat;
+    //     background-size: cover;
+    //     //background-position: center;
+    //     width: 100%;
+    //     position: relative;
+    //     border: none;
+    // }
+
+    .blanco {
+        font-size: 16px;
+        resize: none;
+        color: #ffffff;
+        font: bold;
+        font-weight: 900;
+    }
+    .margen {
+        height: 250px;
+        width: 120px;
+    }
+    .margen_2 {
+        margin-top: 0px;
+    }
+    .margen3 {
+        margin-left: 20px;
+    }
+    .imagen_perfil {
+        height: 200px;
+        width: 200px;
+        margin-top: -3px;
+        margin-bottom: -3px;
+        border-radius: 250px;
+    }
+    h4 {
+        color: #000;
+    }
+    .icon {
+        height: 25px;
+        width: 25px;
+    }
+    .cate {
+        height: 260px;
+        width: 302px;
+    }
+    .filt {
+        text-align: center;
+        margin-bottom: -7.5em;
+        margin-top: -5.5em;
+    }
+    .fon {
+        background-color: #4cd137;
+        color: white;
+    }
+    .fon2 {
+        background-color: #ff3838;
+        color: white;
+    }
+    .toolbar-background {
+        background-image: url('../assets/imgs/proriat.png')!important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+}

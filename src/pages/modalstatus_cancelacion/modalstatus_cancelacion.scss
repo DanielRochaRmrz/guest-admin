@@ -1,0 +1,56 @@
+page-modalstatus_cancelacion {
+
+    .toolbar-background {
+        background-image: url('../assets/content/encabezado2.png')!important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    .borde {
+        margin-top: 0em;
+    }
+    // .imgMenu{
+    //     width: 40px;
+    //     margin-top: 15px;
+    //   }
+
+      .alert-md [aria-checked=false] .alert-radio-label{
+        color:#a09560;
+    }
+    
+        //Nuevo
+       
+        
+    
+    .btnModal{
+        //color:#a09560;
+        margin-left: 40%; margin-top: 10%;
+    }
+    
+    .btnClose{
+        //   align: center;
+        background-color:transparent;
+       }
+       .divBtn{
+           text-align: right;
+       
+       }
+    
+       ion-select-option {
+        color:transparent;
+      }
+    
+      ion-select{
+          max-width: 100%;
+      }
+    
+       .select-text{
+           color: black;
+        //    max-width: 100% !important;
+           min-width: 90%;
+       }
+    
+      
+}
+

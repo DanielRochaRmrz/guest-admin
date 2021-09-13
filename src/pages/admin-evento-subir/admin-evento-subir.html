@@ -1,0 +1,159 @@
+<!-- <ion-header>
+
+    <ion-navbar>
+        <ion-buttons>
+            <button ion-button (click)="cerrar_modal()">
+              Cerrar
+            </button>
+        </ion-buttons>
+        <ion-title>{{ titulo | placeHolder:'Crear nuevo evento' }}</ion-title>
+    </ion-navbar>
+
+</ion-header> -->
+
+<ion-header>
+
+    <ion-navbar class="borde">
+        <ion-row>
+            <ion-col col-2>
+                <div class="cerrar" (click)="cerrar_modal()">
+                    Cerrar
+                </div>
+            </ion-col>
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento">{{ titulo | placeHolder:'Crear nuevo evento' }}</div>
+                <div class="sucursal">Sucursal</div>
+            </ion-col>
+            <ion-col col-1>
+                <div>
+                    <img src="./assets/content/corona.png" style="width: 120%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col>
+            <p class="lugar">
+                CREAR NUEVA EVENTO
+                <br>
+                <img src="./assets/content/line-hori.png" style="width: 40%;" alt="">
+            </p>
+            <p class="descrip">
+                Para mejorar la experiencia del usuario Ghest , le recomendamos subir imagenes en formato PNG
+            </p>
+        </ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
+
+    <br>
+
+    <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+            <div *ngIf="imagenPreview">
+                <img [src]="imagenPreview" class="imgEvento">
+            </div>
+            <!-- <img src="./assets/content/1.jpg" class="imgEvento" alt=""> -->
+        </ion-col>
+        <ion-col></ion-col>
+    </ion-row>
+
+    <ion-list>
+
+        <ion-item no-lines>
+            <ion-label floating>Titulo</ion-label>
+            <ion-input type="text" class="letra" [(ngModel)]="titulo"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Fecha </ion-label>
+            <ion-input type="date" class="letra" [(ngModel)]="fecha"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Hora inicio</ion-label>
+            <ion-input type="time" class="letra" [(ngModel)]="hora"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Hora fin</ion-label>
+            <ion-input type="time" class="letra" [(ngModel)]="hora_fin"></ion-input>
+        </ion-item>
+        <!--<ion-item>
+            <ion-label>Categoría <ion-icon name="md-arrow-dropdown" style="color: #FD9530;"></ion-icon>
+            </ion-label>
+            <ion-select [(ngModel)]="categoria">
+                <ion-option value="Deportivo">Deportivo</ion-option>
+                <ion-option value="Cultural">Cultural</ion-option>
+                <ion-option value="Académico">Académico</ion-option>
+                <ion-option value="Recreativo">Recreativo</ion-option>
+                <ion-option value="Social">Social</ion-option>
+                <ion-option value="Festival">Festival</ion-option>
+                <ion-option value="Homenaje">Homenaje</ion-option>
+                <ion-option value="Reconocimiento">Reconocimiento</ion-option>
+                <ion-option value="Feria">Feria</ion-option>
+                <ion-option value="Cumpleaños">Cumpleaños</ion-option>
+                <ion-option value="Familiy">Familiy Day</ion-option>
+                <ion-option value="Simposio">Simposio</ion-option>
+                <ion-option value="Otro">Otro</ion-option>
+            </ion-select>
+        </ion-item>-->
+        <ion-item>
+            <ion-label>Lugar</ion-label>
+            <ion-input type="text" class="letra" [(ngModel)]="lugar"></ion-input>
+        </ion-item>
+        <ion-card class="cardDes">
+            <ion-item class="fond" no-lines>
+                <ion-textarea class="fond" placeholder="Descripción" [(ngModel)]="obs" name="obs" autocomplete="on" autocorrect="on"></ion-textarea>
+            </ion-item>
+        </ion-card>
+        <!-- <ion-item *ngIf="imagenPreview">
+            <img [src]="imagenPreview">
+        </ion-item> -->
+    </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button class="btnimg" ion-button block icon-left (click)="seleccionarFoto()">
+                    <ion-icon name="md-reverse-camera"></ion-icon>
+                    Seleccionar
+                </button>
+
+                <br>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col>
+                <button class="btnimgs" ion-button [disabled]="titulo.length <= 1 || imagenPreview.length <= 1" (click)="crear_post(ciudadSucursal)">
+                    Crear post
+                </button>
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+        <!-- <ion-buttons end>
+            <--|| imagenPreview.length <= 1--
+            <button color="dark" ion-button [disabled]="titulo.length <= 1 || imagenPreview.length <= 1"
+                (click)="crear_post(ciudadSucursal)">
+                Crear post
+            </button>
+        </ion-buttons>-->
+        <!-- <ion-row>
+            <ion-col>
+                <button ion-button block icon-left (click)="mostrar_camara()">
+            <ion-icon name="camera"></ion-icon>
+              Camara
+        </button>
+            </ion-col>
+
+        </ion-row> -->
+    </ion-grid>
+</ion-content>

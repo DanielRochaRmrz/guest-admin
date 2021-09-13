@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>
+        <!-- <ion-title>Modificar Área y Zona</ion-title> -->
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="">
+    <div class="divBtn">
+        <a  class="btnModal" (click)="closeModal()"> X
+            <!-- <ion-icon item-right name="ios-close-outline"></ion-icon> -->
+        </a>
+    </div>
+
+    <!--SELECT PARA ESTATUS-->
+    <!-- <div class="style1">
+        <ion-row>
+            <ion-col text-center> <font color="black">  Estatus  </font></ion-col>
+            <ion-col text-center class="color2">
+            <ion-list>
+                <ion-item>
+                    <ion-select [(ngModel)]="status">
+                            <ion-option selected="{{valCreando}}" value="Creando">Creando</ion-option>                                
+                            <ion-option selected="{{valCreadaCompartida}}" value="CreadaCompartida" >Creada Compartida</ion-option>  
+                            <ion-option selected="{{valModificado}}" value="Modificado">Modificado</ion-option>
+                            <ion-option selected="{{valCompartida}}" value="Compartida" >Compartida</ion-option>
+                            <ion-option selected="{{valPagando}}" value="Pagando">Pagando</ion-option>
+                            <ion-option selected="{{valAceptado}}" value="Aceptado">Aceptado</ion-option>
+                            <ion-option selected="{{valTerminado}}" value="Terminado" >Terminado</ion-option>
+                </ion-select>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+      </ion-row>
+    </div>     
+     -->
+    <div class="style1" >
+        <ion-row>
+            <ion-col text-center> <font color="black">  No Mesa</font> </ion-col>
+            <ion-col text-center>
+                <ion-item>
+                    <ion-input type="number" [(ngModel)]="mesa" value='{{ numMesa }}' placeholder="Numero de mesa"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <button ion-button class="btnModal" color="warning" (click)="saveData()">Actualizar</button>
+
+
+</ion-content>

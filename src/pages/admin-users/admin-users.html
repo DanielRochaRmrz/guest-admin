@@ -1,0 +1,104 @@
+<ion-header>
+    <ion-navbar>
+        <button class="bt" ion-button (click)="cerrar_modal()">
+                Cerrar
+        </button>
+        <ion-title>Alta de empleados</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="" padding>
+
+    <div align="center">
+        <img src="../assets/imgs/logo-negro.png" alt="">
+       
+    </div>
+
+    <ion-list>
+        <div>
+            <ion-row>
+<ion-col col-2>
+
+    <img src="../assets/imgs/icons/Group24.png"   alt="">
+</ion-col>
+<ion-col col-9>
+    <ion-item  class="_input">
+    <ion-label  style="color:black" floating > <font size="4"> <b>Nombre</b> </font></ion-label>
+    <ion-input  style="color:black" type="text" [(ngModel)]="credentials.name"></ion-input>
+</ion-item>
+</ion-col>
+            </ion-row>
+                  <!-- <img src="../assets/imgs/icons/Group24.png" alt="">
+            <ion-label  style="color:black" floating>Nombre</ion-label>
+            <ion-input  style="color:black" type="text" [(ngModel)]="credentials.name"></ion-input> -->
+        </div>
+        <div>
+            <ion-row>
+                <ion-col col-2>
+                
+                    <img src="../assets/imgs/icons/Group101.png"  alt="">
+                </ion-col>
+                <ion-col col-9>
+                    <ion-item  class="_input">
+                    <ion-label style="color:black" floating> <font size="4"> <b>Correo</b> </font> </ion-label>
+                    <ion-input style="color:black" type="email" [(ngModel)]="credentials.email"></ion-input>
+                    </ion-item >
+                </ion-col>
+                            </ion-row> 
+                        </div>
+        <div>
+
+            <ion-row>
+                <ion-col col-2>
+                
+                    <img src="../assets/imgs/icons/Group251.png"  alt="">
+                </ion-col>
+                <ion-col col-9>
+                    <ion-item  class="_input">
+                    <ion-label  style="color:black" floating> <font size="4"> <b>Contraseña</b> </font></ion-label>
+                    <ion-input style="color:black"  type="password" [(ngModel)]="credentials.password"></ion-input>
+</ion-item>
+                </ion-col>
+            </ion-row>
+            </div>
+
+
+
+            <div style="color:black" >
+
+                <ion-row>
+                    <ion-col col-2>
+                    
+                        <img src="../assets/imgs/icons/Group251.png"  alt="">
+                    </ion-col>
+                    <ion-col col-9>
+                       <ion-row>
+<ion-col col-6>
+    <ion-label><font size="4"> <b>Tipo usuario</b> </font></ion-label>
+</ion-col>
+<ion-col col-6>
+    <ion-select style="background-color: white;" [(ngModel)]="credentials.type" class="fond">
+        <!-- <ion-option value="a">Administrador</ion-option> -->
+        <!--<ion-option value="e">Empleado</ion-option>-->
+        <ion-option value="coordinacion">Coordinación</ion-option>
+        <ion-option value="rp">RP</ion-option>
+        <ion-option value="capitan_mesero"> <font size="4">Capitán meseros</font></ion-option>
+    </ion-select> 
+</ion-col>
+
+
+                       </ion-row>
+                      
+           </ion-col>
+                </ion-row>
+                </div>
+            
+   <br>
+   <br>
+
+        <div text-center>
+            <button  ion-button round style="min-width: 200px; padding: 10px 16px;background-color:#FD9530" (click)="register()">Register</button>
+        </div>
+    </ion-list>
+</ion-content>
+

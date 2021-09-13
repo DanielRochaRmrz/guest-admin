@@ -1,0 +1,125 @@
+page-admin-reservacion-detalle {
+
+    //Nuevo
+    .toolbar-background {
+        background-image: url('../assets/content/encabezado3.jpg')!important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .borde {
+        margin-top: 0em;
+        color: #FD9530;
+    }
+    
+    ion-icon{
+        color: #fff;
+    }
+
+    .AdminEvento {
+        color: #fff;
+    }
+
+    .sucursal {
+        color: #fff;
+        opacity: 0.8;
+    }
+
+    .imgLi {
+        width: 2px;
+    }
+
+    .nombre {
+        text-align: center;
+        font-size: x-large;
+    }
+    ion-icon{
+        color: #fff;
+    }
+
+    .iconoP{
+        color: black;
+        font-size: 40px;
+    }
+
+    .nombreE{
+        color: #FFC149;
+        margin-top: -5%;
+    }
+
+    .categoria {
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .zona {
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .categoriaE {
+        color: #474646;
+    }
+
+
+    .zonaE {
+        color: #474646;
+    }
+
+    .numE {
+        color: #474646;
+        margin-top: 10px;
+    }
+
+    .Tproducto {
+        color: #474646;
+    }
+
+    .badge {
+        border-radius: 10px;
+        color: #fff;
+        background-color: #FD9530;
+    }
+
+    .badge-ios {
+        border-radius: 10px;
+        color: #fff;
+        background-color: #FD9530;
+    }
+
+    .badge-md {
+        border-radius: 10px;
+        color: #fff;
+        background-color: #FD9530;
+    }
+
+    .cuponD {
+        margin-top: -13px;
+    }
+
+    .blanco_2{
+        color: #706F6F;
+    }
+
+    .iconoAr{
+        width: 10px; 
+        margin-top: -5%;
+        margin-left: 85%;
+    }
+    
+
+
+  .list-avatar-page {
+      ion-note {
+          font-size: 12px;
+          align-self: flex-start;
+          margin-top: 14px;
+      }
+  }
+  .adv {
+      height: 35px;
+      width: 35px;
+  }
+
+}

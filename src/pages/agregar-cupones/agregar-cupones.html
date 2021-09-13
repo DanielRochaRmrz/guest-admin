@@ -1,0 +1,72 @@
+
+<ion-header>
+  <ion-navbar hideBackButton  >
+    <ion-row>
+      <ion-col col-1> 
+        <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+      
+
+      </ion-col>
+      <ion-col col-8>
+        <ion-title>Agregar cupones</ion-title>
+      </ion-col>
+    </ion-row>
+  
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="myForm" novalidate class="">
+   <ion-list>
+       <ion-item>
+        <ion-label class="blanco_1">Sucursal</ion-label>
+          <ion-select [(ngModel)]="sucursal" multiple="false" cancelText="Cancelar" okText="Aceptar" name="sucursal" formControlName="sucursal">
+             <div>
+               <ion-option *ngFor="let sucur of sucursales" [value]="sucur.uid">{{ sucur.displayName }}</ion-option>
+             </div>
+        </ion-select>
+       </ion-item>
+       <br>
+       <ion-item>
+         <ion-label class="blanco_1">Valor del cupón (MXN)</ion-label>
+         <ion-input style="color:black" type="number" [(ngModel)]="valorCupon" name="valorCupon" formControlName="valorCupon"></ion-input>
+       </ion-item>
+       <br>
+       <ion-item>
+         <ion-label class="blanco_1">Cupones a generar</ion-label>
+         <ion-input  style="color:black" type="number" [(ngModel)]="numCupones" name="numCupones" formControlName="numCupones"></ion-input>
+       </ion-item>
+       <br>
+       <!-- <ion-item>
+         <ion-label class="blanco_1">Condición</ion-label>
+         <ion-select [(ngModel)]="condicion" multiple="false" cancelText="Cancelar" okText="Aceptar" name="condicion" formControlName="condicion">
+             <div>
+               <ion-option value="10reservaciones">Usuario + de 10 reservaciones</ion-option>
+               <ion-option value="20reservaciones">Usuario + de 20 reservaciones</ion-option>
+             </div>
+         </ion-select>
+       </ion-item> -->
+       <br>
+       <ion-item>
+         <ion-label class="blanco_1">Fecha de expiración</ion-label>
+         <ion-datetime  style="color:black" item-end displayFormat="DD/MM/YYYY" [(ngModel)]="fechaExp" name="fechaExp" formControlName="fechaExp" min={{fechaActual}} doneText=Aceptar cancelText=Cancelar></ion-datetime>
+       </ion-item>
+       <br>
+       <ion-item>
+       </ion-item>
+
+    </ion-list>
+  </form>
+  <!-- <ion-footer no-border>
+      <ion-toolbar>
+          <ion-grid> -->
+              <ion-row>
+                           <ion-col col-12>
+                      <div text-center>
+                          <button ion-button block round color="warning" (click)="cuponAdd()" [disabled]="!myForm.valid"> <font color="white">  Generar </font></button>
+                      </div>
+                </ion-col>
+              </ion-row>
+          <!-- </ion-grid>
+      </ion-toolbar>
+  </ion-footer> -->
+ </ion-content>

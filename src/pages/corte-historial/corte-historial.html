@@ -1,0 +1,73 @@
+
+<ion-header>
+    <ion-navbar class="borde"  hideBackButton>
+        <ion-row>
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+                  </ion-col>
+        
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento">Historial de Cortes </div>
+                <div class="sucursal">Sucursal</div>
+            </ion-col>
+            <ion-col>
+                <div align='end'>
+                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <!-- <ion-card class="">
+        <ion-card-header class="" text-center><font color="black">   Historial de Corte</font>
+           
+        </ion-card-header>
+    </ion-card> -->
+
+    <ion-card class="">
+        <ion-card-content class="" *ngFor="let corte of corteHistorico">
+            <ion-card-title>
+                <h4 class="blanco_1"> <font color="black"> Corte {{corte.folio}} </font> 
+                    <button *ngIf="type == 'master'" ion-button clear (click)="deleteCorte(corte.uid)">
+                        <ion-icon name="trash"></ion-icon>
+                      </button>
+                     </h4>
+            </ion-card-title>
+            
+            <ion-item class="">
+                <img class="icon" src="../assets/imgs/icons/calendario1.png" item-start>
+                <p class="blanco_2"> <font color="black">  Fecha de Inicio </font> </p>
+                <ion-badge class="negro" item-end> {{corte.fecha_Inicio}} </ion-badge>
+            </ion-item>
+            <ion-item class="">
+                <img class="icon" src="../assets/imgs/icons/calendario1.png" item-start>
+                <a class="blanco_2"> <font color="black" >  Fecha fin </font> </a>
+                <ion-badge class="negro" item-end> {{corte.fecha_Fin}} </ion-badge>
+            </ion-item>
+            <ion-item class="">
+                <img class="icon" src="../assets/imgs/icons/money1.png" item-start>
+                <a class="blanco3 qq_2"> <font color="black"> Total</font> </a>
+                <ion-badge item-end> {{corte.totalCorte | currency}}</ion-badge>
+            </ion-item>
+            
+            <ion-item class="">
+                <img class="icon" src="../assets/imgs/icons/money1.png" item-start>
+                <a class="blanco_2"> <font color="black">  Propina </font> </a>
+                <ion-badge item-end>  {{corte.propina | currency}} </ion-badge>
+            </ion-item>
+            <ion-item class="">
+                <img class="icon" src="../assets/imgs/icons/money1.png" item-start>
+                <a class="blanco_2"> <font color="black">  Total + Propina </font> </a>
+                <ion-badge item-end>  {{corte.propina + corte.totalCorte | currency}} </ion-badge>
+            </ion-item>
+
+        </ion-card-content>
+    </ion-card>
+
+
+</ion-content>
