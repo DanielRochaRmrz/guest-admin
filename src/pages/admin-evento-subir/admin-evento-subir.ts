@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController, Platform } from 'ionic-angular';
 //import { Camera, CameraOptions } from '@ionic-native/camera';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { CargaArchivoProvider } from "../../providers/carga-archivo/carga-archivo"
@@ -34,8 +33,6 @@ export class AdminEventoSubirPage {
 
 
   constructor( private viewCtrl: ViewController,
-                //private camera: Camera,
-                private imagePicker: ImagePicker,
                 public _cap: CargaArchivoProvider,
                 public firebase: AngularFireAuth,
                 public afs: AngularFirestore,

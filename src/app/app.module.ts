@@ -78,12 +78,8 @@ import { PushNotiProvider } from "../providers/push-noti/push-noti";
 import { ReservacionProvider } from "../providers/reservacion/reservacion";
 
 //Plugins
-// import { Facebook } from '@ionic-native/facebook';
-// import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
-//import { Camera, CameraOptions } from '@ionic-native/camera';
-import { ImagePicker } from '@ionic-native/image-picker';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from "firebase/app";
@@ -98,6 +94,7 @@ import { AdminDeMonUserPage } from '../pages/admin-de-mon-user/admin-de-mon-user
 import { ResumenProvider } from '../providers/resumen/resumen';
 import { MisReservacionesPage } from '../pages/mis-reservaciones/mis-reservaciones';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Camera } from '@ionic-native/camera';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBixlCb21nNbPSurY-Pvqu3hZB80Icl9Pk",
@@ -109,7 +106,6 @@ export const firebaseConfig = {
 };
 import { Stripe } from '@ionic-native/stripe';
 import { PaymentProvider } from '../providers/payment/payment';
-import { Camera } from '@ionic-native/camera';
 
 
  firebase.initializeApp(firebaseConfig);
@@ -253,12 +249,8 @@ import { Camera } from '@ionic-native/camera';
     BarcodeScanner,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UsuarioProvider,
-    // Facebook,
-    // GooglePlus,
     AuthProvider,
     UserProvider,
-    //Camera,
-    ImagePicker,
     SocialSharing,
     CargaArchivoProvider,
     CartaAddProvider,
@@ -268,7 +260,6 @@ import { Camera } from '@ionic-native/camera';
     CargaCroquisProvider,
     AngularFirestore,
     PushNotiProvider,
-    //AuthService,
     OneSignal,
     ReservacionProvider,
     GestionReservacionesProvider,

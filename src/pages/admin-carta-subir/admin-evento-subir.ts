@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController, NavParams,NavController} from 'ionic-angular';
-//import { Camera, CameraOptions } from '@ionic-native/camera';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { CargaArchivoCartaProvider } from '../../providers/carga-archivo-carta/carga-archivo';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -27,8 +26,7 @@ export class AdminCartaSubirPage {
 
   constructor( private viewCtrl: ViewController,
     public navCtrl: NavController,
-                //private camera: Camera,
-                private imagePicker: ImagePicker,
+                private camera: Camera,
                 public _cap: CargaArchivoCartaProvider,
                 public firebase: AngularFireAuth,
                 public navParams: NavParams,
@@ -78,24 +76,25 @@ export class AdminCartaSubirPage {
 // });
 //   }
 
+
   seleccionar_foto(){
-    let opciones:ImagePickerOptions={
+    const options: CameraOptions = {
       quality: 70,
-      outputType: 1,
-      maximumImagesCount: 1
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      mediaType: 2,
+      saveToPhotoAlbum: false,
     }
-    this.imagePicker.getPictures(opciones).then((results) => {
-        for (var i = 0; i < results.length; i++) {
-          //console.log('Image URI: ' + results[i]);
-          this.imagenPreview = 'data:image/jpeg;base64,' + results[i];
-          this.imagen64 = results[i];
-
-
+    this.camera.getPicture(options).then((imageData) => {
+  
+       this.imagenPreview = 'data:image/jpeg;base64,' + imageData;
+       this.imagen64 =  imageData;   
+  
+    }, (err) => {
+     console.log("error en selector", JSON.stringify(err) );
+    });
   }
-  }, (err) => {
-    console.log("Error en selector", JSON.stringify(err))
-  });
-  }
+
   crear_post(){
     let archivo ={
       img: this.imagen64,

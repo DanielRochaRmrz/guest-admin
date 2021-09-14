@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { CargaArchivoProvider } from '../../providers/carga-archivo/carga-archivo';
 // import { AdminEventoSubirPage } from '../admin-evento-subir/admin-evento-subir';
 
@@ -18,7 +18,7 @@ evento = { key: null }
 eventoUid: any;
 eventoKey: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private imagePicker: ImagePicker, private sucProv: CargaArchivoProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private sucProv: CargaArchivoProvider) {
     this.eventoKey = navParams.get('key');
     console.log('key', this.evento.key);    
     this.eventoUid = navParams.get('uid');
@@ -29,22 +29,27 @@ eventoKey: any;
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminEventoImageEditPage');
   }
+
+
+
   seleccionar_foto(){
-    let opciones:ImagePickerOptions={
+    const options: CameraOptions = {
       quality: 70,
-      outputType: 1,
-      maximumImagesCount: 1
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      mediaType: 2,
+      saveToPhotoAlbum: false,
     }
-    this.imagePicker.getPictures(opciones).then((results) => {
-        for (var i = 0; i < results.length; i++) {
-          //console.log('Image URI: ' + results[i]);
-          this.imagenPreview = 'data:image/jpeg;base64,' + results[i];
-          this.imagen64 = results[i];
+    this.camera.getPicture(options).then((imageData) => {
+  
+       this.imagenPreview = 'data:image/jpeg;base64,' + imageData;
+       this.imagen64 =  imageData;   
+  
+    }, (err) => {
+     console.log("error en selector", JSON.stringify(err) );
+    });
   }
-  }, (err) => {
-    console.log("Error en selector", JSON.stringify(err))
-  });
-  }
+  
   editarImagen(){
     let data={
       img: this.imagen64
