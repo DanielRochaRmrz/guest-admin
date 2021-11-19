@@ -133,7 +133,7 @@ seleccionarFoto(){
     }
     this._cap.cargar_imagen_firebase(archivo)
     .then(()=>{
-     this.getUsersPusEvento();
+    //  this.getUsersPusEvento();
       this.cerrar_modal();
      
     });

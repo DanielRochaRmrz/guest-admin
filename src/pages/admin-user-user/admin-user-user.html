@@ -6,17 +6,17 @@
 -->
 <ion-header>
 
-    <ion-navbar  hideBackButton >
-      <ion-row>
+    <ion-navbar hideBackButton>
+        <ion-row>
 
-        <ion-col col-1>
-            <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
-              </ion-col>
-          <ion-col col-8>
-            <ion-title>Usuarios</ion-title>
-          </ion-col>
-      </ion-row>
-      
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+            </ion-col>
+            <ion-col col-8>
+                <ion-title>Usuarios</ion-title>
+            </ion-col>
+        </ion-row>
+
     </ion-navbar>
 
 </ion-header>
@@ -34,36 +34,40 @@
         <ion-list *ngIf="user.type == 'u' " class="">
             <div (click)="selectUsuario(user.uid)">
 
-                <ion-row>
-                    <ion-col col-3>
-                        <!-- <img src="{{user.photoURL}}?type=large&width=720&height=720" style="margin-top:-15px;width:90%;border-radius:50%;margin-left: 10px;"> -->
-                        <div *ngIf="user.provider == 'facebook'">
-                            <div *ngIf="user.status_foto == 0">
-                                <img src="{{user.photoURL}}" style="width:40%;border-radius:50%;">
+                <ion-card>
+                    <ion-row>
+                        <ion-col col-4>
+                            <!-- <img src="{{user.photoURL}}?type=large&width=720&height=720" style="margin-top:-15px;width:90%;border-radius:50%;margin-left: 10px;"> -->
+                            <div *ngIf="user.provider == 'facebook'">
+                                <div *ngIf="user.status_foto == 0" align="center">
+                                    <img src="{{user.photoURL}}" style="width:40%;border-radius:50%;">
+                                </div>
+                                <div *ngIf="user.status_foto == 1" align="center">
+                                    <img src="{{user.photoURL}}" style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -70px;">
+                                </div>
                             </div>
-                            <div *ngIf="user.status_foto == 1">
-                                <img src="{{user.photoURL}}" style="width: 38px;height: 41px;border-radius: 50%;margin-top: 7px;margin-left: -58px;">
-                            </div>
-                        </div>
-                        <div *ngIf="user.provider == 'google'">
-                            <div *ngIf="user.status_foto == 0">
-                                <img src="{{user.photoURL}}?type=large&width=720&height=720"
-                                    style="width:85%;border-radius:50%;">
-                            </div>
-                            <div *ngIf="user.status_foto == 1" align="center">
-                                <img src="{{user.photoURL}}"
-                                    style="width: 38px;height: 41px;border-radius: 50%;margin-top: 7px;margin-left: -58px;">
-                            </div>
-                        </div>
-                    </ion-col>
 
-                    <ion-col col-6>
-                        <p class="p"> <b>{{ user.displayName }}</b> </p>
-                        <ion-badge *ngIf="user.active == false " class="fon" item-end>Inhabilitado</ion-badge>
-                        <!-- <p class="p">{{ user.uid }}</p> -->
-                    </ion-col>
-                </ion-row>
+                            <div *ngIf="user.provider == 'google'">
+                                <div *ngIf="user.status_foto == 0" align="center">
+                                    <img src="{{user.photoURL}}?type=large&width=720&height=720" style="width:85%;border-radius:50%;">
+                                </div>
+                                <div *ngIf="user.status_foto == 1" align="center">
+                                    <img src="{{user.photoURL}}" style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -62px;position: absolute;">
+                                </div>
+                            </div>
+                        </ion-col>
 
+                        <ion-col col-8>
+                            Nombre
+                            <p class="p-a"> <b>{{ user.displayName }}</b> </p>
+                            <ion-badge *ngIf="user.active == false " class="fon" item-end>Inhabilitado</ion-badge>
+                            ID
+                            <p class="p">{{ user.uid }}</p>
+                        </ion-col>
+
+                    </ion-row>
+
+                </ion-card>
 
 
             </div>

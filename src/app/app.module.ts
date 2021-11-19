@@ -106,6 +106,7 @@ export const firebaseConfig = {
 };
 import { Stripe } from '@ionic-native/stripe';
 import { PaymentProvider } from '../providers/payment/payment';
+import { HttpClientModule } from '@angular/common/http';
 
 
  firebase.initializeApp(firebaseConfig);
@@ -183,6 +184,7 @@ import { PaymentProvider } from '../providers/payment/payment';
     AngularFireAuthModule,
     PipesModule,
     HttpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,16 +1,16 @@
 <ion-header>
 
-    <ion-navbar  hideBackButton >
+    <ion-navbar hideBackButton>
         <ion-row>
             <ion-col col-1>
                 <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
-      
+
             </ion-col>
             <ion-col col-8>
-                    <ion-title>Usuarios</ion-title>
+                <ion-title>Usuarios</ion-title>
             </ion-col>
         </ion-row>
-  
+
     </ion-navbar>
 
 </ion-header>
@@ -43,8 +43,7 @@
         <div *ngIf="usuario == 'a'">
             <div *ngFor="let admin of admins">
                 <ion-list *ngSwitchCase="'empleado'">
-                    <div *ngIf="admin.type == 'e' || admin.type == 'coordinacion' || admin.type == 'rp' || admin.type == 'capitan_mesero'"
-                        (click)="selectUsuario(admin.uid, admin.active)">
+                    <div *ngIf="admin.type == 'e' || admin.type == 'coordinacion' || admin.type == 'rp' || admin.type == 'capitan_mesero'" (click)="selectUsuario(admin.uid, admin.active)">
 
                         <ion-row>
 
@@ -53,15 +52,13 @@
 
                                     <ion-col>
 
-                                        <img src="{{admin.photoURL}}?type=large&width=720&height=720"
-                                            style="width:190%;border-radius:50px">
+                                        <img src="{{admin.photoURL}}?type=large&width=720&height=720" style="width:190%;border-radius:50px">
 
                                     </ion-col>
 
                                     <ion-col col-2>
 
-                                        <img src="../assets/imgs/Rectangle 73.png"
-                                            style="width:35%;height:65%;margin-top:10px">
+                                        <img src="../assets/imgs/Rectangle 73.png" style="width:35%;height:65%;margin-top:10px">
 
                                     </ion-col>
 
@@ -117,41 +114,37 @@
                         *ngIf="admin.type == 'e' || admin.type == 'coordinacion' || admin.type == 'rp' || admin.type == 'capitan_mesero'"
                         (click)="selectUsuario(admin.uid, admin.active)"> -->
                     <!-- <ion-thumbnail item-start> -->
-<ion-card>
-                    <ion-item no-lines (click)="selectUsuarioU(admin.uid, 'home')">
+                    <ion-card>
+                        <ion-item no-lines (click)="selectUsuarioU(admin.uid, 'home')">
 
-                        <ion-row>
-                            <ion-col col-4>
-                                <!-- <img src="{{admin.photoURL}}?type=large&width=720&height=720"
+                            <ion-row>
+                                <ion-col col-4>
+                                    <!-- <img src="{{admin.photoURL}}?type=large&width=720&height=720"
                                     style="border-radius:50px"> -->
-                                <div *ngIf="admin.provider == 'facebook'" align="center">
-                                    <div *ngIf="admin.status_foto == 0">
-                                        <img src="{{admin.photoURL}}"
-                                            style="width:40%;border-radius:50%;">
-                                </div>
-                                <div *ngIf="admin.status_foto == 1" align="center">
-                                        <img src="{{admin.photoURL}}"
-                                        style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -70px;">
+                                    <div *ngIf="admin.provider == 'facebook'" align="center">
+                                        <div *ngIf="admin.status_foto == 0">
+                                            <img src="{{admin.photoURL}}" style="width:40%;border-radius:50%;">
+                                        </div>
+                                        <div *ngIf="admin.status_foto == 1" align="center">
+                                            <img src="{{admin.photoURL}}" style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -70px;">
+                                        </div>
                                     </div>
-                                </div>
-                                <div *ngIf="admin.provider == 'google'" align="center">
-                                    <div *ngIf="admin.status_foto == 0">
-                                        <img src="{{admin.photoURL}}?type=large&width=720&height=720"
-                                            style="width:85%;border-radius:50%;">
+                                    <div *ngIf="admin.provider == 'google'" align="center">
+                                        <div *ngIf="admin.status_foto == 0">
+                                            <img src="{{admin.photoURL}}?type=large&width=720&height=720" style="width:85%;border-radius:50%;">
+                                        </div>
+                                        <div *ngIf="admin.status_foto == 1" align="center">
+                                            <img src="{{admin.photoURL}}" style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -62px;position: absolute;">
+                                        </div>
                                     </div>
-                                    <div *ngIf="admin.status_foto == 1" align="center">
-                                        <img src="{{admin.photoURL}}"
-                                            style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -62px;position: absolute;">
-                                    </div>
-                                </div>
 
-                            </ion-col>
-                            <ion-col col-5>
-                                <h6>
-                                    Nombre
-                                    <p class="p-a">{{ admin.displayName }}</p>
-                                </h6>
-                                <!-- <h6>
+                                </ion-col>
+                                <ion-col col-5>
+                                    <h6>
+                                        Nombre
+                                        <p class="p-a">{{ admin.displayName }}</p>
+                                    </h6>
+                                    <!-- <h6>
                                     Tipo
                                     <div *ngIf="admin.type == 'e'">
                                         <p class="p">Empleado</p>
@@ -166,19 +159,19 @@
                                         <p class="p">Capitán de meseros</p>
                                     </div>
                                 </h6> -->
-                                <h6>
-                                    ID
-                                    <p class="p">{{ admin.uid }}</p>
-                                </h6>
-                            </ion-col>
+                                    <h6>
+                                        ID
+                                        <p class="p">{{ admin.uid }}</p>
+                                    </h6>
+                                </ion-col>
 
 
-                        </ion-row>
+                            </ion-row>
 
 
-                        <ion-badge *ngIf="admin.active == 'false' " class="fondo" item-end>Inhabilitado</ion-badge>
-                    </ion-item>
-                </ion-card>
+                            <ion-badge *ngIf="admin.active == 'false' " class="fondo" item-end>Inhabilitado</ion-badge>
+                        </ion-item>
+                    </ion-card>
                 </ion-list>
             </div>
         </div>

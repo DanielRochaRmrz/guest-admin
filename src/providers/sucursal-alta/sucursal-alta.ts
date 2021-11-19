@@ -6,17 +6,17 @@ import * as firebase from "firebase";
 import {
   ToastController,
   AlertController,
-  LoadingController
+  LoadingController,
 } from "ionic-angular";
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument
+  AngularFirestoreDocument,
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs/Observable";
 import { map } from "rxjs/operators";
 import { UserProvider } from "../user/user";
-
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class SucursalAltaProvider {
@@ -44,6 +44,8 @@ export class SucursalAltaProvider {
   Croquis: AngularFirestoreCollection<any[]>;
   _Croquis: Observable<any[]>;
 
+  private apiUrl: string = "https://adminsoft.mx/operacion/guest";
+
   constructor(
     public afireauth: AngularFireAuth,
     public afiredatabase: AngularFireDatabase,
@@ -52,48 +54,54 @@ export class SucursalAltaProvider {
     public loadinCtl: LoadingController,
     public afs: AngularFirestore,
     private UserProv: UserProvider,
-  ) {
-
-  }
+    private http: HttpClient
+  ) {}
 
   newRegisters(newsucursal, sucursal) {
     console.log("estas son las variables", newsucursal, sucursal);
 
-    this.afireauth.auth.createUserWithEmailAndPassword(newsucursal.email, newsucursal.password).then((userCredential) => {
-      this.uidNewUser = userCredential.user.uid;
-      console.log("User " + this.uidNewUser + '' + sucursal + " created successfully!");
-      this.registers(newsucursal, this.uidNewUser, sucursal);
-      this.UserProv.registerUser(newsucursal.sucursal, newsucursal.email, 'a', this.uidNewUser);
-    });
+    this.afireauth.auth
+      .createUserWithEmailAndPassword(newsucursal.email, newsucursal.password)
+      .then((userCredential) => {
+        this.uidNewUser = userCredential.user.uid;
+        console.log(
+          "User " + this.uidNewUser + "" + sucursal + " created successfully!"
+        );
+        this.registers(newsucursal, this.uidNewUser, sucursal);
+        this.UserProv.registerUser(
+          newsucursal.sucursal,
+          newsucursal.email,
+          "a",
+          this.uidNewUser
+        );
+      });
   }
 
   registers(newsucursal, uidNewUser, sucursal) {
     console.log("Datos al registrar", newsucursal);
 
-    this.afs
-      .collection("sucursales").doc(uidNewUser)
-      .set({
-        uid: uidNewUser,
-        displayName: newsucursal.sucursal,
-        contacto: newsucursal.nombrecontacto,
-        direccion: newsucursal.direccion,
-        correo: newsucursal.email,
-        photoURL: "https://firebasestorage.googleapis.com/v0/b/guestreservation-8b24b.appspot.com/o/evento%2Fimagn_1.jpg?alt=media&token=74858bd7-00d3-4623-9994-57b3a6a5a93b",
-        email: newsucursal.email,
-        password: newsucursal.password,
-        status: newsucursal.status,
-        tipo: newsucursal.tipo,
-        type: 'a',
-        tel: newsucursal.telefono,
-        ciudad: newsucursal.ciudad,
-        sucursal: true,
-        estacionamiento: "",
-        descripción: "",
-        codigoEtiqueta: "",
-        horas: ""
-      });
+    this.afs.collection("sucursales").doc(uidNewUser).set({
+      uid: uidNewUser,
+      displayName: newsucursal.sucursal,
+      contacto: newsucursal.nombrecontacto,
+      direccion: newsucursal.direccion,
+      correo: newsucursal.email,
+      photoURL:
+        "https://firebasestorage.googleapis.com/v0/b/guestreservation-8b24b.appspot.com/o/evento%2Fimagn_1.jpg?alt=media&token=74858bd7-00d3-4623-9994-57b3a6a5a93b",
+      email: newsucursal.email,
+      password: newsucursal.password,
+      status: newsucursal.status,
+      tipo: newsucursal.tipo,
+      type: "a",
+      tel: newsucursal.telefono,
+      ciudad: newsucursal.ciudad,
+      sucursal: true,
+      estacionamiento: "",
+      descripción: "",
+      codigoEtiqueta: "",
+      horas: "",
+    });
   }
-
 
   cargarSucursal(
     sucursal: string,
@@ -117,13 +125,13 @@ export class SucursalAltaProvider {
   public getSucursal(uid) {
     // return this.afiredatabase.object("sucursales/" + uid);
     console.log("uid", uid);
-    this.sucursalDoc = this.afs.collection<any>("sucursales", ref =>
+    this.sucursalDoc = this.afs.collection<any>("sucursales", (ref) =>
       ref.where("uid", "==", uid)
     );
     this._sucursal = this.sucursalDoc.valueChanges();
     return (this._sucursal = this.sucursalDoc.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
+      map((changes) => {
+        return changes.map((action) => {
           const data = action.payload.doc.data() as any;
           data.$key = action.payload.doc.id;
           return data;
@@ -135,7 +143,7 @@ export class SucursalAltaProvider {
   getOneSucursal(idx) {
     this.Sucursal = this.afs.doc<any>(`sucursales/${idx}`);
     return (this._Sucursal = this.Sucursal.snapshotChanges().pipe(
-      map(action => {
+      map((action) => {
         if (action.payload.exists === false) {
           return null;
         } else {
@@ -149,14 +157,11 @@ export class SucursalAltaProvider {
 
   updateProfile(data) {
     console.log(data.uid);
-    this.afs
-      .collection("sucursales")
-      .doc(data.uid)
-      .update(data);
+    this.afs.collection("sucursales").doc(data.uid).update(data);
     // this.afiredatabase.database.ref("sucursales/" + data.uid).update(data);
   }
   cargar_imagen_firebase(archivo: Credenciales) {
-    let promesa = new Promise((resolve, reject) => {
+    let promesa = new Promise<void>((resolve, reject) => {
       this.mostrar_toast("Cargando..");
 
       let storeRef = firebase.storage().ref();
@@ -167,8 +172,8 @@ export class SucursalAltaProvider {
         .putString(archivo.photoURL, "base64", { contentType: "image/jpeg" });
       uploadTask.on(
         firebase.storage.TaskEvent.STATE_CHANGED,
-        () => { }, //saber el % cuantos se han subido
-        error => {
+        () => {}, //saber el % cuantos se han subido
+        (error) => {
           //manejo
           console.log("Error en la carga");
           console.log(JSON.stringify(error));
@@ -184,11 +189,11 @@ export class SucursalAltaProvider {
           // resolve();
           uploadTask.snapshot.ref
             .getDownloadURL()
-            .then(urlImage => {
+            .then((urlImage) => {
               this.crear_post(archivo.uid, urlImage);
               this.mostrar_toast("URL" + urlImage);
             })
-            .catch(error => {
+            .catch((error) => {
               console.log(error);
             });
           resolve();
@@ -200,13 +205,10 @@ export class SucursalAltaProvider {
   public crear_post(uid, url: string) {
     let sucursal: Credenciales = {
       uid: uid,
-      photoURL: url
+      photoURL: url,
     };
     console.log(JSON.stringify(sucursal));
-    this.afs
-      .collection("sucursales")
-      .doc(uid)
-      .update(sucursal);
+    this.afs.collection("sucursales").doc(uid).update(sucursal);
     // this.afiredatabase.object(`sucursales/`+uid).update(sucursal);
     this.imagenes.push(sucursal);
     this.mostrar_toast("Imagen actualizada");
@@ -217,14 +219,14 @@ export class SucursalAltaProvider {
       .collection("areas")
       .add({
         uidSucursal: idSucursal,
-        nombre: area
-      }).then(docRef => {
-
+        nombre: area,
+      })
+      .then((docRef) => {
         this.updateAreaIDX(docRef.id);
         this.alertCtrl
           .create({
             title: "Se agregó correctamente",
-            buttons: ["Aceptar"]
+            buttons: ["Aceptar"],
           })
           .present();
       })
@@ -239,12 +241,12 @@ export class SucursalAltaProvider {
         .collection("areas")
         .doc(idx)
         .update({
-          uid: idx
+          uid: idx,
         })
         .then(() => {
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -258,14 +260,22 @@ export class SucursalAltaProvider {
         uidArea: idArea,
         nombre: zona,
         consumo: Number(consumoMin),
-        uidSucursal: idSucursal
-      }).then(docRef => {
-
+        uidSucursal: idSucursal,
+      })
+      .then((docRef) => {
         this.updateZonaIDX(docRef.id);
+        const zon = {
+          uidZona: docRef.id,
+          zona: zona,
+          consumoMin: consumoMin,
+          idArea: idArea,
+          idSucursal: idSucursal,
+        };
+        this.agregarZonaHttp(zon);
         this.alertCtrl
           .create({
             title: "Se agregó correctamente",
-            buttons: ["Aceptar"]
+            buttons: ["Aceptar"],
           })
           .present();
       })
@@ -281,25 +291,31 @@ export class SucursalAltaProvider {
         .collection("zonas")
         .doc(idx)
         .update({
-          uid: idx
+          uid: idx,
         })
         .then(() => {
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
     return promise;
   }
 
-  verificarConsecutivo(idSucursal, idArea, idZona, numMesas, numPersonas): Promise<any> {
+  verificarConsecutivo(
+    idSucursal,
+    idArea,
+    idZona,
+    numMesas,
+    numPersonas
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
         .collection("mesas")
         .where("uidZona", "==", idZona)
         .get()
-        .then(querySnapshot => {
+        .then((querySnapshot) => {
           let arr = [];
           querySnapshot.forEach(function (doc) {
             var obj = JSON.parse(JSON.stringify(doc.data()));
@@ -312,12 +328,26 @@ export class SucursalAltaProvider {
             // console.log("Document data:", arr);
             var numero = arr.length;
             // console.log("Este es el tamaño del arreglo: ",numero);
-            this.agregarMesa(idSucursal, idArea, idZona, numMesas, numPersonas, numero);
+            this.agregarMesa(
+              idSucursal,
+              idArea,
+              idZona,
+              numMesas,
+              numPersonas,
+              numero
+            );
 
             resolve(arr);
           } else {
             var numero1 = 0;
-            this.agregarMesa(idSucursal, idArea, idZona, numMesas, numPersonas, numero1);
+            this.agregarMesa(
+              idSucursal,
+              idArea,
+              idZona,
+              numMesas,
+              numPersonas,
+              numero1
+            );
             // console.log("No such document!");
             resolve(null);
           }
@@ -329,7 +359,6 @@ export class SucursalAltaProvider {
   }
 
   agregarMesa(idSucursal, idArea, idZona, numMesas, numPersonas, numero) {
-
     console.log("Numero recibido: ", numero);
     console.log("Sucur recibido: ", idSucursal);
     console.log("area recibido: ", idArea);
@@ -347,7 +376,7 @@ export class SucursalAltaProvider {
         uidSucursal: idSucursal,
         mesa: numero + i,
         numPersonas: Number(numPersonas),
-        estatus: "libre"
+        estatus: "libre",
       });
     }
   }
@@ -362,16 +391,16 @@ export class SucursalAltaProvider {
           this.alertCtrl
             .create({
               title: "La zona se eliminó correctamente",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           this.alertCtrl
             .create({
               title: "Error al eliminar la zona. Intente de nuevo",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
           reject(err);
@@ -390,16 +419,16 @@ export class SucursalAltaProvider {
           this.alertCtrl
             .create({
               title: "El área se eliminó correctamente",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           this.alertCtrl
             .create({
               title: "Error al eliminar el área. Intente de nuevo",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
           reject(err);
@@ -418,16 +447,16 @@ export class SucursalAltaProvider {
           this.alertCtrl
             .create({
               title: "La sucursal se eliminó correctamente",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           this.alertCtrl
             .create({
               title: "Error al eliminar sucursal. Intente de nuevo",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
           reject(err);
@@ -443,23 +472,23 @@ export class SucursalAltaProvider {
         .doc(idZona)
         .update({
           nombre: zona,
-          consumo: consumoMin
+          consumo: consumoMin,
         })
         .then(() => {
           resolve(true);
           this.alertCtrl
             .create({
               title: "La zona se actualizó correctamente",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
           this.alertCtrl
             .create({
               title: "Error al actualizar la zona. Intente de nuevo",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
         });
@@ -473,23 +502,23 @@ export class SucursalAltaProvider {
         .collection("areas")
         .doc(idArea)
         .update({
-          nombre: area
+          nombre: area,
         })
         .then(() => {
           resolve(true);
           this.alertCtrl
             .create({
               title: "El área se actualizó correctamente",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
           this.alertCtrl
             .create({
               title: "Error al actualizar el área. Intente de nuevo",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
         });
@@ -501,53 +530,47 @@ export class SucursalAltaProvider {
     const toast = this.toastCtrl
       .create({
         message: mensaje,
-        duration: 3000
+        duration: 3000,
       })
       .present();
   }
 
   getAreas(idx) {
-    this.areasCollection = this.afs.collection("areas", ref =>
-      ref
-        .where("uidSucursal", "==", idx)
+    this.areasCollection = this.afs.collection("areas", (ref) =>
+      ref.where("uidSucursal", "==", idx)
     );
     this.areas = this.areasCollection.valueChanges();
-    return (this.areas = this.areasCollection
-      .snapshotChanges()
-      .pipe(
-        map(changes => {
-          return changes.map(action => {
-            const data = action.payload.doc.data();
-            data.id = action.payload.doc.id;
-            return data;
-          });
-        })
-      ));
+    return (this.areas = this.areasCollection.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((action) => {
+          const data = action.payload.doc.data();
+          data.id = action.payload.doc.id;
+          return data;
+        });
+      })
+    ));
   }
 
   getZonas(idx) {
-    this.zonasCollection = this.afs.collection("zonas", ref =>
-      ref
-        .where("uidSucursal", "==", idx)
+    this.zonasCollection = this.afs.collection("zonas", (ref) =>
+      ref.where("uidSucursal", "==", idx)
     );
     this.zonas = this.zonasCollection.valueChanges();
-    return (this.zonas = this.zonasCollection
-      .snapshotChanges()
-      .pipe(
-        map(changes => {
-          return changes.map(action => {
-            const data = action.payload.doc.data();
-            data.id = action.payload.doc.id;
-            return data;
-          });
-        })
-      ));
+    return (this.zonas = this.zonasCollection.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((action) => {
+          const data = action.payload.doc.data();
+          data.id = action.payload.doc.id;
+          return data;
+        });
+      })
+    ));
   }
 
   getArea(idx) {
     this.Sucursal = this.afs.doc<any>(`areas/${idx}`);
     return (this._Sucursal = this.Sucursal.snapshotChanges().pipe(
-      map(action => {
+      map((action) => {
         if (action.payload.exists === false) {
           return null;
         } else {
@@ -562,7 +585,7 @@ export class SucursalAltaProvider {
   getZona(idx) {
     this.Sucursal = this.afs.doc<any>(`zonas/${idx}`);
     return (this._Sucursal = this.Sucursal.snapshotChanges().pipe(
-      map(action => {
+      map((action) => {
         if (action.payload.exists === false) {
           return null;
         } else {
@@ -575,22 +598,19 @@ export class SucursalAltaProvider {
   }
 
   getMesas(idx) {
-    this.areasCollection = this.afs.collection("mesas", ref =>
-      ref
-        .where("uidZona", "==", idx).orderBy("mesa")
+    this.areasCollection = this.afs.collection("mesas", (ref) =>
+      ref.where("uidZona", "==", idx).orderBy("mesa")
     );
     this.areas = this.areasCollection.valueChanges();
-    return (this.areas = this.areasCollection
-      .snapshotChanges()
-      .pipe(
-        map(changes => {
-          return changes.map(action => {
-            const data = action.payload.doc.data();
-            data.id = action.payload.doc.id;
-            return data;
-          });
-        })
-      ));
+    return (this.areas = this.areasCollection.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((action) => {
+          const data = action.payload.doc.data();
+          data.id = action.payload.doc.id;
+          return data;
+        });
+      })
+    ));
   }
 
   eliminarMesa(idx) {
@@ -603,16 +623,16 @@ export class SucursalAltaProvider {
           this.alertCtrl
             .create({
               title: "La mesa se eliminó correctamente",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           this.alertCtrl
             .create({
               title: "Error al eliminar la mesa. Intente de nuevo",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
           reject(err);
@@ -628,23 +648,23 @@ export class SucursalAltaProvider {
         .doc(idMesa)
         .update({
           mesa: numMesa,
-          numPersonas: numPersonas
+          numPersonas: numPersonas,
         })
         .then(() => {
           resolve(true);
           this.alertCtrl
             .create({
               title: "La mesa se actualizó correctamente",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
           this.alertCtrl
             .create({
               title: "Error al actualizar la mesa. Intente de nuevo",
-              buttons: ["Aceptar"]
+              buttons: ["Aceptar"],
             })
             .present();
         });
@@ -652,22 +672,67 @@ export class SucursalAltaProvider {
     return promise;
   }
 
+  // Zonas Api
+  agregarZonaHttp(zon: any) {
+    const url = `${this.apiUrl}/guardar_zona`;
+    this.http.post(url, zon).subscribe((resp) => {
+      return resp;
+    });
+  }
+
+  actualizarZonaHttp(zon: any) {
+    const url = `${this.apiUrl}/actulizar_zona`;
+    this.http.post(url, zon).subscribe((resp) => {
+      console.log('Respuesta -->', resp);
+      return resp;
+    });
+  }
+
+  eliminarZonaHttp(zon: any) {
+    const url = `${this.apiUrl}/eliminar_zona`;
+    this.http.post(url, zon).subscribe(( resp: any ) => {
+      const arr = resp.datos;
+      arr.forEach(element => {
+        console.log('Respuesta -->', element);
+      });
+      return resp;
+    });
+  }
+
   ///CUPONES///
   // agregarCupon(codigoCupon, sucursal, valorCupon, numCupones, condicion, fechaExp, fechaActual) {
-    agregarCupon(codigoCupon, sucursal, valorCupon, numCupones, fechaExp, fechaActual) {
-    console.log("Datos en provider de cupon: ", codigoCupon, sucursal, valorCupon, numCupones, fechaExp, fechaActual);
-    this.db.collection("cupones").add({
-      codigoCupon: codigoCupon,
-      idSucursal: sucursal,
-      valorCupon: valorCupon,
-      numCupones: numCupones,
-      // condicion: condicion,
-      fechaExpiracion: fechaExp,
-      fechaRegistro: fechaActual,
-      estatus: "Activo"
-    }).then(docRef => {
-      this.updateCuponIDX(docRef.id);
-    })
+  agregarCupon(
+    codigoCupon,
+    sucursal,
+    valorCupon,
+    numCupones,
+    fechaExp,
+    fechaActual
+  ) {
+    console.log(
+      "Datos en provider de cupon: ",
+      codigoCupon,
+      sucursal,
+      valorCupon,
+      numCupones,
+      fechaExp,
+      fechaActual
+    );
+    this.db
+      .collection("cupones")
+      .add({
+        codigoCupon: codigoCupon,
+        idSucursal: sucursal,
+        valorCupon: valorCupon,
+        numCupones: numCupones,
+        // condicion: condicion,
+        fechaExpiracion: fechaExp,
+        fechaRegistro: fechaActual,
+        estatus: "Activo",
+      })
+      .then((docRef) => {
+        this.updateCuponIDX(docRef.id);
+      })
       .catch(function (error) {
         console.error("Error adding document: ", JSON.stringify(error));
       });
@@ -679,12 +744,12 @@ export class SucursalAltaProvider {
         .collection("cupones")
         .doc(idx)
         .update({
-          uid: idx
+          uid: idx,
         })
         .then(() => {
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -693,11 +758,14 @@ export class SucursalAltaProvider {
 
   ///CIUDADES///
   agregarCiudad(ciudad) {
-    this.db.collection("ciudades").add({
-      ciudad: ciudad
-    }).then(docRef => {
-      this.updateCiudadIDX(docRef.id);
-    })
+    this.db
+      .collection("ciudades")
+      .add({
+        ciudad: ciudad,
+      })
+      .then((docRef) => {
+        this.updateCiudadIDX(docRef.id);
+      })
       .catch(function (error) {
         console.error("Error adding document: ", JSON.stringify(error));
       });
@@ -709,12 +777,12 @@ export class SucursalAltaProvider {
         .collection("ciudades")
         .doc(idx)
         .update({
-          uid: idx
+          uid: idx,
         })
         .then(() => {
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -723,12 +791,15 @@ export class SucursalAltaProvider {
 
   ///Establecimientos//
   agregarEstablecimiento(establecimiento, ciudad) {
-    this.db.collection("establecimientos").add({
-      establecimiento: establecimiento,
-      idCiudad: ciudad
-    }).then(docRef => {
-      this.updateEstablecimientoIDX(docRef.id);
-    })
+    this.db
+      .collection("establecimientos")
+      .add({
+        establecimiento: establecimiento,
+        idCiudad: ciudad,
+      })
+      .then((docRef) => {
+        this.updateEstablecimientoIDX(docRef.id);
+      })
       .catch(function (error) {
         console.error("Error adding document: ", JSON.stringify(error));
       });
@@ -740,25 +811,29 @@ export class SucursalAltaProvider {
         .collection("establecimientos")
         .doc(idx)
         .update({
-          uid: idx
+          uid: idx,
         })
         .then(() => {
           resolve(true);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
     return promise;
   }
   getImagenSucursal(identificador: any) {
-    console.log('Servicio getImagenSucursal inicio', identificador);
+    console.log("Servicio getImagenSucursal inicio", identificador);
 
-    this.Croquis = this.afs.collection<any>("croquis_img", ref => ref.where('idSucursal', '==', identificador).orderBy('fecha_creado', 'asc'));
+    this.Croquis = this.afs.collection<any>("croquis_img", (ref) =>
+      ref
+        .where("idSucursal", "==", identificador)
+        .orderBy("fecha_creado", "asc")
+    );
     this._Croquis = this.Croquis.valueChanges();
     return (this._Croquis = this.Croquis.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
+      map((changes) => {
+        return changes.map((action) => {
           const data = action.payload.doc.data() as any;
           data.$key = action.payload.doc.id;
           return data;
@@ -768,8 +843,6 @@ export class SucursalAltaProvider {
     //console.log('Servicio getImagenSucursal Fin', identificador);
   }
 }
-
-
 
 export class Credenciales {
   uid?: string;
@@ -789,5 +862,4 @@ export class Credenciales {
   codigoEtiqueta?: string;
   descripcion?: string;
   geolocalizacion?: string;
-
 }

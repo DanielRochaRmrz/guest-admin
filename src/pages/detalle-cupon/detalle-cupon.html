@@ -1,59 +1,43 @@
-
 <ion-header>
-  <ion-navbar hideBackButton >
-    <ion-row>
-      <ion-col col-1>
+    <ion-navbar hideBackButton>
+        <ion-row>
+            <ion-col col-1>
 
-        <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
-      
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
 
-      </ion-col>
-  <ion-col col-8>
-    <div *ngFor="let sucursal of sucursales">
-      <ion-title *ngIf="sucursal.uid == idSucursal">Cupones de {{sucursal.displayName}}</ion-title>
-     </div>    
-  </ion-col>
-  
-    </ion-row>
 
-  </ion-navbar>
+            </ion-col>
+            <ion-col col-8>
+                <div *ngFor="let sucursal of sucursales">
+                    <ion-title *ngIf="sucursal.uid == idSucursal">Cupones de {{sucursal.displayName}}</ion-title>
+                </div>
+            </ion-col>
+
+        </ion-row>
+
+    </ion-navbar>
 </ion-header>
-<ion-content class="">
-    <ion-list clxass="">
-        <!-- <ion-item> -->
-          <!-- <ion-thumbnail item-start>
-          </ion-thumbnail> -->
-          <br><br>
-          <div  align ="center" *ngFor="let cupon of cupones">
-          
-              <img src="../assets/imgs/Vector (3).png" alt="" style="margin-top:10px;">
-        
-          
-              <div>
-                <!-- <ion-badge color="naranja" item-end> -->
-            <div class="infocup"  >
+<ion-content>
+    <div *ngFor="let cupon of cupones">
 
-      
+        <ion-card>
+            <img src="../assets/imgs/Vector (3).png" />
+            <div class="card-subtitle">
                 Cupón de descuento {{ cupon.valorCupon | currency }}
+                <br> Código {{ cupon.codigoCupon }}
                 <br>
-                Código {{ cupon.codigoCupon }}
-                
+                <ion-badge color="light">
+                    Disponibles {{ cupon.numCupones }}
+                </ion-badge>
                 <br>
-                <ion-badge color="light"> Disponibles {{ cupon.numCupones }}</ion-badge>
-                <br>
-                <!-- <div align="center"> -->
-                  <ion-badge *ngIf="cupon.estatus == 'Activo'" color="dark" (click)="updateStatus( cupon.estatus, cupon.uid)">{{ cupon.estatus }}</ion-badge>
-                  <ion-badge *ngIf="cupon.estatus == 'Inactivo'" color="red" (click)="updateStatus( cupon.estatus, cupon.uid)">{{ cupon.estatus }}</ion-badge>
-          
-              
-                    <!-- </div> -->
-                  </div>
-                  <!-- </ion-badge> -->
-              </div>
+                <ion-badge *ngIf="cupon.estatus == 'Activo'" color="dark" (click)="updateStatus( cupon.estatus, cupon.uid)">
+                    {{ cupon.estatus }}
+                </ion-badge>
+                <ion-badge *ngIf="cupon.estatus == 'Inactivo'" color="red" (click)="updateStatus( cupon.estatus, cupon.uid)">
+                    {{ cupon.estatus }}
+                </ion-badge>
+            </div>
+        </ion-card>
+    </div>
 
-              <br>
-          </div>
-  
-        <!-- </ion-item> -->
-      </ion-list>
 </ion-content>
