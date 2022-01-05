@@ -69,21 +69,21 @@ export class AdminMonitearReservPage {
         const uidSucursal = element.uidSucursal;
         this.monRes.getReservaciones(uidSucursal, this.formatoFecha).subscribe(reser => {
           this.reservaciones = reser;
-          console.log('reservaciones', reser);
+          console.log('reservaciones1', reser);
         })
         this.monRes.getReservacionesAcepCom(uidSucursal, this.formatoFecha).subscribe(reser => {
           this.reservacionesAcep = reser;
-          console.log('reservaciones', reser);
+          console.log('reservaciones2', reser);
         })
       });
     });
     this.monRes.getReservaciones(id, this.formatoFecha).subscribe(reser => {
       this.reservaciones = reser;
-      console.log('reservaciones', reser);
+      console.log('reservaciones3', reser);
     })
     this.monRes.getReservacionesAcepCom(id, this.formatoFecha).subscribe(reser => {
       this.reservacionesAcep = reser;
-      console.log('reservaciones', reser);
+      console.log('reservaciones4', reser);
     })
   }
   getClientes() {

@@ -51,10 +51,10 @@
   <ion-row>
     <ion-col col-1></ion-col>
     <ion-col align="center">
-      <p class="categoria">Categoria</p>
-      <div *ngFor="let even of Eventos">
-        <p class="categoriaE" text-center *ngIf="this.reservaciones.idevento == even.uid">
-          {{ even.categoria }}
+      <p class="categoria">Mesa</p>
+      <div *ngFor="let mesa of mesas">
+        <p class="categoriaE" text-center>
+          {{ mesa.descripcion }}
         </p>
       </div>
     </ion-col>

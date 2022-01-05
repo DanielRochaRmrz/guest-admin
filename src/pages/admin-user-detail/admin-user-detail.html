@@ -18,12 +18,13 @@
 
 <ion-content padding>
     <!-- <h3 text-center class="blanco"> Información del usuario </h3> -->
-    <div align="right"><br>
-        <span>
-            <font style="opacity: .5;" size="2"> Estatus: Activo </font>
-        </span> <br>
-        <img src="../assets/imgs/icons/Ellipse 4.png" style="width: 30px; " alt="">
-    </div>
+    <!-- <div align="right"><br> -->
+        <!-- <span> -->
+            <!-- <font style="opacity: .5;" size="2"> Estatus: Activo</font> -->
+            <!-- <ion-badge class="fon" item-end (click)="habilitar_user(user.uid, false)">Activo</ion-badge> -->
+        <!-- </span> <br> -->
+        <!-- <img src="../assets/imgs/icons/Ellipse 4.png" style="width: 30px; " alt=""> -->
+    <!-- </div> -->
 
     <ion-list no-lines class="margen_2">
         <ion-item *ngIf="user.active == true">

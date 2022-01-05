@@ -9,7 +9,7 @@ import { Observable } from "rxjs/internal/Observable";
 import {
   AlertController
 } from "ionic-angular";
-
+import { SucursalAltaProvider} from "../../providers/sucursal-alta/sucursal-alta";
 
 @Injectable()
 export class GestionReservacionesProvider {
@@ -38,7 +38,7 @@ export class GestionReservacionesProvider {
   _Reservacion: Observable<any>;
 
   constructor(public aFS: AngularFirestore,
-              public alertCtrl: AlertController,) {
+              public alertCtrl: AlertController,public SucProv: SucursalAltaProvider,) {
   }
 
   getReservaciones(idx, fecha) {
@@ -379,6 +379,8 @@ export class GestionReservacionesProvider {
   }
 
   aceptarReservacion(idx){
+
+
     var promise = new Promise((resolve, reject) => {
       this.db
         .collection("reservaciones")
@@ -394,6 +396,13 @@ export class GestionReservacionesProvider {
               buttons: ["Aceptar"]
             })
             .present();
+
+            console.log("aceptarReservacion")
+            const data = {
+              uid: idx
+          }
+          this.SucProv.actualizarStatusRsvpAceptadaHttp(data);
+        
         })
         .catch(err => {
           reject(err);

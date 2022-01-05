@@ -104,7 +104,7 @@ export class ReservaDetallePage {
         total =total+value.total;
         
       });
-      console.log('totalreserva: '+total);
+      console.log('totalreserva1: '+total);
       this.totalReserv=total;
        
      });

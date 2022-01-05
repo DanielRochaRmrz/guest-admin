@@ -680,12 +680,31 @@ export class SucursalAltaProvider {
     });
   }
 
+  obtenerMesas(id) {
+    return new Promise((resolve, rejects) => {
+      const url = `https://adminsoft.mx/operacion/guest/obtener_mesas/${id}`;
+      this.http.get(url).subscribe((resp: any) => {
+        const data = resp.consulta;
+        resolve(data);
+      });
+    });
+  }
+  
   actualizarZonaHttp(zon: any) {
     const url = `${this.apiUrl}/actulizar_zona`;
     this.http.post(url, zon).subscribe((resp) => {
       console.log('Respuesta -->', resp);
       return resp;
     });
+  }
+
+  actualizarStatusRsvpAceptadaHttp(status: any) {
+    console.log("actualza resv ",status.uid);
+     const url = `${this.apiUrl}/aceptar_rsvp`;
+     this.http.post(url, status).subscribe((resp) => {
+       console.log('Respuesta -->', resp);
+       return resp;
+     });
   }
 
   eliminarZonaHttp(zon: any) {

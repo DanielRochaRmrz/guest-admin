@@ -35,7 +35,74 @@
     <div *ngFor="let reservacion of reservaciones">
         <div *ngFor="let user of usuarios">
             <div *ngIf="reservacion.idUsuario==user.uid &&   reservacion.estatus == 'Creando'" class="espacio">
+                
+                
+
+                <div class="loader"></div>
+                
+                <ion-card class="color1">
+                    <br>
+                    <ion-row >
+                        <ion-col col-12 text-center>
+                            <ion-row >
+                            
+                                <ion-col col-12>
+                                    <img src="{{user.photoURL}}?type=large&width=720&height=720" style="width:20%;border-radius:50%; margin-left:41%;">
+                                </ion-col>
+
+                                <ion-col col-12>
+                                    <b>{{user.displayName}}</b>       
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row><br>
+                    
+                <hr  size="50px">
+                <br>
                 <ion-row >
+                    <ion-col col-12 text-center>
+                        <ion-row >
+                            <ion-col col-4>
+                                <b>Hora</b>
+                            </ion-col>
+                            <ion-col col-4>
+                                <b>Personas</b>
+                            </ion-col>
+                            <ion-col col-4>
+                                <b>Fecha</b>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row >
+                        <ion-col col-4>
+                            {{reservacion.hora}}
+                        </ion-col>
+                        <ion-col col-4>
+                            {{reservacion.numPersonas}}
+                        </ion-col>
+                        <ion-col col-4>
+                            {{ reservacion.fechaR | date : 'dd/MM/yyyy'}} 
+                        </ion-col>
+                        </ion-row>
+						
+						<ion-row >
+                            <!-- <button (click)="consultaReservacion(reservacion.idReservacion)"> -->
+<br>
+<br>
+                            <ion-col col-12 text-center>
+                                <!-- <button class="btn" (click)="consultaReservacion(reservacion.idReservacion)">Detalles
+                                </button> -->
+                                <button ion-button color1 class="colorBlanco" (click)="consultaReservacion(reservacion.idReservacion)">Detalles ></button>
+                            </ion-col>
+<br>
+						</ion-row >        
+                    </ion-col>
+                </ion-row>
+<br>
+            </ion-card>
+
+                
+                <!-- <ion-row >
                     <ion-col col-3 text-center>
                         <ion-row >
                     
@@ -53,8 +120,9 @@
                     <ion-col col-4>
                      <b>{{user.displayName}}</b>    <br>{{reservacion.hora}}
                     </ion-col>
+
                     <ion-col col-3 text-center>
-                        <!-- {{reservacion.fechaR}} -->
+                
                        <div class="cl1"> {{reservacion.numPersonas}} </div> <br> {{ reservacion.fechaR | date : 'dd/MM/yyyy'}} 
                     </ion-col>
                
@@ -63,13 +131,11 @@
                           <img src="../assets/imgs/icons/bx1.png" style="width:50px;" (click)="consultaReservacion(reservacion.idReservacion)" alt="">
                       </div>
                       
-                        <!-- <ion-icon name="arrow-round-forward"></ion-icon> -->
+                        
                     </ion-col>
-                    <!-- <ion-col col-2 text-center (click)="adminReservacion(reservacion.idReservacion)"> -->
-                    <!-- <ion-col col-2 text-center (click)="verCroquis(reservacion.idReservacion, reservacion.idSucursal)">
-                            <button class="btn">Croquis</button>
-                    </ion-col> -->
+                    
                 </ion-row>
+                
                 <br><br>
             </div>
             <div *ngIf="reservacion.idUsuario==user.uid && reservacion.estatus == 'CreadaCompartida'" class="espacio">
@@ -81,7 +147,7 @@
                      <b> {{user.displayName}}</b>   <br>{{reservacion.hora}}
                     </ion-col>
                     <ion-col col-2 text-center>
-                        <!-- {{reservacion.fechaR}} -->
+                
                         {{ reservacion.fechaR | date : 'dd/MM/yyyy'}}
                     </ion-col>
                     <ion-col col-1 text-center>
@@ -90,11 +156,9 @@
                     <ion-col col-1 text-center (click)="consultaReservacion(reservacion.idReservacion)">
                         <ion-icon name="arrow-round-forward"></ion-icon>
                     </ion-col>
-                    <!-- <ion-col col-2 text-center (click)="adminReservacion(reservacion.idReservacion)"> -->
-                    <!-- <ion-col col-2 text-center (click)="verCroquis(reservacion.idReservacion, reservacion.idSucursal)">
-                            <button class="btn">Croquis</button>
-                    </ion-col> -->
+                
                 </ion-row>
+                 -->
             </div>
        </div>
     </div>

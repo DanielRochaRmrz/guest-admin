@@ -45,9 +45,9 @@ public _reservaInfo3: Observable<any>;
   getReservaciones(idSucursal: string,fechaActual) {
     this.reservacionesCollection = this.afs.collection<any>("reservaciones", ref =>
       ref.where("idSucursal", "==", idSucursal)
-          .where("estatus", '==', 'Aceptado')
+          //.where("estatus", '==', 'Aceptado')
           //.where("estatus", '==', 'AceptadoCompartida')
-          .where("fechaR", '>=', fechaActual)
+          //.where("fechaR", '>=', fechaActual)
     );
     this.reservaciones = this.reservacionesCollection.valueChanges();
     return (this.reservaciones = this.reservacionesCollection.snapshotChanges().pipe(

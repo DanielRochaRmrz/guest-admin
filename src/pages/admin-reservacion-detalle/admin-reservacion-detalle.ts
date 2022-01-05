@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Thumbnail } from 'ionic-angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MonitoreoReservasProvider } from '../../providers/monitoreo-reservas/monitoreo-reservas';
 import { AdministrarReservacionesPage } from '../administrar-reservaciones/administrar-reservaciones';
-
+import { AdminMonitearReservPage } from '../admin-monitear-reserv/admin-monitear-reserv';
+import { SucursalAltaProvider} from "../../providers/sucursal-alta/sucursal-alta";
 
 @IonicPage()
 @Component({
@@ -30,11 +31,12 @@ export class AdminReservacionDetallePage {
   propinaRe2: any;
   totalPropinaCupon: any;
   totalPropina: any;
+  mesas: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public monRes: MonitoreoReservasProvider,
-    public afs: AngularFirestore) {
+    public afs: AngularFirestore, public SucProv: SucursalAltaProvider) {
     //recibe parametro de la reservacion
     this.idReservacion = this.navParams.get("idReservacion");
     console.log('idReservacion', this.idReservacion);
@@ -42,7 +44,12 @@ export class AdminReservacionDetallePage {
     this.afs.collection('reservaciones').doc(this.idReservacion).valueChanges().subscribe(reservacion => {
       this.reservaciones = reservacion;
       console.log('reservacion doc', this.reservaciones);
+
     });
+
+  this.obtenerMesas();    
+
+
     //consultar tabla areas
     this.afs
       .collection("areas")
@@ -136,9 +143,13 @@ export class AdminReservacionDetallePage {
   }
 
 
+  async obtenerMesas() {
+    this.mesas = await this.SucProv.obtenerMesas(this.idReservacion);
+    console.log("Mesas -->", this.mesas);
+  }
 
   behind(){
-    this.navCtrl.setRoot(AdministrarReservacionesPage);
+    this.navCtrl.setRoot(AdminMonitearReservPage);
   }
 
 }
