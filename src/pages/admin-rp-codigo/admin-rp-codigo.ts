@@ -33,7 +33,7 @@ export class AdminRpCodigoPage {
 
       this.codigos = data;
 
-      console.log("RP", this.codigos);
+      // console.log("RP", this.codigos);
       
     })
 

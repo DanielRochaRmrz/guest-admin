@@ -20,6 +20,7 @@ export class UserProvider {
   users: AngularFirestoreCollection<any[]>;
   _users: Observable<any>;
   uid: any;
+  codigosRp: any;
 
   constructor(
     public afireauth: AngularFireAuth,
@@ -41,10 +42,10 @@ export class UserProvider {
   }
 
   newRegister(newuser, uidSucursal) {
-    //var config = {apiKey: "AIzaSyBixlCb21nNbPSurY-Pvqu3hZB80Icl9Pk",
-    //authDomain: "guestreservation-8b24b.firebaseapp.com",
-    //databaseURL: "https://guestreservation-8b24b.firebaseio.com"};
-    //var secondaryApp = firebase.initializeApp(config, "Secondary");
+    // var config = {apiKey: "AIzaSyBixlCb21nNbPSurY-Pvqu3hZB80Icl9Pk",
+    // authDomain: "guestreservation-8b24b.firebaseapp.com",
+    // databaseURL: "https://guestreservation-8b24b.firebaseio.com"};
+    // var secondaryApp = firebase.initializeApp(config, "Secondary");
      this.afireauth.auth.createUserWithEmailAndPassword(newuser.email, newuser.password).then((firebaseUser) => {
       this.uid = firebaseUser.user.uid;
       console.log("User " + this.uid + " created successfully!");
@@ -53,7 +54,43 @@ export class UserProvider {
   }
 
   register(newuser, uidSucursal) {
-    this.afs
+
+    // SI EL USUARIO SE REGISTRA COMO RP
+
+    if(newuser.type == "rp"){
+
+      // VERIFICAMOS QUE CODIGO DE RP ESTA DISPONIBLE POR EL MOMENTO
+
+      this.afs.collection('codigosRp', ref => ref.where('uidSucursal', '==', uidSucursal)).valueChanges().subscribe(data => {
+
+        this.codigosRp = data;
+
+        this.codigosRp.forEach(element => {
+
+          const codigoCRp = element.codigo;
+
+          // REGISTRAMOS EN LA BD AL USUARIO TIPO RP
+
+          this.afs
+          .collection("users").doc(this.uid)
+          .set({
+              uid: this.uid,
+              displayName: newuser.name,
+              correo: newuser.email,
+              codigoRP: codigoCRp,
+              type: newuser.type,
+              active: "true",
+              uidSucursal: uidSucursal,
+              photoURL: "../assets/imgs/icons/profile.png",
+            });
+          
+        });
+
+      });      
+
+    }else{
+
+      this.afs
     .collection("users").doc(this.uid)
     .set({
         uid: this.uid,
@@ -64,6 +101,9 @@ export class UserProvider {
         uidSucursal: uidSucursal,
         photoURL: "../assets/imgs/icons/profile.png",
       });
+      
+    }
+    
 }
 
 registerUser(sucursal, email, type, uidNewUser) {
