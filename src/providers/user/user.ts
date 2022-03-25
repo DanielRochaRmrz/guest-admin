@@ -73,11 +73,24 @@ export class UserProvider {
           photoURL: "../assets/imgs/icons/profile.png",
         });
 
-        //  CREAMOS UN REGISTRO PARA SU CODIGO A COMPARTIR 
+        // GENERAMOS UN CODIGO ALEATORIO
 
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        for (let i = 56; i < charactersLength; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+
+        // FECHA ACTUAL 
+        let today = Date.now();
+
+        //  CREAMOS UN REGISTRO PARA SU CODIGO A COMPARTIR 
+        
         this.afs.collection('codigosRp').doc(this.uid).set({
-          codigo: "ESTEESLANUEVAFORMADELCODIGO2022",
+          codigo: result,
           estatus: 1,
+          fecha: today,
           uidRp: this.uid,
           uidSucursal: uidSucursal,
         });
