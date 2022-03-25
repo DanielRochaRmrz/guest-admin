@@ -57,6 +57,7 @@ import { AdminReservacionDetallePage } from '../pages/admin-reservacion-detalle/
 import { AdminReservacionesCursoPage } from '../pages/admin-reservaciones-curso/admin-reservaciones-curso';
 import { DetalleCuponPage } from '../pages/detalle-cupon/detalle-cupon';
 import { CuentasPage } from '../pages/cuentas/cuentas';
+import { AdminRpCodigoPage } from '../pages/admin-rp-codigo/admin-rp-codigo';
 
 //Pipes
 import { PipesModule } from "../pipes/pipes.module";
@@ -168,7 +169,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminReservacionDetallePage,
     AdminReservacionesCursoPage,
     DetalleCuponPage,
-    CuentasPage
+    CuentasPage,
+    AdminRpCodigoPage
   ],
   imports: [
     BrowserModule,
@@ -242,7 +244,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminReservacionDetallePage,
     AdminReservacionesCursoPage,
     DetalleCuponPage,
-    CuentasPage
+    CuentasPage,
+    AdminRpCodigoPage
   ],
   providers: [
     StatusBar,

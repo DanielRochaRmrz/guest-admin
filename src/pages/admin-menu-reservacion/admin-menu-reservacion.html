@@ -202,6 +202,32 @@
                 </div>
             </ion-col>-->
         </ion-row>
+
+        <!-- VER CODIGO DE RP  -->
+
+        <ion-row *ngIf="_userAdmin?.type == 'rp'">
+            <ion-col>
+
+                <div class="cl">
+
+                    <button class="cl" ion-item (click)="goCodigoRp()">
+                  
+                      <h4> &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;&nbsp;Código de reservacion</h4>
+
+                  </button>
+
+                </div>
+
+                <div class="cl2">
+
+                    <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left: 10x;" src="../assets/imgs/icons/book.png"> </ion-icon>
+
+                </div>
+
+            </ion-col>
+            
+        </ion-row>
+
     </div>
         <!--ACCESOS PARA USUARIO COORDINACION RP-->
         <ion-row *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp'">

@@ -13,6 +13,7 @@ import { CiudadEstablecimientoPage } from '../ciudad-establecimiento/ciudad-esta
 import { AdminLoginPage } from '../admin-login/admin-login';
 import { CuentasPage } from '../cuentas/cuentas';
 import { AdminHomePage } from '../admin-home/admin-home';
+import { AdminRpCodigoPage } from '../admin-rp-codigo/admin-rp-codigo'; 
 
 @IonicPage()
 @Component({
@@ -134,6 +135,19 @@ export class AdminMenuReservacionPage {
     console.log("consumo sucUID",this.sucursal.uid);
     var obj=[{uid: this.sucursal.uid}]
     this.navCtrl.push(CuentasPage, { uidSucursal: this.sucursal.uid } );
+  }
+
+  // IR A PAGINA DE CODIGO RP
+
+  goCodigoRp(){
+    
+    this.uids = localStorage.getItem('uidUser');
+
+    // console.log(this.uids);    
+
+    this.navCtrl.push(AdminRpCodigoPage, {uidRp: this.uids});
+    
+
   }
   
   salir() {
