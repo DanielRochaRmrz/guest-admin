@@ -59,34 +59,28 @@ export class UserProvider {
 
     if(newuser.type == "rp"){
 
-      // VERIFICAMOS QUE CODIGO DE RP ESTA DISPONIBLE POR EL MOMENTO
+     // REGISTRAMOS EN LA BD AL USUARIO TIPO RP
 
-      this.afs.collection('codigosRp', ref => ref.where('uidSucursal', '==', uidSucursal)).valueChanges().subscribe(data => {
-
-        this.codigosRp = data;
-
-        this.codigosRp.forEach(element => {
-
-          const codigoCRp = element.codigo;
-
-          // REGISTRAMOS EN LA BD AL USUARIO TIPO RP
-
-          this.afs
-          .collection("users").doc(this.uid)
-          .set({
-              uid: this.uid,
-              displayName: newuser.name,
-              correo: newuser.email,
-              codigoRP: codigoCRp,
-              type: newuser.type,
-              active: "true",
-              uidSucursal: uidSucursal,
-              photoURL: "../assets/imgs/icons/profile.png",
-            });
-          
+      this.afs
+      .collection("users").doc(this.uid)
+      .set({
+          uid: this.uid,
+          displayName: newuser.name,
+          correo: newuser.email,
+          type: newuser.type,
+          active: "true",
+          uidSucursal: uidSucursal,
+          photoURL: "../assets/imgs/icons/profile.png",
         });
 
-      });      
+        //  CREAMOS UN REGISTRO PARA SU CODIGO A COMPARTIR 
+
+        this.afs.collection('codigosRp').doc(this.uid).set({
+          codigo: "ESTEESLANUEVAFORMADELCODIGO2022",
+          estatus: 1,
+          uidRp: this.uid,
+          uidSucursal: uidSucursal,
+        });
 
     }else{
 

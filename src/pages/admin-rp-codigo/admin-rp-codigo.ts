@@ -29,7 +29,7 @@ export class AdminRpCodigoPage {
 
   getCodigoRp(uidRP){
 
-    this.afs.collection('users', ref => ref.where('uid', '==', uidRP)).valueChanges().subscribe(data =>{
+    this.afs.collection('codigosRp', ref => ref.where('uidRp', '==', uidRP).where('estatus', '==', 1)).valueChanges().subscribe(data =>{
 
       this.codigos = data;
 
