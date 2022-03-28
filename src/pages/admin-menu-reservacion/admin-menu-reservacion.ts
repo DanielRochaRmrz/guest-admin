@@ -143,7 +143,7 @@ export class AdminMenuReservacionPage {
     
     this.uids = localStorage.getItem('uidUser');
 
-    // console.log(this.uids);    
+    console.log(this.uids);    
 
     this.navCtrl.push(AdminRpCodigoPage, {uidRp: this.uids});
     

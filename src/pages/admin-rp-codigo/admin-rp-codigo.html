@@ -1,9 +1,4 @@
-<!--
-  Generated template for the AdminRpCodigoPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
     <ion-title>Código del día</ion-title>
@@ -24,7 +19,6 @@
 
         </ion-thumbnail>
 
-
           <h2 class="lbl">Comparte tu código</h2>
 
           <ion-item>
@@ -40,5 +34,119 @@
     </ng-container>
 
   </ion-list>
+
+  
+  <div *ngFor="let sucursal of sucursales">
+    
+    <div *ngIf="sucursal.type == 'a'">
+      
+    <div>
+
+      <div class="fondo">
+
+          <ion-searchbar placeholder="Buscar" [animated]="true" (ionInput)="getItems($event)"></ion-searchbar>
+
+          <ion-segment selectedIndex="1" [(ngModel)]="user">
+
+          </ion-segment>
+
+      </div>
+
+      <div align="center">
+
+          <img src="../assets/imgs/logo-negro.png" alt="">
+
+      </div>
+
+  </div>
+  
+  <div *ngFor="let admin of admins">
+
+    <ion-list>
+
+      <div *ngIf="sucursal.type == 'a'" (click)="selectUsuario(admin.uid, admin.active)">
+
+            <ion-row>
+
+                <ion-col col-3>
+
+                    <ion-row>
+
+                        <ion-col>
+
+                            <img src="{{admin.photoURL}}?type=large&width=720&height=720" style="width:190%;border-radius:50px">
+
+                        </ion-col>
+
+                        <ion-col col-2>
+
+                            <img src="../assets/imgs/Rectangle 73.png" style="width:35%;height:65%;margin-top:10px">
+
+                        </ion-col>
+
+                    </ion-row>
+                    
+                </ion-col>
+
+                <ion-col col-5>
+
+                    <h6 style="color: black;">
+
+                        <b>{{ admin.displayName }}</b>
+
+                    </h6>
+
+                    <ion-row style="margin-top: -10px;">
+
+                        <ion-col>
+
+                            <font size="2" style="color: black;opacity: .5;">
+
+                                <div *ngIf="admin.type == 'rp'"> RP </div>
+                                
+                                  <ng-container *ngFor="let codigoRp of codigosRps">
+
+                                    <div *ngIf="admin.uid == codigoRp.uidRp">
+
+                                      <ion-icon ios="ios-barcode" md="md-barcode"></ion-icon> {{ codigoRp.codigo }}
+                                      <br>
+                                      <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ codigoRp.fecha | date }}
+
+                                    </div>
+
+                                  </ng-container>
+
+                            </font>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </ion-col>
+
+                <ion-col col-4>
+
+                    <div style="margin-left:27px;margin-top: 15px;">
+
+                        <font>STATUS</font> <br>
+
+                        <img src="../assets/imgs/icons/Ellipse 4.png" style="margin-left: 10px; margin-top: 10px;" alt="">
+
+                    </div>
+
+                </ion-col>
+
+            </ion-row>
+
+            <ion-badge *ngIf="admin.active == 'false' " class="fondo" item-end>Inhabilitado</ion-badge>
+
+      </div>
+
+    </ion-list>
+</div>
+
+</div>
+
+</div>
 
 </ion-content>

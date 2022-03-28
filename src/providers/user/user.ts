@@ -222,6 +222,24 @@ registerUser(sucursal, email, type, uidNewUser) {
       })
     ));
   }
+
+  actualizarCodigoRp(uid){
+
+    let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        for (let i = 56; i < charactersLength; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+
+    // Actualizamos el codigo al usuario en la base de datos
+    this.afs.collection('codigosRp').doc(uid).update({
+      codigo: result
+    }).then(() =>{
+      this.mostrar_toast('Se actualizo el código del usuario.');
+    });
+
+  }
   mostrar_toast( mensaje: string  ){
 
     const toast = this.toastCtrl.create({
