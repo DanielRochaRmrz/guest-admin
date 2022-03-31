@@ -62,7 +62,7 @@
   
   <div *ngFor="let admin of admins">
 
-    <ion-list>
+    <ion-list class="descripcion">
 
       <div *ngIf="sucursal.type == 'a'" (click)="selectUsuario(admin.uid, admin.active)">
 
@@ -88,9 +88,9 @@
                     
                 </ion-col>
 
-                <ion-col col-5>
+                <ion-col col-5 class="cuadro">
 
-                    <h6 style="color: black;">
+                    <h6 style="color: #FD9530;">
 
                         <b>{{ admin.displayName }}</b>
 
@@ -108,9 +108,9 @@
 
                                     <div *ngIf="admin.uid == codigoRp.uidRp">
 
-                                      <ion-icon ios="ios-barcode" md="md-barcode"></ion-icon> {{ codigoRp.codigo }}
+                                      <ion-icon ios="ios-barcode-outline" md="md-barcode-"></ion-icon> {{ codigoRp.codigo }}
                                       <br>
-                                      <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ codigoRp.fecha | date }}
+                                      <ion-icon ios="ios-calendar-outline" md="md-calendar-outline"></ion-icon> {{ codigoRp.fecha | date }}
 
                                     </div>
 

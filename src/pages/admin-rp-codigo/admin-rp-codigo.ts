@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController } from 'ioni
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserProvider } from '../../providers/user/user';
+import { AdminRpCorteCodigosPage } from '../admin-rp-corte-codigos/admin-rp-corte-codigos';
 
 @IonicPage()
 @Component({
@@ -141,6 +142,9 @@ export class AdminRpCodigoPage {
 
   selectUsuario(uid, active) {
 
+    var uidSucursal = this.usuario;
+
+
     this.actionSheet.create({
 
       title: 'Acciones',
@@ -177,8 +181,25 @@ export class AdminRpCodigoPage {
         },
 
         {
+          
+          text: 'Corte de códigos',
 
-          text: 'Cancel',
+          role: 'destructive',
+
+          handler: () => {            
+
+            this.navCtrl.push(AdminRpCorteCodigosPage, {uidRp: uid, uidSucursal:uidSucursal});
+            
+            // console.log("SUCURSAL", uidSucursal);
+            // console.log("UID RP", uid);
+
+          }
+
+        },
+
+        {
+
+          text: 'Cancelar',
 
           role: 'cancel',
 

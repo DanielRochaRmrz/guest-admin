@@ -58,6 +58,7 @@ import { AdminReservacionesCursoPage } from '../pages/admin-reservaciones-curso/
 import { DetalleCuponPage } from '../pages/detalle-cupon/detalle-cupon';
 import { CuentasPage } from '../pages/cuentas/cuentas';
 import { AdminRpCodigoPage } from '../pages/admin-rp-codigo/admin-rp-codigo';
+import { AdminRpCorteCodigosPage } from '../pages/admin-rp-corte-codigos/admin-rp-corte-codigos';
 
 //Pipes
 import { PipesModule } from "../pipes/pipes.module";
@@ -108,6 +109,7 @@ export const firebaseConfig = {
 import { Stripe } from '@ionic-native/stripe';
 import { PaymentProvider } from '../providers/payment/payment';
 import { HttpClientModule } from '@angular/common/http';
+import { from } from 'rxjs';
 
 
  firebase.initializeApp(firebaseConfig);
@@ -170,7 +172,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminReservacionesCursoPage,
     DetalleCuponPage,
     CuentasPage,
-    AdminRpCodigoPage
+    AdminRpCodigoPage,
+    AdminRpCorteCodigosPage
   ],
   imports: [
     BrowserModule,
@@ -245,7 +248,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminReservacionesCursoPage,
     DetalleCuponPage,
     CuentasPage,
-    AdminRpCodigoPage
+    AdminRpCodigoPage,
+    AdminRpCorteCodigosPage
   ],
   providers: [
     StatusBar,

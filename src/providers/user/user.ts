@@ -94,7 +94,7 @@ export class UserProvider {
           uidRp: this.uid,
           uidSucursal: uidSucursal,
         });
-
+        
     }else{
 
       this.afs
@@ -225,6 +225,8 @@ registerUser(sucursal, email, type, uidNewUser) {
 
   actualizarCodigoRp(uid){
 
+    let today = Date.now();
+
     let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const charactersLength = characters.length;
@@ -234,7 +236,8 @@ registerUser(sucursal, email, type, uidNewUser) {
 
     // Actualizamos el codigo al usuario en la base de datos
     this.afs.collection('codigosRp').doc(uid).update({
-      codigo: result
+      codigo: result,
+      fecha: today
     }).then(() =>{
       this.mostrar_toast('Se actualizo el código del usuario.');
     });
