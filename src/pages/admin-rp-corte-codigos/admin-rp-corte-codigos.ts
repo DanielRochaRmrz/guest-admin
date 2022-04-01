@@ -27,6 +27,8 @@ export class AdminRpCorteCodigosPage {
   fechaFBd: any;
 
   codigos:any;
+  codigosUsers: any;
+  nombresUsua: any;
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,  public afs: AngularFirestore) {
@@ -97,11 +99,15 @@ export class AdminRpCorteCodigosPage {
 
     var fechaIBd2 = Number(this.fechaIBd );
 
+    typeof(fechaIBd2);
+
     // console.log("FECHAI", fechaIBd2);    
 
     this.fechaFBd = moment(fechaF).format("x");
 
     var fechaFBd2 = Number(this.fechaFBd);
+
+    typeof(fechaFBd2);
 
     // console.log("FECHAf", fechaFBd2);
 
@@ -110,6 +116,25 @@ export class AdminRpCorteCodigosPage {
     this.afs.collection('contCodigosRp', ref => ref.where('uidRP', '==', userRp).where('fecha', '>=', fechaIBd2).where('fecha', '<=', fechaFBd2)).valueChanges().subscribe(data =>{
 
       this.codigos = data;
+
+      this.codigosUsers = data;
+
+      this.codigosUsers.forEach(element => {
+
+        // console.log(element.uidUser);   
+        
+        let uid =  element.uidUser
+        
+        this.afs.collection('users', ref => ref.where('uid', '==', uid)).valueChanges().subscribe(data =>{
+
+          this.nombresUsua = data;
+
+          // console.log("Nombre", this.nombresUsua);
+          
+
+        });
+        
+      });
 
       // console.log("CODIGOS", this.codigos);
 
@@ -122,7 +147,7 @@ export class AdminRpCorteCodigosPage {
       accion1(){
 
       this.ocultar1 = !this.ocultar1;
-      
+
     }
 
 }
