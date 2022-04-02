@@ -40,6 +40,7 @@ export class AdminLoginPage {
         this.sucursalSesion.forEach(element => {
           localStorage.setItem("uidUser", element.uid);
           localStorage.setItem("uid", element.uid);
+          localStorage.setItem("uidSucursal", element.uidSucursal);
           localStorage.getItem("isLogin") == "true"
           localStorage.setItem("type", element.type);
           console.log('id del user que inicio sesion', element.uid);

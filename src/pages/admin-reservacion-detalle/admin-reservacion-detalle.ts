@@ -43,7 +43,7 @@ export class AdminReservacionDetallePage {
     //Traer datos de la reservacion seleccionada
     this.afs.collection('reservaciones').doc(this.idReservacion).valueChanges().subscribe(reservacion => {
       this.reservaciones = reservacion;
-      console.log('reservacion doc', this.reservaciones);
+      console.log('reservacion doc', this.reservaciones.numMesa);
 
     });
 

@@ -1,179 +1,176 @@
 <ion-header>
 
-  <ion-navbar class="borde" hideBackButton  >
-    <ion-row>
-      <ion-col col-1 align="center">
-        <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white">
-        </ion-icon>
-      </ion-col>
-    
+    <ion-navbar class="borde" hideBackButton>
+        <ion-row>
+            <ion-col col-1 align="center">
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white">
+                </ion-icon>
+            </ion-col>
 
-      <ion-col col-1 align="center">
-        <img src="./assets/content/line2.png" class="imgLi" alt="">
-      </ion-col>
-      <ion-col col-8>
-        <div class="AdminEvento">Detalle de Reservación</div>
-        <div class="sucursal">Sucursal</div>
-      </ion-col>
-      <ion-col>
-        <div align='end'>
-          <img src="./assets/content/corona.png" style="width: 40%;" alt="">
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-navbar>
+
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento">Detalle de Reservación</div>
+                <div class="sucursal">Sucursal</div>
+            </ion-col>
+            <ion-col>
+                <div align='end'>
+                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
 
 </ion-header>
 <ion-content>
 
-  <br><br>
+    <br><br>
 
-  <ion-row>
-    <ion-col col-2></ion-col>
-    <ion-col col-8>
-      <div *ngFor="let user of infoUsers">
-        <div *ngIf="user.uid == reservaciones.idUsuario">
-          <p class="nombre">{{user.displayName}}</p>
-        </div>
-      </div>
+    <ion-row>
+        <ion-col col-2></ion-col>
+        <ion-col col-8>
+            <div *ngFor="let user of infoUsers">
+                <div *ngIf="user.uid == reservaciones.idUsuario">
+                    <p class="nombre">{{user.displayName}}</p>
+                </div>
+            </div>
 
-      <h6 *ngFor="let even of Eventos">
-        <h6 text-center *ngIf="this.reservaciones.idevento == even.uid" class="nombreE">
-          {{ even.titulo }}
-        </h6>
-      </h6>
-    </ion-col>
-    <ion-col col-2></ion-col>
-  </ion-row>
+            <h6 *ngFor="let even of Eventos">
+                <h6 text-center *ngIf="this.reservaciones.idevento == even.uid" class="nombreE">
+                    {{ even.titulo }}
+                </h6>
+            </h6>
+        </ion-col>
+        <ion-col col-2></ion-col>
+    </ion-row>
 
-  <br><br><br>
+    <br><br><br>
 
-  <ion-row>
-    <ion-col col-1></ion-col>
-    <ion-col align="center">
-      <p class="categoria">Mesa</p>
-      <div *ngFor="let mesa of mesas">
-        <p class="categoriaE" text-center>
-          {{ mesa.descripcion }}
-        </p>
-      </div>
-    </ion-col>
+    <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col align="center">
+            <p class="categoria">Mesa</p>
+            <p class="categoriaE" text-center>
+                {{ reservaciones.numMesa }}
+            </p>
+        </ion-col>
 
-    <ion-col align="center">
-      <ion-icon name="person-outline" class="iconoP"></ion-icon>
-      <div *ngFor="let even of Eventos">
-        <div text-center class="numE" *ngIf="this.reservaciones.idevento == even.uid">
-          {{ this.reservaciones.numPersonas }}
-        </div>
-      </div>
-    </ion-col>
+        <ion-col align="center">
+            <ion-icon name="person-outline" class="iconoP"></ion-icon>
+            <div *ngFor="let even of Eventos">
+                <div text-center class="numE" *ngIf="this.reservaciones.idevento == even.uid">
+                    {{ this.reservaciones.numPersonas }}
+                </div>
+            </div>
+        </ion-col>
 
-    <ion-col align="center">
-      <p class="zona">Zona</p>
-      <div *ngFor="let zon of Zonas">
-        <div class="zonaE" text-center *ngIf="this.reservaciones.idZona == zon.uid">
-          {{ zon.nombre }}
-        </div>
-      </div>
-    </ion-col>
-    <ion-col col-1></ion-col>
-  </ion-row>
+        <ion-col align="center">
+            <p class="zona">Zona</p>
+            <div *ngFor="let zon of Zonas">
+                <div class="zonaE" text-center *ngIf="this.reservaciones.idZona == zon.uid">
+                    {{ zon.nombre }}
+                </div>
+            </div>
+        </ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
 
-  <br><br>
+    <br><br>
 
-  <div class="Tproducto" text-center>PRODUCTOS DE LA RESERVACIÓN</div>
+    <div class="Tproducto" text-center>PRODUCTOS DE LA RESERVACIÓN</div>
     <h2 *ngFor="let pro of Productos">
-      <h2 *ngIf="this.reservaciones.idReservacion == pro.idReservacion">
-        <ion-item>
-          <p>Producto</p>
-          <ion-badge class="badge" item-end>{{pro.producto}}</ion-badge>
-        </ion-item>
-        <ion-item>
-          <p>Cantidad</p>
-          <ion-badge class="badge" item-end>{{pro.cantidad}}</ion-badge>
-        </ion-item>
-        <ion-item>
-          <p>Costo</p>
-          <ion-badge class="badge" item-end>{{pro.costo | currency}}</ion-badge>
-        </ion-item>
-        <ion-item>
-          <p>Total</p>
-          <ion-badge class="badge" item-end>{{pro.total | currency}}</ion-badge>
-        </ion-item>
-      </h2>
+        <h2 *ngIf="this.reservaciones.idReservacion == pro.idReservacion">
+            <ion-item>
+                <p>Producto</p>
+                <ion-badge class="badge" item-end>{{pro.producto}}</ion-badge>
+            </ion-item>
+            <ion-item>
+                <p>Cantidad</p>
+                <ion-badge class="badge" item-end>{{pro.cantidad}}</ion-badge>
+            </ion-item>
+            <ion-item>
+                <p>Costo</p>
+                <ion-badge class="badge" item-end>{{pro.costo | currency}}</ion-badge>
+            </ion-item>
+            <ion-item>
+                <p>Total</p>
+                <ion-badge class="badge" item-end>{{pro.total | currency}}</ion-badge>
+            </ion-item>
+        </h2>
     </h2>
 
 
 
     <div *ngIf="validarCupon=='Noexiste'">
-      <ion-item class="cuponD">
-        <p>Propina</p>
-        <ion-badge color="dark" item-end>{{propinaRe2 | currency}}</ion-badge>
-      </ion-item>
-      <ion-item class="cuponD">
-        <p>TOTAL RESERVACIÓN</p>
-        <ion-badge color="dark" item-end>{{totalPropina | currency}}</ion-badge>
-      </ion-item>
+        <ion-item class="cuponD">
+            <p>Propina</p>
+            <ion-badge color="dark" item-end>{{propinaRe2 | currency}}</ion-badge>
+        </ion-item>
+        <ion-item class="cuponD">
+            <p>TOTAL RESERVACIÓN</p>
+            <ion-badge color="dark" item-end>{{totalPropina | currency}}</ion-badge>
+        </ion-item>
     </div>
     <div *ngIf="validarCupon=='Existe'">
-      <h2 *ngFor="let cup of Cupones">
-        <h2 *ngIf="this.reservaciones.uidCupon == cup.uid">
-          <ion-item class="cuponD">
-            <p>Cupon descuento</p>
-            <ion-badge color="dark" item-end>{{cup.valorCupon | currency}}</ion-badge>
-          </ion-item>
-          <ion-item>
-            <p>TOTAL</p>
-            <ion-badge color="dark" item-end>{{this.reservaciones.totalReservacion | currency}}</ion-badge>
-          </ion-item>
-          <ion-item>
-            <p>Propina</p>
-            <ion-badge color="dark" item-end>{{propinaRe | currency}}</ion-badge>
-          </ion-item>
-          <ion-item>
-            <p>TOTAL FINAL</p>
-            <ion-badge color="dark" item-end>{{totalPropinaCupon | currency}}</ion-badge>
-          </ion-item>
+        <h2 *ngFor="let cup of Cupones">
+            <h2 *ngIf="this.reservaciones.uidCupon == cup.uid">
+                <ion-item class="cuponD">
+                    <p>Cupon descuento</p>
+                    <ion-badge color="dark" item-end>{{cup.valorCupon | currency}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                    <p>TOTAL</p>
+                    <ion-badge color="dark" item-end>{{this.reservaciones.totalReservacion | currency}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                    <p>Propina</p>
+                    <ion-badge color="dark" item-end>{{propinaRe | currency}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                    <p>TOTAL FINAL</p>
+                    <ion-badge color="dark" item-end>{{totalPropinaCupon | currency}}</ion-badge>
+                </ion-item>
+            </h2>
         </h2>
-      </h2>
     </div>
 
 
     <ion-row>
-      <ion-col col-2></ion-col>
-      <ion-col>
-        <ion-card class="card_atras">
-          <p *ngIf="infoReserCom_num != 0" text-center class="blanco_2">
-            <br>
-            COMPARTIDA ENTRE
-            <img src="./assets/content/iconoC.png" class="iconoAr" alt="">
-            <br>
-          </p>
-          <div *ngFor="let compartidas of cuentasCompartidas">
-            <div *ngIf="this.reservaciones.idReservacion==compartidas.idReservacion">
-              <div *ngFor="let users of infoUsers">
-                <div *ngIf="compartidas.telefono==users.phoneNumber">
-                  <ion-item color="dark">
-                    <ion-avatar item-start>
-                      <img src="../assets/imgs/icons/profile.png">
-                    </ion-avatar>
-                    <ion-badge color="dark" item-end>{{users.displayName}}</ion-badge>
-                  </ion-item>
+        <ion-col col-2></ion-col>
+        <ion-col>
+            <ion-card class="card_atras">
+                <p *ngIf="infoReserCom_num != 0" text-center class="blanco_2">
+                    <br> COMPARTIDA ENTRE
+                    <img src="./assets/content/iconoC.png" class="iconoAr" alt="">
+                    <br>
+                </p>
+                <div *ngFor="let compartidas of cuentasCompartidas">
+                    <div *ngIf="this.reservaciones.idReservacion==compartidas.idReservacion">
+                        <div *ngFor="let users of infoUsers">
+                            <div *ngIf="compartidas.telefono==users.phoneNumber">
+                                <ion-item color="dark">
+                                    <ion-avatar item-start>
+                                        <img src="../assets/imgs/icons/profile.png">
+                                    </ion-avatar>
+                                    <ion-badge color="dark" item-end>{{users.displayName}}</ion-badge>
+                                </ion-item>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col col-2></ion-col>
+            </ion-card>
+        </ion-col>
+        <ion-col col-2></ion-col>
     </ion-row>
 
-    
 
 
 
 
-  <!-- <ion-item>
+
+    <!-- <ion-item>
     <h2 *ngFor="let zon of Zonas">
       <h2 text-center *ngIf="this.reservaciones.idZona == zon.uid">Zona: {{ zon.nombre }} </h2>
     </h2>
@@ -211,7 +208,7 @@
       </h2>
     </h2>
   </ion-item> -->
-  <!-- <div *ngIf="validarCupon=='Noexiste'">
+    <!-- <div *ngIf="validarCupon=='Noexiste'">
     <ion-item color="dark">
       <p>Propina</p>
       <ion-badge color="light" item-end>{{propinaRe2 | currency}}</ion-badge>
@@ -243,7 +240,7 @@
       </h2>
     </h2>
   </div> -->
-  <!-- <ion-card class="card_atras">
+    <!-- <ion-card class="card_atras">
     <p *ngIf="infoReserCom_num != 0" text-center class="blanco_2">COMPARTIDA ENTRE</p>
     <div *ngFor="let compartidas of cuentasCompartidas">
       <div *ngIf="this.reservaciones.idReservacion==compartidas.idReservacion">

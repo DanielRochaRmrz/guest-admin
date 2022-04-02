@@ -1,29 +1,29 @@
 <ion-header>
 
-        <ion-navbar class="borde" hideBackButton >
-            <ion-row>
-                <ion-col col-1>
-                    <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white;margin-top: 14px;"></ion-icon>
-      
-  
-                </ion-col>
-                <ion-col>
-                    <p *ngIf="_sucursal?.type == 'a'">Control de la sucursal </p>
-                    <!--Inicia. Esta información solo la muestra a usuarios=empleados -->
-                    <p *ngIf="_userAdmin?.type == 'e'">Control de la sucursal </p>
-                    <!--Termina. Esta información solo la muestra a usuarios=empleados -->
-                    <!--Inicia. Esta información solo la muestra a usuarios=maestro -->
-                    <p *ngIf="_userAdmin?.type == 'master'" text-wrap>Control de las sucursales </p>
-                    <!-- <ion-title *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'capitan_mesero'">Administración</ion-title> -->
-            
-              
-                </ion-col>
-                
-            </ion-row>
-                     <ion-row *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'capitan_mesero'">
+    <ion-navbar class="borde" hideBackButton>
+        <ion-row>
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white;margin-top: 14px;"></ion-icon>
+
+
+            </ion-col>
+            <ion-col>
+                <p *ngIf="_sucursal?.type == 'a'">Control de la sucursal </p>
+                <!--Inicia. Esta información solo la muestra a usuarios=empleados -->
+                <p *ngIf="_userAdmin?.type == 'e'">Control de la sucursal </p>
+                <!--Termina. Esta información solo la muestra a usuarios=empleados -->
+                <!--Inicia. Esta información solo la muestra a usuarios=maestro -->
+                <p *ngIf="_userAdmin?.type == 'master'" text-wrap>Control de las sucursales </p>
+                <!-- <ion-title *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'capitan_mesero'">Administración</ion-title> -->
+
+
+            </ion-col>
+
+        </ion-row>
+        <ion-row *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'capitan_mesero'">
             <ion-col col-1 align="center">
                 <ion-icon *ngIf="_sucursal?.type == 'e'" name="ios-arrow-back-outline" (click)="behindMaster()" style="color:white;"></ion-icon>
-      
+
             </ion-col>
             <ion-col col-1 align="center">
                 <img src="./assets/content/line2.png" class="imgLi" alt="">
@@ -43,12 +43,12 @@
 </ion-header>
 
 <ion-content class="">
-    
+
     <div align="center">
-        <img src="../assets/imgs/logo-11.png" alt="">    
-    
-        </div>
-        
+        <img src="../assets/imgs/logo-11.png" alt="">
+
+    </div>
+
     <div class="centrar">
         <ion-row>
             <ion-col *ngIf="_sucursal?.type == 'a'" class="text-center">
@@ -78,24 +78,24 @@
         </ion-row>
     </div>
     <!--Termina. Esta información solo la muestra a usuarios=empleados -->
-  <div align="center">
+    <div align="center">
 
 
-    <ion-grid>
-        <ion-row>
-            <ion-col *ngIf="_userAdmin?.type == 'master'">
-                <div>
-                    <button class="cl" ion-item (click)="goSucursal()">
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngIf="_userAdmin?.type == 'master'">
+                    <div>
+                        <button class="cl" ion-item (click)="goSucursal()">
                       <!-- <ion-icon ><img class="iconmenu" src="../assets/imgs/icons/admin-user.png"> </ion-icon> -->
                      <h4> &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;Administrar sucursales</h4>
                     </button>
-                </div>
-                <div class="cl2">
-                    <ion-icon ><img class="iconmenu"  style="width:20px;margin-top: 10px;margin-left:1px;" src="../assets/imgs/icons/admin-user.png"> </ion-icon>
-                   
-                </div>
-            </ion-col>
-            <!--<ion-col *ngIf="_sucursal?.type == 'a'">
+                    </div>
+                    <div class="cl2">
+                        <ion-icon><img class="iconmenu" style="width:20px;margin-top: 10px;margin-left:1px;" src="../assets/imgs/icons/admin-user.png"> </ion-icon>
+
+                    </div>
+                </ion-col>
+                <!--<ion-col *ngIf="_sucursal?.type == 'a'">
                 <div>
                     <button class="cl" ion-item (click)="go3()">
                   <ion-icon><img class="home" src="../assets/imgs/icons/admin-carta.png"> </ion-icon>
@@ -103,97 +103,97 @@
                 </button>
                 </div>
             </ion-col>-->
-        </ion-row>
-        <ion-row>
-            <ion-col *ngIf="_userAdmin?.type == 'master'">
-                <div>
-                    <button class="cl" ion-item (click)="goCupones()">
+            </ion-row>
+            <ion-row>
+                <ion-col *ngIf="_userAdmin?.type == 'master'">
+                    <div>
+                        <button class="cl" ion-item (click)="goCupones()">
                       <!-- <ion-icon ><img class="iconmenu" src="../assets/imgs/icons/billete.png"> </ion-icon> -->
                      <h4>&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;Administrar cupones</h4>
                     </button>
-                </div>
-                <div class="cl2">
-                    <ion-icon ><img class="iconmenu" style="width:20px;margin-top: 10px;margin-left: 1px;" src="../assets/imgs/icons/billete.png"> </ion-icon>
-                 
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col *ngIf="_userAdmin?.type == 'master'">
-                <div>
-                    <button class="cl" ion-item (click)="goCiudades()">
+                    </div>
+                    <div class="cl2">
+                        <ion-icon><img class="iconmenu" style="width:20px;margin-top: 10px;margin-left: 1px;" src="../assets/imgs/icons/billete.png"> </ion-icon>
+
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col *ngIf="_userAdmin?.type == 'master'">
+                    <div>
+                        <button class="cl" ion-item (click)="goCiudades()">
                       <!-- <ion-icon ><img class="iconmenu" src="../assets/imgs/icons/antro.png"></ion-icon>
                    > --> <h4>&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;Administrar ciudades</h4>
                     </button>
-                </div>
-                <div class="cl2">
-                    <ion-icon ><img class="iconmenu" style="margin-top: 10px;margin-left: 1px;" src="../assets/imgs/icons/antro.png"></ion-icon>
-                    
-                </div>
-            </ion-col>
-        </ion-row>
+                    </div>
+                    <div class="cl2">
+                        <ion-icon><img class="iconmenu" style="margin-top: 10px;margin-left: 1px;" src="../assets/imgs/icons/antro.png"></ion-icon>
 
-        <div align="center">
-        <ion-row *ngIf="_sucursal?.type == 'a' || _userAdmin?.type == 'e' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'coordinacion'">
-            <ion-col>
-                <div>
-                 
-                  
-                <a class="cl" ion-item (click)="goMonitorear()">
-               <!-- <ion-icon><img class="" style="width:20px;" src="../assets/imgs/icons/admin-evento.png"> </ion-icon> -->
-                <h4> &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;Monitoreo de reservaciones</h4>
-                </a>
-                </div>
-                <div class="cl2"> 
-                    <ion-icon> <img class="" style="width:20px;margin-top: 15px;margin-left: 1px;"  src="../assets/imgs/icons/admin-evento.png"> </ion-icon> 
-                </div>
-            </ion-col>
-          
+                    </div>
+                </ion-col>
+            </ion-row>
 
-            <ion-col>
-                <div>
-                    <button class="cl" ion-item (click)="adminReservaciones()">
+            <div align="center">
+                <ion-row *ngIf="_sucursal?.type == 'a' || _userAdmin?.type == 'e' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'coordinacion'">
+                    <ion-col>
+                        <div>
+
+
+                            <a class="cl" ion-item (click)="goMonitorear()">
+                                <!-- <ion-icon><img class="" style="width:20px;" src="../assets/imgs/icons/admin-evento.png"> </ion-icon> -->
+                                <h4> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Monitoreo de reservaciones</h4>
+                            </a>
+                        </div>
+                        <div class="cl2">
+                            <ion-icon> <img class="" style="width:20px;margin-top: 15px;margin-left: 1px;" src="../assets/imgs/icons/admin-evento.png"> </ion-icon>
+                        </div>
+                    </ion-col>
+
+
+                    <ion-col>
+                        <div>
+                            <button class="cl" ion-item (click)="adminReservaciones()">
                             <h4>&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; Gestión de reservaciones </h4>
                   </button>
-                </div>
-                <div class="cl2" > 
-                  <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left:1px;" src="../assets/imgs/icons/admin-historial.png"> </ion-icon>
-                                 </div>
-            </ion-col>
-     
-        </ion-row>
- 
-        <ion-row *ngIf="_userAdmin?.type == 'capitan_mesero'">
-            <ion-col>
-                <div>
-                <button class="cl" ion-item (click)="goMonitorear()">
+                        </div>
+                        <div class="cl2">
+                            <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left:1px;" src="../assets/imgs/icons/admin-historial.png"> </ion-icon>
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+
+                <ion-row *ngIf="_userAdmin?.type == 'capitan_mesero'">
+                    <ion-col>
+                        <div>
+                            <button class="cl" ion-item (click)="goMonitorear()">
                <!-- <ion-icon><img class="" src="../assets/imgs/icons/admin-evento.png"> </ion-icon> -->
                 <h4>Monitoreo de reservaciones</h4>
                </button>
-                </div>
+                        </div>
 
-<div class="cl2">
-    <ion-icon><img class=""  style="width:20px;margin-top: 15px;margin-left: 1px;"src="../assets/imgs/icons/admin-evento.png"> </ion-icon> 
-            
+                        <div class="cl2">
+                            <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left: 1px;" src="../assets/imgs/icons/admin-evento.png"> </ion-icon>
 
-</div>
 
-            </ion-col>
-        </ion-row>
-        <ion-row *ngIf="_sucursal?.type == 'a' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'coordinacion'">
-            <ion-col>
-                <div class="cl">
-                    <button class="cl" ion-item (click)="goReservacionHistorial()">
+                        </div>
+
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="_sucursal?.type == 'a' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'coordinacion'">
+                    <ion-col>
+                        <div class="cl">
+                            <button class="cl" ion-item (click)="goReservacionHistorial()">
                    <!-- <ion-icon><img class="home" src="../assets/imgs/icons/corona.png"> </ion-icon> -->
                       <h4> &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;&nbsp;Historial de reservaciones</h4>
                   </button>
-                </div>
+                        </div>
 
-                <div class="cl2"  > 
-                    <ion-icon><img class=""  style="width:20px;margin-top: 15px;margin-left: 10x;" src="../assets/imgs/icons/corona.png"> </ion-icon>
-                                   </div>
-                   </ion-col>
-            <!--<ion-col>
+                        <div class="cl2">
+                            <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left: 10x;" src="../assets/imgs/icons/corona.png"> </ion-icon>
+                        </div>
+                    </ion-col>
+                    <!--<ion-col>
                 <div>
                     <button class="cl" ion-item (click)="goReservacion()">
                  <ion-icon><img class="home" src="../assets/imgs/icons/sucursal.png"> </ion-icon>
@@ -201,37 +201,37 @@
                 </button>
                 </div>
             </ion-col>-->
-        </ion-row>
+                </ion-row>
 
-        <!-- VER CODIGO DE RP  -->
+                <!-- VER CODIGO DE RP  -->
 
-        <ion-row *ngIf="_sucursal?.type == 'a' || _userAdmin?.type == 'rp'">
-            <ion-col>
+                <ion-row *ngIf="_sucursal?.type == 'a' || _userAdmin?.type == 'rp'">
+                    <ion-col>
 
-                <div class="cl">
+                        <div class="cl">
 
-                    <button class="cl" ion-item (click)="goCodigoRp()">
+                            <button class="cl" ion-item (click)="goCodigoRp()">
                   
                       <h4> &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;&nbsp;Código de reservacion</h4>
 
                   </button>
 
-                </div>
+                        </div>
 
-                <div class="cl2">
+                        <div class="cl2">
 
-                    <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left: 10x;" src="../assets/imgs/icons/book.png"> </ion-icon>
+                            <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left: 10x;" src="../assets/imgs/icons/book.png"> </ion-icon>
 
-                </div>
+                        </div>
 
-            </ion-col>
-            
-        </ion-row>
+                    </ion-col>
 
-    </div>
-        <!--ACCESOS PARA USUARIO COORDINACION RP-->
-        <ion-row *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp'">
-            <!-- <ion-col>pagina
+                </ion-row>
+
+            </div>
+            <!--ACCESOS PARA USUARIO COORDINACION RP-->
+            <ion-row *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp'">
+                <!-- <ion-col>pagina
                 <div>
                     <button class="cl" ion-item (click)="goReservacionHistorial()">
                    <ion-icon><img class="home" src="../assets/imgs/icons/corona.png"> </ion-icon>
@@ -239,25 +239,25 @@
                   </button>
                 </div>
             </ion-col> -->
-        </ion-row>
-        <div align="center">
-        <ion-row *ngIf="_sucursal?.type == 'a'">
-            <ion-col>
-                <div >
-                    <button class="cl" ion-item (click)="goConsumo()">
+            </ion-row>
+            <div align="center">
+                <ion-row *ngIf="_userAdmin?.type == 'master'">
+                    <ion-col>
+                        <div>
+                            <button class="cl" ion-item (click)="goConsumo()">
                       <h4> &nbsp; &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;Consumos</h4>
                 </button>
-                </div>
-                <div  class="cl2">
+                        </div>
+                        <div class="cl2">
 
-                    <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left: 1px;"  src="../assets/imgs/icons/sucursal.png"> </ion-icon>
-               
-                </div>
-            </ion-col>
-        </ion-row>
+                            <ion-icon><img class="" style="width:20px;margin-top: 15px;margin-left: 1px;" src="../assets/imgs/icons/sucursal.png"> </ion-icon>
+
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </ion-grid>
     </div>
-    </ion-grid>
-</div>
     <!-- <ion-list class="atras">
         <button class="atras" ion-item (click)="goSucursal()" icon-start>
     <ion-icon item-start><img class="home" src="../assets/imgs/icons/admin-user.png"> </ion-icon>

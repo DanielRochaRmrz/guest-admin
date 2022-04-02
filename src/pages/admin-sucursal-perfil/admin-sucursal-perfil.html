@@ -37,7 +37,9 @@
         </ion-col>
         <ion-col col-4>
             <div align="center">
-                <ion-badge (click)="goCorteVentas(sucursal)" class="fon3" item-end>Corte</ion-badge>
+                <div *ngIf="type == 'master'">
+                    <ion-badge (click)="goCorteVentas(sucursal)" class="fon3" item-end>Corte</ion-badge>
+                </div>
             </div>
 
 
@@ -143,81 +145,59 @@
                 <ion-card-title>
                     <ion-row>
                         <ion-col>
-                            <font color="black">Áreas</font>
+                            <font color="black">Zonas</font>
                         </ion-col>
                         <ion-col col-2>
                             <!-- <img class="icon" src="../assets/imgs/icons/mas.png" item-start (click)="agregarArea(sucursal.uid)"> -->
-                            <ion-icon class="color2" name="md-add" (click)="agregarArea(sucursal.uid)"></ion-icon>
+                            <ion-icon class="color2" name="md-add" (click)="agregarZona(sucursal.uid)"></ion-icon>
                         </ion-col>
                     </ion-row>
                 </ion-card-title>
-                <div *ngFor="let area of areas">
-                    <!-- {{area | json}} -->
-                    <ion-row>
-                        <ion-col>
-                            <p class="blanco_2">
-                                {{area.nombre}}
-                            </p>
-                        </ion-col>
-                        <ion-col col-1>
-                            <!-- <img class="icon1" src="../assets/imgs/icons/mas.png" item-start (click)="agregarZona(area.key)"> -->
-                            <ion-icon class="color2" name="md-add" (click)="agregarZona(area.id, sucursal.uid)"></ion-icon>
-                        </ion-col>
-                        <ion-col col-1>
-                            <ion-icon class="color2" name="md-brush" class="color2" (click)="modificaArea(area.id, area.nombre)"></ion-icon>
-                        </ion-col>
-                        <ion-col col-1>
-                            <ion-icon class="color2" name="md-trash" (click)="eliminarArea(area.id)"></ion-icon>
-                        </ion-col>
-                    </ion-row>
-                    <div *ngFor="let zona of zonas">
-                        <div *ngIf="area.id==zona.uidArea">
-                            <ion-item-sliding class="card_atras">
-                                <ion-item class="card_atras">
-                                    <ion-row>
-                                        <ion-col col-2>
-                                            <img class="icon1" src="../assets/imgs/icons/home-03.png" item-start>
-                                        </ion-col>
-                                        <ion-col col-8>
-                                            <p class="blanco_2">{{zona.nombre}} - {{zona.consumo}}</p>
-                                        </ion-col>
-                                        <ion-col col-1>
-                                            <ion-icon class="color2" name="md-brush" class="color2" (click)="modificaZona(zona.id, zona.nombre, zona.consumo)"></ion-icon>
-                                        </ion-col>
-                                        <ion-col col-1>
-                                            <ion-icon class="color2" name="md-trash" (click)="eliminarZona(zona.id)"></ion-icon>
-                                        </ion-col>
+                <div *ngFor="let zona of zonas">
 
-                                    </ion-row>
-                                </ion-item>
+                    <ion-item-sliding class="card_atras">
+                        <ion-item class="card_atras">
+                            <ion-row>
+                                <ion-col col-2>
+                                    <img class="icon1" src="../assets/imgs/icons/home-03.png" item-start>
+                                </ion-col>
+                                <ion-col col-8>
+                                    <p class="blanco_2">{{zona.nombre}} - {{zona.consumo}}</p>
+                                </ion-col>
+                                <ion-col col-1>
+                                    <ion-icon class="color2" name="md-brush" class="color2" (click)="modificaZona(zona.id, zona.nombre, zona.consumo)"></ion-icon>
+                                </ion-col>
+                                <ion-col col-1>
+                                    <ion-icon class="color2" name="md-trash" (click)="eliminarZona(zona.id)"></ion-icon>
+                                </ion-col>
 
-                                <ion-item-options class="card_atras" side="right">
-                                    <button ion-button color="dark" (click)="agregarMesa(sucursal.uid,area.id,zona.id)">
+                            </ion-row>
+                        </ion-item>
+
+                        <ion-item-options class="card_atras" side="right">
+                            <button ion-button color="dark" (click)="agregarMesa(sucursal.uid,area.id,zona.id)">
                                         <ion-icon name="md-add"></ion-icon>
                                         Agregar
                                     </button>
-                                    <button ion-button color="dark" (click)="eliminarZona(zona.id)">
+                            <button ion-button color="dark" (click)="eliminarZona(zona.id)">
                                         <ion-icon name="md-trash"></ion-icon>
                                         Eliminar
                                     </button>
-                                    <button ion-button color="dark" (click)="modificaZona(zona.id, zona.nombre, zona.consumo)">
+                            <button ion-button color="dark" (click)="modificaZona(zona.id, zona.nombre, zona.consumo)">
                                         <ion-icon name="md-brush"></ion-icon>
                                         Editar
                                     </button>
-                                </ion-item-options>
+                        </ion-item-options>
 
-                            </ion-item-sliding>
-                            <div>
-                                <!-- <ion-item class="card_atras" (click)="adminMesas(area.id, zona.id)">
+                    </ion-item-sliding>
+                    <div>
+                        <!-- <ion-item class="card_atras" (click)="adminMesas(area.id, zona.id)">
                                     <img class="icon2" src="../assets/imgs/mesa.png" item-start>
                                     <p class="blanco_2">Administrar Mesas</p>
                                 </ion-item> -->
-                            </div>
-                        </div>
                     </div>
-                    <br><br>
-
                 </div>
+                <br><br>
             </ion-card-content>
         </ion-card>
         <ion-item footer *ngIf="tipo == 'master'">

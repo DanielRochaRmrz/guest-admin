@@ -248,7 +248,10 @@ export class AdminHomePage {
   ionViewDidLoad() {
     console.log('HOME PAGE');
     this._providerPushNoti.init_push_noti();
+
   }
+
+  
 
   logout() {
     this.authProvider.logout();

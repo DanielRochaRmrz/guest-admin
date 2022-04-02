@@ -22,6 +22,7 @@ export class AdminUsersPage {
     uidSucursal: any;
     sucursal: any;
     sucursales: any;
+    sucursalLocal: string ='';
 
   constructor(
     public navCtrl: NavController,
@@ -33,6 +34,7 @@ export class AdminUsersPage {
     public firebase: AngularFireAuth,
 
     ) {
+        this.sucursalLocal = localStorage.getItem('uidSucursal');
         this.sucursal = this.firebase.auth.currentUser;
         if(this.sucursal != null ){
           this.uidSucursal=this.sucursal.uid
@@ -66,7 +68,7 @@ export class AdminUsersPage {
                 content: 'Por favor, espere'
             });
             // loader.present();
-            this.userProvider.newRegister(this.credentials, this.uidSucursal);
+            this.userProvider.newRegister(this.credentials, this.sucursalLocal);
             // this.navCtrl.pop();newRegister
             this.cerrar_modal();
         }

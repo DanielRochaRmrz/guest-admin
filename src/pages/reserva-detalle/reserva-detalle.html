@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ReservaDetallePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
     <ion-navbar class="borde">
         <ion-row>
@@ -24,268 +18,262 @@
 </ion-header>
 
 <ion-content padding>
-  <br>
-  <div>
-  <font style="opacity: .5;" size=""> ACEPATADO</font><br>
-  <span style="opacity: .5;">________________</span>
-  </div>
-  <div class="" align="right">
-    <a color="dark" (click)="closeModal()">
-        <ion-icon name="close" color="dark"></ion-icon>
-      </a>
+    <ion-fab right top>
+        <button ion-fab color="primary" (click)="closeModal()"><ion-icon name="close"></ion-icon></button>
+    </ion-fab>
+    <br>
+    <div>
+        <font style="opacity: .5;" size=""> ACEPATADO</font><br>
+        <span style="opacity: .5;">________________</span>
+    </div>
+    <div *ngFor="let usuario of usuarios">
+        <div *ngIf="usuario.uid == reserv.idUsuario">
 
+            <div align="center">
 
-</div>
-  <div *ngFor="let usuario of usuarios">
-    <div *ngIf="usuario.uid == reserv.idUsuario">
-       
-        <div align="center">
+                <font size="6" color="#474646"> <b> </b></font>
+            </div>
+            <br>
+            <br>
 
-          <font size="6" color="#474646">  <b> </b></font>
-        </div>
-     <br>
-     <br>
-     
-     <ion-card class="color1">
-     <ion-row class="color1">
-        <ion-item class="color1">
-            <ion-label  stacked><b>Nombre</b></ion-label>
-            <ion-input type="text" placeholder="{{reserv.numPersas}}" value="{{reserv.numPersonas}}"></ion-input>
-          </ion-item>
-     </ion-row><hr>
-     <ion-row>
-        <ion-item class="color1">
-            <ion-label stacked><b>Personas</b></ion-label>
-            <ion-input type="text" placeholder="Personas" value="{{reserv.numPersonas}}"></ion-input>
-          </ion-item>
-     </ion-row><hr>
-
-     <ion-row>
-        <ion-item class="color1">
-            <ion-label  stacked><b>Telefono</b></ion-label>
-            <ion-input type="text" placeholder="Telefono" value="{{usuario.phoneNumber}}"></ion-input>
-          </ion-item>
-     </ion-row><hr>
-
-     <ion-row>
-        <ion-item class="color1">
-            <ion-label  stacked><b>Zona</b></ion-label>
-            <ion-input type="text" placeholder="Zona" value="{{zona.nombre}}"></ion-input>
-          </ion-item>
-     </ion-row>
-
-     
-     
-    
-
-
-    </ion-card>
-<br>
-
-    <ion-card>
-        <ion-grid>
-            <ion-row>
-                <ion-item class="color1"> 
-                    <ion-row>
-                        <ion-col col-4><b>Cantidad</b> </ion-col>
-                        <ion-col col-4><b>Producto</b> </ion-col>
-                        <ion-col col-4 ><b>Precio</b> </ion-col>
-                    </ion-row>
-                </ion-item>
-            </ion-row>
-        </ion-grid>
-
-            <ion-row *ngFor="let produ of productos">
-                <ion-item class="color1">  
-                    <ion-row>
-                        <ion-col col-4>{{produ.cantidad}}</ion-col>
-                        <ion-col col-4>{{produ.producto}}</ion-col>
-                        <ion-col col-4>{{produ.costo}} </ion-col>
-                    </ion-row>
-                    <!-- <ion-label  stacked><b>Producto </b></ion-label> -->
-                    <!-- <ion-input type="text" placeholder="Zona" value="{{produ.cantidad}}"></ion-input> -->
-                </ion-item>
-            </ion-row>
-
-        <ion-row>
-            <ion-item class="color1">
-                <ion-row>
-                    <ion-col col-6><b>Total</b> </ion-col>
-                    <ion-col col-3> </ion-col>
-                    <ion-col col-3><span >$ {{totalReserv}}</span></ion-col>
+            <ion-card class="color1">
+                <ion-row class="color1">
+                    <ion-item class="color1">
+                        <ion-label stacked><b>Nombre</b></ion-label>
+                        <ion-input type="text" placeholder="{{reserv.numPersas}}" value="{{reserv.numPersonas}}"></ion-input>
+                    </ion-item>
                 </ion-row>
-                <!-- <ion-label  stacked><b>Total</b></ion-label>
+                <hr>
+                <ion-row>
+                    <ion-item class="color1">
+                        <ion-label stacked><b>Personas</b></ion-label>
+                        <ion-input type="text" placeholder="Personas" value="{{reserv.numPersonas}}"></ion-input>
+                    </ion-item>
+                </ion-row>
+                <hr>
+
+                <ion-row>
+                    <ion-item class="color1">
+                        <ion-label stacked><b>Telefono</b></ion-label>
+                        <ion-input type="text" placeholder="Telefono" value="{{usuario.phoneNumber}}"></ion-input>
+                    </ion-item>
+                </ion-row>
+                <hr>
+
+                <ion-row>
+                    <ion-item class="color1">
+                        <ion-label stacked><b>Zona</b></ion-label>
+                        <ion-input type="text" placeholder="Zona" value="{{zona.nombre}}"></ion-input>
+                    </ion-item>
+                </ion-row>
+
+
+
+
+
+
+            </ion-card>
+            <br>
+
+            <ion-card>
+                <ion-grid>
+                    <ion-row>
+                        <ion-item class="color1">
+                            <ion-row>
+                                <ion-col col-4><b>Cantidad</b> </ion-col>
+                                <ion-col col-4><b>Producto</b> </ion-col>
+                                <ion-col col-4><b>Precio</b> </ion-col>
+                            </ion-row>
+                        </ion-item>
+                    </ion-row>
+                </ion-grid>
+
+                <ion-row *ngFor="let produ of productos">
+                    <ion-item class="color1">
+                        <ion-row>
+                            <ion-col col-4>{{produ.cantidad}}</ion-col>
+                            <ion-col col-4>{{produ.producto}}</ion-col>
+                            <ion-col col-4>{{produ.costo}} </ion-col>
+                        </ion-row>
+                        <!-- <ion-label  stacked><b>Producto </b></ion-label> -->
+                        <!-- <ion-input type="text" placeholder="Zona" value="{{produ.cantidad}}"></ion-input> -->
+                    </ion-item>
+                </ion-row>
+
+                <ion-row>
+                    <ion-item class="color1">
+                        <ion-row>
+                            <ion-col col-6><b>Total</b> </ion-col>
+                            <ion-col col-3> </ion-col>
+                            <ion-col col-3><span>$ {{totalReserv}}</span></ion-col>
+                        </ion-row>
+                        <!-- <ion-label  stacked><b>Total</b></ion-label>
                 <ion-input type="text" placeholder="Total" value="{{totalReserv}}"></ion-input> -->
-            </ion-item>
-        </ion-row>
-    </ion-card>
+                    </ion-item>
+                </ion-row>
+            </ion-card>
 
-        <ion-row class="row1" style="margin-left:40px">
-            <ion-col col-12>
-                
-            </ion-col>
+            <ion-row class="row1" style="margin-left:40px">
+                <ion-col col-12>
 
-            <!-- <ion-col col-4>
+                </ion-col>
+
+                <!-- <ion-col col-4>
                 <div align="center">
                 <img src="../assets/imgs/icons/Vector4.png" alt=""><br>  &emsp;{{reserv.hora}}
             </div>
             </ion-col> -->
 
-            <!-- <ion-col col-2>
+                <!-- <ion-col col-2>
               <div align="center">
                 <img src="../assets/imgs/icons/Vector2.png" alt=""><br> {{reserv.numPersonas}}
               </div>
             </ion-col> -->
 
-            <!-- <ion-col  col-4 text-right >
+                <!-- <ion-col  col-4 text-right >
               <div align="center">
                 <img src="../assets/imgs/icons/Vector31.png" alt=""> <br> &emsp;{{usuario.phoneNumber}}
               </div>
            
             </ion-col> -->
-        </ion-row>
-        <br>
-        <br>
+            </ion-row>
 
-        <!-- <ion-row class="row1">
+            <!-- <ion-row class="row1">
             <ion-col>
                 <h4>Mesa:</h4>
                     <ion-icon ios="ios-menu" md="md-menu" class="icono"></ion-icon>&emsp; 1
                     {{reserv.numMesa}}
             </ion-col>
         </ion-row> -->
-        <br><br>
 
-        <ion-row class="row1" style="margin-left:40px">
-            <!--<ion-col text-center (click)="modZonaMesa(reserv.uid, reserv.idSucursal, reserv.idArea, reserv.idZona)">
+            <ion-row class="row1" style="margin-left:40px">
+                <!--<ion-col text-center (click)="modZonaMesa(reserv.uid, reserv.idSucursal, reserv.idArea, reserv.idZona)">
                 <h3>Area: </h3>
                 <ion-icon ios="ios-menu" md="md-menu" class="icono"></ion-icon>&emsp;{{area.nombre}}
             </ion-col>-->
-           
-            <!-- <ion-col col-3  align="center">
+
+                <!-- <ion-col col-3  align="center">
                 <font>Area: </font> <br> &emsp; {{ totalReserv }}
             </ion-col>  -->
-            <!-- <ion-col  col-6 align="center" (click)="modZonaMesa(reserv.uid, reserv.idSucursal, reserv.idArea, reserv.idZona)"> 
+                <!-- <ion-col  col-6 align="center" (click)="modZonaMesa(reserv.uid, reserv.idSucursal, reserv.idArea, reserv.idZona)"> 
                 <font>Zona: </font>
                 <br> &emsp;{{zona.nombre}}
             </ion-col> -->
 
-            <!-- <ion-col  col-3 align="center">
+                <!-- <ion-col  col-3 align="center">
                 <font>Total: </font>
                <br> {{ totalReserv }}
             </ion-col> -->
-            
-        </ion-row>
 
-        <br>
-        <br>
-        <!-- <ion-row class="row1">
-            <ion-col >
-                
-                
-                <ion-icon ios="ios-book" md="md-book" class="icono"></ion-icon>&emsp;{{reserv.estatus}}
-            </ion-col>
+            </ion-row>
 
-            <ion-col (click)="modStatus(reserv.idReservacion, reserv.idSucursal, reserv.numMesa, reserv.status )">                    
-                
-                
-                <button ion-button  class="btnN">Mesa</button>
-                
-                    {{ reserv.numMesa }}
-            </ion-col>
-        </ion-row> -->
-        
+            <ion-row class="row">
+                <ion-card color="light">
+                    <ion-card-content>
+                        <ion-card-title>
+                            <ion-col col-12 text-center>
+                                <button ion-button block (click)="asignarMesa(reserv.idReservacion, reserv.fechaR, reserv.idSucursal)">Asignación de mesa</button>
+                            </ion-col>
+                        </ion-card-title>
+                    </ion-card-content>
+                    <ion-item>
+                        <ion-icon name='ios-keypad' item-start style="color: #FFC149"></ion-icon>
+                        Mesa asignada
+                        <ion-badge item-end>{{ reserv.numMesa }}</ion-badge>
+                    </ion-item>
+                </ion-card>
+            </ion-row>
 
-        <ion-row class="row" align="center">
-            <ion-col  col-6 text-center (click)="modStatus_cancelacion(reserv.idReservacion, reserv.idSucursal)">
-            <!-- <ion-col text-center (click)="Cancelar(reserv.uid)"> -->
-                <!-- <ion-icon ios="ios-close-circle" md="md-close-circle" class="icono"></ion-icon>
+
+            <ion-row class="row" align="center">
+                <ion-col col-6 text-center (click)="modStatus_cancelacion(reserv.idReservacion, reserv.idSucursal)">
+                    <!-- <ion-col text-center (click)="Cancelar(reserv.uid)"> -->
+                    <!-- <ion-icon ios="ios-close-circle" md="md-close-circle" class="icono"></ion-icon>
                 Cancelar Reservación -->
-                <button ion-button color="danger" outline  large>Cancelar </button>
-            </ion-col>
-            <ion-col   col-6 text-center (click)="Aceptar(reserv.uid)">
-                <!-- <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="icono"></ion-icon>
+                    <button ion-button color="danger" outline large>Cancelar </button>
+                </ion-col>
+                <ion-col col-6 text-center (click)="Aceptar(reserv.uid)">
+                    <!-- <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="icono"></ion-icon>
                 Aceptar Reservación -->
-                <button ion-button color="secondary" large (click)="getUsersPusNoti()">Aceptar </button>
-            </ion-col>
-        </ion-row>
-        <br><br>
-
-        <ion-row class="title2">
-            <ion-col text-center>
-                <ion-item-divider color="light">Compartida con</ion-item-divider>
-            </ion-col>
-        </ion-row>
-
-        <div *ngFor="let compartida of compartidas" >
-            <div *ngFor="let user of usuarios">
-                    <div *ngIf="compartida.idUsuario==user.uid" class="espacio">
-                    <ion-row >
-                        <ion-col col-2 text-center>
-                            <ion-icon name="ios-person" style="background-color: gold;"></ion-icon>
-                        </ion-col>
-                        <ion-col col-3 text-center>
-                            {{user.displayName}}
-                        </ion-col>
-                        <ion-col col-2 text-center >
-                           $ {{compartida.totalDividido}}
-                        </ion-col>
-                    </ion-row>
-                
-                    </div>
-            </div>
-        </div>                <br><br>
-     
-        <ion-row class="title2">
-            <ion-col text-center>
-                <ion-item-divider color="light">Historial de Reservaciones</ion-item-divider>
-            </ion-col>
-        </ion-row>
-        <div *ngIf="res==true">
-            <ion-grid class="title3">
-                <ion-row>
-                    <ion-col text-center>
-                        Establecimiento
-                    </ion-col>
-                    <ion-col text-center>
-                        Fecha
-                    </ion-col>
-                    <ion-col text-center>
-                        Hora
-                    </ion-col>
-                    <ion-col text-center>
-                        Puntuación
-                    </ion-col>
-                </ion-row>
-                <ion-row class="row1" *ngFor="let history of historial">
-                    <ion-col text-center>
-                        <div *ngFor="let sucursal of sucursales">
-                            <div *ngIf="sucursal.$key==history.idSucursal">
-                                {{sucursal.displayName}}
-                            </div>
-                        </div>
-                    </ion-col>
-                    <ion-col text-center>
-                        {{history.fechaR | date : 'dd/MM/yyyy'}}
-                    </ion-col>
-                    <ion-col text-center>
-                        {{history.hora}}
-                    </ion-col>
-                    <ion-col text-center>
-                        {{history.puntuacion}} 5
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
-        <div *ngIf="res==false">
-            <ion-row class="row1">
-                <ion-col text-center class="col1">
-                    El cliente no tiene reservaciones previas
+                    <button ion-button color="secondary" large (click)="getUsersPusNoti()">Aceptar </button>
                 </ion-col>
             </ion-row>
+            <br><br>
+
+            <ion-row class="title2">
+                <ion-col text-center>
+                    <ion-item-divider color="light">Compartida con</ion-item-divider>
+                </ion-col>
+            </ion-row>
+
+            <div *ngFor="let compartida of compartidas">
+                <div *ngFor="let user of usuarios">
+                    <div *ngIf="compartida.idUsuario==user.uid" class="espacio">
+                        <ion-row>
+                            <ion-col col-2 text-center>
+                                <ion-icon name="ios-person" style="background-color: gold;"></ion-icon>
+                            </ion-col>
+                            <ion-col col-3 text-center>
+                                {{user.displayName}}
+                            </ion-col>
+                            <ion-col col-2 text-center>
+                                $ {{compartida.totalDividido}}
+                            </ion-col>
+                        </ion-row>
+
+                    </div>
+                </div>
+            </div> <br><br>
+
+            <ion-row class="title2">
+                <ion-col text-center>
+                    <ion-item-divider color="light">Historial de Reservaciones</ion-item-divider>
+                </ion-col>
+            </ion-row>
+            <div *ngIf="res==true">
+                <ion-grid class="title3">
+                    <ion-row>
+                        <ion-col text-center>
+                            Establecimiento
+                        </ion-col>
+                        <ion-col text-center>
+                            Fecha
+                        </ion-col>
+                        <ion-col text-center>
+                            Hora
+                        </ion-col>
+                        <ion-col text-center>
+                            Puntuación
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="row1" *ngFor="let history of historial">
+                        <ion-col text-center>
+                            <div *ngFor="let sucursal of sucursales">
+                                <div *ngIf="sucursal.$key==history.idSucursal">
+                                    {{sucursal.displayName}}
+                                </div>
+                            </div>
+                        </ion-col>
+                        <ion-col text-center>
+                            {{history.fechaR | date : 'dd/MM/yyyy'}}
+                        </ion-col>
+                        <ion-col text-center>
+                            {{history.hora}}
+                        </ion-col>
+                        <ion-col text-center>
+                            {{history.puntuacion}} 5
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div *ngIf="res==false">
+                <ion-row class="row1">
+                    <ion-col text-center class="col1">
+                        El cliente no tiene reservaciones previas
+                    </ion-col>
+                </ion-row>
+            </div>
         </div>
     </div>
-</div>
 
 </ion-content>
-

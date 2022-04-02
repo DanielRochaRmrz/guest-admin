@@ -45,6 +45,7 @@ export class AdminSucursalPerfilPage {
   usertipo: any;
   tipo: any;
   usuario: any;
+  type: string = '';
 
   constructor(
     public navCtrl: NavController,
@@ -56,6 +57,7 @@ export class AdminSucursalPerfilPage {
     public loadinCtl: LoadingController,
     public toastCtrl: ToastController
   ) {
+    this.type = localStorage.getItem('type');
     this.sucursal = this.navParams.get("uid");
     // this.sucursal = localStorage.getItem('uidSucursal')
     console.log("uid sucursal", this.sucursal);
@@ -189,7 +191,9 @@ export class AdminSucursalPerfilPage {
     });
   }
 
-  agregarZona(idArea, idSucursal) {
+  agregarZona(idSucursal: string) {
+    console.log('Id Sucursal -->', idSucursal);
+    
     let alert = this.alertCtrl.create({
       title: "Agregar Zona",
       inputs: [
@@ -214,7 +218,7 @@ export class AdminSucursalPerfilPage {
         {
           text: "Registrar",
           handler: (data) => {
-            this.registrarZona(data.zona, data.consumoMin, idArea, idSucursal);
+            this.registrarZona(data.zona, data.consumoMin, idSucursal);
           },
         },
       ],
@@ -262,7 +266,7 @@ export class AdminSucursalPerfilPage {
     alert.present();
   }
 
-  registrarZona(zona, consumoMin, idArea, idSucursal) {
+  registrarZona(zona, consumoMin, idSucursal) {
     if (zona == "") {
       this.alertCtrl
         .create({
@@ -278,7 +282,7 @@ export class AdminSucursalPerfilPage {
         })
         .present();
     } else {
-      this.SucProv.agregarZona(zona, consumoMin, idArea, idSucursal);
+      this.SucProv.agregarZona(zona, consumoMin, idSucursal);
     }
   }
 
@@ -327,7 +331,6 @@ export class AdminSucursalPerfilPage {
             const uidZona = {
               uidZona: idZona
             }
-            this.SucProv.eliminarZonaHttp(uidZona);
           },
         },
       ],
@@ -471,7 +474,6 @@ export class AdminSucursalPerfilPage {
           consumo: consumoMin,
           uidZona: idZona
       }
-      this.SucProv.actualizarZonaHttp(data);
     }
   }
 

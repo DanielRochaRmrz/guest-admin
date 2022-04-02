@@ -96,11 +96,11 @@ export class ModalstatusPage {
       mesa: this.mesa,
       //status: statu,
     };
-    this._providerReserva
-      .updateStatus(this.idReserv, info)
-      .then((respuesta: any) => {
-        console.log("Respuesta: ", respuesta);
-      });
+    // this._providerReserva
+    //   .updateStatus(this.idReserv, info)
+    //   .then((respuesta: any) => {
+    //     console.log("Respuesta: ", respuesta);
+    //   });
       this.navCtrl.pop();
   }
 

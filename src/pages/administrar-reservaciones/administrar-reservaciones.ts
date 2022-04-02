@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController,ViewController, Platform } from 'ionic-angular';
-import { GestionReservacionesProvider } from '../../providers/gestion-reservaciones/gestion-reservaciones';
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ModalController,
+  ViewController,
+  Platform,
+} from "ionic-angular";
+import { GestionReservacionesProvider } from "../../providers/gestion-reservaciones/gestion-reservaciones";
 import { ReservacionProvider } from "../../providers/reservacion/reservacion";
-import { AngularFirestore } from '@angular/fire/firestore';
-import moment from 'moment';
-import { dateDataSortValue } from 'ionic-angular/umd/util/datetime-util';
-import { UserProvider } from '../../providers/user/user';
-import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
+import { AngularFirestore } from "@angular/fire/firestore";
+import moment from "moment";
+import { dateDataSortValue } from "ionic-angular/umd/util/datetime-util";
+import { UserProvider } from "../../providers/user/user";
+import { AdminMenuReservacionPage } from "../admin-menu-reservacion/admin-menu-reservacion";
 
 @IonicPage()
 @Component({
-  selector: 'page-administrar-reservaciones',
-  templateUrl: 'administrar-reservaciones.html',
+  selector: "page-administrar-reservaciones",
+  templateUrl: "administrar-reservaciones.html",
 })
 export class AdministrarReservacionesPage {
-
   fecha: Date = new Date();
   uidSucursal: any;
   reservaciones: any;
@@ -36,49 +42,49 @@ export class AdministrarReservacionesPage {
   compartidas: any;
   totalReserv: any;
   productos: any[];
+  type: string = '';
+  uidUser: string = '';
   public date = moment().format("YYYY-MM-DD");
 
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private modalCtrl: ModalController,
+    private platform: Platform,
+    public _providerReserva: ReservacionProvider,
+    public afs: AngularFirestore,
+    public viewCtrl: ViewController,
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private modalCtrl: ModalController,
-              private platform:Platform,
-              public _providerReserva: ReservacionProvider,
-              public afs: AngularFirestore, public viewCtrl: ViewController,
-          
-              public _gestionReser: GestionReservacionesProvider) {
-                // this.uidSucursal = localStorage.getItem('uid');
-
+    public _gestionReser: GestionReservacionesProvider
+  ) {
+    // this.uidSucursal = localStorage.getItem('uid');
   }
 
   ionViewDidLoad() {
-   
+    this.uidSucursal = localStorage.getItem("uidSucursal");
+    this.type = localStorage.getItem('type');
+    this.uidUser = localStorage.getItem('uidUser')
+    switch (this.type) {
+      case 'rp':
+        console.log('Reservaciones rp');
+        this.codigoRP(this.uidUser);
+        break;
+        default:
+        console.log('Reservaciones normales');
+        this.getReservaciones();
+        break;
+    }
     
-  
-  this.uidSucursal = localStorage.getItem('uid');
-  console.log('idsuccc', this.uidSucursal);
-  this.getReservaciones();
-  this.getUsuarios();
-  this.getMesas2(this.uidSucursal);
-  this.getImgSucursal(this.uidSucursal);
-    //Cuando es un usuario se saca el id de la sucursal ala que pertenece
-     this.afs.collection('users', ref => ref.where('uid', '==', this.uidSucursal)).valueChanges().subscribe(data => {
-     this.sucursales2 = data;
-       this.sucursales2.forEach(element => {
-         this.uidSucursal2 = element.uidSucursal;
-         this.getReservaciones();
-         this.getMesas2(this.uidSucursal2);
-         this.getImgSucursal(this.uidSucursal2);
-       });
-      });
-      this.getUsuarios();
-   
+    this.getUsuarios();
+    this.getMesas2(this.uidSucursal);
+    this.getImgSucursal(this.uidSucursal);
+    this.getUsuarios();
   }
 
-  getCompartidas(idR){
-    console.log('compartidas ts: '+idR);
-      //let idR= "EOAolnpwc9GRuQt8zLpf";
-    this._gestionReser.getCompartidas(idR).subscribe(reserv => {
+  getCompartidas(idR) {
+    console.log("compartidas ts: " + idR);
+    //let idR= "EOAolnpwc9GRuQt8zLpf";
+    this._gestionReser.getCompartidas(idR).subscribe((reserv) => {
       this.compartidas = reserv;
       console.log("Compartidas de reeseva: ", this.compartidas);
     });
@@ -87,47 +93,65 @@ export class AdministrarReservacionesPage {
 
   getReservaciones() {
     // console.log('idsuc', idSucursal);
-    this.uidSucursal = localStorage.getItem('uid');
+    this.uidSucursal = localStorage.getItem("uidSucursal");
     const date = moment().format("YYYY-MM-DD");
-    const fecha = moment(date).format('x');
-    console.log("Fecha numeros: ",fecha);
+    const fecha = moment(date).format("x");
+    console.log("Fecha numeros: ", fecha);
     console.log("Fecha: ", date);
 
-    this._gestionReser.getReservaciones(this.uidSucursal, fecha).subscribe(reserv => {
-      this.reservaciones = reserv;
-      console.log("Estas son las reservacionesXs: ", this.reservaciones);
-
-    });
+    this._gestionReser
+      .getReservaciones(this.uidSucursal, fecha)
+      .subscribe((reserv) => {
+        this.reservaciones = reserv;
+        console.log("Estas son las reservacionesXs: ", this.reservaciones);
+      });
+  }
+  
+  async codigoRP(uidUser: string) {
+    const codigoRP = await this._providerReserva.getCodigoRP(uidUser);
+    console.log('Codigo rp -->', codigoRP);
+    this.getReservacionesRP(codigoRP);
   }
 
+  getReservacionesRP(codigoRP: any) {
+    this.uidSucursal = localStorage.getItem("uidSucursal");
+    this._gestionReser
+      .getReservacionesRP(this.uidSucursal, codigoRP)
+      .subscribe((reserv) => {
+        this.reservaciones = reserv;
+        console.log("Estas son las reservacionesXs: ", this.reservaciones);
+      });
+  }
+
+
   getUsuarios() {
-    this._gestionReser.getUsuarios().subscribe(users => {
+    this._gestionReser.getUsuarios().subscribe((users) => {
       this.usuarios = users;
       console.log("Estos son los usuarios: ", this.usuarios);
     });
   }
 
-  Agendar(){
-    alert('Si entra');
+  Agendar() {
+    alert("Si entra");
   }
 
-  modStatus_cancelacion(idReserv, idSucursal){
-    console.log("moStatus_cancelacion",idReserv);
+  modStatus_cancelacion(idReserv, idSucursal) {
+    console.log("moStatus_cancelacion", idReserv);
     console.log(idSucursal);
 
-    let modal = this.modalCtrl.create("Modalstatus_cancelacionPage",{  
+    let modal = this.modalCtrl.create("Modalstatus_cancelacionPage", {
       idReserv: idReserv,
       idSucursal: idSucursal,
     });
-    modal.present(); 
-}
+    modal.present();
+  }
 
-  consultaReservacion(idReser){
-    let modal = this.modalCtrl.create("ReservaDetallePage",{ idReser:idReser
-    
+  consultaReservacion(idReser) {
+    let modal = this.modalCtrl.create("ReservaDetallePage", {
+      idReser: idReser,
     });
 
-    modal.present(); 
+    modal.present();
     // this.estatus = false;
     // this.estatus2=true;
     // this._gestionReser.getReservacion(idReser).subscribe(res=>{
@@ -154,19 +178,19 @@ export class AdministrarReservacionesPage {
     // this.getCompartidas(idReser);
   }
 
-  verCroquis(){
-      this.estatus2=false;
-      this.estatus=true;
+  verCroquis() {
+    this.estatus2 = false;
+    this.estatus = true;
     //console.log("administrar-reservacion.ts id->",idReservacion);
   }
 
-  consultaHistorial(idUsuario){
-    this._gestionReser.getHistorial(idUsuario).subscribe(history => {
+  consultaHistorial(idUsuario) {
+    this._gestionReser.getHistorial(idUsuario).subscribe((history) => {
       this.historial = history;
-      if (this.historial.length!=0) {
+      if (this.historial.length != 0) {
         this.res = true;
-      }else{
-        this.res= false;
+      } else {
+        this.res = false;
       }
       console.log("Estas son las reservaciones completas: ", this.historial);
     });
@@ -174,69 +198,67 @@ export class AdministrarReservacionesPage {
     this.consultaSucursales();
   }
 
-  consultaSucursales(){
-    this._gestionReser.getSucursales().subscribe(sucursales => {
+  consultaSucursales() {
+    this._gestionReser.getSucursales().subscribe((sucursales) => {
       this.sucursales = sucursales;
       console.log("Estas son las sucursales: ", this.sucursales);
     });
   }
 
-  modZonaMesa(idReserv, idSucursal, idArea, idZona){
-    let modal = this.modalCtrl.create("ModiareazonaPage",{
+  modZonaMesa(idReserv, idSucursal, idArea, idZona) {
+    let modal = this.modalCtrl.create("ModiareazonaPage", {
       idReserv: idReserv,
       idSucursal: idSucursal,
       idArea: idArea,
-      idZona: idZona
+      idZona: idZona,
     });
     modal.present();
   }
-  modStatus(idReserv, idSucursal){
+  modStatus(idReserv, idSucursal) {
+    console.log("moStatus", idReserv);
+    console.log(idSucursal);
 
-      console.log("moStatus",idReserv);
-      console.log(idSucursal);
-
-      let modal = this.modalCtrl.create("ModalstatusPage",{
-        idReserv: idReserv,
-        idSucursal: idSucursal,
-      });
-      modal.present();
-  }
-
-  asignarMesa(idReserv,idZona){
-    let modal = this.modalCtrl.create("ModalmesasPage",{
+    let modal = this.modalCtrl.create("ModalstatusPage", {
       idReserv: idReserv,
-      idZona: idZona
+      idSucursal: idSucursal,
     });
     modal.present();
   }
-  Aceptar(idReserv){
+
+  asignarMesa(idReserv, idZona) {
+    let modal = this.modalCtrl.create("ModalmesasPage", {
+      idReserv: idReserv,
+      idZona: idZona,
+    });
+    modal.present();
+  }
+  Aceptar(idReserv) {
     //console.log("Este es el id: ", idReserv);
     //this._gestionReser.aceptarReservacion(idReserv);
     //Obtener el estatus de la reservacion si es creada normal o CreadaCompartida
-    this._gestionReser.getEstatusReser(idReserv).subscribe(reser => {
+    this._gestionReser.getEstatusReser(idReserv).subscribe((reser) => {
       this.estatusReser = reser;
-        this.estatusReser.forEach(data => {
-          if(data.estatus=='Creando'){
-            console.log("Este es el id creada: ", idReserv);
-            this._gestionReser.aceptarReservacion(idReserv);
-          }
-          if(data.estatus=='CreadaCompartida'){
-            console.log("Este es el id compartida: ", idReserv);
-              console.log("ejecutocompartida: ", idReserv);
-            this._gestionReser.aceptarReservacionCompartida(idReserv);
-          }
-
-        });
+      this.estatusReser.forEach((data) => {
+        if (data.estatus == "Creando") {
+          console.log("Este es el id creada: ", idReserv);
+          this._gestionReser.aceptarReservacion(idReserv);
+        }
+        if (data.estatus == "CreadaCompartida") {
+          console.log("Este es el id compartida: ", idReserv);
+          console.log("ejecutocompartida: ", idReserv);
+          this._gestionReser.aceptarReservacionCompartida(idReserv);
+        }
+      });
     });
   }
 
-  Cancelar(idReserv){
+  Cancelar(idReserv) {
     console.log("Este es el id: ", idReserv);
     this._gestionReser.cancelarReservacion(idReserv);
   }
 
   getMesas(idZona) {
-    this._gestionReser.getMesas(idZona).subscribe(mesas => {
+    this._gestionReser.getMesas(idZona).subscribe((mesas) => {
       this.mesas = mesas;
       console.log("mesas JAJA: ", this.mesas);
     });
@@ -244,46 +266,42 @@ export class AdministrarReservacionesPage {
 
   getMesas2(idSucursal) {
     console.log("getMesas2sucursal", idSucursal);
-    this._providerReserva.getMesas2(idSucursal).subscribe(mesas2 => {
+    this._providerReserva.getMesas2(idSucursal).subscribe((mesas2) => {
       console.log("Mesas2", mesas2);
       this.mesas2 = mesas2;
     });
   }
 
   getProductos(idReserv) {
-    let total=0;
+    let total = 0;
     console.log("getProductos id reserva", idReserv);
-     this._providerReserva.getProductos(idReserv).subscribe(productos => {
-       console.log("productos: ", productos);
-       this.productos = productos;
+    this._providerReserva.getProductos(idReserv).subscribe((productos) => {
+      console.log("productos: ", productos);
+      this.productos = productos;
 
-       productos.forEach(function (value) {
-        console.log('foreachIonci' +value.total );
-        total =total+value.total;
-        
+      productos.forEach(function (value) {
+        console.log("foreachIonci" + value.total);
+        total = total + value.total;
       });
-      console.log('totalreserva: '+total);
-      this.totalReserv=total;
-       
-     });
+      console.log("totalreserva: " + total);
+      this.totalReserv = total;
+    });
   }
 
-  getImgSucursal(uid){
-
-      this._providerReserva.getImagenSucursal(uid).subscribe(res=>{
-        this.imagenList=res;
-        console.log("imagenes123",this.imagenList);
-          res.forEach(function (value) {
-            //console.log("imagenId",value.myId);
-            console.log("forech urlImg",value.imagenes);
-            //this.imgSucursal=value.imagenes;
-            //console.log("Url", this.imgSucursal);
-        });
+  getImgSucursal(uid) {
+    this._providerReserva.getImagenSucursal(uid).subscribe((res) => {
+      this.imagenList = res;
+      console.log("imagenes123", this.imagenList);
+      res.forEach(function (value) {
+        //console.log("imagenId",value.myId);
+        console.log("forech urlImg", value.imagenes);
+        //this.imgSucursal=value.imagenes;
+        //console.log("Url", this.imgSucursal);
       });
-}
+    });
+  }
 
-behind(){
-  this.navCtrl.setRoot(AdminMenuReservacionPage);
-}
-
+  behind() {
+    this.navCtrl.setRoot(AdminMenuReservacionPage);
+  }
 }

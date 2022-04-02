@@ -30,15 +30,6 @@ export class UserProvider {
     public toastCtrl: ToastController,
   ) {
     console.log("Hello UserProvider Provider");
-    afireauth.authState.subscribe(user => {
-      console.log('user',user);
-      if (user) {
-        const uidUser = user.uid;
-        localStorage.setItem('uid',uidUser);
-        console.log("este es el uid de", uidUser);
-      }
-    });
-
   }
 
   newRegister(newuser, uidSucursal) {

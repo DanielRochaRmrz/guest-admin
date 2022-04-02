@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ReservacionProvider } from "../../providers/reservacion/reservacion";
+import { AdministrarReservacionesPage } from '../administrar-reservaciones/administrar-reservaciones';
 
 @IonicPage()
 @Component({
@@ -64,7 +65,7 @@ export class Modalstatus_cancelacionPage {
   // }
 
   closeModal() {
-    this.navCtrl.pop();
+    this.navCtrl.setRoot(AdministrarReservacionesPage);
 }
 
 }

@@ -253,11 +253,10 @@ export class SucursalAltaProvider {
     return promise;
   }
 
-  public agregarZona(zona, consumoMin, idArea, idSucursal) {
+  public agregarZona(zona, consumoMin, idSucursal) {
     this.db
       .collection("zonas")
       .add({
-        uidArea: idArea,
         nombre: zona,
         consumo: Number(consumoMin),
         uidSucursal: idSucursal,
@@ -268,10 +267,8 @@ export class SucursalAltaProvider {
           uidZona: docRef.id,
           zona: zona,
           consumoMin: consumoMin,
-          idArea: idArea,
           idSucursal: idSucursal,
         };
-        this.agregarZonaHttp(zon);
         this.alertCtrl
           .create({
             title: "Se agregó correctamente",
@@ -672,14 +669,6 @@ export class SucursalAltaProvider {
     return promise;
   }
 
-  // Zonas Api
-  agregarZonaHttp(zon: any) {
-    const url = `${this.apiUrl}/guardar_zona`;
-    this.http.post(url, zon).subscribe((resp) => {
-      return resp;
-    });
-  }
-
   obtenerMesas(id) {
     return new Promise((resolve, rejects) => {
       const url = `https://adminsoft.mx/operacion/guest/obtener_mesas/${id}`;
@@ -687,14 +676,6 @@ export class SucursalAltaProvider {
         const data = resp.consulta;
         resolve(data);
       });
-    });
-  }
-  
-  actualizarZonaHttp(zon: any) {
-    const url = `${this.apiUrl}/actulizar_zona`;
-    this.http.post(url, zon).subscribe((resp) => {
-      console.log('Respuesta -->', resp);
-      return resp;
     });
   }
 
@@ -705,17 +686,6 @@ export class SucursalAltaProvider {
        console.log('Respuesta -->', resp);
        return resp;
      });
-  }
-
-  eliminarZonaHttp(zon: any) {
-    const url = `${this.apiUrl}/eliminar_zona`;
-    this.http.post(url, zon).subscribe(( resp: any ) => {
-      const arr = resp.datos;
-      arr.forEach(element => {
-        console.log('Respuesta -->', element);
-      });
-      return resp;
-    });
   }
 
   ///CUPONES///
