@@ -119,26 +119,26 @@ export class AdminRpCorteCodigosPage {
 
       this.codigosUsers = data;
 
-      this.codigosUsers.forEach(element => {
+      // this.codigosUsers.forEach(element => {
 
         // console.log(element.uidUser);   
         
-        let uid =  element.uidUser
+        // let uid =  element.uidUser
         
-        this.afs.collection('users', ref => ref.where('uid', '==', uid)).valueChanges().subscribe(data =>{
+        // this.afs.collection('users', ref => ref.where('uid', '==', uid)).valueChanges().subscribe(data =>{
 
           this.nombresUsua = data;
 
           // console.log("Nombre", this.nombresUsua);
           
 
-        });
+        // });
         
-      });
+      // });
 
       // console.log("CODIGOS", this.codigos);
 
-    })
+    });
 
   }
 

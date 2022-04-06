@@ -123,16 +123,9 @@
         <img class="icon" src="../assets/imgs/icons/profile.png" item-start>
         <a class="blanco_2"></a>
         <h4 class="blanco_1"  ></h4>
-
-        <ng-container *ngFor="let nombreUsua of nombresUsua; let i = index">
         
-                <div *ngIf="nombreUsua.uid == codigo.uidUser">
+         <ion-badge class="negro" item-end> {{ codigo.nombreUsuario }}</ion-badge>
 
-                  <ion-badge class="negro" item-end> {{ nombreUsua.displayName }}</ion-badge>
-
-                </div>
-
-        </ng-container>
       </ion-item>
 
   </ion-card-content>
