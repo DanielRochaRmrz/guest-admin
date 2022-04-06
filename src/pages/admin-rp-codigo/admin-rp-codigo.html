@@ -108,9 +108,11 @@
 
                                     <div *ngIf="admin.uid == codigoRp.uidRp">
 
-                                      <ion-icon ios="ios-barcode-outline" md="md-barcode-"></ion-icon> {{ codigoRp.codigo }}
+                                      <!-- <ion-icon ios="ios-barcode-outline" md="md-barcode-"></ion-icon> {{ codigoRp.codigo }} -->
+                                      <img class="icon" src="../assets/imgs/icons/admin-historial.png" item-start style="height: 15px; width: auto;"> {{ codigoRp.codigo }}
                                       <br>
-                                      <ion-icon ios="ios-calendar-outline" md="md-calendar-outline"></ion-icon> {{ codigoRp.fecha | date }}
+                                      <!-- <ion-icon ios="ios-calendar-outline" md="md-calendar-outline"></ion-icon> {{ codigoRp.fecha | date }} -->
+                                      <img class="icon" src="../assets/imgs/icons/calendario.png" item-start style="height: 15px; width: auto;"> {{ codigoRp.fecha | date }}
 
                                     </div>
 
