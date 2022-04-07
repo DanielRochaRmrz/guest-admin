@@ -2,23 +2,29 @@
     <ion-navbar>
         <ion-row>
             <ion-col col-10>
-                <div align="right">
+                <div text-left>
                     <ion-title>Cancelar Reservación</ion-title>
                 </div>
               
             </ion-col>
             <ion-col col-2>
+
                 <div class="divBtn">
+
                     <button class="btnClose" ion-button icon-only (click)="closeModal()">
-                      <font color="white">X</font>
+
+                    <ion-icon style="color: white;" item-right name="ios-close-outline"></ion-icon>
+
                     </button>
+
                 </div>
+
             </ion-col>
 
-        </ion-row>
-   
+        </ion-row>   
        
     </ion-navbar>
+
 </ion-header>
 
 
@@ -29,43 +35,70 @@
         </button>
     </div> -->
     <br>
+    <div text-center>
+
+     <font style="opacity: .5;" size="">Cancelación de reservación con</font><br>
+
+     <div text-center>
+
+         <font style="opacity: .5;" size="1rem">            
+            
+            UID: {{this.idReserv}}
+
+        </font>
     
-    <br>
-    
+    </div>
+
+    </div>
+
+    <hr>  
+
+    <div text-center>
+
+        <img style="width: 2rem;" src="./assets/content/advertencia.png" alt="">
+
+    </div>
+
     <form [formGroup]="myForm" novalidate class="card_atras" (ngSubmit)="saveData()">
         <div class="style1">
             <ion-row>
-                <ion-col text-center>
+                <ion-col text-left>
+                <label for="" style="color: red;">*</label>
                     Motivo
                 </ion-col>
-                <ion-col text-center class="color2">
+                <!-- <ion-col text-left class="color2"> -->
                     <ion-item >
-                        <ion-select [(ngModel)]="data.motivo"   name="motivo" formControlName="motivo" >
+                        <ion-select [(ngModel)]="data.motivo" name="motivo" formControlName="motivo" >
                             <ion-option>Mesa no disponible</ion-option>                                
                             <ion-option>Nos reservamos derecho de admisión</ion-option>
                             <ion-option>Estamos buscando en ticketmaster</ion-option>
                             <ion-option>Se agotaron los espacios para reservar</ion-option>
                         </ion-select>
                     </ion-item>
-                </ion-col>
+                <!-- </ion-col> -->
             </ion-row>
         </div>    
 
         <div class="style1" >
             <ion-row>
-                <ion-col text-center>
+                <ion-col text-left>
                     Estatus
                 </ion-col>
-                <ion-col text-center>
-                    <ion-item>
+                <!-- <ion-col text-left> -->
+                    <ion-item>                       
                         <ion-label>Cancelado</ion-label>
                         <ion-input type="hidden" [(ngModel)]="data.status"  name="status" formControlName="status" value="Cancelado"></ion-input>                      
                     </ion-item>
-                </ion-col>
+                <!-- </ion-col> -->
             </ion-row>
         </div>
 
-        <button ion-button class="btnModal" type="submit" color="warning" [disabled]="!myForm.valid"> <font color="white">Actualizar </font> </button>
+            <button ion-button class="btnModal" type="submit" color="warning" [disabled]="!myForm.valid"> 
+
+                Cancelar 
+    
+            </button>
+
       </form>
 
 </ion-content>

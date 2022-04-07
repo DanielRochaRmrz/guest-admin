@@ -232,6 +232,21 @@ export class ReservacionProvider {
     });
   }
 
+  public borrarRegistroUsuarioCodigoRP(uidReservacion){
+
+    this.af.collection("contCodigosRp").doc(uidReservacion).delete().then(() => {
+
+      console.log("Se borro regsitro en contCodigosRp");
+      
+
+    }).catch(function(error) {
+
+      console.log("No se pudo en contCodigosRp");
+      
+
+    })
+  }
+
   public addCorte(
     fechaI,
     fechaF,

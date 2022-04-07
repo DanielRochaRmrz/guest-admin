@@ -54,7 +54,13 @@ export class Modalstatus_cancelacionPage {
     this._providerReserva.cancelarStatus(this.idReserv, info).then((respuesta: any) => {
         console.log("Respuesta: ", respuesta);
       });
-      this.closeModal();
+    
+    // ELIMINAMOS EL REGSITRO DEL CODIGO USADO POR EL USUARIO PARA QUE PUEDA VOLVER A USARLO
+
+    this._providerReserva.borrarRegistroUsuarioCodigoRP(this.idReserv);
+
+    this.closeModal();
+    
   }
 
   // getMesas(idx) {
@@ -67,5 +73,7 @@ export class Modalstatus_cancelacionPage {
   closeModal() {
     this.navCtrl.setRoot(AdministrarReservacionesPage);
 }
+
+
 
 }
