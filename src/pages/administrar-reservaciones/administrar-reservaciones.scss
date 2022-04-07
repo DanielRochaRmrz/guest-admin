@@ -1,13 +1,13 @@
 page-administrar-reservaciones {
-    
-     
+
+
     .toolbar-background {
-        background-image: url('../assets/imgs/proriat.png')!important;
+        background-image: url('../assets/imgs/proriat.png') !important;
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
-    
+
     .card {
         // width: 35%;
         margin-left: -1%;
@@ -17,6 +17,7 @@ page-administrar-reservaciones {
         display: inline-block;
         // margin: 0%;
     }
+
     .AdminEvento {
         color: #fff;
     }
@@ -24,22 +25,25 @@ page-administrar-reservaciones {
     .sucursal {
         color: #fff;
         opacity: 0.8;
-      
-    }
-    .button-ios{
-        background-color: #FD9530 !important;
+
     }
 
-    .color1{
+    // .button-ios{
+    //     background-color: #FD9530 !important;
+    // }
+
+    .color1 {
         background: #fafafa !important;
         color: #fafafa !important;
         background-color: #fafafa !important;
     }
-        .colorBlanco{
-            
-            color: #ffffff !important;
-    
-        }
+
+    .colorBlanco {
+
+        color: #ffffff !important;
+
+    }
+
     // .header {
     //     color: #ffffff;
     //     font-size: 2.5rem;
@@ -48,10 +52,12 @@ page-administrar-reservaciones {
         padding: 0%;
         color: #000;
     }
+
     .borde {
         margin-top: 0em;
         color: #fff;
     }
+
     .imgLi {
         width: 2px;
     }
@@ -60,12 +66,12 @@ page-administrar-reservaciones {
         border: none;
         background: #FD9530;
         color: #fff;
-      
-        margin-left:40px;
+
+        margin-left: 40px;
         border-radius: 25px;
-         position: absolute;
-       width:18px;
-       height: 18px;
+        position: absolute;
+        width: 18px;
+        height: 18px;
     }
 
 
@@ -73,12 +79,12 @@ page-administrar-reservaciones {
         border: none;
         background: #FD9530;
         color: #fff;
-      
-        margin-left:40px;
+
+        margin-left: 40px;
         // border-radius: 25px;
-         position: absolute;
-       width:18px;
-       height: 18px;
+        position: absolute;
+        width: 18px;
+        height: 18px;
     }
 
     .panelReserv {
@@ -97,33 +103,41 @@ page-administrar-reservaciones {
         //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000', GradientType=1);
         /* IE6-9 fallback on horizontal gradient */
     }
+
     .espacio {
         padding-bottom: 5px;
     }
+
     .row1 {
         padding-left: 15px;
         padding-top: 15px;
     }
+
     .col1 {
         padding-left: 15px;
         padding-top: 15px;
         font-size: 30px;
     }
+
     .icono {
         zoom: 2.0;
     }
+
     .pad {
         padding-right: 2%;
     }
+
     .title {
         font-size: 3.5rem;
         color: #ffffff;
         padding-left: 15px;
     }
+
     .title2 {
         font-size: 2.1rem;
         color: #ffffff;
     }
+
     .title3 {
         font-size: 1.8rem;
         color: #ffffff;
@@ -131,11 +145,11 @@ page-administrar-reservaciones {
         padding-top: 15px;
     }
 
-    .btn{
+    .btn {
         background-color: gold;
     }
 
-    #imgS{
-        max-width:90%;
-      }
+    #imgS {
+        max-width: 90%;
+    }
 }
