@@ -43,11 +43,18 @@ export class MyApp {
     public usuarioProv: UsuarioProvider,
     private afAuth: AngularFireAuth
   ) {
-    console.log('esta es la info del usuario');
-    console.log(this.usuarioProv.usuario.nombre);
-    this.user = this.usuarioProv.usuario;
+    
 
     platform.ready().then(() => {
+
+      statusBar.overlaysWebView(false);
+      statusBar.backgroundColorByHexString("#FD9530");
+      splashScreen.hide();
+
+      console.log('esta es la info del usuario');
+      console.log(this.usuarioProv.usuario.nombre);
+      this.user = this.usuarioProv.usuario;
+
       if (
         localStorage.getItem("isLogin") == "false") {
         this.nav.setRoot(AdminLoginPage);
@@ -64,8 +71,6 @@ export class MyApp {
       // }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
     });
   }
   //Menu de la aplicacion
