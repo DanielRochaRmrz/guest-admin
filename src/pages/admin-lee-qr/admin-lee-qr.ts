@@ -75,11 +75,10 @@ idCompartir: any;
         });
         //alert('Reservación pagada: Acceso permitido');
         let alerta = this.alertCtrl.create({
-    // message:
-    //   "Reservación pagada: Acesso permitido",
+    message: "Reservación pagada: Acesso permitido",
      buttons: [
        {
-         text: "Reservación pagada: Acesso permitido! Aceptar",
+         text: "Aceptar",
          handler: () => {
            console.log("Buy clicked");
          }
