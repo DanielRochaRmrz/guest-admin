@@ -160,24 +160,46 @@ export class ReservaDetallePage {
     modal.present();
   }
   Aceptar(idReserv) {
-    this.getUsersPusNoti();
-    //console.log("Este es el id: ", idReserv);
-    //this._gestionReser.aceptarReservacion(idReserv);
-    //Obtener el estatus de la reservacion si es creada normal o CreadaCompartida
-    this._gestionReser.getEstatusReser(idReserv).subscribe((reser) => {
-      this.estatusReser = reser;
-      this.estatusReser.forEach((data) => {
-        if (data.estatus == "Creando") {
-          console.log("Este es el id creada: ", idReserv);
-          this._gestionReser.aceptarReservacion(idReserv);
-        }
-        if (data.estatus == "CreadaCompartida") {
-          console.log("Este es el id compartida: ", idReserv);
-          console.log("ejecutocompartida: ", idReserv);
-          this._gestionReser.aceptarReservacionCompartida(idReserv);
-        }
+    if(this.reserv.numMesa != undefined ){
+
+      this.getUsersPusNoti();
+      //console.log("Este es el id: ", idReserv);
+      //this._gestionReser.aceptarReservacion(idReserv);
+      //Obtener el estatus de la reservacion si es creada normal o CreadaCompartida
+      this._gestionReser.getEstatusReser(idReserv).subscribe((reser) => {
+        this.estatusReser = reser;
+        this.estatusReser.forEach((data) => {
+          if (data.estatus == "Creando") {
+            console.log("Este es el id creada: ", idReserv);
+            this._gestionReser.aceptarReservacion(idReserv);
+            
+            this.closeModal();
+  
+          }
+          if (data.estatus == "CreadaCompartida") {
+            console.log("Este es el id compartida: ", idReserv);
+            console.log("ejecutocompartida: ", idReserv);
+            this._gestionReser.aceptarReservacionCompartida(idReserv);
+  
+            this.closeModal();
+  
+          }
+        });
       });
-    });
+
+    }else{
+
+      const alert = this.alertCtrl.create({
+
+        title: "No se ha asignado una mesa a esta reservación",
+        buttons: ["Aceptar"]
+        
+      });
+
+      alert.present();
+
+    }
+   
   }
 
   getUsersPusNoti() {
