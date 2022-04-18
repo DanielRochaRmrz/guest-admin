@@ -21,8 +21,9 @@ export class AdminRpCodigoPage {
   sucursales: any;
   uid: any;
   codigosRps: any;
+  copyCode: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afs: AngularFirestore, public firebase: AngularFireAuth,  public actionSheet: ActionSheetController, public _up: UserProvider,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afs: AngularFirestore, public firebase: AngularFireAuth,  public actionSheet: ActionSheetController, public _up: UserProvider) {
 
     this.usuario = this.navParams.get("uidRp");
 
@@ -150,6 +151,19 @@ export class AdminRpCodigoPage {
       title: 'Acciones',
 
       buttons: [
+        {
+
+          text: 'Copiar código',
+
+          role: 'destructive',
+          
+          handler: () => {
+
+           this._up.copiarCodigo(uid);
+
+          }
+
+        },
 
         {
           
@@ -213,6 +227,14 @@ export class AdminRpCodigoPage {
       ]
 
     }).present();
+
+  }
+
+  copyText(){
+
+    var uidSucursal = this.usuario;
+
+    this._up.copiarCodigo(uidSucursal);
 
   }
 

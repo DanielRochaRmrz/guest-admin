@@ -23,11 +23,11 @@
 
           <ion-item>
 
-            <ion-input readonly="{{isReadonly}}" type="text" value="{{ codigo.codigo }} "></ion-input>
+            <ion-input readonly="{{isReadonly}}" type="text" value="{{ codigo.codigo }}"></ion-input>
 
           </ion-item>
 
-          <button ion-button clear item-end>Copiar</button>
+          <button ion-button clear item-end (click)="copyText()" >Copiar</button>
 
       </ion-item>
 

@@ -97,6 +97,7 @@ import { ResumenProvider } from '../providers/resumen/resumen';
 import { MisReservacionesPage } from '../pages/mis-reservaciones/mis-reservaciones';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera } from '@ionic-native/camera';
+import { Clipboard } from '@ionic-native/clipboard';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBixlCb21nNbPSurY-Pvqu3hZB80Icl9Pk",
@@ -277,7 +278,8 @@ import { from } from 'rxjs';
     ResumenProvider,
     Stripe,
     PaymentProvider,
-    Camera
+    Camera,
+    Clipboard
   ]
 })
 export class AppModule {}

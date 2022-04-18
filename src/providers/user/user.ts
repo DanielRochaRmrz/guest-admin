@@ -13,6 +13,8 @@ import "firebase/firestore";
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { ToastController } from 'ionic-angular';
 
+import { Clipboard } from '@ionic-native/clipboard';
+
 @Injectable()
 export class UserProvider {
   // firedata = firebase.database().ref('/users');
@@ -21,6 +23,7 @@ export class UserProvider {
   _users: Observable<any>;
   uid: any;
   codigosRp: any;
+  copyCodes: any;
 
   constructor(
     public afireauth: AngularFireAuth,
@@ -28,6 +31,7 @@ export class UserProvider {
     public afs: AngularFirestore,
     private http: Http,
     public toastCtrl: ToastController,
+    private clipboard: Clipboard,
   ) {
     console.log("Hello UserProvider Provider");
   }
@@ -234,6 +238,27 @@ registerUser(sucursal, email, type, uidNewUser) {
     });
 
   }
+
+  copiarCodigo(uid){
+
+    this.afs.collection('codigosRp', ref => ref.where("uidRp", "==", uid)).valueChanges().subscribe(data =>{
+
+      this.copyCodes = data;
+
+      this.copyCodes.forEach(element => {
+        
+        const code = element.codigo;
+
+        this.clipboard.copy(code);
+
+        this.mostrar_toast('Se copio el código del RP');
+
+      });
+
+    });
+
+  }
+
   mostrar_toast( mensaje: string  ){
 
     const toast = this.toastCtrl.create({
