@@ -80,6 +80,19 @@ export class UsuarioProvider {
       })
     ));
   }
+
+  getUserName(id:string){
+    return new Promise((resolve, reject) => {
+      let reservaciones = this.afs.collection("users").doc(id);
+      reservaciones
+        .get()
+        .subscribe((user) => {
+          const us = user.data()
+            resolve(us.displayName);
+        });
+    });
+
+  }
 }
 
 export interface Credenciales {

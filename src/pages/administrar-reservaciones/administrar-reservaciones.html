@@ -31,8 +31,8 @@
     <hr>
     <br>
     <div *ngFor="let reservacion of reservaciones">
-        <div *ngFor="let user of usuarios">
-            <div *ngIf="reservacion.idUsuario==user.uid &&   reservacion.estatus == 'Creando'" class="espacio">
+
+            <div *ngIf="reservacion.estatus == 'Creando'" class="espacio">
 
                 <div class="loader"></div>
 
@@ -54,7 +54,7 @@
                                 </ion-col>
 
                                 <ion-col col-12>
-                                    <b>{{user.displayName}}</b>
+                                    <b>{{ reservacion.idUsuario | getNameUser  | async }}</b>
                                 </ion-col>
                             </ion-row>
                         </ion-col>
@@ -107,7 +107,7 @@
             </div>
             <!-- COMPARTIDAS -->
 
-            <div *ngIf="reservacion.idUsuario==user.uid &&   reservacion.estatus == 'CreadaCompartida'" class="espacio">
+            <div *ngIf="reservacion.estatus == 'CreadaCompartida'" class="espacio">
 
                 <div class="loader"></div>
 
@@ -130,7 +130,7 @@
 
                                 <ion-col col-12>
 
-                                    <b>{{user.displayName}}</b>
+                                    <b>{{ reservacion.idUsuario | getNameUser  | async }}</b>
 
                                 </ion-col>
                             </ion-row>
@@ -166,7 +166,7 @@
                             </ion-row>
 
                             <ion-row>
-                                <!-- <button (click)="consultaReservacion(reservacion.idReservacion)"> -->
+                                <!-- <button (click)="consultaHistorial(reservacion.idReservacion)"> -->
                                 <br>
                                 <br>
                                 <ion-col col-12 text-center>
@@ -182,7 +182,6 @@
                     <br>
                 </ion-card>
             </div>
-        </div>
     </div>
 
 </ion-content>
