@@ -9,14 +9,19 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 export class GetNameUserPipe implements PipeTransform {
 
-  constructor(private userProvider: UsuarioProvider ){
-  
-  }  
+
+  constructor(private userProvider: UsuarioProvider) {
+
+  }
 
   async transform(idUsuario: string) {
-  
-    const user = await this.userProvider.getUserName(idUsuario);
 
+    const usuario: unknown = await this.userProvider.getUserName(idUsuario);
+
+    const us: string = usuario as string;
+
+    const user = JSON.parse(us);
+    
     return user;
 
   }

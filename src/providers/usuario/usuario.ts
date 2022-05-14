@@ -87,8 +87,8 @@ export class UsuarioProvider {
       reservaciones
         .get()
         .subscribe((user) => {
-          const us = user.data()
-            resolve(us.displayName);
+          const us = user.data();
+            resolve(JSON.stringify(us));
         });
     });
 
