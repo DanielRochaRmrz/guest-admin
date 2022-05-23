@@ -1,0 +1,222 @@
+<ion-header>
+
+    <ion-navbar class="borde" hideBackButton>
+        <ion-row>
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+                  </ion-col>
+
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento">Reservaciones próximas</div>
+                <div class="sucursal">Sucursal</div>
+            </ion-col>
+            <ion-col>
+                <div align='end'>
+                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col>
+            <p class="lugar">
+                Próximas
+                <br>
+                <img src="./assets/content/line-hori.png" style="width: 40%;" alt="">
+            </p>
+            <p class="descrip">
+                Sucursal
+            </p>
+        </ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col>
+            <ion-card class="cuadro">
+                <div class="proximas">PRÓXIMAS</div>
+            </ion-card>
+            <ion-card class="descripcion">
+                <br>
+                <ion-item *ngFor="let reservacion of reservaciones" class="descripcion" no-lines>
+                    <ion-row>
+                        <ion-col col-3>
+                            <div *ngFor="let event of infoEvento">
+                                <div *ngIf="event.uid == reservacion.idevento">
+                                    <img [src]="event.img" class="imgEvent">
+                                    <p class="tituloE">{{event.titulo}}</p>
+                                </div>
+                            </div>
+                        </ion-col>
+                        <ion-col col-1>
+                            <img src="./assets/content/line3.png" class="imgL" alt="">
+                        </ion-col>
+                        <ion-col col-6>
+                            <ng-container *ngFor="let cliente of clientes">
+                                <h2 *ngIf="cliente.uid == reservacion.idUsuario">{{ cliente.displayName }} </h2>
+                            </ng-container>
+                            <p class="fechaR">Fecha {{ reservacion.fechaR}} </p>
+                            <button ion-button class="btnDetalle" round (click)="goDetalle(reservacion.idReservacion)">
+                                Detalle
+                            </button>
+                        </ion-col>
+                        <ion-col col-2>
+                            <p class="hora">{{ reservacion.hora }} </p>
+                            <p style="margin-top: 5px;"></p>
+                            <div align="center"><img src="./assets/content/Ellipse43.png" class="imgElli" alt=""></div>
+                            <p style="margin-top: 5px;"></p>
+                            <p class="status">{{ reservacion.estatus }} </p>
+                            <!-- <p class="aceptado">Aceptado </p> -->
+                        </ion-col>
+                    </ion-row>
+                    <!-- <ion-avatar item-start>
+                        <img src="../assets/imgs/icons/book.png">
+                    </ion-avatar>
+                    <ng-container *ngFor="let cliente of clientes">
+                        <h2 *ngIf="cliente.uid == reservacion.idUsuario">{{ cliente.displayName }} </h2>
+                    </ng-container>
+                    <p>Folio:{{ reservacion.folio }} </p>
+                    <p>{{ reservacion.estatus }} </p>
+                    <p>{{ reservacion.fechaR}} </p>
+                    <ion-note item-end>{{ reservacion.hora }} </ion-note>
+                    <button ion-button color="dark" round (click)="goDetalle(reservacion.idReservacion)">
+                        Detalle
+                    </button> -->
+                </ion-item>
+                <br>
+                <ion-item *ngFor="let reservaciona of reservacionesAcep" class="descripcion" no-lines>
+                    <ion-row>
+                        <ion-col col-3>
+                            <div *ngFor="let event of infoEvento">
+                                <div *ngIf="event.uid == reservaciona.idevento">
+                                    <img [src]="event.img" class="imgEvent">
+                                    <p class="tituloE">{{event.titulo}}</p>
+                                </div>
+                            </div>
+                        </ion-col>
+                        <ion-col col-1>
+                            <img src="./assets/content/line3.png" class="imgL" alt="">
+                        </ion-col>
+                        <ion-col col-6>
+                            <ng-container *ngFor="let cliente of clientes">
+                                <h2 *ngIf="cliente.uid == reservaciona.idUsuario">{{ cliente.displayName }} </h2>
+                            </ng-container>
+                            <p class="fechaR">Fecha {{ reservaciona.fechaR}} </p>
+                            <button ion-button class="btnDetalle" round (click)="goDetalle(reservaciona.idReservacion)">
+                                Detalle
+                            </button>
+                        </ion-col>
+                        <ion-col col-2>
+                            <p class="hora">{{ reservaciona.hora }} </p>
+                            <p style="margin-top: 5px;"></p>
+                            <div align="center"><img src="./assets/content/Ellipse44.png" class="imgElli" alt=""></div>
+                            <p style="margin-top: 5px;"></p>
+                            <p class="status">STATUS </p>
+                            <p class="aceptado">Aceptado </p>
+                        </ion-col>
+                    </ion-row>
+                    <!-- <ion-avatar item-start>
+                        <div *ngFor="let event of infoEvento">
+                            <div *ngIf="event.uid == reservaciona.idevento">
+                                <img [src]="event.img">
+                            </div>
+                        </div>
+                    </ion-avatar>
+                    <ng-container *ngFor="let cliente of clientes">
+                        <h2 *ngIf="cliente.uid == reservaciona.idUsuario">{{ cliente.displayName }} </h2>
+                    </ng-container>
+                    <p>Folio:{{ reservaciona.folio }} </p>
+                    <p>Aceptado </p>
+                    <p>{{ reservaciona.fechaR}} </p>
+                    <ion-note item-end>{{ reservaciona.hora }} </ion-note>
+                    <button ion-button color="dark" round (click)="goDetalle(reservaciona.idReservacion)">
+                        Detalle
+                    </button> -->
+                </ion-item>
+            </ion-card>
+        </ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
+
+
+    <!-- <ion-searchbar [animated]="true" (ionInput)="getItems($event)"></ion-searchbar> -->
+    <!--  <ion-list *ngIf="reservaciones.length != 0">-->
+    <!-- <ion-list-header>Próximas</ion-list-header>
+    <ion-item *ngFor="let reservacion of reservaciones">
+        <ion-avatar item-start>
+            <img src="../assets/imgs/icons/book.png">
+        </ion-avatar>
+        <ng-container *ngFor="let cliente of clientes">
+            <h2 *ngIf="cliente.uid == reservacion.idUsuario">{{ cliente.displayName }} </h2>
+        </ng-container>
+        <p>Folio:{{ reservacion.folio }} </p>
+        <p>{{ reservacion.estatus }} </p>
+        <p>{{ reservacion.fechaR}} </p>
+        <ion-note item-end>{{ reservacion.hora }} </ion-note>
+        <button ion-button color="dark" round (click)="goDetalle(reservacion.idReservacion)">
+            <-- <ion-icon ios="ios-more" md="md-more"></ion-icon> --
+            Detalle
+        </button>
+        <--<button ion-button color="dark" round (click)="aceptarReserv(reservacion.idReservacion)">
+                  <-- <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>  -->
+        <!--  Aceptar
+                </button>--
+    </ion-item> -->
+    <!-- <ion-item *ngFor="let reservaciona of reservacionesAcep">
+        <ion-avatar item-start>
+            <img src="../assets/imgs/icons/book.png">
+        </ion-avatar>
+        <ng-container *ngFor="let cliente of clientes">
+            <h2 *ngIf="cliente.uid == reservaciona.idUsuario">{{ cliente.displayName }} </h2>
+        </ng-container>
+        <p>Folio:{{ reservaciona.folio }} </p>
+        <p>Aceptado </p>
+        <p>{{ reservaciona.fechaR}} </p>
+        <ion-note item-end>{{ reservaciona.hora }} </ion-note>
+        <button ion-button color="dark" round (click)="goDetalle(reservaciona.idReservacion)">
+            <-- <ion-icon ios="ios-more" md="md-more"></ion-icon> --
+            Detalle
+        </button>
+        <--<button ion-button color="dark" round (click)="aceptarReserv(reservacion.idReservacion)">
+                  <-- <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>  -->
+        <!--  Aceptar
+                </button>--
+    </ion-item> -->
+    <!--</ion-list>-->
+    <!--<ion-list *ngIf="reservaciones.length == 0 && reservacionesAcep.length == 0">
+        <-- <ion-item>
+            <ion-avatar item-start>
+                <img src="../assets/imgs/icons/book.png">
+            </ion-avatar>
+            Por el momento no hay reservaciones disponibles.
+        </ion-item> -->
+    <!--  <ion-card>
+            <div text-center>
+                <img text-center class="adv" src="../assets/imgs/icons/advertencia.png" />
+            </div>
+            <ion-card-content>
+                <ion-card-title text-center>
+                    Aviso
+                </ion-card-title>
+                <p>
+                    Por el momento no hay reservaciones.
+                </p>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>-->
+    <ion-fab right bottom>
+        <button *ngIf="menu != 'menu'" ion-fab color="dark" (click)="scan()">
+            <ion-icon ios="ios-barcode" md="md-barcode"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>
