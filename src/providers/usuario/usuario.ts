@@ -81,7 +81,8 @@ export class UsuarioProvider {
     ));
   }
 
-  getUserName(id:string){
+  getUserName(id:any){
+    
     return new Promise((resolve, reject) => {
       let reservaciones = this.afs.collection("users").doc(id);
       reservaciones

@@ -59,6 +59,7 @@ import { DetalleCuponPage } from '../pages/detalle-cupon/detalle-cupon';
 import { CuentasPage } from '../pages/cuentas/cuentas';
 import { AdminRpCodigoPage } from '../pages/admin-rp-codigo/admin-rp-codigo';
 import { AdminRpCorteCodigosPage } from '../pages/admin-rp-corte-codigos/admin-rp-corte-codigos';
+import { ReservaDetallePage } from '../pages/reserva-detalle/reserva-detalle';
 
 //Pipes
 import { PipesModule } from "../pipes/pipes.module";
@@ -174,7 +175,8 @@ import { from } from 'rxjs';
     DetalleCuponPage,
     CuentasPage,
     AdminRpCodigoPage,
-    AdminRpCorteCodigosPage
+    AdminRpCorteCodigosPage,
+    ReservaDetallePage
   ],
   imports: [
     BrowserModule,
@@ -250,7 +252,8 @@ import { from } from 'rxjs';
     DetalleCuponPage,
     CuentasPage,
     AdminRpCodigoPage,
-    AdminRpCorteCodigosPage
+    AdminRpCorteCodigosPage,
+    ReservaDetallePage
   ],
   providers: [
     StatusBar,

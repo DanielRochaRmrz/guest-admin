@@ -11,6 +11,8 @@ import { ReservacionProvider } from "../../providers/reservacion/reservacion";
 import { AngularFirestore } from "@angular/fire/firestore";
 import moment from "moment";
 import { AdminMenuReservacionPage } from "../admin-menu-reservacion/admin-menu-reservacion";
+import { ReservaDetallePage } from "../reserva-detalle/reserva-detalle";
+
 
 @IonicPage()
 @Component({
@@ -111,13 +113,15 @@ export class AdministrarReservacionesPage {
 
   consultaReservacion(idReser) {
 
-    let modal = this.modalCtrl.create("ReservaDetallePage", {
+    this.navCtrl.push(ReservaDetallePage, { idReser: idReser })
 
-      idReser: idReser
+    // let modal = this.modalCtrl.create("ReservaDetallePage", {
 
-    });
+    //   idReser: idReser
 
-    modal.present();
+    // });
+
+    // modal.present();
 
   }
 

@@ -14,15 +14,19 @@ export class GetNameUserPipe implements PipeTransform {
 
   }
 
-  async transform(idUsuario: string) {
+  async transform(idUsuario: any) {
 
-    const usuario: unknown = await this.userProvider.getUserName(idUsuario);
+    if(idUsuario){
 
-    const us: string = usuario as string;
+      const usuario: any = await this.userProvider.getUserName(idUsuario);
 
-    const user = JSON.parse(us);
-    
-    return user;
+      const us: string = usuario as string;
+
+      const user = JSON.parse(us);
+      
+      return user;
+
+    }  
 
   }
 }
