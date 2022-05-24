@@ -3,7 +3,6 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ModalController,
   ViewController
 } from "ionic-angular";
 import { GestionReservacionesProvider } from "../../providers/gestion-reservaciones/gestion-reservaciones";
@@ -31,7 +30,6 @@ export class AdministrarReservacionesPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private modalCtrl: ModalController,
     public _providerReserva: ReservacionProvider,
     public afs: AngularFirestore,
     public viewCtrl: ViewController,
@@ -114,14 +112,6 @@ export class AdministrarReservacionesPage {
   consultaReservacion(idReser) {
 
     this.navCtrl.push(ReservaDetallePage, { idReser: idReser })
-
-    // let modal = this.modalCtrl.create("ReservaDetallePage", {
-
-    //   idReser: idReser
-
-    // });
-
-    // modal.present();
 
   }
 
