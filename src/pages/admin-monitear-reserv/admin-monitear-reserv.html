@@ -55,7 +55,7 @@
              <h2 style="text-transform: uppercase"> <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon> Nombre: <b>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</b> </h2>
 
             <h3>
-                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon>  Fecha: <b> {{ reservacion.fechaR }} </b> 
+                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon>  Fecha: <b> {{ reservacion.fechaR | date: 'dd/MM/yyyy' }} </b> 
             </h3>
 
             <p class="hora">
@@ -110,7 +110,7 @@
              <h2 style="text-transform: uppercase"> <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon> Nombre: <b>{{ (reservaciona.idUsuario | getNameUser | async)?.displayName }}</b> </h2>
 
             <h3>
-                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon>  Fecha: <b> {{ reservaciona.fechaR }} </b> 
+                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon>  Fecha: <b> {{ reservaciona.fechaR | date: 'dd/MM/yyyy' }} </b> 
             </h3>
 
             <p class="hora">

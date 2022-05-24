@@ -1,261 +1,358 @@
 <ion-header>
 
-    <ion-navbar class="borde" hideBackButton>
-        <ion-row>
-            <ion-col col-1 align="center">
-                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white">
-                </ion-icon>
-            </ion-col>
+  <ion-navbar class="borde" hideBackButton>
+    <ion-row>
+      <ion-col col-1 align="center">
+        <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white">
+        </ion-icon>
+      </ion-col>
 
 
-            <ion-col col-1 align="center">
-                <img src="./assets/content/line2.png" class="imgLi" alt="">
-            </ion-col>
-            <ion-col col-8>
-                <div class="AdminEvento">Detalle de Reservación</div>
-                <div class="sucursal">Sucursal</div>
-            </ion-col>
-            <ion-col>
-                <div align='end'>
-                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-navbar>
+      <ion-col col-1 align="center">
+        <img src="./assets/content/line2.png" class="imgLi" alt="">
+      </ion-col>
+      <ion-col col-8>
+        <div class="AdminEvento">Detalle de Reservación</div>
+        <div class="sucursal">Sucursal</div>
+      </ion-col>
+      <ion-col>
+        <div align='end'>
+          <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
 
 </ion-header>
 <ion-content>
 
-    <br><br>
+  <br>
 
-    <ion-row>
-        <ion-col col-2></ion-col>
-        <ion-col col-8>
-            <div *ngFor="let user of infoUsers">
-                <div *ngIf="user.uid == reservaciones.idUsuario">
-                    <p class="nombre">{{user.displayName}}</p>
-                </div>
-            </div>
+  <ion-row>
 
-            <h6 *ngFor="let even of Eventos">
-                <h6 text-center *ngIf="this.reservaciones.idevento == even.uid" class="nombreE">
-                    {{ even.titulo }}
-                </h6>
-            </h6>
-        </ion-col>
-        <ion-col col-2></ion-col>
-    </ion-row>
+    <ion-col col-2></ion-col>
 
-    <br><br><br>
+    <ion-col col-8>
 
-    <ion-row>
-        <ion-col col-1></ion-col>
-        <ion-col align="center">
-            <p class="categoria">Mesa</p>
-            <p class="categoriaE" text-center>
-                {{ reservaciones.numMesa }}
-            </p>
-        </ion-col>
+      <div align="center">
 
-        <ion-col align="center">
-            <ion-icon name="person-outline" class="iconoP"></ion-icon>
-            <div *ngFor="let even of Eventos">
-                <div text-center class="numE" *ngIf="this.reservaciones.idevento == even.uid">
-                    {{ this.reservaciones.numPersonas }}
-                </div>
-            </div>
-        </ion-col>
+        <img class="imagen_perfil" src="{{ (reservaciones.idUsuario | getNameUser | async)?.photoURL }}" />
 
-        <ion-col align="center">
-            <p class="zona">Zona</p>
-            <div *ngFor="let zon of Zonas">
-                <div class="zonaE" text-center *ngIf="this.reservaciones.idZona == zon.uid">
-                    {{ zon.nombre }}
-                </div>
-            </div>
-        </ion-col>
-        <ion-col col-1></ion-col>
-    </ion-row>
-
-    <br><br>
-
-    <div class="Tproducto" text-center>PRODUCTOS DE LA RESERVACIÓN</div>
-    <h2 *ngFor="let pro of Productos">
-        <h2 *ngIf="this.reservaciones.idReservacion == pro.idReservacion">
-            <ion-item>
-                <p>Producto</p>
-                <ion-badge class="badge" item-end>{{pro.producto}}</ion-badge>
-            </ion-item>
-            <ion-item>
-                <p>Cantidad</p>
-                <ion-badge class="badge" item-end>{{pro.cantidad}}</ion-badge>
-            </ion-item>
-            <ion-item>
-                <p>Costo</p>
-                <ion-badge class="badge" item-end>{{pro.costo | currency}}</ion-badge>
-            </ion-item>
-            <ion-item>
-                <p>Total</p>
-                <ion-badge class="badge" item-end>{{pro.total | currency}}</ion-badge>
-            </ion-item>
-        </h2>
-    </h2>
-
-
-
-    <div *ngIf="validarCupon=='Noexiste'">
-        <ion-item class="cuponD">
-            <p>Propina</p>
-            <ion-badge color="dark" item-end>{{propinaRe2 | currency}}</ion-badge>
-        </ion-item>
-        <ion-item class="cuponD">
-            <p>TOTAL RESERVACIÓN</p>
-            <ion-badge color="dark" item-end>{{totalPropina | currency}}</ion-badge>
-        </ion-item>
-    </div>
-    <div *ngIf="validarCupon=='Existe'">
-        <h2 *ngFor="let cup of Cupones">
-            <h2 *ngIf="this.reservaciones.uidCupon == cup.uid">
-                <ion-item class="cuponD">
-                    <p>Cupon descuento</p>
-                    <ion-badge color="dark" item-end>{{cup.valorCupon | currency}}</ion-badge>
-                </ion-item>
-                <ion-item>
-                    <p>TOTAL</p>
-                    <ion-badge color="dark" item-end>{{this.reservaciones.totalReservacion | currency}}</ion-badge>
-                </ion-item>
-                <ion-item>
-                    <p>Propina</p>
-                    <ion-badge color="dark" item-end>{{propinaRe | currency}}</ion-badge>
-                </ion-item>
-                <ion-item>
-                    <p>TOTAL FINAL</p>
-                    <ion-badge color="dark" item-end>{{totalPropinaCupon | currency}}</ion-badge>
-                </ion-item>
-            </h2>
-        </h2>
-    </div>
-
-
-    <ion-row>
-        <ion-col col-2></ion-col>
-        <ion-col>
-            <ion-card class="card_atras">
-                <p *ngIf="infoReserCom_num != 0" text-center class="blanco_2">
-                    <br> COMPARTIDA ENTRE
-                    <img src="./assets/content/iconoC.png" class="iconoAr" alt="">
-                    <br>
-                </p>
-                <div *ngFor="let compartidas of cuentasCompartidas">
-                    <div *ngIf="this.reservaciones.idReservacion==compartidas.idReservacion">
-                        <div *ngFor="let users of infoUsers">
-                            <div *ngIf="compartidas.telefono==users.phoneNumber">
-                                <ion-item color="dark">
-                                    <ion-avatar item-start>
-                                        <img src="../assets/imgs/icons/profile.png">
-                                    </ion-avatar>
-                                    <ion-badge color="dark" item-end>{{users.displayName}}</ion-badge>
-                                </ion-item>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ion-card>
-        </ion-col>
-        <ion-col col-2></ion-col>
-    </ion-row>
-
-
-
-
-
-
-    <!-- <ion-item>
-    <h2 *ngFor="let zon of Zonas">
-      <h2 text-center *ngIf="this.reservaciones.idZona == zon.uid">Zona: {{ zon.nombre }} </h2>
-    </h2>
-    <h2 text-center>Num. Personas: {{ this.reservaciones.numPersonas }} </h2>
-    <h2 *ngFor="let even of Eventos">
-      <h2 text-center *ngIf="this.reservaciones.idevento == even.uid">
-        Evento: {{ even.titulo }}
-      </h2>
-    </h2>
-    <h2 *ngFor="let even of Eventos">
-      <h2 text-center *ngIf="this.reservaciones.idevento == even.uid">
-        Categoria: {{ even.categoria }}
-      </h2>
-    </h2>
-    <br>
-    <h2 text-center>PRODUCTOS DE LA RESERVACIÓN</h2>
-    <h2 *ngFor="let pro of Productos">
-      <h2 *ngIf="this.reservaciones.idReservacion == pro.idReservacion">
-        <ion-item>
-          <p>Producto</p>
-          <ion-badge color="dark" item-end>{{pro.producto}}</ion-badge>
-        </ion-item>
-        <ion-item>
-          <p>Cantidad</p>
-          <ion-badge color="dark" item-end>{{pro.cantidad}}</ion-badge>
-        </ion-item>
-        <ion-item>
-          <p>Costo</p>
-          <ion-badge color="dark" item-end>{{pro.costo | currency}}</ion-badge>
-        </ion-item>
-        <ion-item>
-          <p>Total</p>
-          <ion-badge color="dark" item-end>{{pro.total | currency}}</ion-badge>
-        </ion-item>
-      </h2>
-    </h2>
-  </ion-item> -->
-    <!-- <div *ngIf="validarCupon=='Noexiste'">
-    <ion-item color="dark">
-      <p>Propina</p>
-      <ion-badge color="light" item-end>{{propinaRe2 | currency}}</ion-badge>
-    </ion-item>
-    <ion-item color="dark">
-      <p>TOTAL RESERVACIÓN</p>
-      <ion-badge color="light" item-end>{{totalPropina | currency}}</ion-badge>
-    </ion-item>
-  </div>
-  <div *ngIf="validarCupon=='Existe'">
-    <h2 *ngFor="let cup of Cupones">
-      <h2 *ngIf="this.reservaciones.uidCupon == cup.uid">
-        <ion-item color="dark">
-          <p>Cupon descuento</p>
-          <ion-badge color="light" item-end>{{cup.valorCupon | currency}}</ion-badge>
-        </ion-item>
-        <ion-item color="dark">
-          <p>TOTAL</p>
-          <ion-badge color="light" item-end>{{this.reservaciones.totalReservacion | currency}}</ion-badge>
-        </ion-item>
-        <ion-item color="dark">
-          <p>Propina</p>
-          <ion-badge color="light" item-end>{{propinaRe | currency}}</ion-badge>
-        </ion-item>
-        <ion-item color="dark">
-          <p>TOTAL FINAL</p>
-          <ion-badge color="light" item-end>{{totalPropinaCupon | currency}}</ion-badge>
-        </ion-item>
-      </h2>
-    </h2>
-  </div> -->
-    <!-- <ion-card class="card_atras">
-    <p *ngIf="infoReserCom_num != 0" text-center class="blanco_2">COMPARTIDA ENTRE</p>
-    <div *ngFor="let compartidas of cuentasCompartidas">
-      <div *ngIf="this.reservaciones.idReservacion==compartidas.idReservacion">
-        <div *ngFor="let users of infoUsers">
-          <div *ngIf="compartidas.telefono==users.phoneNumber">
-            <ion-item color="dark">
-              <ion-avatar item-start>
-                <img src="../assets/imgs/icons/profile.png">
-              </ion-avatar>
-              <ion-badge color="light" item-end>{{users.displayName}}</ion-badge>
-            </ion-item>
-          </div>
-        </div>
       </div>
+
+      <p class="nombre">
+
+        {{ (reservaciones.idUsuario | getNameUser | async)?.displayName }}
+
+        <img *ngIf="reservaciones.estatus == 'Aceptado'" src="./assets/content/Ellipse55.png" class="imgElli" alt="">
+        <img *ngIf="reservaciones.estatus == 'Cancelado'" src="./assets/content/Ellipse43.png" class="imgElliC" alt="">
+
+      </p>
+
+      <h6 text-center *ngIf="this.reservaciones.idevento" class="nombreE">
+
+        ({{ (reservaciones.idevento | getNameEvento | async)?.titulo }})
+
+      </h6>
+
+    </ion-col>
+
+    <ion-col col-2></ion-col>
+
+  </ion-row>
+
+  <hr>
+
+  <br>
+
+  <div align="center">
+
+    <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
+    <font size="2" color="#474646"> <b>DETALLES DE LA RESERVACIÓN </b></font>
+
+  </div>
+
+  <br>
+
+  <ion-list>
+
+    <!-- UID RESERVACION -->
+
+    <ion-item>
+
+      <ion-icon ios="ios-key" md="md-key" item-start style="color: #fcc04d"></ion-icon>
+
+      UID reservación
+
+      <ion-note item-end>
+
+        {{ reservaciones.idReservacion }}
+
+      </ion-note>
+
+    </ion-item>
+
+    <!-- FOLIO RESERVACION -->
+
+    <ion-item>
+
+      <ion-icon ios="ios-folder-open" md="md-folder-open" item-start style="color: #fcc04d"></ion-icon>
+
+      Folio reservación
+
+      <ion-note item-end>
+
+        {{ reservaciones.folio }}
+
+      </ion-note>
+
+    </ion-item>
+
+    <!-- FECHA RESERVACION -->
+
+    <ion-item>
+
+      <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon>
+
+      Fecha reservación
+
+      <ion-note item-end>
+
+        {{ reservaciones.fechaR | date : 'dd/MM/yyyy' }}
+
+      </ion-note>
+
+    </ion-item>
+
+    <!-- HORA RESERVACION -->
+
+    <ion-item>
+
+      <ion-icon ios="ios-clock" md="md-clock" item-start style="color: #fcc04d"></ion-icon>
+
+      Fecha reservación
+
+      <ion-note item-end>
+
+        {{ reservaciones.hora }}
+
+      </ion-note>
+
+    </ion-item>
+
+    <!-- CODIGO RP -->
+
+    <ion-item>
+
+      <ion-icon ios="ios-keypad" md="md-keypad" item-start style="color: #fcc04d"></ion-icon>
+
+      Código RP usado
+
+      <ion-note item-end>
+
+        {{ reservaciones.codigoRP }}
+
+      </ion-note>
+
+    </ion-item>
+
+    <!-- MESA -->
+
+    <ion-item>
+
+      <ion-icon ios="ios-grid" md="md-grid" item-start style="color: #fcc04d"></ion-icon>
+
+      Mesa
+
+      <ion-note item-end>
+
+        {{ reservaciones.numMesa }}
+
+      </ion-note>
+
+    </ion-item>
+
+    <!-- PERSONAS -->
+
+    <ion-item>
+
+      <ion-icon ios="ios-people" md="md-people" item-start style="color: #fcc04d"></ion-icon>
+
+      Número de personas
+
+      <ion-note item-end>
+
+        {{ reservaciones.numPersonas }}
+
+      </ion-note>
+
+    </ion-item>
+
+    <!-- ZONAS -->
+
+    <ion-item>
+
+      <ion-icon ios="ios-keypad" md="md-keypad" item-start style="color: #fcc04d"></ion-icon>
+
+      Zona
+
+      <ion-note item-end>
+
+        {{ (reservaciones.idZona | getNameZona | async)?.nombre }}
+
+      </ion-note>
+
+    </ion-item>
+
+  </ion-list>
+
+  <hr>
+
+  <br>
+
+  <!-- PRODUCTOS -->
+
+  <div align="center">
+
+    <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
+    <font size="2" color="#474646"> <b>PRODUCTOS DE LA RESERVACIÓN </b></font>
+
+    <br>
+
+  </div>
+
+  <div align="center">
+
+    <ion-grid>
+
+      <ion-row class="header-row">
+        <ion-col><b>Producto</b></ion-col>
+
+        <ion-col><b>Cantidad</b></ion-col>
+
+        <ion-col><b>Costo</b></ion-col>
+
+        <ion-col><b>Total</b></ion-col>
+
+      </ion-row>
+
+      <ion-row *ngFor="let pro of productos">
+
+        <ion-col>{{ pro.producto }}</ion-col>
+
+        <ion-col>{{ pro.cantidad }} </ion-col>
+
+        <ion-col>{{ pro.costo | currency }}</ion-col>
+
+        <ion-col>{{ pro.total | currency }} </ion-col>
+
+      </ion-row>
+
+      <div *ngIf="validarCupon=='Noexiste'">
+
+        <!-- PROPINA -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col><b>Propina</b></ion-col>
+          <ion-col><b>{{ propinaRe2 | currency }}</b></ion-col>
+        </ion-row>
+
+        <!-- TOTAL RESERVACIÓN -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col><b>Total reservación</b></ion-col>
+          <ion-col><b> {{totalPropina | currency}} </b></ion-col>
+        </ion-row>
+
+      </div>
+
+      <!-- CON CUPON -->
+      <div *ngIf="validarCupon=='Existe'">
+
+        <div *ngFor="let cup of cupones">
+
+
+          <!-- CUPON DESCUENTO -->
+          <ion-row>
+            <ion-col><b>Cupón descuento</b></ion-col>
+            <ion-col><b></b></ion-col>
+            <ion-col></ion-col>
+            <ion-col>-{{ cup.valorCupon | currency }}</ion-col>
+          </ion-row>
+
+          <!-- TOTAL -->
+          <ion-row>
+            <ion-col><b>Total</b></ion-col>
+            <ion-col><b></b></ion-col>
+            <ion-col></ion-col>
+            <ion-col>{{ reservaciones.totalReservacion | currency }}</ion-col>
+          </ion-row>
+
+          <!-- PROPINA -->
+          <ion-row>
+            <ion-col><b>Propina</b></ion-col>
+            <ion-col><b></b></ion-col>
+            <ion-col></ion-col>
+            <ion-col>{{ propinaRe | currency }}</ion-col>
+          </ion-row>
+
+          <!-- TOTAL FINAL -->
+          <ion-row>
+            <ion-col><b>Total final</b></ion-col>
+            <ion-col><b></b></ion-col>
+            <ion-col></ion-col>
+            <ion-col><b>{{ totalPropinaCupon | currency }}</b></ion-col>
+          </ion-row>
+
+        </div>
+
+      </div>
+
+    </ion-grid>
+
+  </div>
+
+  <hr>
+
+  <br>
+  <div *ngIf="infoReserCom_num != 0">
+
+    <div align="center">
+
+      <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
+      <font size="2" color="#474646"> <b>COMPARTIDA ENTRE</b> </font>
+
+      <br>
+
     </div>
-  </ion-card> -->
+
+    <br>
+
+  </div>
+  <div *ngFor="let compartidas of cuentasCompartidas">
+
+    <div *ngIf="compartidas.telefono == ( (reservaciones.idUsuario | getNameUser | async)?.phoneNumber)">
+
+      <ion-list>
+
+        <ion-item>
+
+          <ion-avatar item-start>
+
+            <img src="{{ (reservaciones.idUsuario | getNameUser | async)?.photoURL }}">
+
+          </ion-avatar>
+
+          <h2>{{ (reservaciones.idUsuario | getNameUser | async)?.displayName }}</h2>
+
+        </ion-item>
+
+      </ion-list>
+
+    </div>
+
+  </div>
 
 </ion-content>

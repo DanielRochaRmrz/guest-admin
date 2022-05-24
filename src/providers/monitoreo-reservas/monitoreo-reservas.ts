@@ -31,6 +31,10 @@ public tarjetaDoc: AngularFirestoreDocument<any>;
 public tarjeta: Observable<any>;
 public areas: AngularFirestoreCollection<any[]>;
 public _areas: Observable<any>;
+
+public cupones: AngularFirestoreCollection<any[]>;
+public _cupones: Observable<any>;
+
 public reservaInfo2: AngularFirestoreCollection<any[]>;
 public _reservaInfo2: Observable<any>;
 public reservaInfo3: AngularFirestoreCollection<any[]>;
@@ -372,6 +376,51 @@ getEventosSucucursal(uidSucursal){
 
 }
 
+getEventoNamePipe(id:any){
+
+  return new Promise((resolve, reject) => {
+    let eventos = this.afs.collection("evento").doc(id);
+    eventos
+      .get()
+      .subscribe((evento) => {
+        const ev = evento.data();
+          resolve(JSON.stringify(ev));
+      });
+  });
+
+}
+
+getZonaNamePipe(id:any){
+
+  return new Promise((resolve, reject) => {
+    let zonas = this.afs.collection("zonas").doc(id);
+    zonas
+      .get()
+      .subscribe((zona) => {
+        const ev = zona.data();
+          resolve(JSON.stringify(ev));
+      });
+  });
+
+}
+
+//OBTIENE LOS CUPONES DE LA SUCURSAL
+public getCupones(idx, uidCupon ) {
+  
+  this.cupones = this.afs.collection<any>("cupones", ref =>
+    ref.where("idSucursal", "==", idx).where("uid", "==", uidCupon )
+  );
+  this._cupones = this.cupones.valueChanges();
+  return (this._cupones = this.cupones.snapshotChanges().pipe(
+    map(changes => {
+      return changes.map(action => {
+        const data = action.payload.doc.data() as any;
+        data.$key = action.payload.doc.id;
+        return data;
+      });
+    })
+  ));
+}
 
 getAllProductos(idReserv): Promise<any> {
   return new Promise((resolve, reject) => {

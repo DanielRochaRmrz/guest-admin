@@ -33,6 +33,7 @@ page-admin-reservacion-detalle {
     .nombre {
         text-align: center;
         font-size: x-large;
+        text-transform: uppercase;
     }
     ion-icon{
         color: #fff;
@@ -121,5 +122,21 @@ page-admin-reservacion-detalle {
       height: 35px;
       width: 35px;
   }
+
+  .imagen_perfil {
+    height: 15rem;
+    width: 15rem;
+    margin-top: 0px;
+    margin-bottom: -3px;
+    border-radius: 250px;
+}
+
+.imgElliC {
+    width: 5%;
+}
+
+.imgElli {
+    width: 5%;
+}
 
 }
