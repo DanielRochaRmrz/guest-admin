@@ -65,6 +65,20 @@
                 <img src="./assets/content/Ellipse55.png" class="imgElli" alt=""> {{ reservacion.estatus }} 
             </p>
 
+            <ng-container *ngIf="reservacion.idevento != null">
+
+                <ng-container *ngFor="let event of infoEvento">
+
+                    <ng-container *ngIf="reservacion.idevento == event.uid">
+
+                        <p class="hora"> <ion-icon ios="ios-beer" md="md-beer" item-start style="color: #fcc04d"></ion-icon> {{ event.titulo }} </p>
+
+                    </ng-container>
+
+                </ng-container>
+
+            </ng-container>
+
             <button ion-button block round class="btnDetalle" (click)="goDetalle(reservacion.idReservacion)">
 
                 Detalle
@@ -89,7 +103,7 @@
 
             <ion-avatar item-start>
 
-                <img src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}">
+                <img src="{{ (reservaciona.idUsuario | getNameUser | async)?.photoURL }}">
 
             </ion-avatar>
 
@@ -105,8 +119,22 @@
             <p class="hora" item-end>
                 <img src="./assets/content/Ellipse55.png" class="imgElli" alt=""> {{ reservaciona.estatus }} 
             </p>
+            
+            <ng-container *ngIf="reservaciona.idevento != null">
 
-            <button ion-button block round class="btnDetalle" (click)="goDetalle(reservaciona.idReservacion)">
+                <ng-container *ngFor="let event of infoEvento">
+
+                    <ng-container *ngIf="reservaciona.idevento == event.uid">
+
+                        <p class="hora"> <ion-icon ios="ios-beer" md="md-beer" item-start style="color: #fcc04d"></ion-icon> {{ event.titulo }} </p>
+
+                    </ng-container>
+
+                </ng-container>
+
+            </ng-container>
+
+            <button ion-button block round class="btnDetalle" (click)="goDetalle(reservacionaa.idReservacion)">
 
                 Detalle
 

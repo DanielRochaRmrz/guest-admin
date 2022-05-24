@@ -12,7 +12,9 @@ export class MonitoreoReservasProvider {
   db = firebase.firestore();
 // Reservaciones
 public  reservacionesCollection: AngularFirestoreCollection<any>;
+public  eventosCollection: AngularFirestoreCollection<any>;
 public reservaciones: Observable<any[]>;
+public eventos: Observable<any[]>;
 public  reservacionesCursoCollection: AngularFirestoreCollection<any>;
 public reservacionesCurso: Observable<any[]>;
 public  reservacionesAcepComCollection: AngularFirestoreCollection<any>;
@@ -344,6 +346,33 @@ getEvento(idEvento) {
     })
     );
 }
+
+getEventosSucucursal(uidSucursal){
+  
+  this.eventosCollection = this.afs.collection<any>("evento", ref => ref.where("uidSucursal", "==", uidSucursal));
+
+  this.eventos = this.eventosCollection.valueChanges();
+
+  return (this.eventos = this.eventosCollection.snapshotChanges().pipe(
+    
+    map(changes => {
+    
+      return changes.map(action => {
+    
+        const data = action.payload.doc.data() as any;
+    
+        data.uid = action.payload.doc.id;
+    
+        return data;
+    
+      });
+  
+    })
+  ));
+
+}
+
+
 getAllProductos(idReserv): Promise<any> {
   return new Promise((resolve, reject) => {
     this.db

@@ -7,7 +7,6 @@ import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 
-
 @IonicPage()
 @Component({
   selector: 'page-admin-monitear-reserv',
@@ -20,12 +19,12 @@ export class AdminMonitearReservPage {
   scannedData: any = {};
 
   reservaciones: any = [];
+  infoEvento: any = [];
   datosQr: any;
   menu: any;
   formatoFecha: any;
   sucursales: any;
   reservacionesAcep: any;
-  infoEvento: any;
 
   constructor(
     public navCtrl: NavController,
@@ -34,12 +33,15 @@ export class AdminMonitearReservPage {
     public monRes: MonitoreoReservasProvider,
     private barcodeScanner: BarcodeScanner
   ) {
+    
     //recibe parametro de la reservacion
     this.menu = this.navParams.get("menu");
-    console.log(this.menu);
+
   }
 
   ionViewDidLoad() {
+
+    console.log("admin-monitear-reserv.html");    
 
     this.getAllReservacione();
 
@@ -71,7 +73,7 @@ export class AdminMonitearReservPage {
 
     }
 
-    console.log("fecha actual", this.formatoFecha);
+    // console.log("fecha actual", this.formatoFecha);
     
     const id = localStorage.getItem('uidSucursal');
     
@@ -88,16 +90,15 @@ export class AdminMonitearReservPage {
 
           this.reservaciones = reser;
 
-          console.log('reservaciones1', reser);
+          // console.log("this.reservaciones ->", this.reservaciones);
           
+
         })
         
         // TRAE LAS RESERVACIONES COMPARTIDAS
         this.monRes.getReservacionesAcepCom(uidSucursal, this.formatoFecha).subscribe(reser => {
 
           this.reservacionesAcep = reser;
-
-          console.log('reservaciones2', reser);
 
         })
       });
@@ -112,13 +113,18 @@ export class AdminMonitearReservPage {
   }
 
   getEvento() {
+    
+    const uidSucursal = localStorage.getItem('uidSucursal');  
 
-    this.afs.collection("evento").valueChanges().subscribe(data12 => {
-        this.infoEvento = data12;
-        console.log("evento", this.infoEvento);
-    });
+    this.monRes.getEventosSucucursal(uidSucursal).subscribe(data12 => {
 
-  }
+      this.infoEvento = data12;      
+
+      // console.log("this.infoEvento ", this.infoEvento);
+      
+
+  })
+}
 
   scan() {
 
