@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { MonitoreoReservasProvider } from '../../providers/monitoreo-reservas/monitoreo-reservas';
 import { AdminMonitearReservPage } from '../admin-monitear-reserv/admin-monitear-reserv';
 import { SucursalAltaProvider} from "../../providers/sucursal-alta/sucursal-alta";
+import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 
 @IonicPage()
 @Component({
@@ -122,7 +123,17 @@ export class AdminReservacionDetallePage {
 
  
   behind(){
-    this.navCtrl.setRoot(AdminMonitearReservPage);
+
+    const goMenuHistorial= this.navParams.get("page");
+
+    if(goMenuHistorial){
+
+      this.navCtrl.setRoot(goMenuHistorial);
+
+    }else{
+
+      this.navCtrl.setRoot(AdminMonitearReservPage);
+    }
   }
 
 

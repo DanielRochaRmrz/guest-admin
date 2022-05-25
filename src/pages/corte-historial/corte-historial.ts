@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ReservacionProvider } from '../../providers/reservacion/reservacion';
-import { SucursalAltaProvider, Credenciales } from '../../providers/sucursal-alta/sucursal-alta';
+import { SucursalAltaProvider } from '../../providers/sucursal-alta/sucursal-alta';
 import { AuthProvider } from '../../providers/auth/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AdminHomePage } from '../admin-home/admin-home';

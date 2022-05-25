@@ -362,19 +362,19 @@ export class ReservacionProvider {
   }
 
   public getReservaciones(idx: any, fecha1: String, fecha2: String) {
-    // return this.afiredatabase.object("sucursales/" + uid);
-    //let idUsuario = idx;
+
+
     this.fechaI = fecha1;
+
     this.fechaF = fecha2;
+
     const fechI = moment(this.fechaI).format("x");
+
     const fechF = moment(this.fechaF).format("x");
-    console.log("fechaIProvider", fechI);
-    console.log("fechaFProvider", fechF);
-    console.log("idsucursal", idx);
 
     this.reservaciones = this.af.collection<any>("reservaciones", (ref) =>
-      //      ref.where("idSucursal", "==", idx).where("estatus", "==", "Creando")
-      ref
+
+    ref
         .where("idSucursal", "==", idx)
         .where("estatus", "==", "Pagado")
         .where("fechaR_", ">=", fechI)
@@ -386,8 +386,6 @@ export class ReservacionProvider {
         return changes.map((action) => {
           const data = action.payload.doc.data() as any;
           data.$key = action.payload.doc.id;
-          // console.log("que es", data.$key);
-
           return data;
         });
       })

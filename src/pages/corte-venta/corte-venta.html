@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>corte-venta</ion-title>
+        <ion-title>Corte de venta</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -38,7 +38,7 @@
                 <ion-badge class="negro" item-end> {{ comision2 | currency}}</ion-badge>
             </ion-item>
             <ion-item class="card_atras">
-                <a class="blanco_2"> Guest (3.9%)</a>
+                <a class="blanco_2"> Guest (5.9%)</a>
                 <h4 class="blanco_1"></h4>
                 <ion-badge class="negro" item-end> {{ comision1 | currency}}</ion-badge>
             </ion-item>
@@ -80,7 +80,7 @@
             <ion-item class="card_atras">
                 <img class="icon" src="../assets/imgs/icons/calendario.png" item-start>
                 <p class="blanco_2">Fecha de reservación</p>
-                <ion-badge class="negro" item-end>{{ reserva.fechaR }} </ion-badge>
+                <ion-badge class="negro" item-end>{{ reserva.fechaR | date : 'dd/MM/yyyy' }} </ion-badge>
             </ion-item>
             <ion-item class="card_atras">
                 <img class="icon" src="../assets/imgs/icons/time.png" item-start>
@@ -97,7 +97,7 @@
 
             <ion-item class="card_atras" *ngIf="reserva.propina != null ">
                 <img class="icon" src="../assets/imgs/icons/billete.png" item-start>
-                <a class="blanco_2">Propina {{ reserva.propina * 100}} % </a>
+                <a class="blanco_2">Propina {{ reserva.propina * 100 }} % </a>
                 <ion-badge class="negro" item-end> {{ reserva.propina * reserva.totalReservacion | currency }} </ion-badge>
             </ion-item>
 

@@ -152,7 +152,7 @@ export class AdminMonitearReservPage {
 
   behind(){
 
-    this.navCtrl.setRoot(AdminMenuReservacionPage);
+       this.navCtrl.push(AdminMenuReservacionPage);
 
   }
 

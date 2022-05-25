@@ -12,7 +12,6 @@ import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-r
 })
 export class AdminHistorialReservacionesPage {
   reservaciones: any = [];
-  clientes: any;
   sucursales: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -21,39 +20,46 @@ export class AdminHistorialReservacionesPage {
   }
 
   ionViewDidLoad() {
+
     this.getAllReservacione();
-    this.getClientes();
+
   }
   getAllReservacione() {
+
     const id = localStorage.getItem('uidSucursal');
+
     //Cuando es un usuario se saca el id de la sucursal ala que pertenece
      this.afs.collection('users', ref => ref.where('uid', '==', id)).valueChanges().subscribe(data => {
+
      this.sucursales = data;
+
        this.sucursales.forEach(element => {
+
          const uidSucursal = element.uidSucursal;
+
          this.monRes.getReservacionesPagando(uidSucursal).subscribe( reser => {
+
            this.reservaciones = reser;
+
            console.log('reservaciones', reser);
          })
        });
       });
-    this.monRes.getReservacionesPagando(id).subscribe( reser => {
-      this.reservaciones = reser;
-      console.log('reservaciones', reser);
-    })
+  
   }
-  getClientes() {
-    this.monRes.getAllClientes("users").then(c =>{
-          this.clientes = c;
-          console.log("Estos son los clientes: ",this.clientes);
-        });
-  }
+  
   goDetalle(idReservacion) {
-    this.navCtrl.push(AdminReservacionDetallePage, {idReservacion:idReservacion});
+
+    const page = AdminHistorialReservacionesPage;
+
+    this.navCtrl.push(AdminReservacionDetallePage, {idReservacion:idReservacion, page});
+
   }
 
   behind(){
+
     this.navCtrl.setRoot(AdminMenuReservacionPage);
+
   }
 
 }

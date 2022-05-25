@@ -23,11 +23,6 @@
 </ion-header>
 
 <ion-content padding>
-    <!-- <ion-card class="">
-        <ion-card-header class="" text-center><font color="black">   Historial de Corte</font>
-           
-        </ion-card-header>
-    </ion-card> -->
 
     <ion-card class="">
         <ion-card-content class="" *ngFor="let corte of corteHistorico">
@@ -42,12 +37,12 @@
             <ion-item class="">
                 <img class="icon" src="../assets/imgs/icons/calendario1.png" item-start>
                 <p class="blanco_2"> <font color="black">  Fecha de Inicio </font> </p>
-                <ion-badge class="negro" item-end> {{corte.fecha_Inicio}} </ion-badge>
+                <ion-badge class="negro" item-end> {{corte.fecha_Inicio | date : 'dd/MM/yyyy' }} </ion-badge>
             </ion-item>
             <ion-item class="">
                 <img class="icon" src="../assets/imgs/icons/calendario1.png" item-start>
                 <a class="blanco_2"> <font color="black" >  Fecha fin </font> </a>
-                <ion-badge class="negro" item-end> {{corte.fecha_Fin}} </ion-badge>
+                <ion-badge class="negro" item-end> {{corte.fecha_Fin | date : 'dd/MM/yyyy' }} </ion-badge>
             </ion-item>
             <ion-item class="">
                 <img class="icon" src="../assets/imgs/icons/money1.png" item-start>
