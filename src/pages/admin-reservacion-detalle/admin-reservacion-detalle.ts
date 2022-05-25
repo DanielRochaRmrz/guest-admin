@@ -53,6 +53,9 @@ export class AdminReservacionDetallePage {
 
       this.cuentasCompartidas = res11;
 
+      console.log("this.cuentasCompartidas -->", this.cuentasCompartidas);
+      
+
       this.infoReserCom_num = this.infoReserCom.length;
 
 

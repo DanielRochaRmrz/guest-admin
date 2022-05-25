@@ -68,7 +68,7 @@
   <div align="center">
 
     <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
-    <font size="2" color="#474646"> <b>DETALLES DE LA RESERVACIÓN </b></font>
+    <font size="2" color="#474646"> <b> DETALLES DE LA RESERVACIÓN </b></font>
 
   </div>
 
@@ -215,7 +215,7 @@
   <div align="center">
 
     <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
-    <font size="2" color="#474646"> <b>PRODUCTOS DE LA RESERVACIÓN </b></font>
+    <font size="2" color="#474646"> <b> PRODUCTOS DE LA RESERVACIÓN </b></font>
 
     <br>
 
@@ -322,7 +322,7 @@
     <div align="center">
 
       <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
-      <font size="2" color="#474646"> <b>COMPARTIDA ENTRE</b> </font>
+      <font size="2" color="#474646"> <b> COMPARTIDA ENTRE</b> </font>
 
       <br>
 
@@ -331,28 +331,32 @@
     <br>
 
   </div>
-  <div *ngFor="let compartidas of cuentasCompartidas">
+ 
+  <!-- <div *ngIf="compartidas.telefono == ( (reservaciones.idUsuario | getNameUser | async)?.phoneNumber)"> -->
 
-    <div *ngIf="compartidas.telefono == ( (reservaciones.idUsuario | getNameUser | async)?.phoneNumber)">
+        <ion-list *ngFor="let compartidas of cuentasCompartidas">
 
-      <ion-list>
+          <ion-item>
 
-        <ion-item>
+            <ion-avatar item-start>
 
-          <ion-avatar item-start>
+              <img src="{{ (compartidas.idUsuario | getNameUser | async)?.photoURL }}">
 
-            <img src="{{ (reservaciones.idUsuario | getNameUser | async)?.photoURL }}">
+            </ion-avatar>
 
-          </ion-avatar>
+            <h2>{{ (compartidas.idUsuario | getNameUser | async)?.displayName }}</h2>
 
-          <h2>{{ (reservaciones.idUsuario | getNameUser | async)?.displayName }}</h2>
+            <p>{{ compartidas.telefono }} </p>
 
-        </ion-item>
+            <ion-note item-end>
 
-      </ion-list>
+              {{ compartidas.estatus }}
+              <p>{{ compartidas.estatus_escaneo }}</p>
+      
+            </ion-note>
 
-    </div>
+          </ion-item>
 
-  </div>
+        </ion-list>
 
 </ion-content>
