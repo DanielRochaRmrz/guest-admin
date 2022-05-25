@@ -22,6 +22,7 @@ export class AdminRpCodigoPage {
   uid: any;
   codigosRps: any;
   copyCode: any;
+  tpye: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afs: AngularFirestore, public firebase: AngularFireAuth,  public actionSheet: ActionSheetController, public _up: UserProvider) {
 
@@ -47,6 +48,8 @@ export class AdminRpCodigoPage {
 
           const uidSucursal = element.uidSucursal;
 
+          this.tpye = element.type;          
+
           this.afs.collection('users', ref => ref.where('uidSucursal', '==', uidSucursal).where('type', "==", "rp"))
 
             .valueChanges().subscribe(u => {
@@ -55,7 +58,7 @@ export class AdminRpCodigoPage {
 
               this.empleados = u;
 
-              // console.log('admins', this.admins);
+              console.log('this.admins', this.admins);
 
             })
 
@@ -86,7 +89,7 @@ export class AdminRpCodigoPage {
 
       this.codigos = data;
 
-      // console.log("RP", this.codigos);
+      console.log("RP", this.codigos);
       
     })
 

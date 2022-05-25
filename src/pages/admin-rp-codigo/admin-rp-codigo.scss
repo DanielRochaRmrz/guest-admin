@@ -1,14 +1,5 @@
 page-admin-rp-codigo {
 
-    ion-content{
-        background-image: url('../assets/imgs/Guest11.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-          //background-position: center;
-        width: 100%;
-        position: relative;
-        border: none;
-      }
       .toolbar-background {
         background-image: url('../assets/imgs/proriat.png')!important;
         background-size: cover;
@@ -32,8 +23,7 @@ page-admin-rp-codigo {
         color: #fff;
     }
     h2 {
-        color: #ffff;
-        text-align: center;
+        color: #000;
     }
     
     .borde {
@@ -125,5 +115,20 @@ page-admin-rp-codigo {
     
     .proximas {
         margin-top: 1px;
+    }
+
+    .imgElli {
+        width: 20%;
+    }
+
+    .fondo{
+
+        background-color: #FD9530;
+
+    }
+
+    .btnDetalle {
+        color: #fff;
+        background: #FD9530;
     }
 }

@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-navbar>
     <ion-title>Código del día</ion-title>
@@ -7,42 +6,110 @@
 
 <ion-content padding>
 
-  <ion-list>
+
+  <ng-container *ngIf="this.tpye == 'rp'">
+
+    <div align="center">
+
+      <img src="../assets/imgs/logo-negro.png" alt="">
+
+    </div>
 
     <ng-container *ngFor="let codigo of codigos">
 
-      <ion-item>
+    <ion-card class="color1">
+      <br>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <ion-row>
 
-        <ion-thumbnail item-start>
+            <ion-col col-12>
 
-          <img src="../assets/imgs/icons/book.png">
+              <div text-center>
 
-        </ion-thumbnail>
+                <div align="center">
 
-          <h2 class="lbl">Comparte tu código</h2>
+                  <img class="imagen_perfil" src="{{ (codigo.uidRp | getNameUser | async)?.photoURL }}" />
 
-          <ion-item>
+                </div>
 
-            <ion-input readonly="{{isReadonly}}" type="text" value="{{ codigo.codigo }}"></ion-input>
+              </div>
 
-          </ion-item>
+            </ion-col>
 
-          <button ion-button clear item-end (click)="copyText()" >Copiar</button>
+            <ion-col col-12>
+              <b style="text-transform: uppercase">{{ (codigo.uidRp | getNameUser | async)?.displayName }}</b>
+              <p style="font-size: 9px;">(RP)</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row><br>
 
-      </ion-item>
+      <hr size="50px">
+      <br>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <ion-row>
+            <ion-col col-4>
 
-    </ng-container>
+              <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon> <b> Sucursal</b>
 
-  </ion-list>
+            </ion-col>
+            <ion-col col-4>
 
-  
+              <ion-icon ios="ios-code-download" md="md-code-download" item-start style="color: #fcc04d"></ion-icon><b>Código RP</b>
+
+            </ion-col>
+            <ion-col col-4>
+
+              <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon><b> Fecha del alta código</b>
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>
+              {{ (codigo.uidSucursal | getNameUser | async)?.displayName }}
+            </ion-col>
+
+            <ion-col col-4>
+              <h2><b>{{ codigo.codigo }}</b></h2>
+            </ion-col>
+
+            <ion-col col-4>
+              {{ codigo.fecha | date : 'dd/MM/yyyy' }}
+            </ion-col>
+            
+          </ion-row>
+
+          <ion-row>
+
+            <br>
+            <br>
+            <ion-col col-12 text-center>
+
+              <br>
+              <button ion-button block round class="btnDetalle" (click)="copyText()">Copiar código</button>
+            </ion-col>
+            <br>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <br>
+    </ion-card>
+
+  </ng-container>
+
+  </ng-container>
+
+
   <div *ngFor="let sucursal of sucursales">
-    
-    <div *ngIf="sucursal.type == 'a'">
-      
-    <div>
 
-      <div class="fondo">
+    <div *ngIf="sucursal.type == 'a'">
+
+      <div>
+
+        <div class="fondo">
 
           <ion-searchbar placeholder="Buscar" [animated]="true" (ionInput)="getItems($event)"></ion-searchbar>
 
@@ -50,106 +117,71 @@
 
           </ion-segment>
 
-      </div>
+        </div>
 
-      <div align="center">
+        <div align="center">
 
           <img src="../assets/imgs/logo-negro.png" alt="">
 
+        </div>
+
       </div>
+      <br>
+
+      <div *ngFor="let admin of admins">
+
+        <ion-list class="descripcion">
+
+          <div *ngIf="sucursal.type == 'a'" (click)="selectUsuario(admin.uid, admin.active)">
+
+            <ion-list>
+
+              <ion-item>
+
+                <ion-avatar item-start>
+
+                  <img src="{{ admin.photoURL }}">
+
+                </ion-avatar>
+
+                <h2>
+                  <ion-icon ios="ios-person" md="md-person" item-start style="color: #fcc04d"></ion-icon>
+                  <b>{{ admin.displayName }}</b>
+                  <ng-container *ngIf="admin.type == 'rp'">(RP)</ng-container>
+                </h2>
+
+                <ng-container *ngFor="let codigoRp of codigosRps">
+
+                  <div *ngIf="admin.uid == codigoRp.uidRp">
+
+                    <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon><b>{{
+                      codigoRp.codigo }}</b>
+                    <br>
+
+                    <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon> {{
+                    codigoRp.fecha | date }}
+
+                  </div>
+
+                </ng-container>
+
+                <p class="hora" item-end>
+                  <img src="./assets/content/Ellipse55.png" class="imgElli" alt=""> Status
+                </p>
+
+              </ion-item>
+
+            </ion-list>
+
+
+          </div>
+
+        </ion-list>
+        <br>
+      </div>
+
+    </div>
 
   </div>
-  
-  <div *ngFor="let admin of admins">
-
-    <ion-list class="descripcion">
-
-      <div *ngIf="sucursal.type == 'a'" (click)="selectUsuario(admin.uid, admin.active)">
-
-            <ion-row>
-
-                <ion-col col-3>
-
-                    <ion-row>
-
-                        <ion-col>
-
-                            <img src="{{admin.photoURL}}?type=large&width=720&height=720" style="width:190%;border-radius:50px">
-
-                        </ion-col>
-
-                        <ion-col col-2>
-
-                            <img src="../assets/imgs/Rectangle 73.png" style="width:35%;height:65%;margin-top:10px">
-
-                        </ion-col>
-
-                    </ion-row>
-                    
-                </ion-col>
-
-                <ion-col col-5 class="cuadro">
-
-                    <h6 style="color: #FD9530;">
-
-                        <b>{{ admin.displayName }}</b>
-
-                    </h6>
-
-                    <ion-row style="margin-top: -10px;">
-
-                        <ion-col>
-
-                            <font size="2" style="color: black;opacity: .5;">
-
-                                <div *ngIf="admin.type == 'rp'"> RP </div>
-                                
-                                  <ng-container *ngFor="let codigoRp of codigosRps">
-
-                                    <div *ngIf="admin.uid == codigoRp.uidRp">
-
-                                      <!-- <ion-icon ios="ios-barcode-outline" md="md-barcode-"></ion-icon> {{ codigoRp.codigo }} -->
-                                      <img class="icon" src="../assets/imgs/icons/admin-historial.png" item-start style="height: 15px; width: auto;"> {{ codigoRp.codigo }}
-                                      <br>
-                                      <!-- <ion-icon ios="ios-calendar-outline" md="md-calendar-outline"></ion-icon> {{ codigoRp.fecha | date }} -->
-                                      <img class="icon" src="../assets/imgs/icons/calendario.png" item-start style="height: 15px; width: auto;"> {{ codigoRp.fecha | date }}
-
-                                    </div>
-
-                                  </ng-container>
-
-                            </font>
-
-                        </ion-col>
-
-                    </ion-row>
-
-                </ion-col>
-
-                <ion-col col-4>
-
-                    <div style="margin-left:27px;margin-top: 15px;">
-
-                        <font>STATUS</font> <br>
-
-                        <img src="../assets/imgs/icons/Ellipse 4.png" style="margin-left: 10px; margin-top: 10px;" alt="">
-
-                    </div>
-
-                </ion-col>
-
-            </ion-row>
-
-            <ion-badge *ngIf="admin.active == 'false' " class="fondo" item-end>Inhabilitado</ion-badge>
-
-      </div>
-
-    </ion-list>
-    <br>
-</div>
-
-</div>
-
-</div>
 
 </ion-content>
