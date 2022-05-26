@@ -6,6 +6,11 @@
 
 <ion-content padding>
 
+  <!-- <ion-fab right top>
+    <button ion-fab color="primary" (click)="behind()">
+      <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
+    </button>
+  </ion-fab> -->
 
   <ng-container *ngIf="this.tpye == 'rp'">
 
@@ -17,88 +22,91 @@
 
     <ng-container *ngFor="let codigo of codigos">
 
-    <ion-card class="color1">
-      <br>
-      <ion-row>
-        <ion-col col-12 text-center>
-          <ion-row>
+      <ion-card class="color1">
+        <br>
+        <ion-row>
+          <ion-col col-12 text-center>
+            <ion-row>
 
-            <ion-col col-12>
+              <ion-col col-12>
 
-              <div text-center>
+                <div text-center>
 
-                <div align="center">
+                  <div align="center">
 
-                  <img class="imagen_perfil" src="{{ (codigo.uidRp | getNameUser | async)?.photoURL }}" />
+                    <img class="imagen_perfil" src="{{ (codigo.uidRp | getNameUser | async)?.photoURL }}" />
+
+                  </div>
 
                 </div>
 
-              </div>
+              </ion-col>
 
-            </ion-col>
+              <ion-col col-12>
+                <b style="text-transform: uppercase">{{ (codigo.uidRp | getNameUser | async)?.displayName }}</b>
+                <p style="font-size: 9px;">(RP)</p>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row><br>
 
-            <ion-col col-12>
-              <b style="text-transform: uppercase">{{ (codigo.uidRp | getNameUser | async)?.displayName }}</b>
-              <p style="font-size: 9px;">(RP)</p>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-      </ion-row><br>
+        <hr size="50px">
+        <br>
+        <ion-row>
+          <ion-col col-12 text-center>
+            <ion-row>
+              <ion-col col-4>
 
-      <hr size="50px">
-      <br>
-      <ion-row>
-        <ion-col col-12 text-center>
-          <ion-row>
-            <ion-col col-4>
+                <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon> <b>
+                  Sucursal</b>
 
-              <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon> <b> Sucursal</b>
+              </ion-col>
+              <ion-col col-4>
 
-            </ion-col>
-            <ion-col col-4>
+                <ion-icon ios="ios-code-download" md="md-code-download" item-start style="color: #fcc04d"></ion-icon>
+                <b>Código RP</b>
 
-              <ion-icon ios="ios-code-download" md="md-code-download" item-start style="color: #fcc04d"></ion-icon><b>Código RP</b>
+              </ion-col>
+              <ion-col col-4>
 
-            </ion-col>
-            <ion-col col-4>
+                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon><b> Fecha del
+                  alta código</b>
 
-              <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon><b> Fecha del alta código</b>
+              </ion-col>
+            </ion-row>
 
-            </ion-col>
-          </ion-row>
+            <ion-row>
+              <ion-col col-4>
+                {{ (codigo.uidSucursal | getNameUser | async)?.displayName }}
+              </ion-col>
 
-          <ion-row>
-            <ion-col col-4>
-              {{ (codigo.uidSucursal | getNameUser | async)?.displayName }}
-            </ion-col>
+              <ion-col col-4>
+                <h2><b>{{ codigo.codigo }}</b></h2>
+              </ion-col>
 
-            <ion-col col-4>
-              <h2><b>{{ codigo.codigo }}</b></h2>
-            </ion-col>
+              <ion-col col-4>
+                {{ codigo.fecha | date : 'dd/MM/yyyy' }}
+              </ion-col>
 
-            <ion-col col-4>
-              {{ codigo.fecha | date : 'dd/MM/yyyy' }}
-            </ion-col>
-            
-          </ion-row>
+            </ion-row>
 
-          <ion-row>
-
-            <br>
-            <br>
-            <ion-col col-12 text-center>
+            <ion-row>
 
               <br>
-              <button ion-button block round class="btnDetalle" (click)="copyText()">Copiar código</button>
-            </ion-col>
-            <br>
-          </ion-row>
-        </ion-col>
-      </ion-row>
-      <br>
-    </ion-card>
+              <br>
+              <ion-col col-12 text-center>
 
-  </ng-container>
+                <br>
+                <button ion-button block round class="btnDetalle" (click)="copyText()">Copiar código</button>
+              </ion-col>
+              <br>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <br>
+      </ion-card>
+
+    </ng-container>
 
   </ng-container>
 

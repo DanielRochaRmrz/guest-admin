@@ -24,6 +24,10 @@
 
 <ion-content padding>
 
+    <ion-fab right top>
+        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
+    </ion-fab>
+
     <ion-card class="">
         <ion-card-content class="" *ngFor="let corte of corteHistorico">
             <ion-card-title>
