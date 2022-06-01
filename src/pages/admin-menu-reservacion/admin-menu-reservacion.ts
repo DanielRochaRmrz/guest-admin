@@ -2,12 +2,10 @@ import { Component } from "@angular/core";
 import {
   IonicPage,
   NavController,
-  NavParams,
-  ModalController,
+  NavParams
 } from "ionic-angular";
-import { Platform, MenuController, Nav } from "ionic-angular";
+import {  MenuController } from "ionic-angular";
 import { AdminSucursalListPage } from "../admin-sucursal-list/admin-sucursal-list";
-// import { AdminSucursalSubirPage } from '../admin-sucursal-subir/admin-sucursal-subir';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AuthProvider } from "../../providers/auth/auth";
 import { AdministrarReservacionesPage } from "../administrar-reservaciones/administrar-reservaciones";
@@ -42,13 +40,12 @@ export class AdminMenuReservacionPage {
     public menuCtrl: MenuController,
     public authProvider: AuthProvider
   ) {
+
     this.sucursal = localStorage.getItem("uidSucursal");
     this.uids = localStorage.getItem("uidUser");
 
     this.authProvider.getUserBd(this.sucursal).subscribe((s) => {
-      console.log("S:", s);
       this._sucursal = s;
-      console.log("_sucursal", this._sucursal);
     });
   }
 
@@ -68,8 +65,8 @@ export class AdminMenuReservacionPage {
       console.log("sucursal empleado", uidSucursal);
       // Traemos la informacion de la sucursal del empleado
       this.authProvider.getUserBd(uidSucursal).subscribe((s) => {
+
         this._sucursalEmpleado = s;
-        console.log("_sucursalEmpleado", this._sucursalEmpleado);
       });
     });
   }
@@ -83,6 +80,7 @@ export class AdminMenuReservacionPage {
   behindMaster() {
     this.navCtrl.setRoot(AdministrarReservacionesPage);
   }
+
   adminReservaciones() {
     this.navCtrl.push(AdministrarReservacionesPage, {
       uidSucursal: this.sucursal,
@@ -98,18 +96,22 @@ export class AdminMenuReservacionPage {
     console.log(this.usertipo);
     this.navCtrl.push(AdminSucursalListPage, { usertipo: this.usertipo });
   }
+
   //ir a pagina de cupones
   goCupones() {
     this.navCtrl.push(CuponesSucursalPage);
   }
+
   //ir a pagina de ciudades
   goCiudades() {
     this.navCtrl.push(CiudadEstablecimientoPage);
   }
+
   //ir a pagina de historial
   goReservacionHistorial() {
     this.navCtrl.push(AdminHistorialReservacionesPage);
   }
+  
   goConsumo() {
     console.log("consumo sucUID", this.sucursal);
     var obj = [{ uid: this.sucursal }];

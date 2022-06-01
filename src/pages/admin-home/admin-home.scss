@@ -1,7 +1,7 @@
 page-admin-home {
 
     .toolbar-background {
-        background-image: url('../assets/content/encabezado3.jpg')!important;
+        background-image: url('../assets/content/encabezado3.jpg') !important;
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
@@ -23,10 +23,13 @@ page-admin-home {
         text-align: center;
         color: #fff;
     }
+
     h2 {
-        color: #ffff;
+        color: #FFC149;
         text-align: center;
+        text-transform: uppercase;
     }
+
     .foo {
         text-align: left;
         background-color: transparent;
@@ -52,7 +55,10 @@ page-admin-home {
     }
 
     .fondo_admin {
-        background-image: url('../assets/content/cuerpo.png')!important;
+        background-image: url('../assets/content/cuerpo.png') !important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
     }
 
     .nombreRes {
@@ -80,7 +86,7 @@ page-admin-home {
 
 
     .nombreCar {
-        position:absolute;
+        position: absolute;
         width: 160%;
         height: 45px;
         left: -5px;
@@ -89,40 +95,43 @@ page-admin-home {
         font-size: 12px;
     }
 
-      
+
     .imgRes {
-        position:absolute;
+        position: absolute;
         width: 60px;
         top: 10px;
-        left : 0px;
+        left: 0px;
         margin-top: -7px;
         z-index: 1;
     }
 
     .imgRes4 {
-        position: absolute;
-        width: 60px;
-        top: 10px;
-        left: -9px;
-        margin-top: -19px;
-        z-index: 1;
+        // position: absolute;
+        // width: 60px;
+        // top: 10px;
+        // left: -9px;
+        // margin-top: -19px;
+        // z-index: 1;
+
+        width: 35px;
+        height: 35px;
     }
 
 
     .imgRes2 {
-        position:absolute;
+        position: absolute;
         width: 60px;
         top: 10px;
-        left : 0px;
+        left: 0px;
         margin-top: -7px;
         z-index: 1;
     }
 
     .imgRes3 {
-        position:absolute;
+        position: absolute;
         width: 60px;
         top: 10px;
-        left : -2px;
+        left: -2px;
         margin-top: -17px;
         z-index: 1;
     }
@@ -169,13 +178,10 @@ page-admin-home {
     }
 
     .nombreCar4 {
+        
         background-color: #FFC149;
         color: #fff;
         border-radius: 15px;
-        width: 160px;
-        height: 45px;
-        margin-top: -10px;
-        // margin-left: -10%;
         text-transform: uppercase;
         font-size: 10px;
     }
@@ -221,7 +227,7 @@ page-admin-home {
         /* IE6-9 */
         //color: #fff;
     }
-    
+
     // .hea {
     //     // height: 75px;
     //     // width: 300px;
@@ -232,6 +238,7 @@ page-admin-home {
         height: 15px;
         width: 15px;
     }
+
     // grids
     ion-col div {
         // background-color: #000000;
@@ -240,27 +247,32 @@ page-admin-home {
         padding: 5px;
         // text-align: left;
     }
+
     .cl {
         border: none;
         background: #000000;
         color: #fff;
     }
+
     .cl2 {
         border: none;
         background: #FBCC0C;
         color: #fff;
         border-radius: 25px;
     }
+
     h4 {
         padding: 10px 0 0 10px !important;
         margin: 0;
     }
+
     .foo2 {
         text-align: left;
         background-color: transparent;
         color: white;
         margin-top: 100%;
     }
+
     .textoNombre {
         text-align: left;
         background-color: transparent;
@@ -268,6 +280,7 @@ page-admin-home {
         margin-top: -10%;
         margin-left: 12%;
     }
+
     .textoNombre2 {
         text-align: left;
         background-color: transparent;
@@ -275,6 +288,7 @@ page-admin-home {
         margin-top: -5%;
         margin-left: 12%;
     }
+
     .textoNombre3 {
         text-align: left;
         background-color: transparent;
@@ -282,6 +296,7 @@ page-admin-home {
         margin-top: -12%;
         margin-left: 12%;
     }
+
     .textoNombre4 {
         text-align: left;
         background-color: transparent;
@@ -289,16 +304,51 @@ page-admin-home {
         margin-top: -6%;
         margin-left: 12%;
     }
-    .blanco{
-      color: #ffffff;
-      font: bold;
-      font-weight: 900;
-      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f1f1f1+50,e1e1e1+100,f6f6f6+100,e1e1e1+100&0.5+0,0.5+100 */
-    background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.5) 0%, rgba(241,241,241,0.5) 50%, rgba(225,225,225,0.5) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.5) 0%,rgba(241,241,241,0.5) 50%,rgba(225,225,225,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%,rgba(241,241,241,0.5) 50%,rgba(225,225,225,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80e1e1e1',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-    border-radius: 10px;
+
+    .blanco {
+        color: #ffffff3a;
+        font: bold;
+        font-weight: 900;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f1f1f1+50,e1e1e1+100,f6f6f6+100,e1e1e1+100&0.5+0,0.5+100 */
+        background: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.247) 0%, rgba(241, 241, 241, 0.276) 50%, rgba(255, 255, 255, 0.367) 100%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.5) 0%, rgba(241, 241, 241, 0.5) 50%, rgba(225, 225, 225, 0.5) 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(241, 241, 241, 0.5) 50%, rgba(225, 225, 225, 0.5) 100%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80ffffff', endColorstr='#80e1e1e1', GradientType=1);
+        /* IE6-9 fallback on horizontal gradient */
+        border-radius: 10px;
 
     }
+
+    .imagen_perfil {
+        height: 10rem;
+        width: 10rem;
+        margin-top: 10px;
+        margin-bottom: -3px;
+        border-radius: 250px;
+        // background-color: #F0A20B;
+    }
+
+    .buttonColor{
+
+        background-color: #FD9530;
+        color: #fff;
+    }
+
+    
+//   ion-col div {
+//     background-color: #f0f5ff;
+//     border: 1px solid #e6e9ee;
+//     border-radius: 2px;
+//     padding: 5px;
+//     text-align: center;
+//   }
+
+//   p {
+//     padding: 10px 0 0 10px !important;
+//     margin: 0;
+//   }
+
 }

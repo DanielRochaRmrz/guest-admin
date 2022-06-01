@@ -6,6 +6,7 @@ import { AdminLeeQrPage } from '../admin-lee-qr/admin-lee-qr';
 import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-reservacion-detalle';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
+import { AdminHomePage } from '../admin-home/admin-home';
 
 @IonicPage()
 @Component({
@@ -36,6 +37,8 @@ export class AdminMonitearReservPage {
     
     //recibe parametro de la reservacion
     this.menu = this.navParams.get("menu");
+    console.log(this.menu);
+    
 
   }
 
@@ -152,7 +155,13 @@ export class AdminMonitearReservPage {
 
   behind(){
 
-       this.navCtrl.push(AdminMenuReservacionPage);
+    if (this.menu != null || this.menu != undefined) {
+      this.navCtrl.setRoot(AdminHomePage);
+
+    }else{
+      
+      this.navCtrl.push(AdminMenuReservacionPage);
+    }
 
   }
 
