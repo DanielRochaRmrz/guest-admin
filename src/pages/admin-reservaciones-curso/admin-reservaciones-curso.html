@@ -3,7 +3,7 @@
     <ion-navbar class="borde" hideBackButton>
         <ion-row>
             <ion-col>
-                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+                <!-- <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon> -->
 
             </ion-col>
             <ion-col col-1 align="center">
@@ -24,6 +24,10 @@
 </ion-header>
 
 <ion-content>
+
+    <ion-fab right top>
+        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
+    </ion-fab>
 
     <ion-fab right top>
         <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>

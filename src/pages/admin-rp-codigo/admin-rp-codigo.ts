@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserProvider } from '../../providers/user/user';
 import { AdminRpCorteCodigosPage } from '../admin-rp-corte-codigos/admin-rp-corte-codigos';
+import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 
 @IonicPage()
 @Component({
@@ -239,6 +240,10 @@ export class AdminRpCodigoPage {
 
     this._up.copiarCodigo(uidSucursal);
 
+  }
+
+  behind(){
+    this.navCtrl.setRoot(AdminMenuReservacionPage);
   }
 
 }

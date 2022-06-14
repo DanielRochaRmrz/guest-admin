@@ -23,6 +23,10 @@
 
 <ion-content class="" *ngFor="let sucursal of sucursales">
 
+    <ion-fab right top>
+        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
+    </ion-fab>
+
     <div align="center" style="margin-top: 55px;">
 
         <!-- <font text-center style="color:black;"> Información de la sucursal</font> <br> -->
@@ -89,9 +93,9 @@
             </ion-item>
             <div class="">
                 <img class="imagen_perfil" [src]="sucursal.photoURL">
-                <ion-badge (click)="goEditPerfilImagen(sucursal.uid)" class="edit_pho">
+                <!-- <ion-badge (click)="goEditPerfilImagen(sucursal.uid)" class="edit_pho">
                     <ion-icon name="md-brush"></ion-icon>
-                </ion-badge>
+                </ion-badge> -->
             </div>
         </ion-item>
         <ion-item>

@@ -131,6 +131,14 @@
                 </ion-badge>
             </ion-item>
 
+            <ion-item *ngIf="_userEmpleado?.type == 'rp'">
+                <ion-icon ios="ios-play" md="md-play" style="color: #fcc04d"></ion-icon>
+                Reservaciones
+                <ion-badge class="buttonColor" item-end (click)="goReservacion()">
+                    <ion-icon ios="ios-search" md="md-search" style="color:white"></ion-icon>
+                </ion-badge>
+            </ion-item>
+
             <hr>
 
         </ng-container>

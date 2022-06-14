@@ -1,18 +1,5 @@
 <ion-header>
     <ion-navbar class="borde" hideBackButton>
-        <ion-row>
-            <ion-col col-1>
-            </ion-col>
-            <ion-col>
-                <p *ngIf="_sucursal?.type == 'a' || _userAdmin?.type == 'e'">Control de la sucursal </p>
-
-                <!--Inicia. Esta información solo la muestra a usuarios=maestro -->
-                <p *ngIf="_userAdmin?.type == 'master'" text-wrap>Control de las sucursales </p>
-                <!-- <ion-title *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'capitan_mesero'">Administración</ion-title> -->
-
-            </ion-col>
-
-        </ion-row>
         <ion-row
             *ngIf="_userAdmin?.type == 'coordinacion' || _userAdmin?.type == 'rp' || _userAdmin?.type == 'capitan_mesero'">
             <ion-col col-1 align="center">
