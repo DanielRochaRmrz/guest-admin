@@ -1,12 +1,12 @@
 page-admin-menu-reservacion {
     ion-content{
-        background-image: url('../assets/imgs/Guest11.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-          //background-position: center;
-        width: 100%;
-        position: relative;
-        border: none;
+        // background-image: url('../assets/imgs/Guest11.png');
+        // background-repeat: no-repeat;
+        // background-size: cover;
+        //   //background-position: center;
+        // width: 100%;
+        // position: relative;
+        // border: none;
       }
       .toolbar-background {
         background-image: url('../assets/imgs/proriat.png')!important;
@@ -28,11 +28,12 @@ page-admin-menu-reservacion {
     }
     .centrar {
         text-align: center;
-        color: #fff;
+        color: #000;
     }
     h2 {
-        color: #ffff;
-        text-align: center;
+        color: #000;
+        font-weight: 100;
+        
     }
     
     .borde {
@@ -109,5 +110,20 @@ page-admin-menu-reservacion {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80e1e1e1',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     border-radius: 10px;
 
+    }
+
+    .imagen_perfil {
+        height: 10rem;
+        width: 10rem;
+        margin-top: 10px;
+        margin-bottom: -3px;
+        border-radius: 250px;
+        // background-color: #F0A20B;
+    }
+
+    .imgRes4 {
+        
+        width: 35px;
+        height: 35px;
     }
 }
