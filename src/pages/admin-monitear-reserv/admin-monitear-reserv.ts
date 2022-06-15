@@ -93,7 +93,7 @@ export class AdminMonitearReservPage {
 
           this.reservaciones = reser;
 
-          // console.log("this.reservaciones ->", this.reservaciones);
+          console.log("this.reservaciones ->", this.reservaciones);
           
 
         })

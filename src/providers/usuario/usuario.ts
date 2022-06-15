@@ -4,10 +4,11 @@ import { AngularFireAuth } from "angularfire2/auth";
 //import firebase from 'firebase';
 import {
   AngularFirestore,
-  AngularFirestoreCollection,
+  AngularFirestoreCollection
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs/Observable";
 import { map } from "rxjs/operators";
+import { resolve } from "url";
 
 @Injectable()
 export class UsuarioProvider {
@@ -15,6 +16,9 @@ export class UsuarioProvider {
 
   areas: AngularFirestoreCollection<any[]>;
   _areas: Observable<any>;
+
+  reservacionesCompartidas: AngularFirestoreCollection<any[]>;
+  _reservacionesCompartidas: Observable<any>;
 
   usuario: Credenciales = {};
 
@@ -93,6 +97,24 @@ export class UsuarioProvider {
         });
     });
 
+  }
+
+  getUserNameXPhone(phone:any){
+
+    this.reservacionesCompartidas = this.afs.collection<any>("users", (ref) =>
+      ref.where("phoneNumber", "==", phone)
+    );
+    this._reservacionesCompartidas = this.reservacionesCompartidas.valueChanges();
+    return (this._reservacionesCompartidas = this.reservacionesCompartidas.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((action) => {
+          const data = action.payload.doc.data() as any;
+          data.$key = action.payload.doc.id;
+          return data;
+        });
+      })
+    ));
+    
   }
 }
 

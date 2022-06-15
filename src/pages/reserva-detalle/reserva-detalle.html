@@ -213,10 +213,10 @@
                     <div class="espacio">
                         <ion-row>
                             <ion-col col-2 text-center>
-                                <ion-icon name="ios-person" style="background-color: gold;"></ion-icon>
+                                <ion-icon ios="ios-person" md="md-person" style="color: #fcc04d"></ion-icon>
                             </ion-col>
                             <ion-col col-3 text-center>
-                                {{ (uidUsuarioReser | getNameUser | async)?.displayName }}
+                                {{ compartida.telefono | getNamexphoneUser }}
                             </ion-col>
                             <ion-col col-2 text-center>
                                 $ {{ compartida.totalDividido }}
@@ -225,7 +225,7 @@
 
                     </div>
                     
-            </div> <br><br>
+            </div> 
 
             <ion-row class="title2">
                 <ion-col text-center>
@@ -236,16 +236,16 @@
                 <ion-grid class="title3">
                     <ion-row>
                         <ion-col text-center>
-                            Establecimiento
+                            <b>Establecimiento</b>
                         </ion-col>
                         <ion-col text-center>
-                            Fecha
+                            <b>Fecha</b>
                         </ion-col>
                         <ion-col text-center>
-                            Hora
+                            <b>Hora</b>
                         </ion-col>
                         <ion-col text-center>
-                            Puntuación
+                            <b>Puntuación</b>
                         </ion-col>
                     </ion-row>
                     <ion-row class="row1" *ngFor="let history of historial">
@@ -253,9 +253,9 @@
 
                             <!-- <div *ngFor="let sucursal of sucursales">
                                 <div *ngIf="sucursal.$key==history.idSucursal"> -->
-                                    {{sucursal.displayName}}
+                                    <!-- {{sucursal.displayName}} -->
 
-                                    {{ (history.idSucursal | getNameUser | async)?.displayName }}
+                                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d"></ion-icon> <b style="text-transform: uppercase;"> {{ (history.idSucursal | getNameUser | async)?.displayName }}</b>
 
                                 <!-- </div>
                             </div> -->

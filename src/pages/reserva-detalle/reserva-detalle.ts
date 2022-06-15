@@ -34,6 +34,7 @@ export class ReservaDetallePage {
   estatusReser: any;
   users: any;
   uidUsuarioReser: string;
+  compartidas: any;
 
   constructor(
     public navCtrl: NavController,
@@ -58,6 +59,11 @@ export class ReservaDetallePage {
     this._gestionReser.getReservacion(this.idRers).subscribe((res) => {
 
       this.reserv = res;
+
+      console.log("this.reserv", this.reserv);
+      
+
+      this.getCompartidaCon(this.idRers);
 
       // INICIA igualamos la variable string uidUsuarioReser a una constante por que no asiganaba un tipo de dato 
       
@@ -96,6 +102,9 @@ export class ReservaDetallePage {
     this._gestionReser.getHistorial(idUsuario).subscribe((history) => {
 
       this.historial = history;
+
+      // console.log(this.historial);
+      
 
       if (this.historial.length != 0) {
 
@@ -322,5 +331,17 @@ export class ReservaDetallePage {
       .then((respuesta: any) => {
         console.log("Respuesta: ", respuesta);
       });
+  }
+
+  getCompartidaCon(idReserv: string){
+    
+    this._gestionReser.getCompartidas(idReserv).subscribe((res) => { 
+
+      this.compartidas = res;
+
+      console.log(this.compartidas);     
+
+    })
+
   }
 }
