@@ -249,7 +249,7 @@ registerUser(sucursal, email, type, uidNewUser) {
         
         const code = element.codigo;
 
-        this.clipboard.copy(code);
+        this.clipboard.copy('PANOCHOTAS');
 
         this.mostrar_toast('Se copio el código del RP');
 

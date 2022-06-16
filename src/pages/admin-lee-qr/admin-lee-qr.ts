@@ -61,6 +61,11 @@ export class AdminLeeQrPage {
     //Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
     //si la reservacion es compartida cambiar el estatus en tabla compartida de cada persona que comparte.
     if (this.idCompartir != undefined) {
+
+      this.afs.collection('reservaciones').doc(this.idReservacion2).update({
+        estatus: 'Finalizado'
+      });
+      
       //Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
       this.afs.collection('compartidas').doc(this.idCompartir).update({
         estatus_escaneo: 'OK'
@@ -76,7 +81,7 @@ export class AdminLeeQrPage {
       });
       alerta.present();
     }
-    
+
     // Datos de la reservacion
     this.servMon.getReservacion(this.idReservacion2).subscribe(reserv => {
       this.reservacion = reserv;
