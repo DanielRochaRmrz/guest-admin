@@ -16,15 +16,12 @@ export class GetNamexphoneUserPipe implements PipeTransform {
   async transform(idUsuario: any) {
 
     if(idUsuario){
-      console.log('user -->', idUsuario);
 
       const usuario: any = await this.userProvider.getUserNamePhone(idUsuario);
 
       const us: string = usuario as string;
 
-      const user = JSON.parse(us);
-      console.log('user -->', user);
-      
+      const user = JSON.parse(us);      
       
       return user;
 

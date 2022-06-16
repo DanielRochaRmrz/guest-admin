@@ -27,8 +27,10 @@
 <ion-content>
 
   <ion-fab right top>
-    <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
-</ion-fab>
+    <button ion-fab color="primary" (click)="behind()">
+      <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
+    </button>
+  </ion-fab>
 
   <br>
 
@@ -335,32 +337,45 @@
     <br>
 
   </div>
- 
+
   <!-- <div *ngIf="compartidas.telefono == ( (reservaciones.idUsuario | getNameUser | async)?.phoneNumber)"> -->
 
-        <ion-list *ngFor="let compartidas of cuentasCompartidas">
+  <div *ngFor="let compartidas of cuentasCompartidas" padding>
 
-          <ion-item>
+      <ion-row>
 
-            <ion-avatar item-start>
+        <ion-col>
 
-              <img src="{{ (compartidas.idUsuario | getNameUser | async)?.photoURL }}">
+          <img class="imagen_perfil" src="{{ (compartidas.telefono | getNamexphoneUser | async)?.photoURL }}" />        
+        
+        </ion-col>
 
-            </ion-avatar>
+        <ion-col>
 
-            <h2>{{ (compartidas.idUsuario | getNameUser | async)?.displayName }}</h2>
+          <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{ (compartidas.telefono | getNamexphoneUser | async)?.displayName }}        
+        
+        </ion-col>
 
-            <p>{{ compartidas.telefono }} </p>
+        <ion-col>
+          <ion-icon ios="ios-call" md="md-call" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{ compartidas.telefono }}
+        </ion-col>
 
-            <ion-note item-end>
+        <ion-col>
 
-              {{ compartidas.estatus }}
-              <p>{{ compartidas.estatus_escaneo }}</p>
-      
-            </ion-note>
+          <ion-note item-end>
 
-          </ion-item>
+            {{ compartidas.estatus }}
 
-        </ion-list>
+            <p *ngIf="compartidas.estatus_escaneo == 'NO'" ><ion-icon ios="ios-close-circle" md="md-close-circle" item-start style="color: #F44336"></ion-icon></p>
+
+            <p *ngIf="compartidas.estatus_escaneo != 'NO'" ><ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-start style="color: #CDDC39"></ion-icon></p>
+
+          </ion-note>
+
+        </ion-col>
+
+      </ion-row>
+
+  </div>
 
 </ion-content>

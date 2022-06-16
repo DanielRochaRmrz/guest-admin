@@ -120,8 +120,8 @@
             <p class="hora">
                 <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon>Hora de reservación: <b> {{ reservaciona.hora }} </b>
             </p>
-            <p class="hora" item-end>
-                <img src="./assets/content/Ellipse55.png" class="imgElli" alt=""> {{ reservaciona.estatus }} 
+            <p *ngIf="reservaciona.estatus" class="hora" item-end>
+                <img src="./assets/content/Ellipse55.png" class="imgElli" alt=""> Aceptado
             </p>
             
             <ng-container *ngIf="reservaciona.idevento != null">
@@ -138,7 +138,7 @@
 
             </ng-container>
 
-            <button ion-button block round class="btnDetalle" (click)="goDetalle(reservacionaa.idReservacion)">
+            <button ion-button block round class="btnDetalle" (click)="goDetalle(reservaciona.idReservacion)">
 
                 Detalle
 
