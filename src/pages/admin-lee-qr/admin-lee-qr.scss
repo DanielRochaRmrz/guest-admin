@@ -47,6 +47,8 @@ page-admin-lee-qr {
 
     .titulo{
         color: #FD9530;
+        font-weight: bold;  
+        text-align: center;
     }
 
     .url {
@@ -56,4 +58,21 @@ page-admin-lee-qr {
         height: 40px;
     }
 
+    .imagen_perfil {
+        height: 9rem;
+        width: 9rem;
+        margin-top: 0px;
+        margin-bottom: 10px;
+        border-radius: 50%;
+    }
+
+    .nombre {
+        text-align: center;
+        font-size: x-large;
+        text-transform: uppercase;
+    }
+
+    .imgElli {
+        width: 5%;
+    }
 }

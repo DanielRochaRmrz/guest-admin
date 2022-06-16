@@ -37,9 +37,19 @@ export class AdminLeeQrPage {
   ) {
 
     this.datosQrRecibidos = this.navParams.get('datosQr');
+
+    console.log("this.datosQrRecibidos", this.datosQrRecibidos);
+    
     const dataCode = JSON.parse(this.datosQrRecibidos);
+
+    // console.log("dataCode", dataCode);
+    
     this.idReservacion2 = dataCode.idReservacion;
     this.idCompartir = dataCode.idCompartir;
+
+    // this.idReservacion2 = "rw1KSVPMLiYLuD9i9Bbl";
+    // this.idCompartir = "o0w3IhulBjSR9AKQeEj4";
+
     //alert(this.idCompartir);
     //Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
     //si la reservacion es normal cambiar el estatus principal a pagando.
@@ -94,8 +104,6 @@ export class AdminLeeQrPage {
       // Extraemos el id de la zona
       const uidZona = this.reservacion.idZona;
       this.infoZona(uidZona);
-      // Enviamos el idReservacion a reservaciones mesas
-      this.getAllTables(this.idReservacion2);
       // Extraemos el id del evento
       const uidEvento = this.reservacion.idevento;
       this.infoEvento(uidEvento);
@@ -135,12 +143,6 @@ export class AdminLeeQrPage {
     this.servMon.getZona(uid).subscribe(a => {
       this.zona = a;
       console.log('zona', this.zona);
-    })
-  }
-  getAllTables(id) {
-    this.servMon.getAllMesas(id).then(m => {
-      this.mesas = m;
-      console.log('mesas', this.mesas);
     })
   }
   infoEvento(uid) {

@@ -204,7 +204,8 @@
 
             <ion-row class="title2">
                 <ion-col text-center>
-                    <ion-item-divider color="light">Compartida con</ion-item-divider>
+                    
+                    <ion-item-divider color="light"><ion-icon ios="ios-menu" md="md-menu"  style="color: #fcc04d"></ion-icon> Compartida con</ion-item-divider>
                 </ion-col>
             </ion-row>
 
@@ -218,6 +219,9 @@
                             <ion-col col-3 text-center>
                                 {{ (compartida.telefono | getNamexphoneUser| async)?.displayName }}
                             </ion-col>
+                            <ion-col col-3 text-center>
+                                <ion-icon ios="ios-call" md="md-call" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{ compartida.telefono }}                                
+                            </ion-col>
                             <ion-col col-2 text-center>
                                 $ {{ compartida.totalDividido }}
                             </ion-col>
@@ -229,7 +233,8 @@
 
             <ion-row class="title2">
                 <ion-col text-center>
-                    <ion-item-divider color="light">Historial de Reservaciones</ion-item-divider>
+                    
+                    <ion-item-divider color="light"><ion-icon ios="ios-menu" md="md-menu" style="color: #fcc04d"></ion-icon> Historial de Reservaciones</ion-item-divider>
                 </ion-col>
             </ion-row>
             <div *ngIf="res==true">
@@ -244,9 +249,9 @@
                         <ion-col text-center>
                             <b>Hora</b>
                         </ion-col>
-                        <ion-col text-center>
+                        <!-- <ion-col text-center>
                             <b>Puntuación</b>
-                        </ion-col>
+                        </ion-col> -->
                     </ion-row>
                     <ion-row class="row1" *ngFor="let history of historial">
                         <ion-col text-center>
@@ -255,7 +260,7 @@
                                 <div *ngIf="sucursal.$key==history.idSucursal"> -->
                                     <!-- {{sucursal.displayName}} -->
 
-                                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d"></ion-icon> <b style="text-transform: uppercase;"> {{ (history.idSucursal | getNameUser | async)?.displayName }}</b>
+                                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d"></ion-icon> <b style="text-transform: uppercase;"> &nbsp; {{ (history.idSucursal | getNameUser | async)?.displayName }}</b>
 
                                 <!-- </div>
                             </div> -->
@@ -266,9 +271,9 @@
                         <ion-col text-center>
                             {{history.hora}}
                         </ion-col>
-                        <ion-col text-center>
+                        <!-- <ion-col text-center>
                             {{history.puntuacion}} 5
-                        </ion-col>
+                        </ion-col> -->
                     </ion-row>
                 </ion-grid>
             </div>

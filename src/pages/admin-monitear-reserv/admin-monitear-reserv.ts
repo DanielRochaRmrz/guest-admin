@@ -150,6 +150,10 @@ export class AdminMonitearReservPage {
     }, (err) => {
       
       console.log('Error', err);
+
+      const datosQr = [{ "idReservacion": "rw1KSVPMLiYLuD9i9Bbl"}, {"idCompartir": "o0w3IhulBjSR9AKQeEj4"}];
+
+      this.navCtrl.push(AdminLeeQrPage, { datosQr: datosQr });
     })
   }
 
