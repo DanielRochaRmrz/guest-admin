@@ -216,7 +216,7 @@
                                 <ion-icon ios="ios-person" md="md-person" style="color: #fcc04d"></ion-icon>
                             </ion-col>
                             <ion-col col-3 text-center>
-                                {{ compartida.telefono | getNamexphoneUser }}
+                                {{ (compartida.telefono | getNamexphoneUser| async)?.displayName }}
                             </ion-col>
                             <ion-col col-2 text-center>
                                 $ {{ compartida.totalDividido }}

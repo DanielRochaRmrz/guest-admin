@@ -99,23 +99,22 @@ export class UsuarioProvider {
 
   }
 
-  getUserNameXPhone(phone:any){
-
-    this.reservacionesCompartidas = this.afs.collection<any>("users", (ref) =>
-      ref.where("phoneNumber", "==", phone)
-    );
-    this._reservacionesCompartidas = this.reservacionesCompartidas.valueChanges();
-    return (this._reservacionesCompartidas = this.reservacionesCompartidas.snapshotChanges().pipe(
-      map((changes) => {
-        return changes.map((action) => {
-          const data = action.payload.doc.data() as any;
-          data.$key = action.payload.doc.id;
-          return data;
-        });
-      })
-    ));
+  getUserNamePhone(phone:any){
     
+    return new Promise((resolve, reject) => {
+      let reservaciones = this.afs.collection("users").ref;
+      reservaciones
+        .where("phoneNumber", "==", phone).get()
+        .then((user) => {
+          user.forEach(res => {
+           const us = res.data();
+            resolve(JSON.stringify(us));
+          });
+        });
+    });
+
   }
+
 }
 
 export interface Credenciales {

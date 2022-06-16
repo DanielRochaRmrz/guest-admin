@@ -1,4 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { AngularFirestore } from "@angular/fire/firestore";
+import { map } from 'rxjs/operators';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 @Pipe({
@@ -6,33 +8,27 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 })
 export class GetNamexphoneUserPipe implements PipeTransform {
 
-  constructor(private userProvider: UsuarioProvider) {
+  constructor(public firestore: AngularFirestore, public userProvider: UsuarioProvider) {
 
   }
 
-  async transform(phone: any) {
+  // 
+  async transform(idUsuario: any) {
 
-    if (phone) {
+    if(idUsuario){
+      console.log('user -->', idUsuario);
 
-      await this.userProvider.getUserNameXPhone(phone)
+      const usuario: any = await this.userProvider.getUserNamePhone(idUsuario);
 
-      .subscribe((users) => {
+      const us: string = usuario as string;
 
-        const us: any  = users as any;
+      const user = JSON.parse(us);
+      console.log('user -->', user);
+      
+      
+      return user;
 
-        us.forEach(function(value){
-
-          value.displayName;
-          
-          // console.log("name", value.displayName);         
-
-          return value.displayName;
-
-        })
-
-      })
-
-    }
+    }  
 
   }
 }
