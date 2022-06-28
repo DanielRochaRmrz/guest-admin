@@ -596,23 +596,29 @@ export class ReservacionProvider {
                               .delete()
                               .then(() => {
                                 resolve("success");
-                              }).catch((error) => {
-                                console.error('Documento no borrado con exito', error);
+                              })
+                              .catch((error) => {
+                                console.error(
+                                  "Documento no borrado con exito",
+                                  error
+                                );
                               });
                           });
                         } else {
                           resolve("success");
                         }
                       });
-                  }).catch((error) => {
-                  console.error('Documento no borrado con exito', error);
-                });
+                  })
+                  .catch((error) => {
+                    console.error("Documento no borrado con exito", error);
+                  });
               }
             });
           } else {
             resolve("success");
           }
-        }).catch((error) => console.error('Sin resultados'));
+        })
+        .catch((error) => console.error("Sin resultados"));
     });
   }
 }
