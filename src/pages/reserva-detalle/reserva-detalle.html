@@ -61,7 +61,9 @@
                 <ion-item>
                     <ion-icon ios="ios-people" md="md-people" item-start style="color: #fcc04d"></ion-icon>
                     Número de personas
-                  <ion-badge item-end>{{ reserv.numPersonas }}</ion-badge>
+                    <div *ngIf="reserv.numPersonas">
+                        <ion-badge item-end>{{ reserv.numPersonas }}</ion-badge>
+                    </div>
                 </ion-item>
             
                 <ion-item>

@@ -213,22 +213,44 @@ export class ReservacionProvider {
   }
 
   public cancelarStatus(id, info) {
+    // AGREGAMOS EL MOTIVO DE LA CANCELACION 
+
+    const idUsuario = localStorage.getItem("uid")
+    const fecha = moment().format("x");
+
+    this.af.collection("reservacionesCanceladas").add({
+      uidUser: idUsuario,
+      estatus: info.status,
+      motivoCancelacion: info.motivo,
+      uidReservacion: id,
+      fecha: fecha
+    });
+
+    // BORRAMOS EL REGISTRO EN COMPARTIDAS
+
+    var query = this.af.collection("compartidas").ref.where("idReservacion", "==", id);
+
+    query.get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        doc.ref.delete();
+      })
+    });
     return new Promise((resolve, reject) => {
-      //const idUsuario = localStorage.getItem("uid");
-      this.af
-        .collection("reservaciones")
-        .doc(id)
-        .update({
-          estatus: info.status,
-          motivoCancelacion: info.motivo,
-        })
-        .then((reserva) => {
-          console.log("Reservación cancelada: ", JSON.stringify(reserva));
-          resolve({ success: true });
-        })
-        .catch((err) => {
-          reject(err);
-        });
+
+    // BORRAMOS EL REGISTRO EN RESERVACIONES
+    this.af
+      .collection("reservaciones")
+      .doc(id)
+      // .delete()
+      .update({
+        estatus: "Cancelado"
+      })
+      .then((reserva) => {
+        resolve({ success: true });
+      })
+      .catch((err) => {
+        reject(err);
+      });
     });
   }
 
@@ -309,8 +331,8 @@ export class ReservacionProvider {
       .collection("corte")
       .doc(idCorte)
       .delete()
-      .then(function () {})
-      .catch(function (error) {});
+      .then(function () { })
+      .catch(function (error) { });
   }
 
   public updateReservaId(ID) {
@@ -320,8 +342,8 @@ export class ReservacionProvider {
       .update({
         idReservacion: ID,
       })
-      .then(() => {})
-      .catch(() => {});
+      .then(() => { })
+      .catch(() => { });
   }
 
   public updateCuponStatus(uid, info) {
@@ -372,6 +394,7 @@ export class ReservacionProvider {
       ref
         .where("idSucursal", "==", idx)
         .where("estatus", "==", "Pagado")
+        .where("estatus", "==", "Finalizado")
         .where("fechaR_", ">=", fechI)
         .where("fechaR_", "<=", fechF)
     );

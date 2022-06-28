@@ -83,7 +83,7 @@ export class AdminMenuReservacionPage {
 
   adminReservaciones() {
     this.navCtrl.push(AdministrarReservacionesPage, {
-      uidSucursal: this.sucursal,
+      uidSucursal: this.sucursal
     });
   }
 

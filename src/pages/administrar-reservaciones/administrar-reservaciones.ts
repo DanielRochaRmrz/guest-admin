@@ -82,6 +82,9 @@ export class AdministrarReservacionesPage {
 
     this.uidSucursal = localStorage.getItem("uidSucursal");
 
+    console.log("ESTE ES EL UID DE LA SUCURSAL NO SE SI SE PIERDA UWU =>", this.uidSucursal);
+    
+
     const date = moment().format("YYYY-MM-DD");
 
     const fecha = moment(date).format("x");

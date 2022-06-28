@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ReservacionProvider } from "../../providers/reservacion/reservacion";
 import { AdministrarReservacionesPage } from '../administrar-reservaciones/administrar-reservaciones';
+import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 
 @IonicPage()
 @Component({
@@ -63,15 +64,12 @@ export class Modalstatus_cancelacionPage {
     
   }
 
-  // getMesas(idx) {
-  //   this._providerReserva.getMesas2(idx).subscribe(mesas => {
-  //     console.log("Mesas2", mesas);
-  //     this.mesas = mesas;
-  //   });
-  // }
-
   closeModal() {
-    this.navCtrl.setRoot(AdministrarReservacionesPage);
+    const uidSucursal = localStorage.getItem("uidSucursal");
+
+    this.navCtrl.push(AdministrarReservacionesPage, {
+      uidSucursal: uidSucursal
+    });
 }
 
 
