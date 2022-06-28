@@ -3,9 +3,9 @@
     <ion-navbar hideBackButton>
         <ion-row>
 
-            <ion-col col-1>
+            <!-- <ion-col col-1>
                 <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
-            </ion-col>
+            </ion-col> -->
             <ion-col col-8>
                 <ion-title>Usuario Detalle</ion-title>
             </ion-col>
@@ -17,6 +17,9 @@
 
 
 <ion-content padding>
+    <ion-fab right top>
+        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
+    </ion-fab>
     <!-- <h3 text-center class="blanco"> Información del usuario </h3> -->
     <!-- <div align="right"><br> -->
         <!-- <span> -->
