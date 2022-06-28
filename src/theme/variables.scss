@@ -168,6 +168,8 @@ $picker-ios-button-text-color: #FD9530;
 $card-ios-margin-left: 0px;
 $card-ios-margin-right: 0px;
 $alert-ios-checkbox-label-text-color: #959494;
+$toast-ios-background: #FFC149;
+$toast-ios-title-color: #000000;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 // App Windows Variables
@@ -190,7 +192,8 @@ $picker-md-option-text-color: #ffffff;
 $picker-md-button-text-color: #eccc68;
 $card-md-margin-left: 0px;
 $card-md-margin-right: 0px;
-
+$toast-md-background: #FFC149;
+$toast-md-title-color: #000000;
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can
 // then be future customized. This import comes last

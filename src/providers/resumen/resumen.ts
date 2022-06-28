@@ -19,9 +19,8 @@ export class ResumenProvider {
     console.log("Hello ResumenProvider Provider");
   }
 
-  gerReservacion(idx) {
+  gerReservacion(idx: string) {
     this.reservacion = this.af.doc<any>(`reservaciones/${idx}`);
-    // this.pedidoDoc = this.afs.collection<Servicios>('servicios').doc(`/${idPedido}`).collection<Pedidos>('pedidos');
     return (this._reservacion = this.reservacion.snapshotChanges().pipe(
       map(action => {
         if (action.payload.exists === false) {
@@ -35,9 +34,8 @@ export class ResumenProvider {
     ));
   }
 
-  getSucursal(idx) {
+  getSucursal(idx: string) {
     this.sucursales = this.af.doc<any>(`sucursales/${idx}`);
-    // this.pedidoDoc = this.afs.collection<Servicios>('servicios').doc(`/${idPedido}`).collection<Pedidos>('pedidos');
     return (this._sucursales = this.sucursales.snapshotChanges().pipe(
       map(action => {
         if (action.payload.exists === false) {

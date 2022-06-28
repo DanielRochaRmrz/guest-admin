@@ -17,14 +17,14 @@ import { AdminSucursalListPage } from '../admin-sucursal-list/admin-sucursal-lis
 import { AdminLoginPage } from '../admin-login/admin-login';
 import { AdminUsersGuestPage } from '../admin-users-guest/admin-users-guest';
 import { CorteHistorialPage } from '../corte-historial/corte-historial';
+import { AdminCroquisPage } from '../admin-croquis/admin-croquis';
 
 @IonicPage()
 @Component({
-  selector: 'page-admin-home',
-  templateUrl: 'admin-home.html',
+  selector: "page-admin-home",
+  templateUrl: "admin-home.html",
 })
 export class AdminHomePage {
-
   email: string;
   uid: string;
   sucursal: any;
@@ -58,8 +58,7 @@ export class AdminHomePage {
     public afs: AngularFirestore,
     public monRes: MonitoreoReservasProvider
   ) {
-
-    this.sucursal2 = localStorage.getItem('uid');
+    this.sucursal2 = localStorage.getItem("uid");
     console.log("este es el uid logueado", this.sucursal2);
 
     //this.sucursal = this.firebase.auth.currentUser;
@@ -144,7 +143,6 @@ export class AdminHomePage {
 
     console.log('HOME PAGE');
     this._providerPushNoti.init_push_noti();
-
   }
 
   goEventos(){
@@ -192,6 +190,10 @@ export class AdminHomePage {
     }
 
     this.navCtrl.push(CorteHistorialPage, this.sucProv.selectedSucursalItem = Object.assign({}, x))
+  }
+
+  goCroquis() {
+    this.navCtrl.push(AdminCroquisPage);
   }
 
   salir() {

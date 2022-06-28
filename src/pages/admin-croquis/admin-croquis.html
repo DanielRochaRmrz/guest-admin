@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-navbar class="borde-toolbar" hideBackButton>
+        <ion-row>
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi-toolbar" alt="" />
+            </ion-col>
+            <ion-col col-8>
+                <div class="title-toolbar">Croquis</div>
+            </ion-col>
+            <ion-col>
+                <div align="end">
+                    <img src="./assets/content/corona.png" style="width: 40%" alt="" />
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+
+    <ion-fab right top>
+        <button ion-fab color="primary" (click)="irHome()"><ion-icon name="close"></ion-icon></button>
+    </ion-fab>
+    <div *ngIf="croquis.length != 0; then con else sin"></div>
+
+    <ng-template #sin>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-card>
+                        <img [src]="imgCroquis" />
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div *ngIf="cargaImagen == 0; then cargar else guardar"></div>
+                    <ng-template #cargar>
+                        <button ion-button full (click)="seleccionarFoto()">Cargar croquis</button>
+                    </ng-template>
+                    <ng-template #guardar>
+                        <button color="secondary" ion-button full (click)="guardarFoto()">Guardar croquis</button>
+                    </ng-template>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ng-template>
+
+    <ng-template #con>
+        <div *ngFor="let cro of croquis">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-card>
+                            <div *ngIf="imgCroquisUpdate == ''; then imgDB else imgSelect"></div>
+                            <ng-template #imgDB>
+                                <img [src]="cro.imagenes" />
+                            </ng-template>
+                            <ng-template #imgSelect>
+                                <img [src]="imgCroquisUpdate" />
+                            </ng-template>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div *ngIf="cargaImagen == 0; then modificar else actulizar"></div>
+                        <ng-template #modificar>
+                            <button ion-button full (click)="updateFoto()">Modificar croquis</button>
+                        </ng-template>
+                        <ng-template #actulizar>
+                            <button color="secondary" ion-button full>Actulizar croquis</button>
+                        </ng-template>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ng-template>
+
+</ion-content>

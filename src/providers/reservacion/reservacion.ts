@@ -232,19 +232,17 @@ export class ReservacionProvider {
     });
   }
 
-  public borrarRegistroUsuarioCodigoRP(uidReservacion){
-
-    this.af.collection("contCodigosRp").doc(uidReservacion).delete().then(() => {
-
-      console.log("Se borro regsitro en contCodigosRp");
-      
-
-    }).catch(function(error) {
-
-      console.log("No se pudo en contCodigosRp");
-      
-
-    })
+  public borrarRegistroUsuarioCodigoRP(uidReservacion) {
+    this.af
+      .collection("contCodigosRp")
+      .doc(uidReservacion)
+      .delete()
+      .then(() => {
+        console.log("Se borro regsitro en contCodigosRp");
+      })
+      .catch(function (error) {
+        console.log("No se pudo en contCodigosRp");
+      });
   }
 
   public addCorte(
@@ -362,8 +360,6 @@ export class ReservacionProvider {
   }
 
   public getReservaciones(idx: any, fecha1: String, fecha2: String) {
-
-
     this.fechaI = fecha1;
 
     this.fechaF = fecha2;
@@ -373,8 +369,7 @@ export class ReservacionProvider {
     const fechF = moment(this.fechaF).format("x");
 
     this.reservaciones = this.af.collection<any>("reservaciones", (ref) =>
-
-    ref
+      ref
         .where("idSucursal", "==", idx)
         .where("estatus", "==", "Pagado")
         .where("fechaR_", ">=", fechI)
@@ -535,11 +530,11 @@ export class ReservacionProvider {
         .where("numMesa", "==", mesa)
         .get()
         .then((data) => {
-          console.log('Data mesa -->', data.empty)
+          console.log("Data mesa -->", data.empty);
           resolve(data.empty);
         })
         .catch((error) => {
-          console.log('Error en la consulta -->', error);
+          console.log("Error en la consulta -->", error);
         });
     });
   }
@@ -557,8 +552,67 @@ export class ReservacionProvider {
           });
         })
         .catch((error) => {
-          console.log('Error en la consulta -->', error);
+          console.log("Error en la consulta -->", error);
         });
+    });
+  }
+
+  cleanReserva(uid: string) {
+    return new Promise((resolve, reject) => {
+      const reservaciones = this.af.collection("reservaciones").ref;
+      reservaciones
+        .where("idSucursal", "==", uid)
+        .where("estatus", "not-in", ["Finalizado", "Pagado"])
+        .get()
+        .then((data) => {
+          const dataVacia = data.empty;
+          if (dataVacia == false) {
+            data.forEach((reserva) => {
+              const reservacion = reserva.data();
+              const fecha = new Date();
+              const fechaYMD = moment(fecha).format("YYYY-MM-DD");
+              const resIgualDespues = moment(reservacion.fechaR).isSameOrAfter(
+                fechaYMD
+              );
+              if (resIgualDespues == false) {
+                const idReservacion = reservacion.idReservacion;
+                this.af
+                  .collection("reservaciones")
+                  .doc(idReservacion)
+                  .delete()
+                  .then(() => {
+                    const compartidas = this.af.collection("compartidas").ref;
+                    compartidas
+                      .where("idReservacion", "==", idReservacion)
+                      .get()
+                      .then((data) => {
+                        const dataVacia = data.empty;
+                        if (dataVacia == false) {
+                          data.forEach((compartida) => {
+                            const compartidaID = compartida.id;
+                            this.af
+                              .collection("compartidas")
+                              .doc(compartidaID)
+                              .delete()
+                              .then(() => {
+                                resolve("success");
+                              }).catch((error) => {
+                                console.error('Documento no borrado con exito', error);
+                              });
+                          });
+                        } else {
+                          resolve("success");
+                        }
+                      });
+                  }).catch((error) => {
+                  console.error('Documento no borrado con exito', error);
+                });
+              }
+            });
+          } else {
+            resolve("success");
+          }
+        }).catch((error) => console.error('Sin resultados'));
     });
   }
 }

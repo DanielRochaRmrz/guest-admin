@@ -1,9 +1,8 @@
 <ion-header>
-
     <ion-navbar class="borde" hideBackButton>
         <ion-row>
             <ion-col col-1 align="center">
-                <img src="./assets/content/line2.png" class="imgLi" alt="">
+                <img src="./assets/content/line2.png" class="imgLi" alt="" />
             </ion-col>
             <ion-col col-8>
 
@@ -14,7 +13,7 @@
                     </div>
 
                 </div>
-  
+
                 <div class="centrart" *ngIf="_userEmpleado?.type == 'rp'">
 
                     <p>{{ _userEmpleado?.displayName }} </p>
@@ -23,47 +22,46 @@
 
             </ion-col>
             <ion-col>
-                <div align='end'>
-                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+                <div align="end">
+                    <img src="./assets/content/corona.png" style="width: 40%" alt="" />
                 </div>
             </ion-col>
         </ion-row>
     </ion-navbar>
-
 </ion-header>
 
 <ion-content>
     <ion-grid>
         <ion-row>
 
-          <ion-col>
+            <ion-col>
 
-            <ion-list>
-                
-                <div *ngIf="_sucursal?.type == 'a'">
-                    <button ion-item (click)="goPerfilSucursal(_sucursal.uid)">
+                <ion-list>
+
+                    <div *ngIf="_sucursal?.type == 'a'">
+                        <button ion-item (click)="goPerfilSucursal(_sucursal.uid)">
                        <p><ion-icon ios="ios-cog" md="md-cog" style="color: #FD9530"></ion-icon> Config.</p>
                     </button>
-                </div>
+                    </div>
 
-                <div *ngIf="_userEmpleado?.type == 'e' || _userEmpleado?.type == 'master' ">
+                    <div *ngIf="_userEmpleado?.type == 'e' || _userEmpleado?.type == 'master' ">
 
-                    <button ion-item (click)="goPerfilEmpleado(_userEmpleado.uid)">
+                        <button ion-item (click)="goPerfilEmpleado(_userEmpleado.uid)">
                         <p><ion-icon ios="ios-cog" md="md-cog" style="color: #FD9530"></ion-icon> Config.</p>
                      </button>
 
-                </div>
-              </ion-list>
+                    </div>
+                </ion-list>
 
-          </ion-col>
+            </ion-col>
 
-          <ion-col >
+            <ion-col>
 
-            <button ion-item (click)="salir()">
+                <button ion-item (click)="salir()">
                 <p> <ion-icon ios="ios-exit" md="md-exit" style="color: #FD9530"></ion-icon> Cerrar sesión</p>
             </button>
 
-          </ion-col>
+            </ion-col>
         </ion-row>
     </ion-grid>
 
@@ -83,9 +81,9 @@
 
     </ion-row>
 
-        <div class="bienvenido">
-            <h3 style="color: #000;">¡Bienvenido {{ _userEmpleado?.displayName }}!</h3>
-        </div>
+    <div class="bienvenido">
+        <h3 style="color: #000;">¡Bienvenido {{ _userEmpleado?.displayName }}!</h3>
+    </div>
 
     <br>
 
@@ -165,9 +163,7 @@
 
             <ion-item (click)="goMonitorearCurso('home')">
                 <!-- <ion-icon ios="ios-play" md="md-play" style="color: #fcc04d"></ion-icon> -->
-                <img item-start class="imgRes4" src="./assets/content/icono4.png">
-
-                Administración de usuarios
+                <img item-start class="imgRes4" src="./assets/content/icono4.png"> Administración de usuarios
                 <ion-badge class="buttonColor" item-end>
                     <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" style="color:white"></ion-icon>
                 </ion-badge>
@@ -175,8 +171,7 @@
 
             <ion-item (click)="goEventos()">
                 <!-- <ion-icon ios="ios-play" md="md-play" style="color: #fcc04d"></ion-icon> -->
-                <img item-start class="imgRes4" src="./assets/content/icono3.png">
-                Administrar eventos
+                <img item-start class="imgRes4" src="./assets/content/icono3.png"> Administrar eventos
                 <ion-badge class="buttonColor" item-end>
                     <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" style="color:white"></ion-icon>
                 </ion-badge>
@@ -184,19 +179,15 @@
 
             <ion-item (click)="goReservacion()">
                 <!-- <ion-icon ios="ios-play" md="md-play" style="color: #fcc04d"></ion-icon> -->
-                <img item-start class="imgRes4" src="./assets/content/icono3.png">
-
-                Reservaciones
+                <img item-start class="imgRes4" src="./assets/content/icono3.png"> Reservaciones
                 <ion-badge class="buttonColor" item-end>
                     <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" style="color:white"></ion-icon>
                 </ion-badge>
             </ion-item>
 
-            <ion-item>
+            <ion-item (click)="goCroquis()">
                 <!-- <ion-icon ios="ios-play" md="md-play" style="color: #fcc04d"></ion-icon> -->
-                <img item-start class="imgRes4" src="./assets/content/icono3.png">
-
-                Administrar Croquis
+                <img item-start class="imgRes4" src="./assets/content/icono3.png"> Administrar Croquis
                 <ion-badge class="buttonColor" item-end>
                     <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" style="color:white"></ion-icon>
                 </ion-badge>
@@ -204,24 +195,21 @@
 
             <ion-item (click)="goCorteHistorial(this.sucursal)">
                 <!-- <ion-icon ios="ios-play" md="md-play" style="color: #fcc04d"></ion-icon> -->
-                <img item-start class="imgRes4" src="./assets/content/icono3.png">
-
-                Cortes
+                <img item-start class="imgRes4" src="./assets/content/icono3.png"> Cortes
                 <ion-badge class="buttonColor" item-end>
                     <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" style="color:white"></ion-icon>
                 </ion-badge>
             </ion-item>
 
         </div>
-        
+
         <!-- ADMINISTRADOR MASTER  -->
 
         <div *ngIf="_userEmpleado?.type == 'master'">
 
             <ion-item (click)="goSucursal()">
                 <!-- <ion-icon ios="ios-play" md="md-play" style="color: #fcc04d"></ion-icon> -->
-                <img item-start class="imgRes4" src="./assets/content/icono1.png">
-                Sucursales registradas
+                <img item-start class="imgRes4" src="./assets/content/icono1.png"> Sucursales registradas
                 <ion-badge class="buttonColor" item-end>
                     <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" style="color:white"></ion-icon>
                 </ion-badge>
@@ -229,8 +217,7 @@
 
             <ion-item (click)="goListaUsuariosEmpleados('master')">
                 <!-- <ion-icon ios="ios-play" md="md-play" style="color: #fcc04d"></ion-icon> -->
-                <img item-start class="imgRes4" src="./assets/content/icono2.png">
-                Usuarios registrados
+                <img item-start class="imgRes4" src="./assets/content/icono2.png"> Usuarios registrados
                 <ion-badge class="buttonColor" item-end>
                     <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" style="color:white"></ion-icon>
                 </ion-badge>
@@ -239,5 +226,5 @@
         </div>
 
     </ion-card>
-        
+
 </ion-content>

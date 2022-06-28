@@ -202,6 +202,7 @@ export class SucursalAltaProvider {
     });
     return promesa;
   }
+  
   public crear_post(uid, url: string) {
     let sucursal: Credenciales = {
       uid: uid,

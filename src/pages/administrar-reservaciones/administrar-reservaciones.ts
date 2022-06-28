@@ -43,6 +43,8 @@ export class AdministrarReservacionesPage {
 
     this.uidUser = localStorage.getItem('uidUser');
 
+    this.clearReservas(this.uidSucursal);
+
     switch (this.type) {
 
       case 'rp':
@@ -59,6 +61,12 @@ export class AdministrarReservacionesPage {
 
     }
 
+  }
+
+
+ async clearReservas(uid: string) {
+    const clearReserva = await this._providerReserva.cleanReserva(uid);
+    console.log('Repsueta exito -->', clearReserva);
   }
 
   getCompartidas(idR) {

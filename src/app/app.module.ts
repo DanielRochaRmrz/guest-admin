@@ -60,6 +60,7 @@ import { CuentasPage } from '../pages/cuentas/cuentas';
 import { AdminRpCodigoPage } from '../pages/admin-rp-codigo/admin-rp-codigo';
 import { AdminRpCorteCodigosPage } from '../pages/admin-rp-corte-codigos/admin-rp-corte-codigos';
 import { ReservaDetallePage } from '../pages/reserva-detalle/reserva-detalle';
+import { AdminCroquisPage } from '../pages/admin-croquis/admin-croquis';
 
 //Pipes
 import { PipesModule } from "../pipes/pipes.module";
@@ -112,6 +113,7 @@ import { Stripe } from '@ionic-native/stripe';
 import { PaymentProvider } from '../providers/payment/payment';
 import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
+
 
 
  firebase.initializeApp(firebaseConfig);
@@ -176,7 +178,8 @@ import { from } from 'rxjs';
     CuentasPage,
     AdminRpCodigoPage,
     AdminRpCorteCodigosPage,
-    ReservaDetallePage
+    ReservaDetallePage,
+    AdminCroquisPage
   ],
   imports: [
     BrowserModule,
@@ -253,7 +256,8 @@ import { from } from 'rxjs';
     CuentasPage,
     AdminRpCodigoPage,
     AdminRpCorteCodigosPage,
-    ReservaDetallePage
+    ReservaDetallePage,
+    AdminCroquisPage
   ],
   providers: [
     StatusBar,
