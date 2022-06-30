@@ -21,7 +21,7 @@ import { ReservaDetallePage } from "../reserva-detalle/reserva-detalle";
 export class AdministrarReservacionesPage {
   fecha: Date = new Date();
   uidSucursal: any;
-  reservaciones: any;
+  reservaciones: any = [];
   compartidas: any;
   type: string = '';
   uidUser: string = '';
@@ -82,9 +82,6 @@ export class AdministrarReservacionesPage {
 
     this.uidSucursal = localStorage.getItem("uidSucursal");
 
-    console.log("ESTE ES EL UID DE LA SUCURSAL NO SE SI SE PIERDA UWU =>", this.uidSucursal);
-    
-
     const date = moment().format("YYYY-MM-DD");
 
     const fecha = moment(date).format("x");
@@ -94,6 +91,9 @@ export class AdministrarReservacionesPage {
       .subscribe((reserv) => {
 
         this.reservaciones = reserv;
+        
+        console.log('RESERVACIONES', this.reservaciones);
+        
 
       });
   }

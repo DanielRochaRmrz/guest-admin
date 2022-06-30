@@ -24,7 +24,9 @@
 <ion-content style="background-color: white;" padding>
 
     <ion-fab right top>
-        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
+        <button ion-fab color="primary" (click)="behind()">
+            <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
+        </button>
     </ion-fab>
 
     <div>
@@ -34,192 +36,216 @@
     </div>
     <hr>
     <br>
-    <div *ngFor="let reservacion of reservaciones">
-
-        <div *ngIf="reservacion.estatus == 'Creando'" class="espacio">
-
-            <div class="loader"></div>
-
-            <ion-card class="color1">
-                <br>
-                <ion-row>
-                    <ion-col col-12 text-center>
-                        <ion-row>
-
-                            <ion-col col-12>
-
-                                <div text-center>
-
-                                    <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-person"
-                                            md="md-person"></ion-icon> -->
-
-                                    <div align="center">
-
-                                        <img class="imagen_perfil" src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}" />
-
-                                    </div>
-
-                                </div>
-
-                            </ion-col>
-
-                            <ion-col col-12>
-                                <b style="text-transform: uppercase">{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</b>
-                                <p style="font-size: 9px;">(Reservación tipo normal)</p>
-                            </ion-col>
-                        </ion-row>
-                    </ion-col>
-                </ion-row><br>
-
-                <hr size="50px">
-                <br>
-                <ion-row>
-                    <ion-col col-12 text-center>
-                        <ion-row>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon> <b> Hora</b>
-
-                            </ion-col>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d"></ion-icon><b> Personas</b>
-
-                            </ion-col>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon><b> Fecha</b>
-
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                {{ reservacion.hora }}
-                            </ion-col>
-                            <ion-col col-4>
-                                {{ reservacion.numPersonas }}
-                            </ion-col>
-                            <ion-col col-4>
-                                {{ reservacion.fechaR | date : 'dd/MM/yyyy'}}
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <!-- <button (click)="consultaReservacion(reservacion.idReservacion)"> -->
-                            <br>
-                            <br>
-                            <ion-col col-12 text-center>
-                                <!-- <button class="btn" (click)="consultaReservacion(reservacion.idReservacion)">Detalles
-                                </button> -->
-                                <br>
-                                <button ion-button block round class="btnDetalle" (click)="consultaReservacion(reservacion.idReservacion)">Detalles</button>
-                            </ion-col>
-                            <br>
-                        </ion-row>
-                    </ion-col>
-                </ion-row>
-                <br>
-            </ion-card>
+    <div *ngIf="reservaciones.length == 0; then msj else reserva"></div>
+    <ng-template #msj>
+        <div>
+            <div align="center">
+                <img text-center class="adv2" src="./assets/content/advertencia.png" />
+            </div>
+            <p class="aviso">
+                Aviso
+            </p>
+            <p class="aviso">
+                Por el momento no hay reservaciones.
+            </p>
         </div>
-        <!-- COMPARTIDAS -->
+    </ng-template>
+    <ng-template #reserva>
+        <div *ngFor="let reservacion of reservaciones">
 
-        <div *ngIf="reservacion.estatus == 'CreadaCompartida'" class="espacio">
-
-            <div class="loader"></div>
-
-            <ion-card class="color1">
-                <br>
-                <ion-row>
-                    <ion-col col-12 text-center>
-                        <ion-row>
-
-                            <ion-col col-12>
-
-                                <div text-center>
-
-                                    <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-people"
-                                            md="md-people"></ion-icon> -->
-
-                                    <div align="center">
-
-                                        <img class="imagen_perfil" src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}" />
-
+            <div *ngIf="reservacion.estatus == 'Creando'" class="espacio">
+    
+                <div class="loader"></div>
+    
+                <ion-card class="color1">
+                    <br>
+                    <ion-row>
+                        <ion-col col-12 text-center>
+                            <ion-row>
+    
+                                <ion-col col-12>
+    
+                                    <div text-center>
+    
+                                        <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-person"
+                                                md="md-person"></ion-icon> -->
+    
+                                        <div align="center">
+    
+                                            <img class="imagen_perfil"
+                                                src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}" />
+    
+                                        </div>
+    
                                     </div>
-
-                                </div>
-
-                            </ion-col>
-
-                            <ion-col col-12>
-
-                                <b style="text-transform: uppercase">{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</b>
-                                <p style="font-size: 9px;">(Reservación tipo compartida)</p>
-
-                            </ion-col>
-                        </ion-row>
-                    </ion-col>
-                </ion-row><br>
-
-                <hr size="50px">
-                <br>
-                <ion-row>
-                    <ion-col col-12 text-center>
-                        <ion-row>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon><b>
-                                    Hora</b>
-
-                            </ion-col>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d">
-                                </ion-icon><b> Personas</b>
-
-                            </ion-col>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d">
-                                </ion-icon><b> Fecha</b>
-
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                {{ reservacion.hora }}
-                            </ion-col>
-                            <ion-col col-4>
-                                {{ reservacion.numPersonas }}
-                            </ion-col>
-                            <ion-col col-4>
-                                {{ reservacion.fechaR | date : 'dd/MM/yyyy' }}
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <!-- <button (click)="consultaHistorial(reservacion.idReservacion)"> -->
-                            <br>
-                            <br>
-                            <ion-col col-12 text-center>
-                                <!-- <button class="btn" (click)="consultaReservacion(reservacion.idReservacion)">Detalles
-                                </button> -->
+    
+                                </ion-col>
+    
+                                <ion-col col-12>
+                                    <b
+                                        style="text-transform: uppercase">{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</b>
+                                    <p style="font-size: 9px;">(Reservación tipo normal)</p>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row><br>
+    
+                    <hr size="50px">
+                    <br>
+                    <ion-row>
+                        <ion-col col-12 text-center>
+                            <ion-row>
+                                <ion-col col-4>
+    
+                                    <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon> <b>
+                                        Hora</b>
+    
+                                </ion-col>
+                                <ion-col col-4>
+    
+                                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d">
+                                    </ion-icon><b> Personas</b>
+    
+                                </ion-col>
+                                <ion-col col-4>
+    
+                                    <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d">
+                                    </ion-icon><b> Fecha</b>
+    
+                                </ion-col>
+                            </ion-row>
+    
+                            <ion-row>
+                                <ion-col col-4>
+                                    {{ reservacion.hora }}
+                                </ion-col>
+                                <ion-col col-4>
+                                    {{ reservacion.numPersonas }}
+                                </ion-col>
+                                <ion-col col-4>
+                                    {{ reservacion.fechaR | date : 'dd/MM/yyyy'}}
+                                </ion-col>
+                            </ion-row>
+    
+                            <ion-row>
+                                <!-- <button (click)="consultaReservacion(reservacion.idReservacion)"> -->
                                 <br>
-                                <button ion-button block round class="btnDetalle"
-                                    (click)="consultaReservacion(reservacion.idReservacion)">
-
-                                    Detalles
-
-                                </button>
-                            </ion-col>
-                            <br>
-                        </ion-row>
-                    </ion-col>
-                </ion-row>
-                <br>
-            </ion-card>
+                                <br>
+                                <ion-col col-12 text-center>
+                                    <!-- <button class="btn" (click)="consultaReservacion(reservacion.idReservacion)">Detalles
+                                    </button> -->
+                                    <br>
+                                    <button ion-button block round class="btnDetalle"
+                                        (click)="consultaReservacion(reservacion.idReservacion)">Detalles</button>
+                                </ion-col>
+                                <br>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                    <br>
+                </ion-card>
+            </div>
+            <!-- COMPARTIDAS -->
+    
+            <div *ngIf="reservacion.estatus == 'CreadaCompartida'" class="espacio">
+    
+                <div class="loader"></div>
+    
+                <ion-card class="color1">
+                    <br>
+                    <ion-row>
+                        <ion-col col-12 text-center>
+                            <ion-row>
+    
+                                <ion-col col-12>
+    
+                                    <div text-center>
+    
+                                        <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-people"
+                                                md="md-people"></ion-icon> -->
+    
+                                        <div align="center">
+    
+                                            <img class="imagen_perfil"
+                                                src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}" />
+    
+                                        </div>
+    
+                                    </div>
+    
+                                </ion-col>
+    
+                                <ion-col col-12>
+    
+                                    <b
+                                        style="text-transform: uppercase">{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</b>
+                                    <p style="font-size: 9px;">(Reservación tipo compartida)</p>
+    
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row><br>
+    
+                    <hr size="50px">
+                    <br>
+                    <ion-row>
+                        <ion-col col-12 text-center>
+                            <ion-row>
+                                <ion-col col-4>
+    
+                                    <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon><b>
+                                        Hora</b>
+    
+                                </ion-col>
+                                <ion-col col-4>
+    
+                                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d">
+                                    </ion-icon><b> Personas</b>
+    
+                                </ion-col>
+                                <ion-col col-4>
+    
+                                    <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d">
+                                    </ion-icon><b> Fecha</b>
+    
+                                </ion-col>
+                            </ion-row>
+    
+                            <ion-row>
+                                <ion-col col-4>
+                                    {{ reservacion.hora }}
+                                </ion-col>
+                                <ion-col col-4>
+                                    {{ reservacion.numPersonas }}
+                                </ion-col>
+                                <ion-col col-4>
+                                    {{ reservacion.fechaR | date : 'dd/MM/yyyy' }}
+                                </ion-col>
+                            </ion-row>
+    
+                            <ion-row>
+                                <!-- <button (click)="consultaHistorial(reservacion.idReservacion)"> -->
+                                <br>
+                                <br>
+                                <ion-col col-12 text-center>
+                                    <!-- <button class="btn" (click)="consultaReservacion(reservacion.idReservacion)">Detalles
+                                    </button> -->
+                                    <br>
+                                    <button ion-button block round class="btnDetalle"
+                                        (click)="consultaReservacion(reservacion.idReservacion)">
+    
+                                        Detalles
+    
+                                    </button>
+                                </ion-col>
+                                <br>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                    <br>
+                </ion-card>
+            </div>
         </div>
-    </div>
-
+    </ng-template>
+    
 </ion-content>

@@ -241,10 +241,10 @@ export class ReservacionProvider {
     this.af
       .collection("reservaciones")
       .doc(id)
-      // .delete()
-      .update({
-        estatus: "Cancelado"
-      })
+      .delete()
+      // .update({
+      //   estatus: "Cancelado"
+      // })
       .then((reserva) => {
         resolve({ success: true });
       })

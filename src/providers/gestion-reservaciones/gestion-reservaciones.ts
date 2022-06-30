@@ -174,6 +174,21 @@ export class GestionReservacionesProvider {
     ));
   }
 
+  getReservacionDetalle(idReservacion: string){
+
+    return new Promise((resolve, reject) => {
+      const reservaciones = this.aFS.collection(`reservaciones`).ref;
+      reservaciones.where("idReservacion", "==", idReservacion).get()
+      .then((data) => {
+        data.forEach(resp => {
+          const reservacion = resp.data();
+          resolve(reservacion);
+        })
+      })
+    })
+
+  }
+
   getArea(idArea: string) {
     this.reservacionDoc = this.aFS.doc(`areas/${idArea}`);
     // this.pedidoDoc = this.afs.collection<Servicios>('servicios').doc(`/${idPedido}`).collection<Pedidos>('pedidos');

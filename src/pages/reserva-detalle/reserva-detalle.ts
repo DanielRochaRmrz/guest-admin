@@ -56,55 +56,51 @@ export class ReservaDetallePage {
 
     console.log("ionViewDidLoad ReservaDetallePage");
 
-    this._gestionReser.getReservacion(this.idRers).subscribe((res) => {
+    this.getReservacion();
 
-      this.reserv = res;
+    this.getCompartidaCon(this.idRers);
 
-      console.log("this.reserv", this.reserv);
-      
+    this.getProductos(this.idRers);
+  }
 
-      this.getCompartidaCon(this.idRers);
+  async getReservacion() {
 
-      // INICIA igualamos la variable string uidUsuarioReser a una constante por que no asiganaba un tipo de dato 
-      
-      const uidUsuarioReser  = this.reserv.idUsuario;
-      
-      this.uidUsuarioReser = uidUsuarioReser;
-      
-      // TERMINA igualamos la variable string uidUsuarioReser a una constante por que no asiganaba un tipo de dato 
+    this.reserv = await this._gestionReser.getReservacionDetalle(this.idRers);
+
+    this.uidUsuarioReser = this.reserv.idUsuario;
+
+    let idZona = this.reserv.idZona;
+
+    this._gestionReser.getZona(idZona).subscribe((zona) => {
+
+      this.zona = zona;     
+
+    });
+
+    this.getMesas(idZona);
+
+    this.consultaHistorial(this.reserv.idUsuario);
+
+    // console.log('la nueva reservacion detallee uwu', this.reserv);
 
 
-      let idArea = this.reserv.idArea;
+  }
 
-      this._gestionReser.getArea(idArea).subscribe((area) => {
-
-        this.area = area;
-        
-      });
-
-      let idZona = this.reserv.idZona;
-
-      this._gestionReser.getZona(idZona).subscribe((zona) => {
-
-        this.zona = zona;
-
-      });
-
-      this.consultaHistorial(this.reserv.idUsuario);
-
-      this.getProductos(this.idRers);
-
+   getMesas(idZona) {
+    this._gestionReser.getMesas(idZona).subscribe((mesas) => {
+      this.mesas = mesas;
+      console.log("mesas JAJA: ", this.mesas);
     });
   }
 
-    consultaHistorial(idUsuario) {
+  consultaHistorial(idUsuario) {
 
     this._gestionReser.getHistorial(idUsuario).subscribe((history) => {
 
       this.historial = history;
 
       // console.log(this.historial);
-      
+
 
       if (this.historial.length != 0) {
 
@@ -115,7 +111,7 @@ export class ReservaDetallePage {
         this.res = false;
 
       }
-      
+
     });
 
   }
@@ -125,7 +121,7 @@ export class ReservaDetallePage {
     let total = 0;
 
     this._providerReserva.getProductos(idReserv).subscribe((productos) => {
-    
+
       this.productos = productos;
 
       productos.forEach(function (value) {
@@ -137,7 +133,7 @@ export class ReservaDetallePage {
 
     });
   }
-    
+
 
   closeModal() {
 
@@ -151,7 +147,7 @@ export class ReservaDetallePage {
 
     this.getUsersPusCancelar();
 
-      let modal = this.modalCtrl.create("Modalstatus_cancelacionPage", {
+    let modal = this.modalCtrl.create("Modalstatus_cancelacionPage", {
 
       idReserv: idReserv,
 
@@ -160,17 +156,17 @@ export class ReservaDetallePage {
     });
 
     modal.present();
-    
+
   }
 
   Aceptar(idReserv) {
 
-    if(this.reserv.numMesa != undefined ){
+    if (this.reserv.numMesa != undefined) {
 
       this.getUsersPusNoti();
 
       this._gestionReser.getEstatusReser(idReserv).subscribe((reser) => {
-        
+
         this.estatusReser = reser;
 
         this.estatusReser.forEach((data) => {
@@ -178,41 +174,41 @@ export class ReservaDetallePage {
           if (data.estatus == "Creando") {
 
             this._gestionReser.aceptarReservacion(idReserv);
-            
+
             this.closeModal();
-  
+
           }
           if (data.estatus == "CreadaCompartida") {
 
             this._gestionReser.aceptarReservacionCompartida(idReserv);
-  
+
             this.closeModal();
-  
+
           }
         });
       });
 
-    }else{
+    } else {
 
       const alert = this.alertCtrl.create({
 
         title: "No se ha asignado una mesa a esta reservación",
         buttons: ["Aceptar"]
-        
+
       });
 
       alert.present();
 
     }
-   
+
   }
 
   getUsersPusNoti() {
     console.log("id rese", this.reserv.idUsuario);
 
     this._gestionReser.getMyUser(this.reserv.idUsuario).subscribe((users) => {
-  
-      this.users = users;  
+
+      this.users = users;
 
       if (this.platform.is("cordova")) {
         let noti = {
@@ -333,13 +329,13 @@ export class ReservaDetallePage {
       });
   }
 
-  getCompartidaCon(idReserv: string){
-    
-    this._gestionReser.getCompartidas(idReserv).subscribe((res) => { 
+  getCompartidaCon(idReserv: string) {
+
+    this._gestionReser.getCompartidas(idReserv).subscribe((res) => {
 
       this.compartidas = res;
 
-      console.log(this.compartidas);     
+      console.log(this.compartidas);
 
     })
 
