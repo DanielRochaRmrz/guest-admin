@@ -39,27 +39,27 @@ export class AdminLeeQrPage {
     this.datosQrRecibidos = this.navParams.get('datosQr');
 
     console.log("this.datosQrRecibidos", this.datosQrRecibidos);
-    
+
     const dataCode = JSON.parse(this.datosQrRecibidos);
 
     // console.log("dataCode", dataCode);
-    
+
     this.idReservacion2 = dataCode.idReservacion;
     this.idCompartir = dataCode.idCompartir;
 
-    // this.idReservacion2 = "rw1KSVPMLiYLuD9i9Bbl";
-    // this.idCompartir = "o0w3IhulBjSR9AKQeEj4";
+    // this.idReservacion2 = "tSeXI5EptXKGh4gQBvlw";
+    // this.idCompartir = "SImUawOi5b6b9I1eNMco";
 
     //alert(this.idCompartir);
     //Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
-    //si la reservacion es normal cambiar el estatus principal a pagando.
+    //si la reservacion es normal cambiar el estatus principal a Finalizado.
     if (this.idCompartir == undefined) {
       this.afs.collection('reservaciones').doc(this.idReservacion2).update({
         estatus: 'Finalizado'
       });
       //alert('Reservación pagada: Acceso permitido');
       let alerta = this.alertCtrl.create({
-       title: "Reservación pagada: Acesso permitido!",
+        title: "Reservación pagada: Acesso permitido!",
         buttons: [
           {
             text: "Aceptar"
@@ -72,15 +72,45 @@ export class AdminLeeQrPage {
     //si la reservacion es compartida cambiar el estatus en tabla compartida de cada persona que comparte.
     if (this.idCompartir != undefined) {
 
-      this.afs.collection('reservaciones').doc(this.idReservacion2).update({
-        estatus: 'Finalizado'
+      // VERIFICAMOS CUANTOS USUARIOS SON PARTE DE LA RESERVACION
+
+      const consul = this.afs.collection('compartidas').ref;
+      consul.where('idReservacion', '==', this.idReservacion2).get().then(data => {
+        console.log("RESERVACIONES COMPARTIDAS", data);
+        var count = [];
+        data.forEach(res => {
+          const idCompartidas = res.id;
+          count.push(idCompartidas);
+
+
+        });
+        const totalCompartidas = count.length;
+        if (totalCompartidas == 0) {
+
+          this.afs.collection('reservaciones').doc(this.idReservacion2).update({
+            estatus: 'Finalizado'
+          });
+
+          // Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
+          this.afs.collection('compartidas').doc(this.idCompartir).update({
+            estatus_escaneo: 'OK'
+          });
+
+        }else{
+
+          let alerta = this.alertCtrl.create({
+            title: "Reservación compartida aceptada: Acesso permitido",
+            buttons: [
+              {
+                text: "Aceptar"
+              }
+            ]
+          });
+          alerta.present();
+
+        }
       });
-      
-      //Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
-      this.afs.collection('compartidas').doc(this.idCompartir).update({
-        estatus_escaneo: 'OK'
-      });
-      //alert('Reservación pagada: Acceso permitido');
+
       let alerta = this.alertCtrl.create({
         title: "Reservación pagada: Acesso permitido",
         buttons: [
