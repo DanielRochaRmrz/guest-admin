@@ -404,6 +404,56 @@ getZonaNamePipe(id:any){
 
 }
 
+public getEstatusReservacion(idReseravcion: string){
+
+  return new Promise((resolve, reject) => {
+
+    let consul = this.afs.collection("reservaciones").ref;
+    consul.where("idReservacion", "==", idReseravcion).get().then((data) => {
+
+      data.forEach((doc) => {
+
+        const estatus = doc.data().estatus;
+
+        const idSucursal = doc.data().idSucursal;
+        
+        var info = [{ "estatus": estatus}, {"idSucursal": idSucursal}];
+
+        resolve(info);
+
+        console.log(info);        
+
+      });
+    }).catch((error) => {
+
+      console.log("Error en la consulta -->", error);
+    });
+  });
+
+}
+
+public getEstatusReservacionCompartidas(idReseravcion: string, idCompartida: string){
+
+  return new Promise((resolve, reject) => {
+
+    let consul = this.afs.collection("compartidas").ref;
+    consul.where("idReservacion", "==", idReseravcion).where("idCompartir", "==", idCompartida).get().then((data) => {
+
+      data.forEach((doc) => {
+
+        const estatus_escaneo = doc.data().estatus_escaneo;
+
+        resolve(estatus_escaneo);      
+
+      });
+    }).catch((error) => {
+
+      console.log("Error en la consulta -->", error);
+    });
+  });
+
+}
+
 //OBTIENE LOS CUPONES DE LA SUCURSAL
 public getCupones(idx, uidCupon ) {
   

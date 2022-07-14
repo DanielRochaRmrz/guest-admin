@@ -151,7 +151,7 @@ export class AdminMonitearReservPage {
       
       console.log('Error', err);
 
-      const datosQr = [{ "idReservacion": "rw1KSVPMLiYLuD9i9Bbl"}, {"idCompartir": "o0w3IhulBjSR9AKQeEj4"}];
+      const datosQr = [{ "idReservacion": "i5nxQeQS3rQqeGOpH4Ux"}, {"idCompartir": "undefined"}];
 
       this.navCtrl.push(AdminLeeQrPage, { datosQr: datosQr });
     })

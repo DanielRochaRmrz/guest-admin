@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MonitoreoReservasProvider } from '../../providers/monitoreo-reservas/monitoreo-reservas';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AdminMonitearReservPage } from '../admin-monitear-reserv/admin-monitear-reserv';
 
 @IonicPage()
 @Component({
@@ -36,65 +37,66 @@ export class AdminLeeQrPage {
     public alertCtrl: AlertController,
   ) {
 
-    this.datosQrRecibidos = this.navParams.get('datosQr');
+    // this.datosQrRecibidos = this.navParams.get('datosQr');
 
-    console.log("this.datosQrRecibidos", this.datosQrRecibidos);
+    // console.log("this.datosQrRecibidos", this.datosQrRecibidos);
 
-    const dataCode = JSON.parse(this.datosQrRecibidos);
+    // const dataCode = JSON.parse(this.datosQrRecibidos);
 
     // console.log("dataCode", dataCode);
 
-    this.idReservacion2 = dataCode.idReservacion;
-    this.idCompartir = dataCode.idCompartir;
+    // this.idReservacion2 = dataCode.idReservacion;
+    // this.idCompartir = dataCode.idCompartir;
 
-    // this.idReservacion2 = "tSeXI5EptXKGh4gQBvlw";
-    // this.idCompartir = "SImUawOi5b6b9I1eNMco";
+    this.idReservacion2 = "655Be5QyJwhJjvpA4WIj";
+    this.idCompartir = "wpqg4q8bNm4GU2iT4Wek";
 
-    //alert(this.idCompartir);
-    //Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
-    //si la reservacion es normal cambiar el estatus principal a Finalizado.
+    const idSucursalG = localStorage.getItem('uidSucursal');
+
+    // ESCANEO DE RESERVACION NORMAL
     if (this.idCompartir == undefined) {
-      this.afs.collection('reservaciones').doc(this.idReservacion2).update({
-        estatus: 'Finalizado'
-      });
-      //alert('Reservación pagada: Acceso permitido');
-      let alerta = this.alertCtrl.create({
-        title: "Reservación pagada: Acesso permitido!",
-        buttons: [
-          {
-            text: "Aceptar"
-          }
-        ]
-      });
-      alerta.present();
-    }
-    //Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
-    //si la reservacion es compartida cambiar el estatus en tabla compartida de cada persona que comparte.
-    if (this.idCompartir != undefined) {
 
-      // VERIFICAMOS CUANTOS USUARIOS SON PARTE DE LA RESERVACION
+      this.servMon.getEstatusReservacion(this.idReservacion2).then(data => {
 
-      const consul = this.afs.collection('compartidas').ref;
-      consul.where('idReservacion', '==', this.idReservacion2).get().then(data => {
-        console.log("RESERVACIONES COMPARTIDAS", data);
-        var count = [];
-        data.forEach(res => {
-          const idCompartidas = res.id;
-          count.push(idCompartidas);
+        const estatus = data[0].estatus;
 
+        const idSucursal = data[1].idSucursal;
 
-        });
-        const totalCompartidas = count.length;
-        if (totalCompartidas == 1) {
+        if (estatus == "Finalizado") {
+
+          let alerta = this.alertCtrl.create({
+            title: "Esta reservación ya ha sido escaneada: ¡Acesso denegado!",
+            buttons: [
+              {
+                text: "Aceptar"
+              }
+            ]
+          });
+          alerta.present();
+
+          this.navCtrl.push(AdminMonitearReservPage);
+
+        } else if (idSucursal != idSucursalG) {
+
+          let alerta = this.alertCtrl.create({
+            title: "Esta reservación pertenece a otra sucursal: ¡Acesso denegado!",
+            buttons: [
+              {
+                text: "Aceptar"
+              }
+            ]
+          });
+          alerta.present();
+
+          this.navCtrl.push(AdminMonitearReservPage);
+
+        } else {
 
           this.afs.collection('reservaciones').doc(this.idReservacion2).update({
             estatus: 'Finalizado'
           });
-
-        } else {
-
           let alerta = this.alertCtrl.create({
-            title: "Reservación compartida aceptada: Acesso permitido",
+            title: "Reservación pagada: Acesso permitido!",
             buttons: [
               {
                 text: "Aceptar"
@@ -104,21 +106,108 @@ export class AdminLeeQrPage {
           alerta.present();
 
         }
-        // Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
-        this.afs.collection('compartidas').doc(this.idCompartir).update({
-          estatus_escaneo: 'OK'
-        });
-      });
 
-      let alerta = this.alertCtrl.create({
-        title: "Reservación pagada: Acesso permitido",
-        buttons: [
-          {
-            text: "Aceptar"
+      })
+
+    }
+    // ESCANEO RESERVACIONES COMPARTIDAS
+
+    if (this.idCompartir != undefined) {
+
+      this.servMon.getEstatusReservacion(this.idReservacion2).then(data => {
+
+        const estatus = data[0].estatus;
+
+        const idSucursal = data[1].idSucursal;
+
+        if (estatus == "Finalizado") {
+
+          let alerta = this.alertCtrl.create({
+            title: "Esta reservación ya ha sido escaneada en su totalidad: ¡Acesso denegado!",
+            buttons: [
+              {
+                text: "Aceptar"
+              }
+            ]
+          });
+          alerta.present();
+
+          this.navCtrl.push(AdminMonitearReservPage);
+
+        } else if (idSucursal != idSucursalG) {
+
+          let alerta = this.alertCtrl.create({
+            title: "Esta reservación pertenece a otra sucursal: ¡Acesso denegado!",
+            buttons: [
+              {
+                text: "Aceptar"
+              }
+            ]
+          });
+          alerta.present();
+
+          this.navCtrl.push(AdminMonitearReservPage);
+
+        }
+
+        this.servMon.getEstatusReservacionCompartidas(this.idReservacion2, this.idCompartir).then(data => {
+
+          if (data == "OK") {
+
+            let alerta = this.alertCtrl.create({
+              title: "Esta QR ya ha sido escaneado: ¡Acesso denegado!",
+              buttons: [
+                {
+                  text: "Aceptar"
+                }
+              ]
+            });
+            alerta.present();
+
+            this.navCtrl.push(AdminMonitearReservPage);
+
+          } else {
+
+            const consul = this.afs.collection('compartidas').ref;
+            consul.where('idReservacion', '==', this.idReservacion2).get().then(data => {
+
+              var count = [];
+              data.forEach(res => {
+                const idCompartidas = res.id;
+                count.push(idCompartidas);
+
+
+              });
+              const totalCompartidas = count.length;
+              if (totalCompartidas == 1) {
+
+                this.afs.collection('reservaciones').doc(this.idReservacion2).update({
+                  estatus: 'Finalizado'
+                });
+
+              } else {
+
+                let alerta = this.alertCtrl.create({
+                  title: "Reservación compartida aceptada: Acesso permitido",
+                  buttons: [
+                    {
+                      text: "Aceptar"
+                    }
+                  ]
+                });
+                alerta.present();
+
+              }
+              // Cambiar el estatus a pagado cuando ya se escanea y se verifico el pago
+              this.afs.collection('compartidas').doc(this.idCompartir).update({
+                estatus_escaneo: 'OK'
+              });
+            });
           }
-        ]
-      });
-      alerta.present();
+
+        });
+      })
+
     }
 
     // Datos de la reservacion
