@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { AdminHomePage } from "../../pages/admin-home/admin-home";
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -19,7 +19,8 @@ export class AdminLoginPage {
   constructor(public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public authProvider: AuthProvider,
-    public afs: AngularFirestore) {
+    public afs: AngularFirestore,
+    public alertCtrl: AlertController) {
   }
   ionViewDidLoad() {
     // if (localStorage.getItem("isLogin") == "true") {
@@ -50,7 +51,15 @@ export class AdminLoginPage {
       console.log('Res', res);
     }).catch((err) => {
 
-      //     alert(err.message);
+      let alerta = this.alertCtrl.create({
+        title: "Correo o contraseña incorrectos, intenta de nuevo",
+        buttons: [
+          {
+            text: "Aceptar"
+          }
+        ]
+      });
+      alerta.present();
     });
 
   }
