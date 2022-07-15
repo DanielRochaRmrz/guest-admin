@@ -37,19 +37,19 @@ export class AdminLeeQrPage {
     public alertCtrl: AlertController,
   ) {
 
-    // this.datosQrRecibidos = this.navParams.get('datosQr');
+    this.datosQrRecibidos = this.navParams.get('datosQr');
 
     // console.log("this.datosQrRecibidos", this.datosQrRecibidos);
 
-    // const dataCode = JSON.parse(this.datosQrRecibidos);
+    const dataCode = JSON.parse(this.datosQrRecibidos);
 
     // console.log("dataCode", dataCode);
 
-    // this.idReservacion2 = dataCode.idReservacion;
-    // this.idCompartir = dataCode.idCompartir;
+    this.idReservacion2 = dataCode.idReservacion;
+    this.idCompartir = dataCode.idCompartir;
 
-    this.idReservacion2 = "655Be5QyJwhJjvpA4WIj";
-    this.idCompartir = "wpqg4q8bNm4GU2iT4Wek";
+    // this.idReservacion2 = "655Be5QyJwhJjvpA4WIj";
+    // this.idCompartir = "wpqg4q8bNm4GU2iT4Wek";
 
     const idSucursalG = localStorage.getItem('uidSucursal');
 
