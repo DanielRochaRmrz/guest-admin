@@ -37,19 +37,20 @@ export class AdminLeeQrPage {
     public alertCtrl: AlertController,
   ) {
 
-    this.datosQrRecibidos = this.navParams.get('datosQr');
+    // this.datosQrRecibidos = this.navParams.get('datosQr');
 
     // console.log("this.datosQrRecibidos", this.datosQrRecibidos);
 
-    const dataCode = JSON.parse(this.datosQrRecibidos);
+    // const dataCode = JSON.parse(this.datosQrRecibidos);
 
     // console.log("dataCode", dataCode);
 
-    this.idReservacion2 = dataCode.idReservacion;
-    this.idCompartir = dataCode.idCompartir;
+    // this.idReservacion2 = dataCode.idReservacion;
+    // this.idCompartir = dataCode.idCompartir;
+    // wpqg4q8bNm4GU2iT4Wek
 
-    // this.idReservacion2 = "655Be5QyJwhJjvpA4WIj";
-    // this.idCompartir = "wpqg4q8bNm4GU2iT4Wek";
+    this.idReservacion2 = "hF93QiLuZeYT6407MEOB";
+    this.idCompartir = "0nVeAWgoBm3iBcBumcEV";
 
     const idSucursalG = localStorage.getItem('uidSucursal');
 
@@ -65,7 +66,7 @@ export class AdminLeeQrPage {
         if (estatus == "Finalizado") {
 
           let alerta = this.alertCtrl.create({
-            title: "Esta reservación ya ha sido escaneada: ¡Acesso denegado!",
+            title: "<div align='center'><img text-center class='adv2' src='./assets/content/advertenciaRojo.png'/></div> Esta reservación ya ha sido escaneada:<br> ¡Acesso denegado!",
             buttons: [
               {
                 text: "Aceptar"
@@ -79,7 +80,7 @@ export class AdminLeeQrPage {
         } else if (idSucursal != idSucursalG) {
 
           let alerta = this.alertCtrl.create({
-            title: "Esta reservación pertenece a otra sucursal: ¡Acesso denegado!",
+            title: "<div align='center'><img text-center class='adv2' src='./assets/content/advertenciaRojo.png'/></div> Esta reservación pertenece a otra sucursal:<br> ¡Acesso denegado!",
             buttons: [
               {
                 text: "Aceptar"
@@ -96,7 +97,7 @@ export class AdminLeeQrPage {
             estatus: 'Finalizado'
           });
           let alerta = this.alertCtrl.create({
-            title: "Reservación pagada: Acesso permitido!",
+            title: "<div align='center'><img text-center class='adv2' src='./assets/content/ok.png'/></div> Reservación pagada:<br> Acesso permitido!",
             buttons: [
               {
                 text: "Aceptar"
@@ -123,7 +124,7 @@ export class AdminLeeQrPage {
         if (estatus == "Finalizado") {
 
           let alerta = this.alertCtrl.create({
-            title: "Esta reservación ya ha sido escaneada en su totalidad: ¡Acesso denegado!",
+            title: "<div align='center'><img text-center class='adv2' src='./assets/content/advertenciaRojo.png'/></div> Esta reservación ya ha sido escaneada en su totalidad:<br> ¡Acesso denegado!",
             buttons: [
               {
                 text: "Aceptar"
@@ -137,7 +138,7 @@ export class AdminLeeQrPage {
         } else if (idSucursal != idSucursalG) {
 
           let alerta = this.alertCtrl.create({
-            title: "Esta reservación pertenece a otra sucursal: ¡Acesso denegado!",
+            title: "<div align='center'><img text-center class='adv2' src='./assets/content/advertenciaRojo.png'/></div> Esta reservación pertenece a otra sucursal:<br> ¡Acesso denegado!",
             buttons: [
               {
                 text: "Aceptar"
@@ -155,7 +156,7 @@ export class AdminLeeQrPage {
           if (data == "OK") {
 
             let alerta = this.alertCtrl.create({
-              title: "Esta QR ya ha sido escaneado: ¡Acesso denegado!",
+              title: "<div align='center'><img text-center class='adv2' src='./assets/content/advertenciaRojo.png'/></div> Este QR ya ha sido escaneado:<br> ¡Acesso denegado!",
               buttons: [
                 {
                   text: "Aceptar"
@@ -188,7 +189,7 @@ export class AdminLeeQrPage {
               } else {
 
                 let alerta = this.alertCtrl.create({
-                  title: "Reservación compartida aceptada: Acesso permitido",
+                  title: "<div align='center'><img text-center class='adv2' src='./assets/content/ok.png'/></div> Reservación compartida aceptada:<br> Acesso permitido",
                   buttons: [
                     {
                       text: "Aceptar"
@@ -212,21 +213,40 @@ export class AdminLeeQrPage {
 
     // Datos de la reservacion
     this.servMon.getReservacion(this.idReservacion2).subscribe(reserv => {
-      this.reservacion = reserv;
-      // Extraemos uid del usuario
-      const uid = this.reservacion.idUsuario;
-      this.infoClient(uid);
-      // Extraemos el id del area
-      const uidArea = this.reservacion.idArea;
-      this.infoArea(uidArea);
-      // Extraemos el id de la zona
-      const uidZona = this.reservacion.idZona;
-      this.infoZona(uidZona);
-      // Extraemos el id del evento
-      const uidEvento = this.reservacion.idevento;
-      this.infoEvento(uidEvento);
-      // Enviamos el idReservacion a productos
-      this.getProducts(this.idReservacion2);
+
+      if (reserv != null) {
+
+        this.reservacion = reserv;
+        // Extraemos uid del usuario
+        const uid = this.reservacion.idUsuario;
+        this.infoClient(uid);
+        // Extraemos el id del area
+        const uidArea = this.reservacion.idArea;
+        this.infoArea(uidArea);
+        // Extraemos el id de la zona
+        const uidZona = this.reservacion.idZona;
+        this.infoZona(uidZona);
+        // Extraemos el id del evento
+        const uidEvento = this.reservacion.idevento;
+        this.infoEvento(uidEvento);
+        // Enviamos el idReservacion a productos
+        this.getProducts(this.idReservacion2);
+      } else {
+
+        let alerta = this.alertCtrl.create({
+          title: "<div align='center'><img text-center class='adv2' src='./assets/content/advertenciaRojo.png'/></div> Esta reservación no existe:<br> ¡Acesso denegado!",
+          buttons: [
+            {
+              text: "Aceptar"
+            }
+          ]
+        });
+        alerta.present();
+
+        this.navCtrl.push(AdminMonitearReservPage);
+
+      }
+
     });
     //this.servMon.getDatosTarjeta(this.idTarjeta).subscribe( tarjeta =>{
     //  this.infotarjeta = tarjeta;
