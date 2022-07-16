@@ -8,7 +8,6 @@ import { SucursalAltaProvider } from '../../providers/sucursal-alta/sucursal-alt
 import { AdminSucursalPerfilPage } from '../admin-sucursal-perfil/admin-sucursal-perfil';
 import { MonitoreoReservasProvider } from '../../providers/monitoreo-reservas/monitoreo-reservas';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { PushNotiProvider } from '../../providers/push-noti/push-noti';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AdminPerfilEmpleadoPage } from '../admin-perfil-empleado/admin-perfil-empleado';
 import { AdminMonitearReservPage } from '../admin-monitear-reserv/admin-monitear-reserv';
@@ -18,6 +17,7 @@ import { AdminLoginPage } from '../admin-login/admin-login';
 import { AdminUsersGuestPage } from '../admin-users-guest/admin-users-guest';
 import { CorteHistorialPage } from '../corte-historial/corte-historial';
 import { AdminCroquisPage } from '../admin-croquis/admin-croquis';
+import { DeviceProvider } from '../../providers/device/device';
 
 @IonicPage()
 @Component({
@@ -27,6 +27,7 @@ import { AdminCroquisPage } from '../admin-croquis/admin-croquis';
 export class AdminHomePage {
   email: string;
   uid: string;
+  uidSucursal: string;
   sucursal: any;
   sucursal2: any;
   _sucursal: any = {};
@@ -54,7 +55,7 @@ export class AdminHomePage {
     public authProvider: AuthProvider,
     public sucProv: SucursalAltaProvider,
     public firebase: AngularFireAuth,
-    public _providerPushNoti: PushNotiProvider,
+    public _deviceProvider: DeviceProvider,
     public afs: AngularFirestore,
     public monRes: MonitoreoReservasProvider
   ) {
@@ -72,7 +73,9 @@ export class AdminHomePage {
       this.authProvider.getUserBd(this.uid).subscribe(s => {
         
         this._sucursal = s;
-        console.log('sucursal', this._sucursal);
+        this.uidSucursal = this._sucursal.uid
+        this._deviceProvider.deviceInfo(this.uidSucursal);
+        console.log('sucursal uid -->', this.uidSucursal);
 
       })
 
@@ -140,9 +143,7 @@ export class AdminHomePage {
   }
 
   ionViewDidLoad() {
-
     console.log('HOME PAGE');
-    this._providerPushNoti.init_push_noti();
   }
 
   goEventos(){

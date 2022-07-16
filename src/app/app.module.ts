@@ -113,6 +113,9 @@ import { Stripe } from '@ionic-native/stripe';
 import { PaymentProvider } from '../providers/payment/payment';
 import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
+import { DeviceProvider } from '../providers/device/device';
+import { Device } from '@ionic-native/device';
+import { FCM } from '@ionic-native/fcm';
 
 
 
@@ -286,7 +289,10 @@ import { from } from 'rxjs';
     Stripe,
     PaymentProvider,
     Camera,
-    Clipboard
+    Clipboard,
+    DeviceProvider,
+    Device,
+    FCM
   ]
 })
 export class AppModule {}
