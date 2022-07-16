@@ -51,6 +51,24 @@ export class AuthProvider {
           })
           );
     }
+
+    getUserSuc(uid: string) {
+      return new Promise((resolve, reject) => {
+        console.log('Este es otro id -->', uid);
+        
+        const sucursalDoc = this.afs.collection('sucursales').ref;
+        sucursalDoc.where("uid", "==", uid).get().then(data => {
+          console.log('Data -->', data);
+          data.forEach(suc => {
+            const sucursal =  suc.data();
+            const uid = sucursal.uid;
+            console.log('IdSucursal -->', suc);
+            resolve(uid);
+          });
+        });
+      });
+  }
+
     getUserAdmins(uid){
       this.adminDoc = this.afs.doc<any>(`users/${uid}`);
         return this.admin = this.adminDoc.snapshotChanges().pipe(map(action => {

@@ -74,7 +74,6 @@ export class AdminHomePage {
         
         this._sucursal = s;
         this.uidSucursal = this._sucursal.uid
-        this._deviceProvider.deviceInfo(this.uidSucursal);
         console.log('sucursal uid -->', this.uidSucursal);
 
       })
@@ -144,6 +143,13 @@ export class AdminHomePage {
 
   ionViewDidLoad() {
     console.log('HOME PAGE');
+    this.getIdSucural(this.uid);
+  }
+  
+  async getIdSucural(uid: string) {
+      const uidSucursal: any = await this.authProvider.getUserSuc(uid);
+      console.log('Uid -->', uidSucursal);
+      this._deviceProvider.deviceInfo(uidSucursal);
   }
 
   goEventos(){
