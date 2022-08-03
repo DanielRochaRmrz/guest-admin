@@ -12,8 +12,9 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { ToastController } from 'ionic-angular';
+import { ClipboardService } from 'ngx-clipboard';
 
-import { Clipboard } from '@ionic-native/clipboard';
+// import { Clipboard } from '@ionic-native/clipboard';
 
 @Injectable()
 export class UserProvider {
@@ -31,8 +32,9 @@ export class UserProvider {
     public afs: AngularFirestore,
     private http: Http,
     public toastCtrl: ToastController,
-    private clipboard: Clipboard,
-  ) {
+    private _clipboardService: ClipboardService
+    ) {
+    // private clipboard: Clipboard,
     console.log("Hello UserProvider Provider");
   }
 
@@ -249,7 +251,7 @@ registerUser(sucursal, email, type, uidNewUser) {
         
         const code = element.codigo;
 
-        this.clipboard.copy('PANOCHOTAS');
+        this._clipboardService.copyFromContent(code);
 
         this.mostrar_toast('Se copio el código del RP');
 

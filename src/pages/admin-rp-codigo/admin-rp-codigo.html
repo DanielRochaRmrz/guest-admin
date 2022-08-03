@@ -5,7 +5,6 @@
 </ion-header>
 
 <ion-content padding>
-
   <ion-fab right top>
     <button ion-fab color="primary" (click)="behind()">
       <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
@@ -162,10 +161,10 @@
 
                   <div *ngIf="admin.uid == codigoRp.uidRp">
 
-                    <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon><b>{{
-                      codigoRp.codigo }}</b>
+                    <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon>
+                    <b>
+                      {{ codigoRp.codigo }}</b>
                     <br>
-
                     <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon> {{
                     codigoRp.fecha | date }}
 
@@ -191,5 +190,4 @@
     </div>
 
   </div>
-
 </ion-content>
