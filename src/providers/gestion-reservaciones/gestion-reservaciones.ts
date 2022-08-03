@@ -93,7 +93,7 @@ export class GestionReservacionesProvider {
     this.servicios = this.aFS.collection<any>("reservaciones", (ref) =>
       ref
         .where("idUsuario", "==", idx)
-        .where("estatus", "==", "Pagando")
+        .where("estatus", "==", "Finalizado")
         .orderBy("fechaR_", "desc")
     );
     this._servicios = this.servicios.valueChanges();

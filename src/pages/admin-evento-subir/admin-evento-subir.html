@@ -48,12 +48,12 @@
         <ion-col col-1></ion-col>
         <ion-col>
             <p class="lugar">
-                CREAR NUEVA EVENTO
+                CREAR NUEVO EVENTO
                 <br>
                 <img src="./assets/content/line-hori.png" style="width: 40%;" alt="">
             </p>
             <p class="descrip">
-                Para mejorar la experiencia del usuario Ghest , le recomendamos subir imagenes en formato PNG
+                Para mejorar la experiencia del usuario Guest, le recomendamos subir imagenes en formato PNG
             </p>
         </ion-col>
         <ion-col col-1></ion-col>
@@ -74,8 +74,8 @@
 
     <ion-list>
 
-        <ion-item no-lines>
-            <ion-label stacked >Titulo</ion-label>
+        <ion-item>
+            <ion-label stacked >Título</ion-label>
             <ion-input type="text" class="letra" [(ngModel)]="titulo"></ion-input>
         </ion-item>
         <ion-item>
@@ -97,12 +97,14 @@
         </ion-item>
 
         <ion-item>
-            <ion-label>Lugar</ion-label>
+            <ion-label stacked >Lugar</ion-label>
             <ion-input type="text" class="letra" [(ngModel)]="lugar"></ion-input>
         </ion-item>
+
+        <br>
         
         <ion-card class="cardDes">
-            <ion-item class="fond" no-lines>
+            <ion-item class="fond">
                 <ion-textarea class="fond" placeholder="Descripción" [(ngModel)]="obs" name="obs" autocomplete="on" autocorrect="on"></ion-textarea>
             </ion-item>
         </ion-card>

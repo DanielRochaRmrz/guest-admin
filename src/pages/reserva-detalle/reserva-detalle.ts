@@ -12,6 +12,7 @@ import { ReservacionProvider } from "../../providers/reservacion/reservacion";
 import { UserProvider } from "../../providers/user/user";
 import { AlertController } from "ionic-angular";
 import { stringify } from "querystring";
+import { DeviceProvider } from "../../providers/device/device";
 
 @IonicPage()
 @Component({
@@ -45,7 +46,8 @@ export class ReservaDetallePage {
     private modalCtrl: ModalController,
     public _providerReserva: ReservacionProvider,
     public navParams: NavParams,
-    public _gestionReser: GestionReservacionesProvider
+    public _gestionReser: GestionReservacionesProvider,
+    private sendNoti: DeviceProvider
   ) {
 
     this.idRers = this.navParams.get("idReser");
@@ -73,7 +75,7 @@ export class ReservaDetallePage {
 
     this._gestionReser.getZona(idZona).subscribe((zona) => {
 
-      this.zona = zona;     
+      this.zona = zona;
 
     });
 
@@ -86,7 +88,7 @@ export class ReservaDetallePage {
 
   }
 
-   getMesas(idZona) {
+  getMesas(idZona) {
     this._gestionReser.getMesas(idZona).subscribe((mesas) => {
       this.mesas = mesas;
       console.log("mesas JAJA: ", this.mesas);
@@ -99,7 +101,7 @@ export class ReservaDetallePage {
 
       this.historial = history;
 
-      // console.log(this.historial);
+      console.log(this.historial);
 
 
       if (this.historial.length != 0) {
@@ -143,15 +145,15 @@ export class ReservaDetallePage {
 
   }
 
-  modStatus_cancelacion(idReserv, idSucursal) {
-
-    this.getUsersPusCancelar();
+  modStatus_cancelacion(idReserv, idSucursal) {    
 
     let modal = this.modalCtrl.create("Modalstatus_cancelacionPage", {
 
       idReserv: idReserv,
 
-      idSucursal: idSucursal
+      idSucursal: idSucursal,
+
+      idUsuario: this.reserv.idUsuario
 
     });
 
@@ -162,8 +164,6 @@ export class ReservaDetallePage {
   Aceptar(idReserv) {
 
     if (this.reserv.numMesa != undefined) {
-
-      this.getUsersPusNoti();
 
       this._gestionReser.getEstatusReser(idReserv).subscribe((reser) => {
 
@@ -188,6 +188,8 @@ export class ReservaDetallePage {
         });
       });
 
+      this.getUsersPushNotiAceptada();
+
     } else {
 
       const alert = this.alertCtrl.create({
@@ -203,69 +205,34 @@ export class ReservaDetallePage {
 
   }
 
-  getUsersPusNoti() {
+  getUsersPushNotiAceptada() {
     console.log("id rese", this.reserv.idUsuario);
 
     this._gestionReser.getMyUser(this.reserv.idUsuario).subscribe((users) => {
 
       this.users = users;
+      
+      if (users.playerID != undefined) {
 
-      if (this.platform.is("cordova")) {
-        let noti = {
-          app_id: "de05ee4f-03c8-4ff4-8ca9-c80c97c5c0d9",
-          include_player_ids: [users.playerID],
-          data: { foo: "bar" },
-          contents: {
-            en: " Reservación aceptada ",
-          },
-        };
+        if (this.platform.is("cordova")) {
 
-        window["plugins"].OneSignal.postNotification(
-          noti,
-          function (successResponse) {
-            console.log("Notification Post Success:", successResponse);
-          },
-          function (failedResponse: any) {
-            console.log("Notification Post Failed: ", failedResponse);
-          }
-        );
-      } else {
-        console.log("Solo funciona en dispositivos");
+          const data = {
+            topic: users.playerID,
+            title: "Reservación aceptada",
+            body: "Hola "+users.displayName+" tu reservación fue aceptada.",
+          };
+          this.sendNoti.sendPushNoti(data).then((resp: any) => {
+            console.log('Respuesta noti fcm', resp);
+          });
+
+        } else {
+          console.log("Solo funciona en dispositivos");
+        }
+
       }
+
     });
   }
-
-  getUsersPusCancelar() {
-
-    this._gestionReser.getMyUser(this.reserv.idUsuario).subscribe((users) => {
-
-      this.users = users;
-
-      if (this.platform.is("cordova")) {
-        let noti = {
-          app_id: "de05ee4f-03c8-4ff4-8ca9-c80c97c5c0d9",
-          include_player_ids: [users.playerID],
-          data: { foo: "bar" },
-          contents: {
-            en: " Reservación cancelada ",
-          },
-        };
-
-        window["plugins"].OneSignal.postNotification(
-          noti,
-          function (successResponse) {
-            console.log("Notification Post Success:", successResponse);
-          },
-          function (failedResponse: any) {
-            console.log("Notification Post Failed: ", failedResponse);
-          }
-        );
-      } else {
-        console.log("Solo funciona en dispositivos");
-      }
-    });
-  }
-
 
   asignarMesa(idReserv: string, fechaR: string, idSucursal: string) {
     const prompt = this.alertCtrl.create({
