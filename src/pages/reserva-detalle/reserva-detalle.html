@@ -19,7 +19,9 @@
 
 <ion-content padding>
     <ion-fab right top>
-        <button ion-fab color="primary" (click)="closeModal()"><ion-icon name="close"></ion-icon></button>
+        <button ion-fab color="primary" (click)="closeModal()">
+            <ion-icon name="close"></ion-icon>
+        </button>
     </ion-fab>
     <br>
     <div>
@@ -28,263 +30,258 @@
     </div>
     <hr>
 
-            <div align="center">
+    <div align="center">
 
-                <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
-                <font size="2" color="#474646"> <b>Detalles de la reservación </b></font>
+        <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
+        <font size="2" color="#474646"> <b>Detalles de la reservación </b></font>
 
-            </div>
+    </div>
 
-            <ion-card>
+    <ion-card>
 
-                <div align="center">
+        <div align="center">
 
-                    <img class="imagen_perfil" src="{{ (uidUsuarioReser | getNameUser | async)?.photoURL }}"/>
+            <img class="imagen_perfil" src="{{ (uidUsuarioReser | getNameUser | async)?.photoURL }}" />
 
-                </div>
-            
-                <ion-card-content>
-                  <ion-card-title>
-                    {{ (uidUsuarioReser | getNameUser | async)?.displayName }}
-                  </ion-card-title>
-                  <p>
-                    Estos son los detalles de la reservación:
-                  </p>
-                </ion-card-content>
+        </div>
 
-                <ion-item>
-                    <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>
-                    Teléfono del cliente
-                    <ion-badge item-end>{{ (uidUsuarioReser | getNameUser | async)?.phoneNumber }}</ion-badge>
-                  </ion-item>
-            
-                <ion-item>
-                    <ion-icon ios="ios-people" md="md-people" item-start style="color: #fcc04d"></ion-icon>
-                    Número de personas
-                    <div *ngIf="reserv.numPersonas">
-                        <ion-badge item-end>{{ reserv.numPersonas }}</ion-badge>
-                    </div>
-                </ion-item>
-            
-                <ion-item>
-                    <ion-icon ios="ios-grid" md="md-grid" item-start style="color: #fcc04d"></ion-icon>
-                  Zona seleccionada
-                  <ion-badge item-end>{{ zona.nombre }}</ion-badge>
-                </ion-item>
+        <ion-card-content>
+            <ion-card-title>
+                {{ (uidUsuarioReser | getNameUser | async)?.displayName }}
+            </ion-card-title>
+            <p>
+                Estos son los detalles de la reservación:
+            </p>
+        </ion-card-content>
 
-                <ion-item>
+        <ion-item>
+            <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>
+            Teléfono del cliente
+            <ion-badge item-end>{{ (uidUsuarioReser | getNameUser | async)?.phoneNumber }}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon ios="ios-people" md="md-people" item-start style="color: #fcc04d"></ion-icon>
+            Número de personas
+            <ion-badge item-end>{{ reserv.numPersonas }}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon ios="ios-grid" md="md-grid" item-start style="color: #fcc04d"></ion-icon>
+            Zona seleccionada
+            <ion-badge item-end>{{ zona.nombre }}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon>
+            Código RP Usado
+            <ion-badge item-end>{{ reserv.codigoRP }}</ion-badge>
+        </ion-item>
+
+    </ion-card>
+
+    <hr>
+
+    <div align="center">
+
+        <ion-icon ios="ios-menu" md="md-menu" item-start style="color: #fcc04d"></ion-icon>
+        <font size="2" color="#474646"> <b>Orden a la carta </b></font>
+
+    </div>
+
+    <!-- <PRODUCTOS> -->
+
+    <div align="center">
+
+        <ion-grid>
+
+            <ion-row class="header-row">
+                <ion-col>
+                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d"></ion-icon>
+                    <b>Cantidad</b>
+                </ion-col>
+
+                <ion-col>
+                    <ion-icon ios="ios-basket" md="md-basket" item-start style="color: #fcc04d"></ion-icon>
+                    <b>Producto</b>
+                </ion-col>
+
+                <ion-col text-right>
                     <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon>
-                  Código RP Usado
-                  <ion-badge item-end>{{ reserv.codigoRP }}</ion-badge>
-                </ion-item>
-            
-              </ion-card>
-
-            <hr>
-
-            <div align="center">
-
-                <ion-icon ios="ios-menu" md="md-menu" item-start style="color: #fcc04d"></ion-icon>
-                <font size="2" color="#474646"> <b>Orden a la carta </b></font>
-
-            </div>
-
-            <!-- <ion-card> -->
-                <ion-grid>
-                    <ion-row>
-                        <ion-item class="color1">
-                            <ion-row>
-
-                                <ion-col col-4>
-
-                                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d"></ion-icon>
-                                    <b>Cantidad</b> 
-                                
-                                </ion-col>
-
-                                <ion-col col-4>
-
-                                    <ion-icon ios="ios-basket" md="md-basket" item-start style="color: #fcc04d"></ion-icon>
-                                    <b>Producto</b> 
-
-                                </ion-col>
-
-                                <ion-col col-4>
-
-                                <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon>
-                                    <b> Precio </b> 
-
-                                </ion-col>
-
-                            </ion-row>
-                        </ion-item>
-                    </ion-row>
-                </ion-grid>
-
-                <ion-row *ngFor="let produ of productos">
-                    <ion-item class="color1">
-                        <ion-row>
-                            <ion-col col-4>{{produ.cantidad}}</ion-col>
-                            <ion-col col-4>{{produ.producto}}</ion-col>
-                            <ion-col col-4>$ {{produ.costo}} </ion-col>
-                        </ion-row>
-
-                    </ion-item>
-                </ion-row>
-
-                <ion-row>
-                    <ion-item class="color1">
-                        <ion-row>
-                            <ion-col col-4>
-
-                                <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
-                                 
-                                <b>Total</b> 
-
-                                </ion-col>
-
-                                <ion-col col-4>
-
-                                    <!-- ESPACIO EN BLANCO -->
-
-                                </ion-col>
-
-                                <ion-col col-4>
-                                
-                                    <span><b>$ {{ totalReserv }}</b></span>
-
-                                </ion-col>
-
-                        </ion-row>
-
-                    </ion-item>
-                </ion-row>
-            <!-- </ion-card> -->
-
-            <ion-row class="row1" style="margin-left:40px">
-                <ion-col col-12>
-
-                </ion-col>
-            </ion-row>
-
-            <ion-row class="row1" style="margin-left:40px">
+                    <b>Precio</b>
+                </ion-col>                
 
             </ion-row>
 
-            <ion-row class="row">
-                <ion-card color="light">
-                    <ion-card-content>
-                        <ion-card-title>
-                            <ion-col col-12 text-center>
-                                <button ion-button block (click)="asignarMesa(reserv.idReservacion, reserv.fechaR, reserv.idSucursal)">Asignación de mesa</button>
-                            </ion-col>
-                        </ion-card-title>
-                    </ion-card-content>
-                    <ion-item>
-                        <ion-icon name='ios-keypad' item-start style="color: #FFC149"></ion-icon>
-                        Mesa asignada
-                        <ion-badge item-end>{{ reserv.numMesa }}</ion-badge>
-                    </ion-item>
-                </ion-card>
+            <ion-row *ngFor="let produ of productos">
+
+                <ion-col>{{ produ.cantidad }}</ion-col>
+
+                <ion-col>{{ produ.producto }} </ion-col>
+
+                <ion-col text-right>{{ produ.costo | currency }}</ion-col>                
+
             </ion-row>
 
+        </ion-grid>
 
-            <ion-row class="row" align="center">
-                <ion-col col-6 text-center (click)="modStatus_cancelacion(reserv.idReservacion, reserv.idSucursal)">
-                    <!-- <ion-col text-center (click)="Cancelar(reserv.uid)"> -->
-                    <!-- <ion-icon ios="ios-close-circle" md="md-close-circle" class="icono"></ion-icon>
+        <ion-grid>
+
+            <ion-row>
+
+                <ion-col>
+
+                    <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
+                    <b>Total</b>
+
+                </ion-col> 
+
+                <ion-col><b></b></ion-col>                
+
+                <ion-col text-right>{{ totalReserv | currency }}</ion-col>
+
+            </ion-row>
+
+        </ion-grid>
+
+    </div>
+
+
+    <!-- </ion-card> -->
+
+    <ion-row class="row1" style="margin-left:40px">
+        <ion-col col-12>
+
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="row1" style="margin-left:40px">
+
+    </ion-row>
+
+    <ion-row class="row">
+        <ion-card color="light">
+            <ion-card-content>
+                <ion-card-title>
+                    <ion-col col-12 text-center>
+                        <button ion-button block
+                            (click)="asignarMesa(reserv.idReservacion, reserv.fechaR, reserv.idSucursal)">Asignación de
+                            mesa</button>
+                    </ion-col>
+                </ion-card-title>
+            </ion-card-content>
+            <ion-item>
+                <ion-icon name='ios-keypad' item-start style="color: #FFC149"></ion-icon>
+                Mesa asignada
+                <ion-badge item-end>{{ reserv.numMesa }}</ion-badge>
+            </ion-item>
+        </ion-card>
+    </ion-row>
+
+
+    <ion-row class="row" align="center">
+        <ion-col col-6 text-center (click)="modStatus_cancelacion(reserv.idReservacion, reserv.idSucursal)">
+            <!-- <ion-col text-center (click)="Cancelar(reserv.uid)"> -->
+            <!-- <ion-icon ios="ios-close-circle" md="md-close-circle" class="icono"></ion-icon>
                 Cancelar Reservación -->
-                    <button ion-button color="danger" outline large>Cancelar </button>
-                </ion-col>
-                <ion-col col-6 text-center>
-                    <!-- <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="icono"></ion-icon>
+            <button ion-button color="danger" outline large>Cancelar </button>
+        </ion-col>
+        <ion-col col-6 text-center>
+            <!-- <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="icono"></ion-icon>
                 Aceptar Reservación -->
-                    <button ion-button color="secondary" large (click)="Aceptar(reserv.idReservacion)">Aceptar </button>
+            <button ion-button color="secondary" large (click)="Aceptar(reserv.idReservacion)">Aceptar </button>
+        </ion-col>
+    </ion-row>
+    <br><br>
+
+    <ion-row class="title2">
+        <ion-col text-center>
+
+            <ion-item-divider color="light">
+                <ion-icon ios="ios-menu" md="md-menu" style="color: #fcc04d"></ion-icon> Compartida con
+            </ion-item-divider>
+        </ion-col>
+    </ion-row>
+
+    <div *ngFor="let compartida of compartidas">
+
+        <div class="espacio">
+            <ion-row>
+                <ion-col col-2 text-center>
+                    <ion-icon ios="ios-person" md="md-person" style="color: #fcc04d"></ion-icon>
+                </ion-col>
+                <ion-col col-3 text-center>
+                    {{ (compartida.telefono | getNamexphoneUser| async)?.displayName }}
+                </ion-col>
+                <ion-col col-3 text-center>
+                    <ion-icon ios="ios-call" md="md-call" item-start style="color: #fcc04d"></ion-icon>&nbsp;
+                    {{ compartida.telefono }}
+                </ion-col>
+                <ion-col col-2 text-center>
+                    $ {{ compartida.totalDividido }}
                 </ion-col>
             </ion-row>
-            <br><br>
 
-            <ion-row class="title2">
+        </div>
+
+    </div>
+
+    <ion-row class="title2">
+        <ion-col text-center>
+
+            <ion-item-divider color="light">
+                <ion-icon ios="ios-menu" md="md-menu" style="color: #fcc04d"></ion-icon> Historial de Reservaciones
+            </ion-item-divider>
+        </ion-col>
+    </ion-row>
+    <div *ngIf="res==true">
+        <ion-grid class="title3">
+            <ion-row>
                 <ion-col text-center>
-                    
-                    <ion-item-divider color="light"><ion-icon ios="ios-menu" md="md-menu"  style="color: #fcc04d"></ion-icon> Compartida con</ion-item-divider>
+                    <b>Establecimiento</b>
                 </ion-col>
-            </ion-row>
-
-            <div *ngFor="let compartida of compartidas">
-               
-                    <div class="espacio">
-                        <ion-row>
-                            <ion-col col-2 text-center>
-                                <ion-icon ios="ios-person" md="md-person" style="color: #fcc04d"></ion-icon>
-                            </ion-col>
-                            <ion-col col-3 text-center>
-                                {{ (compartida.telefono | getNamexphoneUser| async)?.displayName }}
-                            </ion-col>
-                            <ion-col col-3 text-center>
-                                <ion-icon ios="ios-call" md="md-call" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{ compartida.telefono }}                                
-                            </ion-col>
-                            <ion-col col-2 text-center>
-                                $ {{ compartida.totalDividido }}
-                            </ion-col>
-                        </ion-row>
-
-                    </div>
-                    
-            </div> 
-
-            <ion-row class="title2">
                 <ion-col text-center>
-                    
-                    <ion-item-divider color="light"><ion-icon ios="ios-menu" md="md-menu" style="color: #fcc04d"></ion-icon> Historial de Reservaciones</ion-item-divider>
+                    <b>Fecha</b>
                 </ion-col>
-            </ion-row>
-            <div *ngIf="res==true">
-                <ion-grid class="title3">
-                    <ion-row>
-                        <ion-col text-center>
-                            <b>Establecimiento</b>
-                        </ion-col>
-                        <ion-col text-center>
-                            <b>Fecha</b>
-                        </ion-col>
-                        <ion-col text-center>
-                            <b>Hora</b>
-                        </ion-col>
-                        <!-- <ion-col text-center>
+                <ion-col text-center>
+                    <b>Hora</b>
+                </ion-col>
+                <!-- <ion-col text-center>
                             <b>Puntuación</b>
                         </ion-col> -->
-                    </ion-row>
-                    <ion-row class="row1" *ngFor="let history of historial">
-                        <ion-col text-center>
+            </ion-row>
+            <ion-row class="row1" *ngFor="let history of historial">
+                <ion-col text-center>
 
-                            <!-- <div *ngFor="let sucursal of sucursales">
+                    <!-- <div *ngFor="let sucursal of sucursales">
                                 <div *ngIf="sucursal.$key==history.idSucursal"> -->
-                                    <!-- {{sucursal.displayName}} -->
+                    <!-- {{sucursal.displayName}} -->
 
-                                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d"></ion-icon> <b style="text-transform: uppercase;"> &nbsp; {{ (history.idSucursal | getNameUser | async)?.displayName }}</b>
+                    <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d"></ion-icon> <b
+                        style="text-transform: uppercase;"> &nbsp;
+                        {{ (history.idSucursal | getNameUser | async)?.displayName }}</b>
 
-                                <!-- </div>
+                    <!-- </div>
                             </div> -->
-                        </ion-col>
-                        <ion-col text-center>
-                            {{history.fechaR | date : 'dd/MM/yyyy'}}
-                        </ion-col>
-                        <ion-col text-center>
-                            {{history.hora}}
-                        </ion-col>
-                        <!-- <ion-col text-center>
+                </ion-col>
+                <ion-col text-center>
+                    {{history.fechaR | date : 'dd/MM/yyyy'}}
+                </ion-col>
+                <ion-col text-center>
+                    {{history.hora}}
+                </ion-col>
+                <!-- <ion-col text-center>
                             {{history.puntuacion}} 5
                         </ion-col> -->
-                    </ion-row>
-                </ion-grid>
-            </div>
-            <div *ngIf="res==false">
-                <ion-row class="row1">
-                    <ion-col text-center class="col1">
-                        El cliente no tiene reservaciones previas
-                    </ion-col>
-                </ion-row>
-            </div>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div *ngIf="res==false">
+        <ion-row class="row1">
+            <ion-col text-center class="col1">
+                El cliente no tiene reservaciones previas
+            </ion-col>
+        </ion-row>
+    </div>
 
 </ion-content>
