@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { MenuController } from "ionic-angular";
 import { AuthProvider } from '../../providers/auth/auth';
 import { AdminEventoHomePage } from "../../pages/admin-evento-home/admin-evento-home";
@@ -57,7 +57,8 @@ export class AdminHomePage {
     public firebase: AngularFireAuth,
     public _deviceProvider: DeviceProvider,
     public afs: AngularFirestore,
-    public monRes: MonitoreoReservasProvider
+    public monRes: MonitoreoReservasProvider,
+    public platform: Platform
   ) {
     this.sucursal2 = localStorage.getItem("uid");
     console.log("este es el uid logueado", this.sucursal2);
@@ -73,8 +74,7 @@ export class AdminHomePage {
       this.authProvider.getUserBd(this.uid).subscribe(s => {
         
         this._sucursal = s;
-        this.uidSucursal = this._sucursal.uid
-        console.log('sucursal uid -->', this.uidSucursal);
+    
 
       })
 
@@ -149,7 +149,9 @@ export class AdminHomePage {
   async getIdSucural(uid: string) {
       const uidSucursal: any = await this.authProvider.getUserSuc(uid);
       console.log('Uid -->', uidSucursal);
-      this._deviceProvider.deviceInfo(uidSucursal);
+      if (this.platform.is('cordova')) {
+        this._deviceProvider.deviceInfo(uidSucursal);
+      }
   }
 
   goEventos(){
