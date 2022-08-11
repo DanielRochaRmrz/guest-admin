@@ -292,7 +292,7 @@ export class ReservaDetallePage {
     this._providerReserva
       .updateStatus(idReserv, mesa)
       .then((respuesta: any) => {
-        console.log("Respuesta: ", respuesta);
+        this.getReservacion();
       });
   }
 
