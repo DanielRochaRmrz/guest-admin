@@ -112,9 +112,12 @@ import { Stripe } from '@ionic-native/stripe';
 import { PaymentProvider } from '../providers/payment/payment';
 import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
+<<<<<<< Updated upstream
 import { DeviceProvider } from '../providers/device/device';
 import { Device } from '@ionic-native/device';
 import { FCM } from '@ionic-native/fcm';
+=======
+>>>>>>> Stashed changes
 import { ClipboardModule } from 'ngx-clipboard';
 
 
@@ -290,9 +293,12 @@ import { ClipboardModule } from 'ngx-clipboard';
     Stripe,
     PaymentProvider,
     Camera,
+<<<<<<< Updated upstream
     DeviceProvider,
     Device,
     FCM
+=======
+>>>>>>> Stashed changes
   ]
 })
 export class AppModule {}
