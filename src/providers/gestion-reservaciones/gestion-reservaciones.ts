@@ -324,6 +324,7 @@ export class GestionReservacionesProvider {
     });
     return promise;
   }
+
   getOneReservación(idx) {
     this.Reservacion = this.aFS.doc<any>(`reservaciones/${idx}`);
     return (this._Reservacion = this.Reservacion.snapshotChanges().pipe(
@@ -337,6 +338,16 @@ export class GestionReservacionesProvider {
         }
       })
     ));
+  }
+
+  getValorCupon(idCupon: string) {
+   return new Promise((resolve, reject) => {
+      this.aFS.collection('cupones').doc(idCupon).get().subscribe(cupon => {
+        const data = cupon.data();
+        const valorCupon  = data.valorCupon;
+        resolve(valorCupon);
+      })
+   });
   }
 
   mesaReservacion(reserva) {

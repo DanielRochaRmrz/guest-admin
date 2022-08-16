@@ -36,6 +36,7 @@ export class ReservaDetallePage {
   users: any;
   uidUsuarioReser: string;
   compartidas: any;
+  valorCupon: number = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -49,24 +50,19 @@ export class ReservaDetallePage {
     public _gestionReser: GestionReservacionesProvider,
     private sendNoti: DeviceProvider
   ) {
-
     this.idRers = this.navParams.get("idReser");
-
   }
 
   ionViewDidLoad() {
-
     console.log("ionViewDidLoad ReservaDetallePage");
 
     this.getReservacion();
 
     this.getCompartidaCon(this.idRers);
 
-    this.getProductos(this.idRers);
   }
 
   async getReservacion() {
-
     this.reserv = await this._gestionReser.getReservacionDetalle(this.idRers);
 
     this.uidUsuarioReser = this.reserv.idUsuario;
@@ -74,18 +70,24 @@ export class ReservaDetallePage {
     let idZona = this.reserv.idZona;
 
     this._gestionReser.getZona(idZona).subscribe((zona) => {
-
       this.zona = zona;
-
     });
+    
+    if(this.reserv.uidCupon) {
+      this.getValorCupon(this.reserv.uidCupon);
+    }
+    
+    this.getProductos(this.idRers);
 
     this.getMesas(idZona);
 
     this.consultaHistorial(this.reserv.idUsuario);
+  }
 
-    // console.log('la nueva reservacion detallee uwu', this.reserv);
-
-
+  async getValorCupon(idCupon: string) {
+    const valorCupon = await this._gestionReser.getValorCupon(idCupon);
+    this.valorCupon = Number(valorCupon);
+    console.log('Valor cupon -->', valorCupon);
   }
 
   getMesas(idZona) {
@@ -96,141 +98,101 @@ export class ReservaDetallePage {
   }
 
   consultaHistorial(idUsuario) {
-
     this._gestionReser.getHistorial(idUsuario).subscribe((history) => {
-
       this.historial = history;
 
       console.log(this.historial);
 
-
       if (this.historial.length != 0) {
-
         this.res = true;
-
       } else {
-
         this.res = false;
-
       }
-
     });
-
   }
 
   getProductos(idReserv) {
-
     let total = 0;
 
     this._providerReserva.getProductos(idReserv).subscribe((productos) => {
-
       this.productos = productos;
 
       productos.forEach(function (value) {
-
         total = total + value.total;
       });
 
       this.totalReserv = total;
-
     });
   }
 
-
   closeModal() {
-
     let result = "se cerrro";
 
     this.viewCtrl.dismiss({ result: result });
-
   }
 
-  modStatus_cancelacion(idReserv, idSucursal) {    
-
+  modStatus_cancelacion(idReserv, idSucursal) {
     let modal = this.modalCtrl.create("Modalstatus_cancelacionPage", {
-
       idReserv: idReserv,
 
       idSucursal: idSucursal,
 
-      idUsuario: this.reserv.idUsuario
-
+      idUsuario: this.reserv.idUsuario,
     });
 
     modal.present();
-
   }
 
   Aceptar(idReserv) {
-
     if (this.reserv.numMesa != undefined) {
-
       this._gestionReser.getEstatusReser(idReserv).subscribe((reser) => {
-
         this.estatusReser = reser;
 
         this.estatusReser.forEach((data) => {
-
           if (data.estatus == "Creando") {
-
             this._gestionReser.aceptarReservacion(idReserv);
 
             this.closeModal();
-
           }
           if (data.estatus == "CreadaCompartida") {
-
             this._gestionReser.aceptarReservacionCompartida(idReserv);
 
             this.closeModal();
-
           }
         });
       });
 
       this.getUsersPushNotiAceptada();
-
     } else {
-
       const alert = this.alertCtrl.create({
-
         title: "No se ha asignado una mesa a esta reservación",
-        buttons: ["Aceptar"]
-
+        buttons: ["Aceptar"],
       });
 
       alert.present();
-
     }
-
   }
 
   getUsersPushNotiAceptada() {
     console.log("id rese", this.reserv.idUsuario);
 
     this._gestionReser.getMyUser(this.reserv.idUsuario).subscribe((users) => {
-
       this.users = users;
-      
+
       if (users.playerID != undefined) {
-
         if (this.platform.is("cordova")) {
-
           const data = {
             topic: users.playerID,
             title: "Reservación aceptada",
-            body: "Hola "+users.displayName+" tu reservación fue aceptada.",
+            body: "Hola " + users.displayName + " tu reservación fue aceptada.",
           };
           this.sendNoti.sendPushNoti(data).then((resp: any) => {
-            console.log('Respuesta noti fcm', resp);
+            console.log("Respuesta noti fcm", resp);
           });
-
         } else {
           console.log("Solo funciona en dispositivos");
         }
-
       }
-
     });
   }
 
@@ -297,14 +259,10 @@ export class ReservaDetallePage {
   }
 
   getCompartidaCon(idReserv: string) {
-
     this._gestionReser.getCompartidas(idReserv).subscribe((res) => {
-
       this.compartidas = res;
 
       console.log(this.compartidas);
-
-    })
-
+    });
   }
 }

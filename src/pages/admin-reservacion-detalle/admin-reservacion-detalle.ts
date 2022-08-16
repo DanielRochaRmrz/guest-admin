@@ -67,7 +67,7 @@ export class AdminReservacionDetallePage {
     this.monRes.getInfo(this.idReservacion).subscribe(res2 => {
 
       this.infoReservacion = res2;
-
+      
       this.uidCupon = res2[0].uidCupon;    
 
       if (this.uidCupon == undefined) {

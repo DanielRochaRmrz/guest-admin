@@ -124,25 +124,77 @@
             </ion-row>
 
         </ion-grid>
+        <div *ngIf="valorCupon == 0; then sinCupon else conCupon"></div>
+        <ng-template #sinCupon>
+            <ion-grid>
 
-        <ion-grid>
+                <ion-row>
+    
+                    <ion-col>
+    
+                        <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
+                        <b>Total</b>
+    
+                    </ion-col> 
+    
+                    <ion-col><b></b></ion-col>                
+    
+                    <ion-col text-right>{{ totalReserv | currency }}</ion-col>
+    
+                </ion-row>
+    
+            </ion-grid>
+        </ng-template>
+        <ng-template #conCupon>
+            <ion-grid>
 
-            <ion-row>
+                <ion-row>
+    
+                    <ion-col>
+    
+                        <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
+                        <b>Subtotal</b>
+    
+                    </ion-col> 
+    
+                    <ion-col><b></b></ion-col>                
+    
+                    <ion-col text-right>{{ totalReserv | currency }}</ion-col>
+    
+                </ion-row>
 
-                <ion-col>
+                <ion-row>
+    
+                    <ion-col>
+    
+                        <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
+                        <b>Cupon</b>
+    
+                    </ion-col> 
+    
+                    <ion-col><b></b></ion-col>                
+    
+                    <ion-col text-right>{{ valorCupon | currency }}</ion-col>
+    
+                </ion-row>
 
-                    <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
-                    <b>Total</b>
-
-                </ion-col> 
-
-                <ion-col><b></b></ion-col>                
-
-                <ion-col text-right>{{ totalReserv | currency }}</ion-col>
-
-            </ion-row>
-
-        </ion-grid>
+                <ion-row>
+    
+                    <ion-col>
+    
+                        <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
+                        <b>Total</b>
+    
+                    </ion-col> 
+    
+                    <ion-col><b></b></ion-col>                
+    
+                    <ion-col text-right>{{ totalReserv - valorCupon | currency }}</ion-col>
+    
+                </ion-row>
+    
+            </ion-grid>
+        </ng-template>
 
     </div>
 
