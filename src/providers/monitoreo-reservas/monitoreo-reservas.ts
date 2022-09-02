@@ -176,7 +176,7 @@ public _reservaInfo3: Observable<any>;
   getReservacionesPagando(idSucursal: string) {
     this.reservacionesCollection = this.afs.collection<any>("reservaciones", ref =>
       ref.where("idSucursal", "==", idSucursal)
-         .where("estatus", '==', 'Pagando')
+         .where("estatus", '==', 'Finalizado')
          .orderBy('fechaR_', "asc")
     );
     this.reservaciones = this.reservacionesCollection.valueChanges();

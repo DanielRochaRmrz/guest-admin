@@ -116,6 +116,9 @@ import { DeviceProvider } from '../providers/device/device';
 import { Device } from '@ionic-native/device';
 import { FCM } from '@ionic-native/fcm';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ScrollableDirective } from './scrollable.directive';
+import { PaginationService } from './pagination.service';
+import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner';
 
 
 
@@ -182,7 +185,9 @@ import { ClipboardModule } from 'ngx-clipboard';
     AdminRpCodigoPage,
     AdminRpCorteCodigosPage,
     ReservaDetallePage,
-    AdminCroquisPage
+    AdminCroquisPage,
+    ScrollableDirective,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -292,7 +297,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     Camera,
     DeviceProvider,
     Device,
-    FCM
+    FCM,
+    PaginationService,
   ]
 })
 export class AppModule {}

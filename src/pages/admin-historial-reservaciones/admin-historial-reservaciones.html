@@ -15,7 +15,9 @@
 <ion-content class="list-avatar-page ">
 
     <ion-fab right top>
-        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
+        <button ion-fab color="primary" (click)="behind()">
+            <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
+        </button>
     </ion-fab>
 
     <ion-row>
@@ -33,68 +35,73 @@
         <ion-col col-1></ion-col>
     </ion-row>
 
-    <div *ngIf="reservaciones.length >= 1">
+    <!-- <div *ngIf="reservaciones.length >= 1"> -->
 
         <!-- INICIA ION-ITEM PARA EL HISTORIAL DE LAS RESERVACIONES -->
 
-        <ng-container>
+        <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
 
-            <ion-item *ngFor="let reservacion of reservaciones">
+            <div class="container">
 
-                <ion-avatar item-start>
+                <ion-item *ngFor="let reservacion of page.data | async">
 
-                    <img src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}">
+                    <ion-avatar item-start>
 
-                </ion-avatar>
+                        <img src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}">
 
-                <h2 style="text-transform: uppercase">
-                    <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon> Nombre:
-                    <b>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</b>
-                </h2>
+                    </ion-avatar>
 
-                <h3>
-                    <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon> Fecha:
-                    <b> {{ reservacion.fechaR | date: 'dd/MM/yyyy' }} </b>
-                </h3>
+                    <h2 style="text-transform: uppercase">
+                        <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>
+                        Nombre:
+                        <b>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</b>
+                    </h2>
 
-                <p class="hora">
-                    <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon>Hora de
-                    reservación: <b> {{ reservacion.hora }} </b>
-                </p>
-                <p class="hora" item-end>
-                    <img src="./assets/content/Ellipse55.png" class="imgElli" alt=""> {{ reservacion.estatus }}
-                </p>
+                    <h3>
+                        <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon>
+                        Fecha:
+                        <b> {{ reservacion.fechaR | date: 'dd/MM/yyyy' }} </b>
+                    </h3>
 
-                <ng-container *ngIf="reservacion.idevento != null">
+                    <p class="hora">
+                        <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon>Hora de
+                        reservación: <b> {{ reservacion.hora }} </b>
+                    </p>
+                    <p class="hora" item-end>
+                        <img src="./assets/content/Ellipse55.png" class="imgElli" alt=""> {{ reservacion.estatus }}
+                    </p>
 
-                    <ng-container *ngFor="let event of infoEvento">
+                    <ng-container *ngIf="reservacion.idevento != null">
 
-                        <ng-container *ngIf="reservacion.idevento == event.uid">
+                        <ng-container *ngFor="let event of infoEvento">
 
-                            <p class="hora">
-                                <ion-icon ios="ios-beer" md="md-beer" item-start style="color: #fcc04d"></ion-icon> {{
+                            <ng-container *ngIf="reservacion.idevento == event.uid">
+
+                                <p class="hora">
+                                    <ion-icon ios="ios-beer" md="md-beer" item-start style="color: #fcc04d"></ion-icon> {{
                                 event.titulo }}
-                            </p>
+                                </p>
+
+                            </ng-container>
 
                         </ng-container>
 
                     </ng-container>
 
-                </ng-container>
+                    <button ion-button block round class="btnDetalle" (click)="goDetalle(reservacion.idReservacion)">
 
-                <button ion-button block round class="btnDetalle" (click)="goDetalle(reservacion.idReservacion)">
+                        Detalle
 
-                    Detalle
+                    </button>
 
-                </button>
-
-            </ion-item>
+                </ion-item>
 
 
-        </ng-container>
+            </div>
 
+        </div>
 
-    </div>
+    <!-- </div> -->
 
     <ion-list *ngIf="reservaciones.length == 0">
 
@@ -111,4 +118,5 @@
             </p>
         </div>
     </ion-list>
+    
 </ion-content>

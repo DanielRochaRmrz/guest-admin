@@ -16,6 +16,9 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { UsuarioProvider, Credenciales } from "../providers/usuario/usuario";
 import { ResumenPage } from '../pages/resumen/resumen';
 import { MisReservacionesPage } from '../pages/mis-reservaciones/mis-reservaciones';
+import { ScrollableDirective } from './scrollable.directive';
+import { PaginationService } from './pagination.service';
+import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner';
 
 
 @Component({
