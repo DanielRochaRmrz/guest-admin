@@ -5,6 +5,7 @@ import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 import { PaginationService } from '../../app/pagination.service';
+import { snapshotChanges } from 'angularfire2/database';
 
 
 @IonicPage()
@@ -15,6 +16,7 @@ import { PaginationService } from '../../app/pagination.service';
 export class AdminHistorialReservacionesPage implements OnInit {
   reservaciones: any = [];
   sucursales: any;
+  noReservaciones: any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public afs: AngularFirestore,
@@ -23,6 +25,7 @@ export class AdminHistorialReservacionesPage implements OnInit {
   ) {
 
     this.page.reset();
+    this.getAllReservaciones();
   }
 
   ngOnInit() {
@@ -31,40 +34,10 @@ export class AdminHistorialReservacionesPage implements OnInit {
 
   }
 
-  ionViewDidLoad() {
+  getAllReservaciones() {
 
-    this.getAllReservacione();
-
-  }
-  getAllReservacione() {
-    // const id = localStorage.getItem('uidSucursal');
-    // const query = firestore.collection("fruits");
-    // const snapshot = await query.get();
-    // const count = snapshot.size;
-
-    // const query = this.afs.collection('reservaciones');
-    // const sna = await query.get();
-    // const count = sna.size;
-
-
-
-    //Cuando es un usuario se saca el id de la sucursal ala que pertenece
-    // this.afs.collection('users', ref => ref.where('uid', '==', id)).valueChanges().subscribe(data => {
-
-    //   this.sucursales = data;
-
-    //   this.sucursales.forEach(element => {
-
-    //     const uidSucursal = element.uidSucursal;
-
-    //     this.monRes.getReservacionesPagando(uidSucursal).subscribe(reser => {
-
-    //       this.reservaciones = reser;
-
-    //       console.log('reservaciones', reser);
-    //     })
-    //   });
-    // });
+    this.noReservaciones = this.afs.collection('reservaciones').valueChanges().subscribe(values => console.log(values.length)
+    );
 
   }
 

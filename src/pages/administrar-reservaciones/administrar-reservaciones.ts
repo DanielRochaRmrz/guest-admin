@@ -11,7 +11,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import moment from "moment";
 import { AdminMenuReservacionPage } from "../admin-menu-reservacion/admin-menu-reservacion";
 import { ReservaDetallePage } from "../reserva-detalle/reserva-detalle";
-
+import { PaginationService } from '../../app/pagination.service';
 
 @IonicPage()
 @Component({
@@ -26,6 +26,7 @@ export class AdministrarReservacionesPage {
   type: string = '';
   uidUser: string = '';
   public date = moment().format("YYYY-MM-DD");
+  public noReservaciones;
 
   constructor(
     public navCtrl: NavController,
@@ -33,8 +34,14 @@ export class AdministrarReservacionesPage {
     public _providerReserva: ReservacionProvider,
     public afs: AngularFirestore,
     public viewCtrl: ViewController,
-    public _gestionReser: GestionReservacionesProvider
-  ) {}
+    public _gestionReser: GestionReservacionesProvider,
+    public page: PaginationService,
+  ) {
+
+    this.page.reset();
+    this.getNoReservaciones();
+
+  }
 
   ionViewDidLoad() {
     this.uidSucursal = localStorage.getItem("uidSucursal");
@@ -55,7 +62,7 @@ export class AdministrarReservacionesPage {
 
         default:
 
-          this.getReservaciones();
+          this.page.initGestionReservaciones('reservaciones', 'fechaR', { reverse: true, prepend: false }, this.uidSucursal);
 
         break;
 
@@ -69,34 +76,6 @@ export class AdministrarReservacionesPage {
     console.log('Repsueta exito -->', clearReserva);
   }
 
-  getCompartidas(idR) {
-
-    this._gestionReser.getCompartidas(idR).subscribe((reserv) => {
-    this.compartidas = reserv;
-
-    });
-
-  }
-
-  getReservaciones() {
-
-    this.uidSucursal = localStorage.getItem("uidSucursal");
-
-    const date = moment().format("YYYY-MM-DD");
-
-    const fecha = moment(date).format("x");
-
-    this._gestionReser
-      .getReservaciones(this.uidSucursal, fecha)
-      .subscribe((reserv) => {
-
-        this.reservaciones = reserv;
-        
-        console.log('RESERVACIONES', this.reservaciones);
-        
-
-      });
-  }
   
   async codigoRP(uidUser: string) {
 
@@ -130,6 +109,22 @@ export class AdministrarReservacionesPage {
 
     this.navCtrl.setRoot(AdminMenuReservacionPage);
 
+  }
+
+  scrollHandler(e) {
+    
+    if (e === 'bottom') {      
+      this.page.moreGestionReservaciones(this.uidSucursal)
+    }
+  }
+
+  getNoReservaciones(){
+
+    this.afs.collection('reservaciones', ref => ref
+    .where("estatus", 'in', ["Creando", "CreadaCompartida"])).valueChanges().subscribe(values => 
+      
+      this.noReservaciones = values.length
+    );
   }
 
 }
