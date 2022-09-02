@@ -133,19 +133,17 @@
         </div>
 
     </div>
-    <ng-template *ngIf="noReservaciones == 0">
-        <div>
-            <div align="center">
-                <img text-center class="adv2" src="./assets/content/advertencia.png" />
-            </div>
-            <p class="aviso">
-                Aviso
-            </p>
-            <p class="aviso">
-                Por el momento no hay reservaciones.
-            </p>
+    <div *ngIf="noReservaciones == 0">
+        <div align="center">
+            <img text-center class="adv2" src="./assets/content/advertencia.png" />
         </div>
-    </ng-template>
+        <p class="aviso">
+            Aviso
+        </p>
+        <p class="aviso">
+            Por el momento no hay reservaciones.
+        </p>
+    </div>  
 
 
 

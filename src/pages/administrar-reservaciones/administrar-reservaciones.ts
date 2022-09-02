@@ -123,7 +123,8 @@ export class AdministrarReservacionesPage {
     this.afs.collection('reservaciones', ref => ref
     .where("estatus", 'in', ["Creando", "CreadaCompartida"])).valueChanges().subscribe(values => 
       
-      this.noReservaciones = values.length
+      this.noReservaciones = values.length      
+      
     );
   }
 

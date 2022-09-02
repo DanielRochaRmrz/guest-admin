@@ -7,6 +7,8 @@ import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 import { AdminHomePage } from '../admin-home/admin-home';
+import { PaginationService } from '../../app/pagination.service';
+
 
 @IonicPage()
 @Component({
@@ -26,18 +28,26 @@ export class AdminMonitearReservPage {
   formatoFecha: any;
   sucursales: any;
   reservacionesAcep: any;
+  noReservaciones: any;
+  uidSucursal: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public afs: AngularFirestore,
     public monRes: MonitoreoReservasProvider,
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    public page: PaginationService,
   ) {
+
+    this.page.reset();
     
     //recibe parametro de la reservacion
     this.menu = this.navParams.get("menu");
-    console.log(this.menu);
+
+    this.getNoReservaciones();
+
+    this.uidSucursal = localStorage.getItem('uidSucursal');
     
 
   }
@@ -46,68 +56,14 @@ export class AdminMonitearReservPage {
 
     console.log("admin-monitear-reserv.html");    
 
-    this.getAllReservacione();
+    // this.getAllReservacione();
+    this.page.initMonitorReservaciones('reservaciones', 'fechaR', { reverse: true, prepend: false }, this.uidSucursal);
 
     this.getEvento();
 
-  }
-
-  getAllReservacione() {
-
-    var dateObj = new Date()
-
-    var anio = dateObj.getFullYear().toString();
-
-    var mes = dateObj.getMonth().toString();
-
-    var dia = dateObj.getDate();
-
-    var mesArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-
-    if (dia >= 1 && dia <= 9) {
-
-      var diaCero = '0' + dia;
-
-      this.formatoFecha = anio + '-' + mesArray[mes] + '-' + diaCero;
-
-    } else {
-
-      this.formatoFecha = anio + '-' + mesArray[mes] + '-' + dia;
-
-    }
-
-    // console.log("fecha actual", this.formatoFecha);
-    
-    const id = localStorage.getItem('uidSucursal');
-    
-    //Cuando es un usuario se saca el id de la sucursal ala que pertenece
-    this.afs.collection('users', ref => ref.where('uid', '==', id)).valueChanges().subscribe(data => {
-
-      this.sucursales = data;
-
-      this.sucursales.forEach(element => {
-
-        const uidSucursal = element.uidSucursal;
-
-        this.monRes.getReservaciones(uidSucursal, this.formatoFecha).subscribe(reser => {
-
-          this.reservaciones = reser;
-
-          console.log("this.reservaciones ->", this.reservaciones);
-          
-
-        })
-        
-        // TRAE LAS RESERVACIONES COMPARTIDAS
-        this.monRes.getReservacionesAcepCom(uidSucursal, this.formatoFecha).subscribe(reser => {
-
-          this.reservacionesAcep = reser;
-
-        })
-      });
-    });
 
   }
+
 
   goDetalle(idReservacion) {
 
@@ -167,6 +123,25 @@ export class AdminMonitearReservPage {
       this.navCtrl.push(AdminMenuReservacionPage);
     }
 
+  }
+
+  getNoReservaciones(){
+
+    this.afs.collection('reservaciones', ref => ref
+    .where("estatus", 'in', ["Aceptado", "AceptadoCompartida"])).valueChanges().subscribe(values => 
+      
+      this.noReservaciones = values.length      
+      
+    );
+  }
+
+  scrollHandler(e) {
+
+    console.log(e);    
+
+    if (e === 'bottom') {
+      // this.page.more()
+    }
   }
 
 }
