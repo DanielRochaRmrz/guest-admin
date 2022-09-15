@@ -8,7 +8,13 @@
 </ion-header>
 
 
-<ion-content class="" padding>
+<ion-content padding>
+    <ion-col col-5>
+        <h2>
+            <b>Master</b>
+            <div class="detalle">Alta de sucursal</div>
+        </h2>
+    </ion-col>
     <ion-list>
         <ion-item>
             <ion-label floating>Nombre del contacto</ion-label>
@@ -22,7 +28,7 @@
 
         <ion-item>
             <ion-label floating>Teléfono</ion-label>
-            <ion-input type="phone" [(ngModel)]="credentials.telefono"></ion-input>
+            <ion-input type="number" [(ngModel)]="credentials.telefono" (ngModelChange)="change($event)"></ion-input>
         </ion-item>
 
         <ion-item>

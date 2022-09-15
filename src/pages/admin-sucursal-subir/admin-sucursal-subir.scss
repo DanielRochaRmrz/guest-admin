@@ -6,22 +6,30 @@ page-admin-sucursal-subir {
     .AdminEvento {
         color: #fff;
     }
-    
+
     .sucursal {
         color: #fff;
         opacity: 0.8;
-      
+
     }
+
     .toolbar-background {
-        background-image: url('../assets/imgs/proriat.png')!important;
+        background-image: url('../assets/imgs/proriat.png') !important;
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
-    .borde{
+
+    .borde {
         margin-top: 0%;
         border-bottom: #e49602 1px solid;
         //color: #e49602;
-      }
+    }
+
+    .detalle {
+        color: #cecece;
+        margin-top: -8px;
+        text-transform: uppercase;
+    }
 
 }

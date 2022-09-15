@@ -1,9 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, Nav, ViewController, Platform } from 'ionic-angular';
 import { SucursalAltaProvider } from '../../providers/sucursal-alta/sucursal-alta';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserProvider } from '../../providers/user/user';
 import { AdminSucursalListPage } from '../admin-sucursal-list/admin-sucursal-list';
+import { DeviceProvider } from '../../providers/device/device';
 @IonicPage()
 
 @Component({
@@ -37,7 +38,9 @@ export class AdminSucursalSubirPage {
     public platform: Platform,
     public _provderUser: UserProvider,
     public ProSuc: SucursalAltaProvider,
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    public cdRef: ChangeDetectorRef,
+    private sendNoti: DeviceProvider
   ) {
   }
 
@@ -72,12 +75,12 @@ export class AdminSucursalSubirPage {
       toaster.setMessage('La contraseña no es sufucientemente larga, intenta con más de 7 caracteres');
       toaster.present();
     } else {
-        let loader = this.loadingCtrl.create({
-            content: 'Por favor, espere'
-        });
-        // loader.present();
-        this.getUsersPusSucursal();      
-       this.ProSuc.newRegisters(this.credentials, this.sucursal);
+      let loader = this.loadingCtrl.create({
+        content: 'Por favor, espere'
+      });
+      // loader.present();
+      this.getUsersPusSucursal(this.credentials.sucursal);
+      this.ProSuc.newRegisters(this.credentials, this.sucursal);
 
       this.cerrar_modal();
     }
@@ -91,59 +94,43 @@ export class AdminSucursalSubirPage {
   }
 
 
-  getUsersPusSucursal() {
-    let data = [];
-    let data2 = this.users;
+  getUsersPusSucursal(nombreSucursal) {
+
     this._provderUser.getAllUsers().subscribe(users => {
 
-
       this.users = users;
-      console.log('Esusuarios: ', this.users);
-      this.users.forEach(function (value) {
 
-        data.push(value.playerID);
-        console.log('playe', value.playerID);
+      this.users.forEach((users) => {
 
-      });
+        if (users.playerID != undefined) {
 
+          if (this.platform.is("cordova")) {
+          
+            const data = {
+              topic: users.playerID,
+              title: "¡Nueva sucursal abierta!",
+              body: "Para más información visita la app Guest y busca "+ nombreSucursal + " para más información.",
+            };
+            this.sendNoti.sendPushNoti(data).then((resp: any) => {
+              console.log('Respuesta noti fcm', resp);
+            });
 
-      let result = data.filter((item, index) => { return data.indexOf(item) === index; })
+          }else {
+            console.log("Solo funciona en dispositivos");
+          }
 
-      console.log("result: ", result);
-
-      for (var i = 0; i < result.length; i++) {
-        console.log("resullll", result[i]);
-
-
-        if (this.platform.is("cordova")) {
-
-          let noti = {
-            app_id: "de05ee4f-03c8-4ff4-8ca9-c80c97c5c0d9",
-            include_player_ids: result,
-            data: { foo: "bar" },
-            contents: {
-              en: " Nueva Sucursal "
-            }
-          };
-          console.log('notificacion');
-          window["plugins"].OneSignal.postNotification(
-            noti,
-            function (successResponse) {
-              console.log(
-                "Notification Post Success:",
-                successResponse
-              );
-            },
-            function (failedResponse: any) {
-              console.log("Notification Post Failed: ", failedResponse);
-            }
-          );
-        } else {
-          console.log("Solo funciona en dispositivos");
         }
-      }
+
+      })
+
     });
 
+  }
+
+  change(value) {
+
+    this.cdRef.detectChanges();
+    this.credentials.telefono = value.length > 10 ? value.substring(0, 10) : value;
   }
 
 }
