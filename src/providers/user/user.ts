@@ -67,7 +67,7 @@ export class UserProvider {
           type: newuser.type,
           active: "true",
           uidSucursal: uidSucursal,
-          photoURL: "../assets/imgs/icons/profile.png",
+          photoURL: "../assets/imgs/icons/Group24.png",
         });
 
         // GENERAMOS UN CODIGO ALEATORIO

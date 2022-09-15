@@ -19,6 +19,7 @@ import { CorteHistorialPage } from '../corte-historial/corte-historial';
 import { AdminCroquisPage } from '../admin-croquis/admin-croquis';
 import { DeviceProvider } from '../../providers/device/device';
 import { AdminUsersListPage } from '../admin-users-list/admin-users-list';
+AdminUsersGuestPage
 
 @IonicPage()
 @Component({
@@ -189,7 +190,10 @@ export class AdminHomePage {
 
   goListaUsuariosEmpleados(usuario) {
     
-    this.navCtrl.push(AdminUsersListPage, { usuario: usuario });
+    this.navCtrl.push(AdminUsersGuestPage, { usuario: usuario });
+
+    console.log(usuario);
+    
 
   }
 
