@@ -10,7 +10,7 @@
 <ion-content class="" padding>
     <ion-list>
         <ion-item>
-            <ion-label  floating>Nombre del contacto</ion-label>
+            <ion-label floating>Nombre del contacto</ion-label>
             <ion-input type="text" [(ngModel)]="sucProv.selectedSucursalItem.contacto"></ion-input>
         </ion-item>
 
@@ -21,7 +21,7 @@
 
         <ion-item>
             <ion-label floating>Teléfono</ion-label>
-            <ion-input type="phone" [(ngModel)]="sucProv.selectedSucursalItem.tel"></ion-input>
+            <ion-input type="number" [(ngModel)]="sucProv.selectedSucursalItem.tel" (ngModelChange)="change($event)"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Dirección</ion-label>
@@ -45,32 +45,45 @@
                 <ion-option value="restaurante">Restaurante</ion-option>
             </ion-select>
         </ion-item>
+        <br>
         <ion-row style="background-color: #FFC149; color:#fff;" text-center>
             <ion-label>Información para el usuario</ion-label>
         </ion-row>
         <ion-item>
-            <ion-input type="time" class="letra" [(ngModel)]="sucProv.selectedSucursalItem.horas"></ion-input>
+            <ion-input type="text" placeholder="Horario sucursal ej. 21:00 - 02:00" [(ngModel)]="sucProv.selectedSucursalItem.horas"></ion-input>
+            <!-- <ion-input type="time" class="letra" [(ngModel)]="sucProv.selectedSucursalItem.horas"></ion-input> -->
             <!-- <ion-textarea class="fond" placeholder="Descriipción del horario de su sucursal." [(ngModel)]="sucProv.selectedSucursalItem.horas" name="horas" autocomplete="on" autocorrect="on"></ion-textarea> -->
         </ion-item>
         <ion-item>
-            <ion-textarea class="fond" placeholder="Descripción de servicio de estacionamiento" [(ngModel)]="sucProv.selectedSucursalItem.estacionamiento" name="estacionamiento" autocomplete="on" autocorrect="on"></ion-textarea>
+            <ion-textarea class="fond" placeholder="Descripción de servicio de estacionamiento"
+                [(ngModel)]="sucProv.selectedSucursalItem.estacionamiento" name="estacionamiento" autocomplete="on"
+                autocorrect="on"></ion-textarea>
         </ion-item>
         <ion-item>
-            <ion-textarea class="fond" placeholder="Descripción de código de etiqueta" [(ngModel)]="sucProv.selectedSucursalItem.codigoEtiqueta" name="etiqueta" autocomplete="on" autocorrect="on"></ion-textarea>
+            <ion-textarea class="fond" placeholder="Descripción de código de etiqueta"
+                [(ngModel)]="sucProv.selectedSucursalItem.codigoEtiqueta" name="etiqueta" autocomplete="on"
+                autocorrect="on"></ion-textarea>
         </ion-item>
         <ion-item>
-            <ion-textarea class="fond" placeholder="Descripción de la sucursal" [(ngModel)]="sucProv.selectedSucursalItem.descripcion" name="descripcion" autocomplete="on" autocorrect="on"></ion-textarea>
+            <ion-textarea class="fond" placeholder="Descripción de la sucursal"
+                [(ngModel)]="sucProv.selectedSucursalItem.descripcion" name="descripcion" autocomplete="on"
+                autocorrect="on"></ion-textarea>
         </ion-item>
 
     </ion-list>
     <ion-row>
         <ion-col>
-            <button class="md-trash" color="warning" ion-button block (click)="savePerfil()"> <font color="white">  Guardar edición </font></button>
+            <button class="md-trash" color="warning" ion-button block (click)="savePerfil()">
+                <font color="white"> Guardar edición </font>
+            </button>
         </ion-col>
     </ion-row>
     <ion-row>
         <ion-col>
-            <button class="md-trash" color="warning" ion-button block (click)="changePass(sucProv.selectedSucursalItem.email)">  <font color="white"> Restablecer/Cambiar Contraseña</font> </button>
+            <button class="md-trash" color="warning" ion-button block
+                (click)="changePass(sucProv.selectedSucursalItem.email)">
+                <font color="white"> Restablecer/Cambiar Contraseña</font>
+            </button>
         </ion-col>
     </ion-row>
 </ion-content>
