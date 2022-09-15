@@ -2,10 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { Platform, MenuController, Nav } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
-
-import { AdminLoginPage } from "../pages/admin-login/admin-login";
 import { AdminHomePage } from "../pages/admin-home/admin-home";
-import { LoginPage } from "../pages/login/login";
 import { TabsPage } from "../pages/tabs/tabs";
 import { NosotrosPage } from "../pages/nosotros/nosotros";
 import { CartaPage } from "../pages/carta/carta";
@@ -14,11 +11,8 @@ import { PerfilPage } from "../pages/perfil/perfil";
 import { HistorialPage } from "../pages/historial/historial";
 import { AngularFireAuth } from "angularfire2/auth";
 import { UsuarioProvider, Credenciales } from "../providers/usuario/usuario";
-import { ResumenPage } from '../pages/resumen/resumen';
 import { MisReservacionesPage } from '../pages/mis-reservaciones/mis-reservaciones';
-import { ScrollableDirective } from './scrollable.directive';
-import { PaginationService } from './pagination.service';
-import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner';
+import { SliderPage } from "../pages/slider/slider";
 
 
 @Component({
@@ -29,7 +23,7 @@ export class MyApp {
 
   user: Credenciales = {};
 
-  rootPage: any = AdminLoginPage;
+  rootPage: any = SliderPage;
   home = TabsPage;
   nosotros = NosotrosPage;
   carta = CartaPage;
@@ -60,7 +54,7 @@ export class MyApp {
 
       if (
         localStorage.getItem("isLogin") == "false") {
-        this.nav.setRoot(AdminLoginPage);
+        this.nav.setRoot(SliderPage);
       }
       else if (localStorage.getItem("isLogin") == "true") {
          this.nav.setRoot(AdminHomePage);
@@ -127,7 +121,7 @@ export class MyApp {
     //this.afAuth.auth.signOut().then(res => {
       //this.usuarioProv.usuario = {};
       localStorage.setItem("isLogin", 'false');
-      this.nav.setRoot(AdminLoginPage);
+      this.nav.setRoot(SliderPage);
       this.menuCtrl.close();
     //});
   }

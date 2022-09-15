@@ -62,6 +62,7 @@ import { AdminRpCorteCodigosPage } from '../pages/admin-rp-corte-codigos/admin-r
 import { ReservaDetallePage } from '../pages/reserva-detalle/reserva-detalle';
 import { AdminCroquisPage } from '../pages/admin-croquis/admin-croquis';
 
+
 //Pipes
 import { PipesModule } from "../pipes/pipes.module";
 
@@ -119,6 +120,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { ScrollableDirective } from './scrollable.directive';
 import { PaginationService } from './pagination.service';
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner';
+import { SliderPage } from '../pages/slider/slider';
 
 
 
@@ -187,7 +189,8 @@ import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-s
     ReservaDetallePage,
     AdminCroquisPage,
     ScrollableDirective,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    SliderPage
   ],
   imports: [
     BrowserModule,
@@ -266,7 +269,8 @@ import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-s
     AdminRpCodigoPage,
     AdminRpCorteCodigosPage,
     ReservaDetallePage,
-    AdminCroquisPage
+    AdminCroquisPage,
+    SliderPage
   ],
   providers: [
     StatusBar,
