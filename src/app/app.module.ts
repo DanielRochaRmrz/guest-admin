@@ -114,7 +114,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
 import { DeviceProvider } from '../providers/device/device';
 import { Device } from '@ionic-native/device';
-import { FCM } from '@ionic-native/fcm';
+// import { FCM } from '@ionic-native/fcm';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ScrollableDirective } from './scrollable.directive';
 import { PaginationService } from './pagination.service';
@@ -297,7 +297,7 @@ import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-s
     Camera,
     DeviceProvider,
     Device,
-    FCM,
+    // FCM,
     PaginationService,
   ]
 })
