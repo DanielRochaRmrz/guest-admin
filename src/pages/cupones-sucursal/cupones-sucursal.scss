@@ -13,41 +13,52 @@ page-cupones-sucursal {
 
   // }
   .marg {
-      margin-bottom: 1em;
-      text-align: right;
+    margin-bottom: 1em;
+    text-align: right;
   }
+
   .card_atras {
-      margin-top: -1.8em;
+    margin-top: -1.8em;
   }
-  .colorIcon{
+
+  .colorIcon {
     color: #EAB543;
   }
+
   // .borde{
   //     border: 1px solid red;
   // }
 
 
 
-  
+
   .AdminEvento {
     color: #fff;
-}
+  }
 
-.sucursal {
+  .sucursal {
     color: #fff;
     opacity: 0.8;
-  
-}
-.toolbar-background {
-    background-image: url('../assets/imgs/proriat.png')!important;
+
+  }
+
+  .toolbar-background {
+    background-image: url('../assets/imgs/proriat.png') !important;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-}
-.borde{
+  }
+
+  .borde {
     margin-top: 0%;
     border-bottom: #e49602 1px solid;
     //color: #e49602;
+  }
+
+  .detalle {
+    color: #cecece;
+    margin-top: -8px;
+    text-transform: uppercase;
   }
 
 }

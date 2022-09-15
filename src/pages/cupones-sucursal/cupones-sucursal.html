@@ -1,11 +1,10 @@
-
 <ion-header>
   <ion-navbar hideBackButton>
     <ion-row>
 
       <ion-col col-2>
         <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
-      
+
       </ion-col>
       <ion-col col-6>
         <ion-title>Cupones</ion-title>
@@ -13,27 +12,33 @@
     </ion-row>
   </ion-navbar>
 </ion-header>
-<ion-content class="">
-    <ion-card-header class="marg" color="light">
-      <button (click)="agregarCupon()" text-align ion-button clear small color="light" icon-left item-end>
-        <ion-icon name="add" class="colorIcon" style="zoom:1.1;"></ion-icon>
-        <font color="black" style="opacity: .5;"> Agregar cupones a una sucursal</font> 
-      </button>
-    </ion-card-header>
-    <ion-list clxass="" *ngFor="let sucursal of sucursales">
-      <ion-card>
-        <ion-item style="border: none;">
-           <ion-thumbnail item-start>
-             <img [src]="sucursal.photoURL" style="border-radius:250px ;">
-             <h2 style="text-align: center">{{sucursal.displayName}}</h2>
-           </ion-thumbnail>
-           <ion-badge (click)="cuponesDisponibles(sucursal.uid)" text-align color="naranja" item-end>
-              Ver cupones disponibles
-           </ion-badge>
-           <!--<div *ngFor="let cupon of cupones">-->
-            <!-- <div *ngIf="cupon.idSucursal == sucursal.uid">-->
-                <!--<div *ngIf="cupon.estatus == 'Activo'">-->
-                <!--  <ion-badge color="naranja" item-end>
+<ion-content padding>
+  <ion-col col-5>
+    <h2>
+      <b>Master</b>
+      <div class="detalle">Cupones de sucursales</div>
+    </h2>
+  </ion-col>
+  <ion-card-header class="marg" color="light">
+    <button (click)="agregarCupon()" text-align ion-button clear small color="light" icon-left item-end>
+      <ion-icon name="add" class="colorIcon" style="zoom:1.1;"></ion-icon>
+      <font color="black" style="opacity: .5;"> Agregar cupones a una sucursal</font>
+    </button>
+  </ion-card-header>
+  <ion-list clxass="" *ngFor="let sucursal of sucursales">
+    <ion-card>
+      <ion-item style="border: none;">
+        <ion-thumbnail item-start>
+          <img [src]="sucursal.photoURL" style="border-radius:250px ;">
+          <h2 style="text-align: center">{{sucursal.displayName}}</h2>
+        </ion-thumbnail>
+        <ion-badge (click)="cuponesDisponibles(sucursal.uid)" text-align color="naranja" item-end>
+          Ver cupones disponibles
+        </ion-badge>
+        <!--<div *ngFor="let cupon of cupones">-->
+        <!-- <div *ngIf="cupon.idSucursal == sucursal.uid">-->
+        <!--<div *ngIf="cupon.estatus == 'Activo'">-->
+        <!--  <ion-badge color="naranja" item-end>
                     Cupón de descuento {{ cupon.valorCupon | currency }}
                     <br>
                     Código {{ cupon.codigoCupon }}
@@ -42,10 +47,10 @@
                     <br>
                     <ion-badge color="dark">{{ cupon.estatus }}</ion-badge>
                   </ion-badge>-->
-              <!--  </div>-->
-            <!-- </div>-->
-           <!--</div>-->
-        </ion-item>
-      </ion-card>
-    </ion-list>
+        <!--  </div>-->
+        <!-- </div>-->
+        <!--</div>-->
+      </ion-item>
+    </ion-card>
+  </ion-list>
 </ion-content>
