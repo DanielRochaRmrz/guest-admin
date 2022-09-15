@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, Platform, AlertCo
 } from 'ionic-angular';
 import { SucursalAltaProvider, Credenciales } from '../../providers/sucursal-alta/sucursal-alta';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ChangeDetectorRef } from '@angular/core';
 
 // import { MapsAPILoader, MouseEvent } from '@agm/core';
 @IonicPage()
@@ -25,6 +26,7 @@ export class AdminSucursalEditperfilPage {
     public zone: NgZone,
     public platform: Platform,
     public alertCtrl: AlertController,
+    public cdRef: ChangeDetectorRef
 
     ) {  }
 
@@ -73,6 +75,11 @@ mostrar_toast( mensaje: string,  ){
      duration: 3000
    }).present();
 
+}
+change(value){
+
+  this.cdRef.detectChanges();
+  this.sucProv.selectedSucursalItem.tel = value.length > 10 ? value.substring(0, 10) : value;
 }
 
 }
