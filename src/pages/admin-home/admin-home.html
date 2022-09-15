@@ -14,7 +14,7 @@
 
                 </div>
 
-                <div class="centrart" *ngIf="_userEmpleado?.type == 'rp'">
+                <div class="centrart" *ngIf="_userEmpleado?.type == 'rp' || _userEmpleado?.type == 'capitan_mesero'">
 
                     <p>{{ _userEmpleado?.displayName }} </p>
 
@@ -39,16 +39,20 @@
                 <ion-list>
 
                     <div *ngIf="_sucursal?.type == 'a'">
-                        <button ion-item (click)="goPerfilSucursal(_sucursal.uid)">
-                       <p><ion-icon ios="ios-cog" md="md-cog" style="color: #FD9530"></ion-icon> Config.</p>
-                    </button>
+                        <button ion-item (click)="goPerfilSucursal(_userEmpleado?.uid)">
+                            <p>
+                                <ion-icon ios="ios-cog" md="md-cog" style="color: #FD9530"></ion-icon> Config.
+                            </p>
+                        </button>
                     </div>
 
                     <div *ngIf="_userEmpleado?.type == 'e' || _userEmpleado?.type == 'master' ">
 
                         <button ion-item (click)="goPerfilEmpleado(_userEmpleado.uid)">
-                        <p><ion-icon ios="ios-cog" md="md-cog" style="color: #FD9530"></ion-icon> Config.</p>
-                     </button>
+                            <p>
+                                <ion-icon ios="ios-cog" md="md-cog" style="color: #FD9530"></ion-icon> Config.
+                            </p>
+                        </button>
 
                     </div>
                 </ion-list>
@@ -58,8 +62,10 @@
             <ion-col>
 
                 <button ion-item (click)="salir()">
-                <p> <ion-icon ios="ios-exit" md="md-exit" style="color: #FD9530"></ion-icon> Cerrar sesión</p>
-            </button>
+                    <p>
+                        <ion-icon ios="ios-exit" md="md-exit" style="color: #FD9530"></ion-icon> Cerrar sesión
+                    </p>
+                </button>
 
             </ion-col>
         </ion-row>
@@ -92,7 +98,8 @@
 
     <ion-card padding>
 
-        <ng-container *ngIf="_sucursal || _userEmpleado?.type == 'coordinacion' || _userEmpleado?.type == 'rp'">
+        <ng-container
+            *ngIf="_sucursal || _userEmpleado?.type == 'coordinacion' || _userEmpleado?.type == 'rp' || _userEmpleado?.type == 'capitan_mesero'">
 
             <div align="center">
 

@@ -84,7 +84,8 @@ export class AdminHomePage {
       this.authProvider.getUserAdmins(this.uid).subscribe(s => {
 
         this._userEmpleado = s;
-
+        console.log("_userEmpleado", s);
+        
       })
 
       //obtener fecha actual
