@@ -256,20 +256,49 @@
 
       <div *ngIf="validarCupon=='Noexiste'">
 
-        <!-- PROPINA -->
-        <ion-row>
-          <ion-col></ion-col>
-          <ion-col><b></b></ion-col>
-          <ion-col><b>Propina</b></ion-col>
-          <ion-col><b>{{ propinaRe2 | currency }}</b></ion-col>
-        </ion-row>
+
 
         <!-- TOTAL RESERVACIÓN -->
         <ion-row>
           <ion-col></ion-col>
           <ion-col><b></b></ion-col>
-          <ion-col><b>Total reservación</b></ion-col>
-          <ion-col><b> {{totalPropina | currency}} </b></ion-col>
+          <ion-col><b>Subtotal</b></ion-col>
+          <ion-col><b> {{ total_final | currency}} </b></ion-col>
+        </ion-row>
+
+        <!-- PROPINA -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col>Propina</ion-col>
+          <ion-col>{{ propinaRe2 | currency }}</ion-col>
+        </ion-row>
+
+        <!-- IVA -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col>IVA</ion-col>
+          <ion-col>{{ iva | currency}}</ion-col>
+        </ion-row>
+
+        <!-- COMISION 5.9 -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col>Comision 5.9</ion-col>
+          <ion-col>{{ comision | currency}}</ion-col>
+        </ion-row>
+
+        <!-- TOTAL -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col><b>Total</b></ion-col>
+          <ion-col>
+            <b>{{totalNeto | currency}}
+            </b>
+          </ion-col>
         </ion-row>
 
       </div>
@@ -277,42 +306,61 @@
       <!-- CON CUPON -->
       <div *ngIf="validarCupon=='Existe'">
 
-        <div *ngFor="let cup of cupones">
+        <!-- <div *ngFor="let cup of cupones"> -->
 
 
-          <!-- CUPON DESCUENTO -->
-          <ion-row>
-            <ion-col><b>Cupón descuento</b></ion-col>
-            <ion-col><b></b></ion-col>
-            <ion-col></ion-col>
-            <ion-col>-{{ cup.valorCupon | currency }}</ion-col>
-          </ion-row>
+        <!-- CUPON DESCUENTO -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col>Cupón</ion-col>
+          <ion-col>-{{ valorCupon | currency }}</ion-col>
+        </ion-row>
 
-          <!-- TOTAL -->
-          <ion-row>
-            <ion-col><b>Total</b></ion-col>
-            <ion-col><b></b></ion-col>
-            <ion-col></ion-col>
-            <ion-col>{{ reservaciones.totalReservacion | currency }}</ion-col>
-          </ion-row>
+        <!-- TOTAL CON DESCUENTO  -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col><b>Subtotal</b></ion-col>
+          <ion-col><b>{{ reservaciones.totalReservacion | currency }}</b></ion-col>
+        </ion-row>
 
-          <!-- PROPINA -->
-          <ion-row>
-            <ion-col><b>Propina</b></ion-col>
-            <ion-col><b></b></ion-col>
-            <ion-col></ion-col>
-            <ion-col>{{ propinaRe | currency }}</ion-col>
-          </ion-row>
+        <!-- PROPINA -->
+        <ion-row>
+          <ion-col><b></b></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col>Propina</ion-col>
+          <ion-col>{{ propinaRe | currency }}</ion-col>
+        </ion-row>
 
-          <!-- TOTAL FINAL -->
-          <ion-row>
-            <ion-col><b>Total final</b></ion-col>
-            <ion-col><b></b></ion-col>
-            <ion-col></ion-col>
-            <ion-col><b>{{ totalPropinaCupon | currency }}</b></ion-col>
-          </ion-row>
+        <!-- IVA  -->
 
-        </div>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col>IVA</ion-col>
+          <ion-col>{{ iva | currency }}</ion-col>
+        </ion-row>
+
+        <!-- Comision 5.9  -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col>Comision 5.9</ion-col>
+          <ion-col>{{ comision | currency }}</ion-col>
+        </ion-row>
+
+        <!-- Total  -->
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col><b>Total</b></ion-col>
+          <ion-col>
+            <b>{{ totalNeto | currency}}</b>
+          </ion-col>
+        </ion-row>
+
+        <!-- </div> -->
 
       </div>
 
@@ -342,39 +390,45 @@
 
   <div *ngFor="let compartidas of cuentasCompartidas" padding>
 
-      <ion-row>
+    <ion-row>
 
-        <ion-col>
+      <ion-col>
 
-          <img class="imagen_perfil" src="{{ (compartidas.telefono | getNamexphoneUser | async)?.photoURL }}" />        
-        
-        </ion-col>
+        <img class="imagen_perfil" src="{{ (compartidas.telefono | getNamexphoneUser | async)?.photoURL }}" />
 
-        <ion-col>
+      </ion-col>
 
-          <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{ (compartidas.telefono | getNamexphoneUser | async)?.displayName }}        
-        
-        </ion-col>
+      <ion-col>
 
-        <ion-col>
-          <ion-icon ios="ios-call" md="md-call" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{ compartidas.telefono }}
-        </ion-col>
+        <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{
+        (compartidas.telefono | getNamexphoneUser | async)?.displayName }}
 
-        <ion-col>
+      </ion-col>
 
-          <ion-note item-end>
+      <ion-col>
+        <ion-icon ios="ios-call" md="md-call" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{
+        compartidas.telefono }}
+      </ion-col>
 
-            {{ compartidas.estatus }}
+      <ion-col>
 
-            <p *ngIf="compartidas.estatus_escaneo == 'NO'" ><ion-icon ios="ios-close-circle" md="md-close-circle" item-start style="color: #F44336"></ion-icon></p>
+        <ion-note item-end>
 
-            <p *ngIf="compartidas.estatus_escaneo != 'NO'" ><ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-start style="color: #CDDC39"></ion-icon></p>
+          {{ compartidas.estatus }}
 
-          </ion-note>
+          <p *ngIf="compartidas.estatus_escaneo == 'NO'">
+            <ion-icon ios="ios-close-circle" md="md-close-circle" item-start style="color: #F44336"></ion-icon>
+          </p>
 
-        </ion-col>
+          <p *ngIf="compartidas.estatus_escaneo != 'NO'">
+            <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-start style="color: #CDDC39"></ion-icon>
+          </p>
 
-      </ion-row>
+        </ion-note>
+
+      </ion-col>
+
+    </ion-row>
 
   </div>
 

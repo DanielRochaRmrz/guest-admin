@@ -29,6 +29,10 @@ export class AdminReservacionDetallePage {
   productos: any;
   uidCupon: any;
   cupones: any;
+  valorCupon: any;
+  iva : any;
+  comision: any;
+  totalNeto : any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -70,6 +74,9 @@ export class AdminReservacionDetallePage {
       
       this.uidCupon = res2[0].uidCupon;    
 
+      // console.log("TABLA CUPON", res2);
+      
+
       if (this.uidCupon == undefined) {
 
         this.validarCupon = 'Noexiste';
@@ -77,7 +84,10 @@ export class AdminReservacionDetallePage {
         // total de general dependiendo los productos que tenga la reservacio
         this.monRes.getProductos(this.idReservacion).subscribe(productos => {
 
-        this.productos_total = productos;        
+        this.productos_total = productos;     
+        
+        // console.log("PRODUCTOS TABLA", this.productos_total);
+        
 
         // ASIGANAMOS THIS.PRODUCTOS A LA CONSULTA Y PODER HACER EL RECORRIDO EN LA VISTA
 
@@ -85,9 +95,16 @@ export class AdminReservacionDetallePage {
 
         this.total_final = this.productos_total.reduce((acc, obj) => acc + obj.total, 0);
 
-        this.propinaRe2 = this.total_final * res2[0].propina;
+        this.propinaRe2 = this.total_final * res2[0].propina;  
+        
+        this.iva = this.total_final * .16;
+
+        this.comision = this.total_final * .059;
 
         this.totalPropina = this.total_final + this.propinaRe2;
+
+        this.totalNeto = ( this.comision + this.iva ) + this.totalPropina;
+
 
 
         });
@@ -103,15 +120,22 @@ export class AdminReservacionDetallePage {
 
           this.monRes.getCupones(sucursal, this.uidCupon).subscribe(cupones => {
 
-            this.cupones = cupones;           
+            this.cupones = cupones;              
+            
+            this.valorCupon = this.cupones[0].valorCupon;
 
         });
         
-          this.propinaRe = res2[0].totalReservacion * res2[0].propina;
+          this.propinaRe = res2[0].totalReservacion * res2[0].propina; 
 
-          const propinaCalculo = res2[0].totalReservacion * res2[0].propina;
+          this.iva = res2[0].totalReservacion * .16;
 
-          this.totalPropinaCupon = res2[0].totalReservacion + propinaCalculo;       
+          this.comision = res2[0].totalReservacion * .059;
+
+          this.totalPropinaCupon = res2[0].totalReservacion + this.propinaRe;     
+            
+          this.totalNeto = (this.comision + this.iva) + this.totalPropinaCupon;
+
 
        });
 
