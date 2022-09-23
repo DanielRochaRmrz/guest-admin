@@ -140,7 +140,7 @@ export class AdminMonitearReservPage {
     console.log(e);    
 
     if (e === 'bottom') {
-      // this.page.more()
+      this.page.moreMonitorReservaciones(this.uidSucursal);
     }
   }
 
