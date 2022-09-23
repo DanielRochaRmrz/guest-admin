@@ -11,8 +11,8 @@ import { GestionReservacionesProvider } from "../../providers/gestion-reservacio
 import { ReservacionProvider } from "../../providers/reservacion/reservacion";
 import { UserProvider } from "../../providers/user/user";
 import { AlertController } from "ionic-angular";
-import { stringify } from "querystring";
 import { DeviceProvider } from "../../providers/device/device";
+import { AdministrarReservacionesPage } from "../administrar-reservaciones/administrar-reservaciones";
 
 @IonicPage()
 @Component({
@@ -152,12 +152,12 @@ export class ReservaDetallePage {
           if (data.estatus == "Creando") {
             this._gestionReser.aceptarReservacion(idReserv);
 
-            this.closeModal();
+            this.navCtrl.setRoot(AdministrarReservacionesPage);
           }
           if (data.estatus == "CreadaCompartida") {
             this._gestionReser.aceptarReservacionCompartida(idReserv);
 
-            this.closeModal();
+            this.navCtrl.setRoot(AdministrarReservacionesPage);
           }
         });
       });
