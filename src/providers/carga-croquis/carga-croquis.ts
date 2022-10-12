@@ -94,7 +94,10 @@ export class CargaCroquisProvider {
     return (this.croquisObs = this.croquisCol.snapshotChanges().pipe(
       map((cambios) => {
         return cambios.map((data) => {
+          console.log('Id Croquis -->', data.payload.doc.id);
+          
           const croquis = data.payload.doc.data() as any;
+          croquis.$key = data.payload.doc.id;
           return croquis;
         });
       })
@@ -142,7 +145,7 @@ export class CargaCroquisProvider {
     });
   }
 
-  updateCroquis(imagen: any) {
+  updateCroquis(key: string, imagen: any) {
     new Promise((resolve, reject) => {
       this.loadImage();
       let storeRef = firebase.storage().ref();
@@ -170,8 +173,7 @@ export class CargaCroquisProvider {
           uploadTask.snapshot.ref
             .getDownloadURL()
             .then((urlImage) => {
-              let idImage = imagen.idSucursal;
-              this.updateUrlCroquis(idImage, urlImage);
+              this.updateUrlCroquis(key, urlImage);
             })
             .catch((error) => {
               console.log(error);
@@ -196,13 +198,12 @@ export class CargaCroquisProvider {
       });
   }
 
-  public updateUrlCroquis(uid: string, url: string) {
+  public updateUrlCroquis(key: string, url: string) {
     let croquis_img = {
-      idSucursal: uid,
       imagenes: url,
     };
     this.afDB
-      .collection("croquis_img").doc().update
+      .collection("croquis_img").doc(key).update
       (croquis_img)
       .then((reason: any) => {
         console.log("Reason -->", reason);

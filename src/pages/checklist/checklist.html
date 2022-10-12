@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar class="borde" hideBackButton>
+    <ion-row>
+      <ion-col col-1> </ion-col>
+      <ion-col col-1 align="center">
+        <img src="./assets/content/line2.png" class="imgLi" alt="" />
+      </ion-col>
+      <ion-col col-8>
+        <div class="Tools">Checklist</div>
+        <div class="sucursal">Sucursal</div>
+      </ion-col>
+      <ion-col>
+        <div align="end">
+          <img src="./assets/content/corona.png" style="width: 40%" alt="" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-fab left bottom>
+    <button ion-fab color="primary" (click)="checklistNew()">
+      <ion-icon name="md-add" style="color: #000000"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="toBack()">
+      <ion-icon
+        ios="ios-arrow-back"
+        md="md-arrow-back"
+        style="color: #000000"
+      ></ion-icon>
+    </button>
+  </ion-fab>
+  <div>
+    <ion-card (click)="toggleFunc();" class="accordion">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="titulo" col-6>Titulo checklist</ion-col>
+          <ion-col class="fecha" col-6> fecha </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <div class="panel" [ngClass]="opened ? 'active' : ''">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="tituloAdd" col-8>Registrar nueva actividad </ion-col>
+          <ion-col class="botonAdd" col-2>
+            <button ion-button color="dark" round small [disabled]="buttonAdd">
+              <ion-icon name="md-add"></ion-icon>
+            </button>
+            <ion-col col-2></ion-col>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-input
+                placeholder="Actividad"
+                clearInput
+                (keypress)="actividadAdd($event)"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-input placeholder="Responsable" clearInput></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-card>
+            ACTIVIDAD
+          </ion-card>
+        </ion-row>
+      </ion-grid>
+      <!-- <form  [formGroup]="form">
+      <ion-list style="margin-top: 15% !important" class="scroll">
+        <ion-item>
+            <ion-input class="input-field" name="firstName" type="text" placeholder="First Name"></ion-input>
+          </ion-item>
+              <button ion-button block class="login-button" (click)="search(form.value)">Search</button>                
+      </ion-list>
+      </form> -->
+    </div>
+  </div>
+</ion-content>

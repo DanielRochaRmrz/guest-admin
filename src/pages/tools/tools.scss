@@ -1,0 +1,27 @@
+page-tools {
+     //Nuevo
+     .toolbar-background {
+        background-image: url('../assets/content/encabezado3.jpg')!important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .borde {
+        margin-top: 0em;
+        color: #FD9530;
+    }
+
+    .Tools {
+        color: #fff;
+    }
+
+    .sucursal {
+        color: #fff;
+        opacity: 0.8;
+    }
+
+    .imgLi {
+        width: 2px;
+    }
+}

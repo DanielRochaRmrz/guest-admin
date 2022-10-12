@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar class="borde" hideBackButton>
+    <ion-row>
+      <ion-col col-1> </ion-col>
+      <ion-col col-1 align="center">
+        <img src="./assets/content/line2.png" class="imgLi" alt="" />
+      </ion-col>
+      <ion-col col-8>
+        <div class="Tools">Nuevo Checklist</div>
+        <div class="sucursal">Sucursal</div>
+      </ion-col>
+      <ion-col>
+        <div align="end">
+          <img src="./assets/content/corona.png" style="width: 40%" alt="" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" tooltip="Call" positionV="top" arrow (click)="toBack()">
+      <ion-icon
+        ios="ios-arrow-back"
+        md="md-arrow-back"
+        style="color: #000000"
+      ></ion-icon>
+    </button>
+  </ion-fab>
+  <form autocomplete="off" [formGroup]="checklistForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label floating >Activida</ion-label>
+            <ion-input type="text" formControlName="actividad" ></ion-input>
+          </ion-item>
+          <ion-item no-lines>
+            <h6 ion-text color="danger">Campo requerido</h6>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

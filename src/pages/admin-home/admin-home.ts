@@ -19,6 +19,7 @@ import { CorteHistorialPage } from '../corte-historial/corte-historial';
 import { AdminCroquisPage } from '../admin-croquis/admin-croquis';
 import { DeviceProvider } from '../../providers/device/device';
 import { AdminUsersListPage } from '../admin-users-list/admin-users-list';
+import { ToolsPage } from '../tools/tools';
 AdminUsersGuestPage
 
 @IonicPage()
@@ -147,14 +148,14 @@ export class AdminHomePage {
   ionViewDidLoad() {
     console.log('HOME PAGE');
     this.getIdSucural(this.uid);
+    if (this.platform.is('cordova')) {
+      this._deviceProvider.deviceInfo(this.uid);
+    }
   }
   
   async getIdSucural(uid: string) {
       const uidSucursal: any = await this.authProvider.getUserSuc(uid);
       console.log('Uid -->', uidSucursal);
-      if (this.platform.is('cordova')) {
-        this._deviceProvider.deviceInfo(uidSucursal);
-      }
   }
 
   goEventos(){
@@ -210,6 +211,12 @@ export class AdminHomePage {
   goCroquis() {
     this.navCtrl.push(AdminCroquisPage);
   }
+
+  goTools() {
+    this.navCtrl.push(ToolsPage);
+  }
+
+
 
   salir() {
 

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar class="borde" hideBackButton>
+    <ion-row>
+      <ion-col col-1> </ion-col>
+      <ion-col col-1 align="center">
+        <img src="./assets/content/line2.png" class="imgLi" alt="" />
+      </ion-col>
+      <ion-col col-8>
+        <div class="Tools">Herramientas</div>
+        <div class="sucursal">Sucursal</div>
+      </ion-col>
+      <ion-col>
+        <div align="end">
+          <img src="./assets/content/corona.png" style="width: 40%" alt="" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="toBack()">
+      <ion-icon
+        ios="ios-arrow-back"
+        md="md-arrow-back"
+        style="color: #000000"
+      ></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button block (click)="goToChecklist()">
+          <ion-col col-6>
+            Checklist 
+          </ion-col>
+          <ion-col col-6>
+            <div text-right>
+              <ion-icon name="md-checkbox-outline"></ion-icon>
+            </div>
+          </ion-col>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

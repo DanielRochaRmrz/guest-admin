@@ -38,6 +38,8 @@ export class AdminCroquisPage {
   getCroquis(idSucursal: string) {
     this.croquisProvider.getCroquis(idSucursal).subscribe((croquis: any) => {
       this.croquis = croquis;
+      console.log('Croquis -->', this.croquis);
+      
     });
   }
 
@@ -89,12 +91,12 @@ export class AdminCroquisPage {
     this._croquisProvider.saveCroquis(imagen);
   }
 
-  modificarFoto() {
+  modificarFoto(key: string) {
     let imagen = {
       idSucursal: this.idSucursal,
       imagenes: this.imagen64,
     };
-    this._croquisProvider.updateCroquis(imagen);
+    this._croquisProvider.updateCroquis(key, imagen);
   }
 
 }

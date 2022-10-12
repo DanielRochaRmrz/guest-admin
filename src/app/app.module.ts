@@ -61,7 +61,9 @@ import { AdminRpCodigoPage } from '../pages/admin-rp-codigo/admin-rp-codigo';
 import { AdminRpCorteCodigosPage } from '../pages/admin-rp-corte-codigos/admin-rp-corte-codigos';
 import { ReservaDetallePage } from '../pages/reserva-detalle/reserva-detalle';
 import { AdminCroquisPage } from '../pages/admin-croquis/admin-croquis';
-
+import { ToolsPage } from '../pages/tools/tools';
+import { ChecklistPage } from '../pages/checklist/checklist';
+import { ChecklistNewPage } from '../pages/checklist-new/checklist-new';
 
 //Pipes
 import { PipesModule } from "../pipes/pipes.module";
@@ -81,6 +83,7 @@ import { SucursalAltaProvider } from '../providers/sucursal-alta/sucursal-alta';
 import { CargaCroquisProvider } from '../providers/carga-croquis/carga-croquis';
 import { PushNotiProvider } from "../providers/push-noti/push-noti";
 import { ReservacionProvider } from "../providers/reservacion/reservacion";
+import { ToolsProvider } from '../providers/tools/tools';
 
 //Plugins
 import { AuthProvider } from '../providers/auth/auth';
@@ -190,7 +193,10 @@ import { SliderPage } from '../pages/slider/slider';
     AdminCroquisPage,
     ScrollableDirective,
     LoadingSpinnerComponent,
-    SliderPage
+    SliderPage,
+    ToolsPage,
+    ChecklistPage,
+    ChecklistNewPage,
   ],
   imports: [
     BrowserModule,
@@ -207,7 +213,7 @@ import { SliderPage } from '../pages/slider/slider';
     PipesModule,
     HttpModule,
     HttpClientModule,
-    ClipboardModule
+    ClipboardModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -270,7 +276,10 @@ import { SliderPage } from '../pages/slider/slider';
     AdminRpCorteCodigosPage,
     ReservaDetallePage,
     AdminCroquisPage,
-    SliderPage
+    SliderPage,
+    ToolsPage,
+    ChecklistPage,
+    ChecklistNewPage,
   ],
   providers: [
     StatusBar,
@@ -303,6 +312,7 @@ import { SliderPage } from '../pages/slider/slider';
     Device,
     // FCM,
     PaginationService,
+    ToolsProvider,
   ]
 })
 export class AppModule {}
