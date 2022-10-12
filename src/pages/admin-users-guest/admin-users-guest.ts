@@ -75,7 +75,7 @@ export class AdminUsersGuestPage {
           this.adminsU = u;
           this.empleadosU = u;
           console.log("Usuarios en la aplicación", this.adminsU);
-          
+
         });
 
     }
@@ -177,17 +177,14 @@ export class AdminUsersGuestPage {
           text: 'Inhabilitar/hablitar cuenta',
           role: 'destructive',
           handler: () => {
-            const coma = active == 'true' ? 'Inhabilitado' : 'Habilitado';
+            console.log('active', active);
+            
+            const coma = active === true ? false : true;
+            console.log('COMA', coma);
+
             if (confirm('Cambiara el estado a ' + coma + ' de este usuario')) {
               // Si el usuario está activo y se quiere inhablitar entra a esta función
-              if (active == 'true') {
-                this._up.inhabilitar_user(uid);
-                console.log('Se inhablito cuenta');
-                // Si el usuario está desactivo y se quiere hablitar entra a esta función
-              } else if (active == 'false') {
-                this._up.habilitar_user(uid);
-                console.log('Se hablito cuenta');
-              }
+              this._up.inhabilitar_user(uid, coma);
             }
           }
         },
@@ -214,14 +211,14 @@ export class AdminUsersGuestPage {
   }
 
 
-  selectUsuarioU(uid, home){
+  selectUsuarioU(uid, home) {
     this.actionSheet.create({
       title: 'Acciones',
-      buttons:[
+      buttons: [
         {
           text: 'Ver más',
-          handler:()=>{
-            this.navCtrl.push(AdminUserDetailPage, {uid: uid, home: home});
+          handler: () => {
+            this.navCtrl.push(AdminUserDetailPage, { uid: uid, home: home });
           }
         },
         // {          
@@ -231,24 +228,24 @@ export class AdminUsersGuestPage {
         //     if(confirm('¿Estas seguro de desactivar a este usuario?')){
         //       this._up.inhabilitar(uid);
         //       console.log('uid usuario', uid);
-              
+
         //       console.log('Se inhabilito');
         //   } 
         // }
         // },
         {
-          text:'Cancel',
-          role:'cancel',
-          handler:()=>{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
             console.log("Cancelo");
-            
+
           }
         }
       ]
     }).present();
   }
 
-  behind(){
+  behind() {
     this.navCtrl.setRoot(AdminHomePage);
   }
 

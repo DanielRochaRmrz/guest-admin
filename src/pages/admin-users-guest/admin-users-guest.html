@@ -19,7 +19,9 @@
 <ion-content>
 
     <ion-fab right top>
-        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
+        <button ion-fab color="primary" (click)="behind()">
+            <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
+        </button>
     </ion-fab>
 
     <div *ngIf="usuario == 'a' ">
@@ -47,7 +49,8 @@
         <div *ngIf="usuario == 'a'">
             <div *ngFor="let admin of admins">
                 <ion-list *ngSwitchCase="'empleado'">
-                    <div *ngIf="admin.type == 'e' || admin.type == 'coordinacion' || admin.type == 'rp' || admin.type == 'capitan_mesero'" (click)="selectUsuario(admin.uid, admin.active)">
+                    <div *ngIf="admin.type == 'e' || admin.type == 'coordinacion' || admin.type == 'rp' || admin.type == 'capitan_mesero'"
+                        (click)="selectUsuario(admin.uid, admin.active)">
 
                         <ion-row>
 
@@ -56,13 +59,15 @@
 
                                     <ion-col>
 
-                                        <img src="{{admin.photoURL}}?type=large&width=720&height=720" style="width:190%;border-radius:50px">
+                                        <img src="{{admin.photoURL}}?type=large&width=720&height=720"
+                                            style="width:190%;border-radius:50px">
 
                                     </ion-col>
 
                                     <ion-col col-2>
 
-                                        <img src="../assets/imgs/Rectangle 73.png" style="width:35%;height:65%;margin-top:10px">
+                                        <img src="../assets/imgs/Rectangle 73.png"
+                                            style="width:35%;height:65%;margin-top:10px">
 
                                     </ion-col>
 
@@ -97,7 +102,8 @@
                             <ion-col col-4>
                                 <div style="margin-left:27px;margin-top: 15px;">
                                     <font>STATUS</font> <br>
-                                    <img src="../assets/imgs/icons/Ellipse 4.png" style="margin-left: 10px; margin-top: 10px;" alt="">
+                                    <img src="../assets/imgs/icons/Ellipse 4.png"
+                                        style="margin-left: 10px; margin-top: 10px;" alt="">
                                 </div>
 
                             </ion-col>
@@ -106,7 +112,7 @@
                         ID
                         <p class="p">{{ admin.uid }}</p>
                     </h6>-->
-                        <ion-badge *ngIf="admin.active == 'false' " class="fondo" item-end>Inhabilitado</ion-badge>
+                        <ion-badge *ngIf="admin.active == true" class="fondo" item-end>Inhabilitado</ion-badge>
                     </div>
                 </ion-list>
             </div>
@@ -130,15 +136,18 @@
                                             <img src="{{admin.photoURL}}" style="width:40%;border-radius:50%;">
                                         </div>
                                         <div *ngIf="admin.status_foto == 1" align="center">
-                                            <img src="{{admin.photoURL}}" style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -70px;">
+                                            <img src="{{admin.photoURL}}"
+                                                style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -70px;">
                                         </div>
                                     </div>
                                     <div *ngIf="admin.provider == 'google'" align="center">
                                         <div *ngIf="admin.status_foto == 0">
-                                            <img src="{{admin.photoURL}}?type=large&width=720&height=720" style="width:85%;border-radius:50%;">
+                                            <img src="{{admin.photoURL}}?type=large&width=720&height=720"
+                                                style="width:85%;border-radius:50%;">
                                         </div>
                                         <div *ngIf="admin.status_foto == 1" align="center">
-                                            <img src="{{admin.photoURL}}" style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -62px;position: absolute;">
+                                            <img src="{{admin.photoURL}}"
+                                                style="width: 51px;height: 51px;border-radius: 50%;margin-top: 7px;margin-left: -62px;position: absolute;">
                                         </div>
                                     </div>
 
@@ -173,7 +182,7 @@
                             </ion-row>
 
 
-                            <ion-badge *ngIf="admin.active == 'false' " class="fondo" item-end>Inhabilitado</ion-badge>
+                            <ion-badge *ngIf="admin.active == true" class="fondo" item-end>Inhabilitado</ion-badge>
                         </ion-item>
                     </ion-card>
                 </ion-list>
