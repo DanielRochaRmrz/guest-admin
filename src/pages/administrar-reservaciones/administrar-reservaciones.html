@@ -1,150 +1,169 @@
 <ion-header>
-    <ion-navbar hideBackButton>
-        <ion-row>
-
-            <ion-col col-1>
-                <!-- <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon> -->
-            </ion-col>
-            <ion-col col-1 align="center">
-                <img src="./assets/content/line2.png" class="imgLi" alt="">
-            </ion-col>
-            <ion-col col-8>
-                <div class="AdminEvento">Reservaciones</div>
-                <div class="sucursal">Sucursal</div>
-            </ion-col>
-            <ion-col>
-                <div align='end'>
-                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-navbar>
+  <ion-navbar hideBackButton>
+    <ion-row>
+      <ion-col col-1>
+        <!-- <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon> -->
+      </ion-col>
+      <ion-col col-1 align="center">
+        <img src="./assets/content/line2.png" class="imgLi" alt="" />
+      </ion-col>
+      <ion-col col-8>
+        <div class="AdminEvento">Reservaciones</div>
+        <div class="sucursal">Sucursal</div>
+      </ion-col>
+      <ion-col>
+        <div align="end">
+          <img src="./assets/content/corona.png" style="width: 40%" alt="" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
 </ion-header>
 
-<ion-content style="background-color: white;" padding>
+<ion-content style="background-color: white" padding>
+  <ion-fab right top>
+    <button ion-fab color="primary" (click)="behind()">
+      <ion-icon
+        ios="ios-arrow-back"
+        md="md-arrow-back"
+        style="color: #000000"
+      ></ion-icon>
+    </button>
+  </ion-fab>
 
-    <ion-fab right top>
-        <button ion-fab color="primary" (click)="behind()">
-            <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
-        </button>
-    </ion-fab>
-
-    <div>
-        <label for="">
-            <font style="opacity: .6;">ACEPTADO / RESERVACIONES ENTRANTES</font>
-        </label>
-    </div>
-    <hr>
-    <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
-
-        <div class="container" *ngFor="let reservacion of page.data | async">
-
-            <ion-card class="color1">
-                <br>
-                <ion-row>
-                    <ion-col col-12 text-center>
-                        <ion-row>
-
-                            <ion-col col-12>
-
-                                <div text-center>
-
-                                    <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-person"
+  <div>
+    <label for="">
+      <font style="opacity: 0.6">ACEPTADO / RESERVACIONES ENTRANTES</font>
+    </label>
+  </div>
+  <hr />
+  <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
+    <div class="container" *ngFor="let reservacion of page.data | async">
+      <ion-card class="color1">
+        <br />
+        <ion-row>
+          <ion-col col-12 text-center>
+            <ion-row>
+              <ion-col col-12>
+                <div text-center>
+                  <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-person"
                                             md="md-person"></ion-icon> -->
 
-                                    <div align="center">
+                  <div align="center">
+                    <img
+                      class="imagen_perfil"
+                      src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}"
+                    />
+                  </div>
+                </div>
+              </ion-col>
 
-                                        <img class="imagen_perfil"
-                                            src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}" />
+              <ion-col col-12>
+                <b style="text-transform: uppercase"
+                  >{{ (reservacion.idUsuario | getNameUser | async)?.displayName
+                  }}</b
+                >
+                
+                <p style="font-size: x-large;">
+                    <a
+                      [href]="(reservacion.idUsuario | getNameUser | async)?.instagram"
+                      style="text-transform: uppercase"
+                      >
+                      <ion-icon ios="logo-instagram" md="logo-instagram"></ion-icon>
+                    </a>
+                </p>
+                <p
+                  *ngIf="reservacion.estatus == 'Creando'"
+                  style="font-size: 9px"
+                >
+                  (Reservación tipo normal)
+                </p>
+                <p
+                  *ngIf="reservacion.estatus == 'CreadaCompartida'"
+                  style="font-size: 9px"
+                >
+                  (Reservación tipo compartida)
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-col> </ion-row
+        ><br />
 
-                                    </div>
+        <hr size="50px" />
+        <br />
+        <ion-row>
+          <ion-col col-12 text-center>
+            <ion-row>
+              <ion-col col-4>
+                <ion-icon
+                  ios="ios-time"
+                  md="md-time"
+                  item-start
+                  style="color: #fcc04d"
+                ></ion-icon>
+                <b> Hora</b>
+              </ion-col>
+              <ion-col col-4>
+                <ion-icon
+                  ios="ios-checkmark"
+                  md="md-checkmark"
+                  item-start
+                  style="color: #fcc04d"
+                >
+                </ion-icon
+                ><b> Personas</b>
+              </ion-col>
+              <ion-col col-4>
+                <ion-icon
+                  ios="ios-calendar"
+                  md="md-calendar"
+                  item-start
+                  style="color: #fcc04d"
+                >
+                </ion-icon
+                ><b> Fecha</b>
+              </ion-col>
+            </ion-row>
 
-                                </div>
+            <ion-row>
+              <ion-col col-4> {{ reservacion.hora }} </ion-col>
+              <ion-col col-4> {{ reservacion.numPersonas }} </ion-col>
+              <ion-col col-4>
+                {{ reservacion.fechaR | date : 'dd/MM/yyyy'}}
+              </ion-col>
+            </ion-row>
 
-                            </ion-col>
-
-                            <ion-col col-12>
-                                <b style="text-transform: uppercase">{{ (reservacion.idUsuario | getNameUser |
-                                    async)?.displayName }}</b>
-                                <p *ngIf="reservacion.estatus == 'Creando'" style="font-size: 9px;">(Reservación tipo
-                                    normal)</p>
-                                <p *ngIf="reservacion.estatus == 'CreadaCompartida'" style="font-size: 9px;">
-                                    (Reservación tipo compartida)</p>
-                            </ion-col>
-                        </ion-row>
-                    </ion-col>
-                </ion-row><br>
-
-                <hr size="50px">
-                <br>
-                <ion-row>
-                    <ion-col col-12 text-center>
-                        <ion-row>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon> <b>
-                                    Hora</b>
-
-                            </ion-col>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d">
-                                </ion-icon><b> Personas</b>
-
-                            </ion-col>
-                            <ion-col col-4>
-
-                                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d">
-                                </ion-icon><b> Fecha</b>
-
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <ion-col col-4>
-                                {{ reservacion.hora }}
-                            </ion-col>
-                            <ion-col col-4>
-                                {{ reservacion.numPersonas }}
-                            </ion-col>
-                            <ion-col col-4>
-                                {{ reservacion.fechaR | date : 'dd/MM/yyyy'}}
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                            <!-- <button (click)="consultaReservacion(reservacion.idReservacion)"> -->
-                            <br>
-                            <br>
-                            <ion-col col-12 text-center>
-                                <!-- <button class="btn" (click)="consultaReservacion(reservacion.idReservacion)">Detalles
+            <ion-row>
+              <!-- <button (click)="consultaReservacion(reservacion.idReservacion)"> -->
+              <br />
+              <br />
+              <ion-col col-12 text-center>
+                <!-- <button class="btn" (click)="consultaReservacion(reservacion.idReservacion)">Detalles
                                 </button> -->
-                                <br>
-                                <button ion-button block round class="btnDetalle"
-                                    (click)="consultaReservacion(reservacion.idReservacion)">Detalles</button>
-                            </ion-col>
-                            <br>
-                        </ion-row>
-                    </ion-col>
-                </ion-row>
-                <br>
-            </ion-card>
-
-        </div>
-
+                <br />
+                <button
+                  ion-button
+                  block
+                  round
+                  class="btnDetalle"
+                  (click)="consultaReservacion(reservacion.idReservacion)"
+                >
+                  Detalles
+                </button>
+              </ion-col>
+              <br />
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <br />
+      </ion-card>
     </div>
-    <div *ngIf="noReservaciones == 0">
-        <div align="center">
-            <img text-center class="adv2" src="./assets/content/advertencia.png" />
-        </div>
-        <p class="aviso">
-            Aviso
-        </p>
-        <p class="aviso">
-            Por el momento no hay reservaciones.
-        </p>
-    </div>  
-
-
-
+  </div>
+  <div *ngIf="noReservaciones == 0">
+    <div align="center">
+      <img text-center class="adv2" src="./assets/content/advertencia.png" />
+    </div>
+    <p class="aviso">Aviso</p>
+    <p class="aviso">Por el momento no hay reservaciones.</p>
+  </div>
 </ion-content>

@@ -1,196 +1,262 @@
 <ion-header>
-
-    <ion-navbar class="borde">
-        <ion-row>
-            <ion-col col-1 align="center">
-                <!-- <img src="./assets/content/line2.png" class="imgLi" alt=""> -->
-            </ion-col>
-            <ion-col col-8>
-                <div class="AdminEvento">Detalle de la reservación</div>
-                <div class="sucursal">Sucursal</div>
-            </ion-col>
-            <ion-col>
-                <div align='end'>
-                    <img src="./assets/content/corona.png" style="width: 40%;" alt="">
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-navbar>
-
+  <ion-navbar class="borde">
+    <ion-row>
+      <ion-col col-1 align="center">
+        <!-- <img src="./assets/content/line2.png" class="imgLi" alt=""> -->
+      </ion-col>
+      <ion-col col-8>
+        <div class="AdminEvento">Detalle de la reservación</div>
+        <div class="sucursal">Sucursal</div>
+      </ion-col>
+      <ion-col>
+        <div align="end">
+          <img src="./assets/content/corona.png" style="width: 40%" alt="" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
 </ion-header>
 
-<ion-content padding class="fondo_admin" style="background: #fff;">
-
-    <ion-card class="color1">
-        <br>
+<ion-content padding class="fondo_admin" style="background: #fff">
+  <ion-card class="color1">
+    <br />
+    <ion-row>
+      <ion-col col-12 text-center>
         <ion-row>
-            <ion-col col-12 text-center>
-                <ion-row>
-
-                    <ion-col col-12>
-
-                        <div text-center>
-
-                            <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-person"
+          <ion-col col-12>
+            <div text-center>
+              <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-person"
                                     md="md-person"></ion-icon> -->
 
-                            <div align="center">
+              <div align="center">
+                <img class="imagen_perfil" [src]="cliente?.photoURL" />
+              </div>
 
-                                <img class="imagen_perfil" [src]="cliente?.photoURL" />
+              <p class="nombre">{{ cliente.displayName }}</p>
 
-                            </div>
-
-                            <p class="nombre">
-
-                                {{ cliente.displayName }}                        
-                                                       
-                              </p>
-
-                        </div>
-
-                    </ion-col>
-                </ion-row>
-            </ion-col>
+              <p style="font-size: x-large">
+                <a
+                  [href]="cliente.instagram"
+                  style="text-transform: uppercase"
+                >
+                  <ion-icon ios="logo-instagram" md="logo-instagram"></ion-icon>
+                </a>
+              </p>
+            </div>
+          </ion-col>
         </ion-row>
-        <hr>
+      </ion-col>
+    </ion-row>
+    <hr />
+    <ion-row>
+      <ion-col col-12 text-center>
         <ion-row>
-            <ion-col col-12 text-center>
-                <ion-row>
+          <ion-col col-6>
+            <ion-icon
+              ios="ios-at"
+              md="md-at"
+              item-start
+              style="color: #fcc04d"
+            ></ion-icon
+            ><b> Email</b>
+          </ion-col>
+          <ion-col col-6>
+            <ion-icon
+              ios="ios-call"
+              md="md-call"
+              item-start
+              style="color: #fcc04d"
+            ></ion-icon
+            ><b> Teléfono</b>
+          </ion-col>
+        </ion-row>
 
-                    <ion-col col-6>
+        <ion-row>
+          <ion-col col-6> {{ cliente.email }} </ion-col>
+          <ion-col col-6> {{ cliente.phoneNumber }} </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <br />
+  </ion-card>
 
-                        <ion-icon ios="ios-at" md="md-at" item-start style="color: #fcc04d"></ion-icon><b> Email</b>
+  <ion-list>
+    <ion-card-header class="titulo">
+      <ion-icon
+        ios="ios-list"
+        md="md-list"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      Detalle de Reservación
+    </ion-card-header>
 
-                    </ion-col>
-                    <ion-col col-6>
+    <ion-item>
+      <ion-icon
+        ios="ios-key"
+        md="md-key"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      UID reservación:
+      <ion-badge item-end>{{ reservacion.idReservacion }}</ion-badge>
+    </ion-item>
 
-                        <ion-icon ios="ios-call" md="md-call" item-start style="color: #fcc04d"></ion-icon><b> Fecha</b>
+    <ion-item>
+      <ion-icon
+        ios="ios-folder-open"
+        md="md-folder-open"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      Folio:
+      <ion-badge item-end>{{ reservacion.folio }}</ion-badge>
+    </ion-item>
 
-                    </ion-col>
-                </ion-row>
+    <ion-item>
+      <ion-icon
+        ios="ios-bookmark"
+        md="md-bookmark"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      Reservación:
+      <ion-badge item-end
+        >{{ reservacion.fechaR_ | date : 'dd/MM/yyyy' }}, {{ reservacion.hora
+        }}</ion-badge
+      >
+    </ion-item>
 
-                <ion-row>
-                    <ion-col col-6>
-                        {{ cliente.email }}
-                    </ion-col>
-                    <ion-col col-6>
-                        {{ cliente.phoneNumber }}
-                    </ion-col>
-                </ion-row>
+    <ion-item>
+      <ion-icon
+        ios="ios-barcode"
+        md="md-barcode"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      Código RP Usado
+      <ion-badge item-end>{{ reservacion.codigoRP }}</ion-badge>
+    </ion-item>
+
+    <hr />
+
+    <ion-card-header class="titulo">
+      <ion-icon
+        ios="ios-list"
+        md="md-list"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      Detalle de Área
+    </ion-card-header>
+
+    <ion-item>
+      <ion-icon
+        ios="ios-grid"
+        md="md-grid"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      Zona:
+      <ion-badge item-end>{{ zona.nombre }} </ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon
+        ios="ios-expand"
+        md="md-expand"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      Mesa:
+      <ion-badge item-end>{{ reservacion.numMesa }} </ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon
+        ios="ios-contacts"
+        md="md-contacts"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      No. personas:
+      <ion-badge item-end>{{ reservacion.numPersonas }} </ion-badge>
+    </ion-item>
+
+    <ng-container *ngIf="evento">
+      <ion-card-header class="titulo">
+        <ion-icon
+          ios="ios-list"
+          md="md-list"
+          item-start
+          style="color: #fcc04d"
+        ></ion-icon>
+        Evento
+      </ion-card-header>
+
+      <ion-item>
+        <ion-icon
+          ios="ios-grid"
+          md="md-grid"
+          item-start
+          style="color: #fcc04d"
+        ></ion-icon>
+        Evento:
+        <ion-badge item-end>
+          {{ evento.titulo }}, {{ evento.categoria }}, {{ evento.hora }}
+        </ion-badge>
+      </ion-item>
+    </ng-container>
+
+    <hr />
+
+    <ion-card-header class="titulo">
+      <ion-icon
+        ios="ios-list"
+        md="md-list"
+        item-start
+        style="color: #fcc04d"
+      ></ion-icon>
+      Carta
+    </ion-card-header>
+
+    <ion-grid>
+      <ion-row>
+        <ion-item class="color1">
+          <ion-row>
+            <ion-col col-4>
+              <ion-icon
+                ios="ios-checkmark"
+                md="md-checkmark"
+                item-start
+                style="color: #fcc04d"
+              >
+              </ion-icon>
+              <b>Cantidad</b>
             </ion-col>
+
+            <ion-col col-4>
+              <ion-icon
+                ios="ios-basket"
+                md="md-basket"
+                item-start
+                style="color: #fcc04d"
+              ></ion-icon>
+              <b>Producto</b>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+
+    <ion-row *ngFor="let product of productos">
+      <ion-item class="color1">
+        <ion-row>
+          <ion-col col-4>{{ product.cantidad }}</ion-col>
+          <ion-col col-4>{{ product.producto }}</ion-col>
         </ion-row>
-        <br>
-    </ion-card>
-
-    <ion-list>
-        <ion-card-header class="titulo">
-            <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon> Detalle de
-            Reservación
-        </ion-card-header>
-
-        <ion-item>
-            <ion-icon ios="ios-key" md="md-key" item-start style="color: #fcc04d"></ion-icon>
-            UID reservación:
-            <ion-badge item-end>{{ reservacion.idReservacion }}</ion-badge>
-        </ion-item>
-
-        <ion-item>
-            <ion-icon ios="ios-folder-open" md="md-folder-open" item-start style="color: #fcc04d"></ion-icon>
-            Folio:
-            <ion-badge item-end>{{ reservacion.folio }}</ion-badge>
-        </ion-item>
-
-        <ion-item>
-            <ion-icon ios="ios-bookmark" md="md-bookmark" item-start style="color: #fcc04d"></ion-icon>
-            Reservación:
-            <ion-badge item-end>{{ reservacion.fechaR_ | date : 'dd/MM/yyyy' }}, {{ reservacion.hora }}</ion-badge>
-        </ion-item>
-
-        <ion-item>
-            <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon>
-            Código RP Usado
-            <ion-badge item-end>{{ reservacion.codigoRP }}</ion-badge>
-        </ion-item>
-
-        <hr>
-
-        <ion-card-header class="titulo">
-            <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon> Detalle de Área
-        </ion-card-header>
-
-        <ion-item>
-            <ion-icon ios="ios-grid" md="md-grid" item-start style="color: #fcc04d"></ion-icon>
-            Zona:
-            <ion-badge item-end>{{ zona.nombre }} </ion-badge>
-        </ion-item>
-
-        <ion-item>
-            <ion-icon ios="ios-expand" md="md-expand" item-start style="color: #fcc04d"></ion-icon>
-            Mesa:
-            <ion-badge item-end>{{ reservacion.numMesa }} </ion-badge>
-        </ion-item>
-
-        <ion-item>
-            <ion-icon ios="ios-contacts" md="md-contacts" item-start style="color: #fcc04d"></ion-icon>
-            No. personas:
-            <ion-badge item-end>{{ reservacion.numPersonas }} </ion-badge>
-        </ion-item>
-
-        <ng-container *ngIf="evento">
-
-            <ion-card-header class="titulo">
-                <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon> Evento
-            </ion-card-header>
-
-            <ion-item>
-                <ion-icon ios="ios-grid" md="md-grid" item-start style="color: #fcc04d"></ion-icon>
-                Evento:
-                <ion-badge item-end> {{ evento.titulo }}, {{ evento.categoria }}, {{ evento.hora }} </ion-badge>
-            </ion-item>
-
-        </ng-container>
-
-        <hr>
-
-        <ion-card-header class="titulo">
-            <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon> Carta
-        </ion-card-header>
-
-        <ion-grid>
-            <ion-row>
-                <ion-item class="color1">
-                    <ion-row>
-
-                        <ion-col col-4>
-
-                            <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d">
-                            </ion-icon>
-                            <b>Cantidad</b>
-
-                        </ion-col>
-
-                        <ion-col col-4>
-
-                            <ion-icon ios="ios-basket" md="md-basket" item-start style="color: #fcc04d"></ion-icon>
-                            <b>Producto</b>
-
-                        </ion-col>
-
-                    </ion-row>
-                </ion-item>
-            </ion-row>
-        </ion-grid>
-
-        <ion-row *ngFor="let product of productos">
-            <ion-item class="color1">
-                <ion-row>
-                    <ion-col col-4>{{ product.cantidad }}</ion-col>
-                    <ion-col col-4>{{ product.producto }}</ion-col>
-                </ion-row>
-
-            </ion-item>
-        </ion-row>
-        <br>
-    </ion-list>
-
+      </ion-item>
+    </ion-row>
+    <br />
+  </ion-list>
 </ion-content>
