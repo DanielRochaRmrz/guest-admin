@@ -58,6 +58,8 @@ export class AdministrarReservacionesPage {
 
          this.codigoRP(this.uidUser);
 
+         this.page.initGestionReservaciones('reservaciones', 'fechaR', { reverse: true, prepend: false }, this.uidSucursal);
+
         break;
 
         default:

@@ -24,7 +24,7 @@
         </button>
     </ion-fab>
 
-    <div *ngIf="usuario == 'a' ">
+    <div *ngIf="usuario == 'a'">
         <div class="fondo">
             <ion-searchbar placeholder="Buscar" [animated]="true" (ionInput)="getItems($event)"></ion-searchbar>
             <ion-segment selectedIndex="1" [(ngModel)]="user">
@@ -45,10 +45,9 @@
             </ion-segment>
         </div>
     </div>
-    <div [ngSwitch]="user">
         <div *ngIf="usuario == 'a'">
             <div *ngFor="let admin of admins">
-                <ion-list *ngSwitchCase="'empleado'">
+                <ion-list>
                     <div *ngIf="admin.type == 'e' || admin.type == 'coordinacion' || admin.type == 'rp' || admin.type == 'capitan_mesero'"
                         (click)="selectUsuario(admin.uid, admin.active)">
 
@@ -119,7 +118,7 @@
         </div>
         <div *ngIf="usuario == 'master' ">
             <div *ngFor="let admin of adminsU">
-                <ion-list *ngSwitchCase="'empleado'">
+                <ion-list>
                     <!-- <ion-item
                         *ngIf="admin.type == 'e' || admin.type == 'coordinacion' || admin.type == 'rp' || admin.type == 'capitan_mesero'"
                         (click)="selectUsuario(admin.uid, admin.active)"> -->
@@ -188,25 +187,6 @@
                 </ion-list>
             </div>
         </div>
-        <!-- <div *ngFor="let admin of admins">
-            <ion-list class="list_blanco_transp" *ngSwitchCase="'administrador'">
-                <ion-item *ngIf="admin.type == 'a' " (click)="selectUsuario(admin.uid)">
-                    <ion-thumbnail item-start>
-                        <img class="border" src="../assets/imgs/icons/profile.png">
-                    </ion-thumbnail>
-                    <h6>
-                        Nombre
-                        <p class="p">{{ admin.displayName }}</p>
-                    </h6>
-
-                    <h6>
-                        ID
-                        <p class="p">{{ admin.uid }}</p>
-                    </h6>
-                </ion-item>
-            </ion-list>
-        </div> -->
-    </div>
     <div *ngIf="usuario == 'a' ">
         <ion-fab left bottom>
             <button ion-fab color="primary" (click)="mostrar_modal()">

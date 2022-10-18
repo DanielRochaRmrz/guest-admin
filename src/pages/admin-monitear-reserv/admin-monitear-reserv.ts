@@ -9,7 +9,6 @@ import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-r
 import { AdminHomePage } from '../admin-home/admin-home';
 import { PaginationService } from '../../app/pagination.service';
 
-
 @IonicPage()
 @Component({
   selector: 'page-admin-monitear-reserv',
@@ -115,7 +114,7 @@ export class AdminMonitearReservPage {
 
   behind(){
 
-    if (this.menu != null || this.menu != undefined) {
+    if (this.menu != null || this.menu != undefined || localStorage.getItem("type") == "capitan_mesero" ) {
       this.navCtrl.setRoot(AdminHomePage);
 
     }else{

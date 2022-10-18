@@ -24,6 +24,8 @@ export class AdminUsersPage {
     sucursales: any;
     sucursalLocal: string ='';
 
+    usuario: any;
+
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
@@ -35,6 +37,9 @@ export class AdminUsersPage {
 
     ) {
         this.sucursalLocal = localStorage.getItem('uidSucursal');
+        this.usuario = localStorage.getItem("type");
+        console.log("TIPO", this.usuario);
+        
         this.sucursal = this.firebase.auth.currentUser;
         if(this.sucursal != null ){
           this.uidSucursal=this.sucursal.uid

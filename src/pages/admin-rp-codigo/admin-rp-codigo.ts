@@ -40,12 +40,19 @@ export class AdminRpCodigoPage {
     // private _clipboardService: ClipboardService
     this.usuario = this.navParams.get("uidRp");
 
+    this.tpye = localStorage.getItem("type");
+
     // console.log("tipo de usuario", this.usuario);
 
-    this.sucursal = this.firebase.auth.currentUser;
+    // this.sucursal = this.firebase.auth.currentUser;
+
+    // console.log("THIS.SUCURSAL", this.sucursal);
+
+    this.sucursal = localStorage.getItem("uidSucursal");
 
     if (this.sucursal != null) {
-      this.uid = this.sucursal.uid;
+
+      this.uid = this.sucursal;
 
       //Cuando es un usuario se saca el id de la sucursal a la que pertenece
 
@@ -55,12 +62,10 @@ export class AdminRpCodigoPage {
         .subscribe((data) => {
           this.sucursales = data;
 
-          // console.log("sucursales", this.sucursales);
+          // console.log("sucursales", this.sucursalesW);
 
           this.sucursales.forEach((element) => {
             const uidSucursal = element.uidSucursal;
-
-            this.tpye = element.type;
 
             this.afs
               .collection("users", (ref) =>
@@ -87,14 +92,17 @@ export class AdminRpCodigoPage {
 
     this.uidRp = this.navParams.get("uidRp");
 
-    this.getCodigoRp(this.uidRp);
+    this.getCodigoRp();
 
     this.getCodigosRPs();
 
     // console.log(this.uidRp);
   }
 
-  getCodigoRp(uidRP) {
+  getCodigoRp() {
+
+    var uidRP = localStorage.getItem("uidUser");
+
     this.afs
       .collection("codigosRp", (ref) =>
         ref.where("uidRp", "==", uidRP).where("estatus", "==", 1)
@@ -108,7 +116,8 @@ export class AdminRpCodigoPage {
   }
 
   getCodigosRPs() {
-    var uidSucursal = this.usuario;
+
+    var uidSucursal =  localStorage.getItem("uidSucursal");
 
     this.afs
       .collection("codigosRp", (ref) =>
@@ -117,8 +126,6 @@ export class AdminRpCodigoPage {
       .valueChanges()
       .subscribe((data) => {
         this.codigosRps = data;
-
-        // console.log("RP", this.codigosRps);
       });
   }
 
