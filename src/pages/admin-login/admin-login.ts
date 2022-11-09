@@ -52,7 +52,7 @@ export class AdminLoginPage {
     }).catch((err) => {
 
       let alerta = this.alertCtrl.create({
-        title: "Correo o contraseña incorrectos, intenta de nuevo",
+        title: err,
         buttons: [
           {
             text: "Aceptar"

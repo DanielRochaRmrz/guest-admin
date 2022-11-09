@@ -121,9 +121,8 @@ export class AdminMenuReservacionPage {
   // IR A PAGINA DE CODIGO RP
 
   goCodigoRp() {
-    this.uids = localStorage.getItem("uidUser");
-
-    console.log(this.uids);
+    
+    this.uids = localStorage.getItem("uidSucursal");
 
     this.navCtrl.push(AdminRpCodigoPage, { uidRp: this.uids });
   }

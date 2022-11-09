@@ -130,10 +130,10 @@ registerUser(sucursal, email, type, uidNewUser) {
     });
     //
     const options = new RequestOptions({ headers: headers });
-    const url = 'https://guestreservation-8b24b.firebaseapp.com/delete';
-    const data = JSON.stringify({
+    const url = 'https://us-central1-guestreservation-8b24b.cloudfunctions.net/app/userDelete';
+    const data = {
      uid:uid
-    });
+    };
     this.http.post(url, data, options).subscribe(res => {
         console.log('El usuario se elimino de SDK');
     });
@@ -144,45 +144,25 @@ registerUser(sucursal, email, type, uidNewUser) {
     })
   }
   // Inhabilitar cuenta de empleado
-  inhabilitar_user(uid) {
+  inhabilitar_user(uid, estatus) {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
     //
     const options = new RequestOptions({ headers: headers });
-    const url = 'https://guestreservation-8b24b.firebaseapp.com/inhabilitar';
-    const data = JSON.stringify({
-     uid:uid
-    });
+    const url = 'https://us-central1-guestreservation-8b24b.cloudfunctions.net/app/estatusUser';
+    const data = {
+     uid:uid,
+     estatus:estatus
+    };
     this.http.post(url, data, options).subscribe(res => {
-        console.log('El usuario se inhabilito del SDK');
+        console.log('El usuario se inhabilito del SDK', res);
     });
     // Actualizamos al usuario de la base de datos
     this.afs.collection('users').doc(uid).update({
-      active:'false'
+      active:estatus
     }).then(() =>{
       this.mostrar_toast('Se inhabilito al usuario.');
-    })
-  }
-  // habilitar cuenta de empleado
-  habilitar_user(uid) {
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    //
-    const options = new RequestOptions({ headers: headers });
-    const url = 'https://guestreservation-8b24b.firebaseapp.com/habilitar';
-    const data = JSON.stringify({
-     uid:uid
-    });
-    this.http.post(url, data, options).subscribe(res => {
-        console.log('El usuario se inhabilito del SDK');
-    });
-    // Actualizamos al usuario de la base de datos
-    this.afs.collection('users').doc(uid).update({
-      active:'true'
-    }).then(() =>{
-      this.mostrar_toast('Se habilito al usuario.');
     })
   }
 
