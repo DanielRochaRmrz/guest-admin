@@ -28,20 +28,6 @@
             <ion-row>
 
               <ion-col col-12>
-
-                <div text-center>
-
-                  <div align="center">
-
-                    <img class="imagen_perfil" src="{{ (codigo.uidRp | getNameUser | async)?.photoURL }}" />
-
-                  </div>
-
-                </div>
-
-              </ion-col>
-
-              <ion-col col-12>
                 <b style="text-transform: uppercase">{{ (codigo.uidRp | getNameUser | async)?.displayName }}</b>
                 <p style="font-size: 9px;">(RP)</p>
               </ion-col>
@@ -96,7 +82,8 @@
               <ion-col col-12 text-center>
 
                 <br>
-                <button ion-button block round class="btnDetalle" (click)="_up.copiarCodigo(codigo.uidRp)">Copiar código</button>
+                <button ion-button block round class="btnDetalle" (click)="_up.copiarCodigo(codigo.uidRp)">Copiar
+                  código</button>
               </ion-col>
               <br>
             </ion-row>
@@ -145,18 +132,12 @@
 
               <ion-item>
 
-                <ion-avatar item-start>
-
-                  <img src="{{ admin.photoURL }}">
-
-                </ion-avatar>
-
                 <h2>
                   <ion-icon ios="ios-person" md="md-person" item-start style="color: #fcc04d"></ion-icon>
                   <b>{{ admin.displayName }}</b>
                   <ng-container *ngIf="admin.type == 'rp'">(RP)</ng-container>
                 </h2>
-                
+
                 <ng-container *ngFor="let codigoRp of codigosRps">
 
                   <div *ngIf="admin.uid == codigoRp.uidRp">

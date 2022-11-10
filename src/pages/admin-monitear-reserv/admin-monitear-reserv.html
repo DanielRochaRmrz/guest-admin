@@ -54,12 +54,6 @@
 
             <ion-item *ngFor="let reservaciona of page.data | async">
 
-                <ion-avatar item-start>
-
-                    <img src="{{ (reservaciona.idUsuario | getNameUser | async)?.photoURL }}">
-
-                </ion-avatar>
-
                 <h2 style="text-transform: uppercase">
                     <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon> Nombre:
                     <b>{{ (reservaciona.idUsuario | getNameUser | async)?.displayName }}</b>

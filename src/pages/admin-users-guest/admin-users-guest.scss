@@ -4,10 +4,12 @@ page-admin-users-guest {
         // color: black;
         border: 10px;
     }
+
     h5 {
         color: #ffffff;
         font-size: 12px;
     }
+
     ion-list .item {
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2f3640+1,000000+100&0.65+0,0.5+100 */
         // background: -moz-linear-gradient(top, rgba(47, 54, 64, 0.65) 0%, rgba(47, 54, 64, 0.65) 1%, rgba(0, 0, 0, 0.5) 100%);
@@ -18,9 +20,10 @@ page-admin-users-guest {
         /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#a62f3640', endColorstr='#80000000', GradientType=0);
         /* IE6-9 */
-       background-color: transparent;
+        background-color: transparent;
         color: #EAB543;
     }
+
     .p {
         color: black;
     }
@@ -34,20 +37,22 @@ page-admin-users-guest {
         border: 5px;
     }
 
-      .toolbar-background {
-        background-image: url('../assets/imgs/proriat.png')!important;
+    .toolbar-background {
+        background-image: url('../assets/imgs/proriat.png') !important;
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
+
+
 
     .cl {
         border: none;
         background: #FD9530;
         color: #fff;
         //  border-radius: 15px;
-        width:90px;
+        width: 90px;
         // position: absolute;
-       margin-top: -5px;
+        margin-top: -5px;
     }
 }

@@ -40,12 +40,6 @@
 
     <ion-col col-8>
 
-      <div align="center">
-
-        <img class="imagen_perfil" src="{{ (reservaciones.idUsuario | getNameUser | async)?.photoURL }}" />
-
-      </div>
-
       <p class="nombre">
 
         {{ (reservaciones.idUsuario | getNameUser | async)?.displayName }}

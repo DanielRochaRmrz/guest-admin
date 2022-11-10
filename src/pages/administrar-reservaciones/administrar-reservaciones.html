@@ -23,11 +23,7 @@
 <ion-content style="background-color: white" padding>
   <ion-fab right top>
     <button ion-fab color="primary" (click)="behind()">
-      <ion-icon
-        ios="ios-arrow-back"
-        md="md-arrow-back"
-        style="color: #000000"
-      ></ion-icon>
+      <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
     </button>
   </ion-fab>
 
@@ -48,46 +44,29 @@
                 <div text-center>
                   <!-- <ion-icon style="font-size: 4.5rem; color: #FFC149;" ios="ios-person"
                                             md="md-person"></ion-icon> -->
-
-                  <div align="center">
-                    <img
-                      class="imagen_perfil"
-                      src="{{ (reservacion.idUsuario | getNameUser | async)?.photoURL }}"
-                    />
-                  </div>
                 </div>
               </ion-col>
 
               <ion-col col-12>
-                <b style="text-transform: uppercase"
-                  >{{ (reservacion.idUsuario | getNameUser | async)?.displayName
-                  }}</b
-                >
-                
+                <b style="text-transform: uppercase">{{ (reservacion.idUsuario | getNameUser | async)?.displayName
+                  }}</b>
+
                 <p style="font-size: x-large;">
-                    <a
-                      [href]="(reservacion.idUsuario | getNameUser | async)?.instagram"
-                      style="text-transform: uppercase"
-                      >
-                      <ion-icon ios="logo-instagram" md="logo-instagram"></ion-icon>
-                    </a>
+                  <a [href]="(reservacion.idUsuario | getNameUser | async)?.instagram"
+                    style="text-transform: uppercase">
+                    <ion-icon ios="logo-instagram" md="logo-instagram"></ion-icon>
+                  </a>
                 </p>
-                <p
-                  *ngIf="reservacion.estatus == 'Creando'"
-                  style="font-size: 9px"
-                >
+                <p *ngIf="reservacion.estatus == 'Creando'" style="font-size: 9px">
                   (Reservación tipo normal)
                 </p>
-                <p
-                  *ngIf="reservacion.estatus == 'CreadaCompartida'"
-                  style="font-size: 9px"
-                >
+                <p *ngIf="reservacion.estatus == 'CreadaCompartida'" style="font-size: 9px">
                   (Reservación tipo compartida)
                 </p>
               </ion-col>
             </ion-row>
-          </ion-col> </ion-row
-        ><br />
+          </ion-col>
+        </ion-row><br />
 
         <hr size="50px" />
         <br />
@@ -95,33 +74,16 @@
           <ion-col col-12 text-center>
             <ion-row>
               <ion-col col-4>
-                <ion-icon
-                  ios="ios-time"
-                  md="md-time"
-                  item-start
-                  style="color: #fcc04d"
-                ></ion-icon>
+                <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon>
                 <b> Hora</b>
               </ion-col>
               <ion-col col-4>
-                <ion-icon
-                  ios="ios-checkmark"
-                  md="md-checkmark"
-                  item-start
-                  style="color: #fcc04d"
-                >
-                </ion-icon
-                ><b> Personas</b>
+                <ion-icon ios="ios-checkmark" md="md-checkmark" item-start style="color: #fcc04d">
+                </ion-icon><b> Personas</b>
               </ion-col>
               <ion-col col-4>
-                <ion-icon
-                  ios="ios-calendar"
-                  md="md-calendar"
-                  item-start
-                  style="color: #fcc04d"
-                >
-                </ion-icon
-                ><b> Fecha</b>
+                <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d">
+                </ion-icon><b> Fecha</b>
               </ion-col>
             </ion-row>
 
@@ -141,13 +103,8 @@
                 <!-- <button class="btn" (click)="consultaReservacion(reservacion.idReservacion)">Detalles
                                 </button> -->
                 <br />
-                <button
-                  ion-button
-                  block
-                  round
-                  class="btnDetalle"
-                  (click)="consultaReservacion(reservacion.idReservacion)"
-                >
+                <button ion-button block round class="btnDetalle"
+                  (click)="consultaReservacion(reservacion.idReservacion)">
                   Detalles
                 </button>
               </ion-col>
