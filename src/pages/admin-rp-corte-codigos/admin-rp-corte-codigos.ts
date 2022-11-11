@@ -113,7 +113,9 @@ export class AdminRpCorteCodigosPage {
 
     // console.log("userRP", userRp);
 
-    this.afs.collection('contCodigosRp', ref => ref.where('uidRP', '==', userRp).where('fecha', '>=', fechaIBd2).where('fecha', '<=', fechaFBd2).where('estatus', '==', 1)).valueChanges().subscribe(data =>{
+    // this.afs.collection('contCodigosRp', ref => ref.where('uidRP', '==', userRp).where('fecha', '>=', fechaIBd2).where('fecha', '<=', fechaFBd2).where('estatus', '==', 1)).valueChanges().subscribe(data =>{
+
+      this.afs.collection('contCodigosRp', ref => ref.where('uidRP', '==', userRp).where('fecha', '>=', fechaIBd2).where('fecha', '<=', fechaFBd2)).valueChanges().subscribe(data =>{
 
       this.codigos = data;
 
