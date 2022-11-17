@@ -74,8 +74,6 @@ export class AdminSucursalPerfilPage {
 
     this.usuario = localStorage.getItem("uid");
     //this.usuario = this.navParams.get('usuario');
-    console.log("tipo de usuario", this.usuario);
-
     // this.areas = afDB.list('areas/'+this.sucursal+'/').snapshotChanges().map(data => {
     //   return data.map(s => ({ key: s.payload.key, ...s.payload.val() }));
 
@@ -193,7 +191,7 @@ export class AdminSucursalPerfilPage {
 
   agregarZona(idSucursal: string) {
     console.log('Id Sucursal -->', idSucursal);
-    
+
     let alert = this.alertCtrl.create({
       title: "Agregar Zona",
       inputs: [
@@ -470,9 +468,9 @@ export class AdminSucursalPerfilPage {
       this.SucProv.modificarZona(zona, consumoMin, idZona);
 
       const data = {
-          zona: zona,
-          consumo: consumoMin,
-          uidZona: idZona
+        zona: zona,
+        consumo: consumoMin,
+        uidZona: idZona
       }
     }
   }
@@ -497,10 +495,15 @@ export class AdminSucursalPerfilPage {
   }
 
   behind() {
-    if (this.usuario != null || this.usuario != undefined) {
+    if (this.tipo == "a") {
+
       this.navCtrl.setRoot(AdminHomePage);
-    } else {
+
+    } else if (this.tipo == "master") {
+
       this.navCtrl.setRoot(AdminSucursalListPage);
+      
     }
+    
   }
 }

@@ -24,39 +24,39 @@ export class AdminSucursalListPage {
     public modalCtrl: ModalController,
     public Db: AngularFireDatabase,
     public afs: AngularFirestore
-    ) {
-      //recibe parametro de la reservacion
-      this.usertipo = this.navParams.get("usertipo");
-      console.log("llego a list");
-      console.log(this.usertipo);
-      this.afs.collection('sucursales').valueChanges().subscribe( s => {
-        this.sucursales = s;
-      })
-      // this.sucursales = this.Db.list('sucursales').valueChanges();
+  ) {
+    //recibe parametro de la reservacion
+    this.usertipo = this.navParams.get("usertipo");
+    console.log("llego a list");
+    console.log(this.usertipo);
+    this.afs.collection('sucursales').valueChanges().subscribe(s => {
+      this.sucursales = s;
+    })
+    // this.sucursales = this.Db.list('sucursales').valueChanges();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminSucursalListPage');
   }
-  mostrar_modal(){
-    let modal = this.modalCtrl.create(AdminSucursalSubirPage);
-    modal.present();
+  mostrar_modal() {
+
+    this.navCtrl.push(AdminSucursalSubirPage);
   }
 
-  adminSucursal(uid){
-    this.navCtrl.push(AdminSucursalPerfilPage, {'uid':uid, 'usertipo': this.usertipo});
+  adminSucursal(uid) {
+    this.navCtrl.push(AdminSucursalPerfilPage, { 'uid': uid, 'usertipo': this.usertipo });
   }
-  goBack(){
+  goBack() {
     this.navCtrl.push(AdminHomePage);
   }
-  
- behind(){
-   if (this.usertipo == 'master') {
-    this.navCtrl.setRoot(AdminHomePage);
-   }else{
-    this.navCtrl.setRoot(AdminMenuReservacionPage);
-   }
-  
-}
+
+  behind() {
+    if (this.usertipo == 'master') {
+      this.navCtrl.setRoot(AdminHomePage);
+    } else {
+      this.navCtrl.setRoot(AdminMenuReservacionPage);
+    }
+
+  }
 
 }
