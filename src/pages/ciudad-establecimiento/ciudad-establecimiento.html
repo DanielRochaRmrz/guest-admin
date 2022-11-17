@@ -1,37 +1,45 @@
 <ion-header>
-  <ion-navbar class="borde" hideBackButton >
-      <ion-row>
-          <ion-col col-1>
-            <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
-      
-                      </ion-col>
-          <ion-col col-1 align="center">
-              <img src="./assets/content/line2.png" class="imgLi" alt="">
-          </ion-col>
-          <ion-col col-8>
-              <div class="AdminEvento">Ciudades Registradas</div>
-              <div class="sucursal">Sucursal</div>
-          </ion-col>
-          <ion-col>
-              <div align='end'>
-                  <img src="./assets/content/corona.png" style="width: 40%;" alt="">
-              </div>
-          </ion-col>
-      </ion-row>
-  </ion-navbar>
+    <ion-navbar class="borde" hideBackButton>
+        <ion-row>
+            <ion-col col-1>
+                <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+            </ion-col>
+            <ion-col col-1 align="center">
+                <img src="./assets/content/line2.png" class="imgLi" alt="">
+            </ion-col>
+            <ion-col col-8>
+                <div class="AdminEvento">Ciudades Registradas</div>
+            </ion-col>
+        </ion-row>
+    </ion-navbar>
 </ion-header>
-<ion-content class="">
-    <ion-card-header align="right">
-      <button (click)="agregarCiudad()" text-align ion-button clear small color="light" icon-left item-end>
-          <img class="iconMas" src="../assets/imgs/icons/mas.png" item-start>
-      <font color="black" style="opacity: .5;">   Agregar Ciudad </font> 
-      </button>
-    </ion-card-header>
+<ion-content padding>
+    <ion-row>
+        <ion-col col-9>
+            <h2>
+                <b>Master</b>
+                <div class="detalle">Lista de ciudades</div>
+            </h2>
+        </ion-col>
+
+        <ion-col col-3>
+
+            <button (click)="agregarCiudad()" ion-button round class="botonAddCity">
+
+                <ion-icon color="#000" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+
+            </button>
+
+        </ion-col>
+    </ion-row>
+
+    <hr>
+
     <ion-list class="card_atras" *ngFor="let ciud of ciudades">
-      <ion-item style="border: none;">
-          <img class="icon" src="../assets/imgs/icons/iconoghest-01.png" item-start>
-           <a class="blanco_2">{{ ciud.ciudad }}</a>
-          <ion-badge color="naranja" item-end>Agregada</ion-badge>
-      </ion-item>
+        <ion-item style="border: none;">
+            <img class="icon" src="../assets/imgs/icons/iconoghest-01.png" item-start>
+            <a class="blanco_2">{{ ciud.ciudad }}</a>
+            <ion-badge color="naranja" item-end>Agregada</ion-badge>
+        </ion-item>
     </ion-list>
 </ion-content>

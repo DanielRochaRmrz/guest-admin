@@ -1,123 +1,132 @@
-
 <ion-header>
-  <ion-navbar  hideBackButton>
+  <ion-navbar hideBackButton>
     <ion-row>
       <ion-col col-1>
         <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
-            </ion-col>
+      </ion-col>
 
       <ion-col col-8>
         <ion-title>Agregar Ciudad</ion-title>
       </ion-col>
     </ion-row>
-   
+
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <br><br><br><br>
+  <ion-col col-5>
+    <h2>
+      <b>Master</b>
+      <div class="detalle">Agregar ciudad</div>
+    </h2>
+  </ion-col>
+  <hr>
+
   <form [formGroup]="myForm" novalidate class="">
-   <ion-list>
-     <ion-item>
-       <ion-label class="">Ciudad</ion-label>
-       <ion-select [(ngModel)]="ciudad" multiple="false" style="color: black;" cancelText="Cancelar" okText="Aceptar" name="ciudad" formControlName="ciudad">
-           <div>
-             <ion-option value="León">León</ion-option>
-             <ion-option value="Aguascalientes">Aguascalientes</ion-option>
-             <ion-option value="Mexicali">Mexicali</ion-option>
-             <ion-option value="Tijuana">Tijuana</ion-option>
-             <ion-option value="Campeche">Campeche</ion-option>
-             <ion-option value="Saltillo">Saltillo</ion-option>
-             <ion-option value="Manzanillo">Manzanillo</ion-option>
-             <ion-option value="Chihuahua">Chihuahua</ion-option>
-             <ion-option value="Durango">Durango</ion-option>
-             <ion-option value="Celaya">Celaya</ion-option>
-             <ion-option value="Guanajuato">Guanajuato</ion-option>
-             <ion-option value="Irapuato">Irapuato</ion-option>
-             <ion-option value="Salamanca">Salamanca</ion-option>
-             <ion-option value="Acapulco">Acapulco</ion-option>
-             <ion-option value="Pachuca">Pachuca</ion-option>
-             <ion-option value="Guadalajara">Guadalajara</ion-option>
-             <ion-option value="Toluca">Toluca</ion-option>
-             <ion-option value="Morelia">Morelia</ion-option>
-             <ion-option value="Uruapan">Uruapan</ion-option>
-             <ion-option value="Cuernavaca">Cuernavaca</ion-option>
-             <ion-option value="Tepic">Tepic</ion-option>
-             <ion-option value="Monterrey">Monterrey</ion-option>
-             <ion-option value="Oaxaca">Oaxaca</ion-option>
-             <ion-option value="Querétaro">Querétaro</ion-option>
-             <ion-option value="Cancún">Cancún</ion-option>
-             <ion-option value="Chetumal">Chetumal</ion-option>
-             <ion-option value="Culiacán">Culiacán</ion-option>
-             <ion-option value="Mazatlán">Mazatlán</ion-option>
-             <ion-option value="Hermosillo">Hermosillo</ion-option>
-             <ion-option value="Villahermosa">Villahermosa</ion-option>
-             <ion-option value="Matamoros">Matamoros</ion-option>
-             <ion-option value="Veracruz">Veracruz</ion-option>
-             <ion-option value="Mérida">Mérida</ion-option>
-             <ion-option value="Puebla">Puebla</ion-option>
-             <ion-option value="San Miguel de Allende">San Miguel de Allende</ion-option>
-             <ion-option value="Ciudad de México">Ciudad de México</ion-option>
-             <ion-option value="Puerto Vallarta">Puerto Vallarta</ion-option>
-             <ion-option value="Cabo San Lucas">Cabo San Lucas</ion-option>
-             <ion-option value="Cancun">Cancun</ion-option>
-             <ion-option value="Playa del Carmen">Playa del Carmen</ion-option>
-             <ion-option value="Tulum">Tulum</ion-option>
-             <ion-option value="Mazatlan">Mazatlan</ion-option>
-             <ion-option value="Acapulco">Acapulco</ion-option>
-             <ion-option value="Querétaro">Querétaro</ion-option>
-             <ion-option value="Morelia">Morelia</ion-option>
-             <ion-option value="Monterrey">Monterrey</ion-option>
-          
-         </div>
-       </ion-select>
-     </ion-item>
-     <br>  
-     <ion-item no-lines>
-     </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-label class=""><b>Escoge la ciudad</b></ion-label>
+        <ion-select [(ngModel)]="ciudad" multiple="false" style="color: black;" cancelText="Cancelar" okText="Aceptar"
+          name="ciudad" formControlName="ciudad">
+          <div>
+            <ion-option value="León">León</ion-option>
+            <ion-option value="Aguascalientes">Aguascalientes</ion-option>
+            <ion-option value="Mexicali">Mexicali</ion-option>
+            <ion-option value="Tijuana">Tijuana</ion-option>
+            <ion-option value="Campeche">Campeche</ion-option>
+            <ion-option value="Saltillo">Saltillo</ion-option>
+            <ion-option value="Manzanillo">Manzanillo</ion-option>
+            <ion-option value="Chihuahua">Chihuahua</ion-option>
+            <ion-option value="Durango">Durango</ion-option>
+            <ion-option value="Celaya">Celaya</ion-option>
+            <ion-option value="Guanajuato">Guanajuato</ion-option>
+            <ion-option value="Irapuato">Irapuato</ion-option>
+            <ion-option value="Salamanca">Salamanca</ion-option>
+            <ion-option value="Acapulco">Acapulco</ion-option>
+            <ion-option value="Pachuca">Pachuca</ion-option>
+            <ion-option value="Guadalajara">Guadalajara</ion-option>
+            <ion-option value="Toluca">Toluca</ion-option>
+            <ion-option value="Morelia">Morelia</ion-option>
+            <ion-option value="Uruapan">Uruapan</ion-option>
+            <ion-option value="Cuernavaca">Cuernavaca</ion-option>
+            <ion-option value="Tepic">Tepic</ion-option>
+            <ion-option value="Monterrey">Monterrey</ion-option>
+            <ion-option value="Oaxaca">Oaxaca</ion-option>
+            <ion-option value="Querétaro">Querétaro</ion-option>
+            <ion-option value="Cancún">Cancún</ion-option>
+            <ion-option value="Chetumal">Chetumal</ion-option>
+            <ion-option value="Culiacán">Culiacán</ion-option>
+            <ion-option value="Mazatlán">Mazatlán</ion-option>
+            <ion-option value="Hermosillo">Hermosillo</ion-option>
+            <ion-option value="Villahermosa">Villahermosa</ion-option>
+            <ion-option value="Matamoros">Matamoros</ion-option>
+            <ion-option value="Veracruz">Veracruz</ion-option>
+            <ion-option value="Mérida">Mérida</ion-option>
+            <ion-option value="Puebla">Puebla</ion-option>
+            <ion-option value="San Miguel de Allende">San Miguel de Allende</ion-option>
+            <ion-option value="Ciudad de México">Ciudad de México</ion-option>
+            <ion-option value="Puerto Vallarta">Puerto Vallarta</ion-option>
+            <ion-option value="Cabo San Lucas">Cabo San Lucas</ion-option>
+            <ion-option value="Cancun">Cancun</ion-option>
+            <ion-option value="Playa del Carmen">Playa del Carmen</ion-option>
+            <ion-option value="Tulum">Tulum</ion-option>
+            <ion-option value="Mazatlan">Mazatlan</ion-option>
+            <ion-option value="Acapulco">Acapulco</ion-option>
+            <ion-option value="Querétaro">Querétaro</ion-option>
+            <ion-option value="Morelia">Morelia</ion-option>
+            <ion-option value="Monterrey">Monterrey</ion-option>
+
+          </div>
+        </ion-select>
+      </ion-item>
+      <br>
+      <ion-item no-lines>
+      </ion-item>
     </ion-list>
   </form>
   <!-- <ion-footer no-border>
       <ion-toolbar>
           <ion-grid> -->
-              <ion-row>
-           
-                <ion-col col-12>
-                              
-                  <div *ngFor="let ciud of  resultadoCiudad2">
-                    <div *ngIf=" ciud.ciudad == this.ciudad ">
-                      <div text-center>
-                       <label for="" style="color:black"> Ya se encuentra registrada...</label>
-                         
-                    </div>
-                    </div>
-                    
-                   
-                      </div>
+  <ion-row>
+
+    <ion-col col-12>
+
+      <div *ngFor="let ciud of  resultadoCiudad2">
+        <div *ngIf=" ciud.ciudad == this.ciudad ">
+          <div text-center>
+            <label for="" style="color:black"> Ya se encuentra registrada...</label>
+
+          </div>
+        </div>
 
 
-                      <!-- <div *ngIf=""> -->
-                        <div text-center>
-                          <button ion-button block round color="warning" (click)="ciudadAdd()"  [disabled]="!myForm.valid"> <font color="white">Guardar  </font> </button>
-                        <!-- </div> -->
-                  </div>               
-                </ion-col>
-              </ion-row>
-          <!-- </ion-grid>
+      </div>
+
+
+      <!-- <div *ngIf=""> -->
+      <div text-center>
+        <button ion-button block round color="warning" (click)="ciudadAdd()" [disabled]="!myForm.valid">
+          <font color="white">Guardar </font>
+        </button>
+        <!-- </div> -->
+      </div>
+    </ion-col>
+  </ion-row>
+  <!-- </ion-grid>
       </ion-toolbar>
   </ion-footer> -->
- </ion-content>
+</ion-content>
 
 
- <script languague="javascript">
+<script languague="javascript">
   function mostrar() {
-      div = document.getElementById('flotante');
-      div.style.display = '';
+    div = document.getElementById('flotante');
+    div.style.display = '';
   }
 
   function cerrar() {
-      div = document.getElementById('flotante');
-      div.style.display = 'none';
+    div = document.getElementById('flotante');
+    div.style.display = 'none';
   }
 </script>

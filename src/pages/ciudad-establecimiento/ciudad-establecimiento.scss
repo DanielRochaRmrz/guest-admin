@@ -87,4 +87,19 @@ page-ciudad-establecimiento {
     margin-top: -2%;
     margin-left: -50%;
   }
+  .detalle {
+    color: #cecece;
+    margin-top: -8px;
+    text-transform: uppercase;
+}
+.botonAddCity{
+
+  width: 115%;
+
+  ion-icon {
+    display: contents;
+    font-size: 3.5rem;
+}
+
+}
 }
