@@ -50,10 +50,7 @@
       </p>
 
       <p style="font-size: x-large; text-align: center;">
-        <a
-          [href]="(reservaciones.idUsuario | getNameUser | async)?.instagram"
-          style="text-transform: uppercase"
-        >
+        <a [href]="(reservaciones.idUsuario | getNameUser | async)?.instagram" style="text-transform: uppercase">
           <ion-icon ios="logo-instagram" md="logo-instagram" style="color: #fcc04d"></ion-icon>
         </a>
       </p>
@@ -328,8 +325,8 @@
           <ion-col><b>{{ reservaciones.totalReservacion | currency }}</b></ion-col>
         </ion-row>
 
-         <!-- Comision 5.9  -->
-         <ion-row>
+        <!-- Comision 5.9  -->
+        <ion-row>
           <ion-col></ion-col>
           <ion-col><b></b></ion-col>
           <ion-col>Comision 5.9</ion-col>
@@ -396,12 +393,6 @@
 
       <ion-col>
 
-        <img class="imagen_perfil" src="{{ (compartidas.telefono | getNamexphoneUser | async)?.photoURL }}" />
-
-      </ion-col>
-
-      <ion-col>
-
         <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>&nbsp; {{
         (compartidas.telefono | getNamexphoneUser | async)?.displayName }}
 
@@ -412,12 +403,9 @@
         compartidas.telefono }}
       </ion-col>
 
-      <ion-col >
+      <ion-col>
         <p style="font-size: x-large; text-align: center;">
-          <a
-            [href]="(reservaciones.idUsuario | getNameUser | async)?.instagram"
-            style="text-transform: uppercase"
-          >
+          <a [href]="(reservaciones.idUsuario | getNameUser | async)?.instagram" style="text-transform: uppercase">
             <ion-icon ios="logo-instagram" md="logo-instagram" style="color: #fcc04d"></ion-icon>
           </a>
         </p>
