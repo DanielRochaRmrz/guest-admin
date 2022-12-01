@@ -72,6 +72,12 @@
         </ion-item>
 
         <ion-item>
+            <ion-icon ios="ios-people" md="md-people" item-start style="color: #fcc04d"></ion-icon>
+            Nombre RP
+            <ion-badge item-end>{{ (uidRp | getNameUser | async)?.displayName }}</ion-badge>
+        </ion-item>
+
+        <ion-item>
             <ion-icon ios="ios-key" md="md-key" item-start style="color: #fcc04d"></ion-icon>
             UID reservación
             <ion-badge item-end>{{ reserv.idReservacion }}</ion-badge>

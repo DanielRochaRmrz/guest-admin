@@ -37,6 +37,8 @@ export class ReservaDetallePage {
   uidUsuarioReser: string;
   compartidas: any;
   valorCupon: number = 0;
+  uidRp: string;
+  infoCodigoRP: any;
 
   constructor(
     public navCtrl: NavController,
@@ -72,7 +74,11 @@ export class ReservaDetallePage {
     this._gestionReser.getZona(idZona).subscribe((zona) => {
       this.zona = zona;
     });
-    
+
+    // INFO DEL CODIGO USADO
+
+    this.getInfoCodigoRP(this.reserv.codigoRP, this.reserv.idReservacion);
+
     if(this.reserv.uidCupon) {
       this.getValorCupon(this.reserv.uidCupon);
     }
@@ -88,6 +94,16 @@ export class ReservaDetallePage {
     const valorCupon = await this._gestionReser.getValorCupon(idCupon);
     this.valorCupon = Number(valorCupon);
     console.log('Valor cupon -->', valorCupon);
+  }
+
+  async getInfoCodigoRP(codigoRP:string, idReservacion:string){
+
+    this.infoCodigoRP = await this._gestionReser.getInfoContCodigosRP(codigoRP, idReservacion);
+
+    this.uidRp = this.infoCodigoRP.uidRP;
+
+    console.log('infoCodigoRP--->', this.infoCodigoRP.uidRP);    
+
   }
 
   getMesas(idZona) {
