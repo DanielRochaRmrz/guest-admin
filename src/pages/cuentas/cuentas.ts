@@ -89,36 +89,36 @@ export class CuentasPage {
 
     const fech=moment(this.fechaI).format("x");
     console.log(fech);
-    this.getReservaciones(this.idSucursal, this.fechaI, this.fechaF);
+    // this.getReservaciones(this.idSucursal, this.fechaI, this.fechaF);
     this.contador=0;
   }
-  getReservaciones(idx, fechaI, fechaF){
-    console.log('llamar provider',idx);
-     this._reservaciones.getReservaciones(idx, fechaI, fechaF).subscribe(res=>{
-      console.log("Este es el resultado de reservaciones: ", res);
+  // getReservaciones(idx, fechaI, fechaF){
+  //   console.log('llamar provider',idx);
+  //    this._reservaciones.getReservaciones(idx, fechaI, fechaF).subscribe(res=>{
+  //     console.log("Este es el resultado de reservaciones: ", res);
 
-      let suma=0;
-      res.forEach(function (value) {
-        //console.log('totalResercva', value.totalReservacion);
-        if(value.totalReservacion != null){
-          suma=suma+parseFloat(value.totalReservacion);
-        }
+  //     let suma=0;
+  //     res.forEach(function (value) {
+  //       //console.log('totalResercva', value.totalReservacion);
+  //       if(value.totalReservacion != null){
+  //         suma=suma+parseFloat(value.totalReservacion);
+  //       }
         
-        console.log('suma', suma);
-      });
-      this.fechaI=fechaI;
-      this.fechaF=fechaF;
+  //       console.log('suma', suma);
+  //     });
+  //     this.fechaI=fechaI;
+  //     this.fechaF=fechaF;
 
-      this.sumatoria=suma;
-      this.comision1=suma*0.056;
-      this.comision2=suma-this.comision1;
-      this.propina= suma*.05;
+  //     this.sumatoria=suma;
+  //     this.comision1=suma*0.056;
+  //     this.comision2=suma-this.comision1;
+  //     this.propina= suma*.05;
 
-      this.reservaciones = res;
-      console.log('comision1',this.comision1);
-      console.log('comision2',this.comision2);
-    });
-  }
+  //     this.reservaciones = res;
+  //     console.log('comision1',this.comision1);
+  //     console.log('comision2',this.comision2);
+  //   });
+  // }
 
   // guardarCorte(){
   //   console.log('***** F_Guardar_Corte');

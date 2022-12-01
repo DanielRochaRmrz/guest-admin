@@ -1,17 +1,13 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, Platform, AlertController
+import {
+  IonicPage, NavController, NavParams, AlertController
 } from 'ionic-angular';
 import { SucursalAltaProvider, Credenciales } from '../../providers/sucursal-alta/sucursal-alta';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { ReservacionProvider } from '../../providers/reservacion/reservacion';
-
-
 import { ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
-import * as moment from "moment";
-
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @IonicPage()
 @Component({
@@ -19,13 +15,13 @@ import * as moment from "moment";
   templateUrl: 'corte-venta.html',
 })
 export class CorteVentaPage {
-  sucursalItem: Credenciales = { };
+  sucursalItem: Credenciales = {};
   data: any = {};
   reservaciones: any[];
   myForm: FormGroup;
-  fechaI:any;
-  fechaF:any;
-  contador:any;
+  fechaI: any;
+  fechaF: any;
+  contador: any;
   productos = [];
   sumatoria: number;
   comision1: number;
@@ -37,9 +33,9 @@ export class CorteVentaPage {
 
   @ViewChild(Content) content: Content;
 
-  
-    constructor(
-    
+
+  constructor(
+
     public navCtrl: NavController,
     public navParams: NavParams,
     public sucProv: SucursalAltaProvider,
@@ -47,112 +43,93 @@ export class CorteVentaPage {
     public _reservaciones: ReservacionProvider,
     public formBuilder: FormBuilder
 
-    ) {  
-      
-      this.myForm = this.createMyForm();      
+  ) {
 
-    }
+    this.myForm = this.createMyForm();
 
-    public ocultar1: boolean = false;
-      accion1(){
-      this.ocultar1 = !this.ocultar1;
-    }
- 
-    private createMyForm(){
-      return this.formBuilder.group({
-        FechaInicio: ['', Validators.required],
-        FechaFin: ['', Validators.required]
-      });
-    }
-    saveData(){
+  }
 
-      this.fechaI = this.myForm.value.FechaInicio;
-
-      this.fechaF = this.myForm.value.FechaFin;
-
-      this.getReservaciones(this.sucProv.selectedSucursalItem.uid, this.fechaI, this.fechaF);
-      
-      this.contador=0;
-      
-    }
 
   ionViewDidLoad() {
-    
-    this.nombreSucursal=this.sucProv.selectedSucursalItem.displayName;
-    this.idSucursal=this.sucProv.selectedSucursalItem.uid;
+
+    this.nombreSucursal = this.sucProv.selectedSucursalItem.displayName;
+    this.idSucursal = this.sucProv.selectedSucursalItem.uid;
     this.getIdLast(this.idSucursal);
-    this.contador=0;
-    this.sumatoria=0;
+    this.contador = 0;
+    this.sumatoria = 0;
     //this.getReservaciones(this.sucProv.selectedSucursalItem.uid);
   }
-  
-  getReservaciones(idx, fechaI, fechaF){
 
 
-     this._reservaciones.getReservaciones(idx, fechaI, fechaF).subscribe(res=>{
+  public ocultar1: boolean = false;
+  accion1() {
+    this.ocultar1 = !this.ocultar1;
+  }
 
-      console.log("Este es el resultado de reservaciones: ", res);
+  private createMyForm() {
+    return this.formBuilder.group({
+      FechaInicio: ['', Validators.required],
+      FechaFin: ['', Validators.required]
+    });
+  }
+  saveData() {
 
-      let suma=0;
+    this.fechaI = this.myForm.value.FechaInicio;
+    this.fechaF = this.myForm.value.FechaFin;
 
-      let propina=0;
+    this.getReservaciones(this.idSucursal, this.fechaI, this.fechaF);
 
-      res.forEach(function (value) {
+  }
 
-        if(value.totalReservacion != null){
-          suma = suma+parseFloat(value.totalReservacion);          
-        }
-        if(value.propina != null){
+   getReservaciones(idx, fechaI, fechaF) {
 
-          propina = propina+parseFloat(value.totalReservacion)*parseFloat(value.propina);
-        }
-        
-        console.log('suma', suma);
-        console.log('propinaTotal: ', propina);
+    this._reservaciones.getReservaciones(idx, fechaI, fechaF).then((data: any) => {
+
+      const idReservacionArray = [];
+
+      data.forEach(element => {
+
+        idReservacionArray.push(element.idReservacion);
+
       });
+      this.getTotalesReservacion(idReservacionArray);
 
-      this.fechaI = fechaI;
-
-      this.fechaF = fechaF;
-
-      this.sumatoria = suma;
-
-      this.comision1 = suma*0.059;
-
-      this.comision2 = suma-this.comision1;
-
-      this.propinaTotal = propina;
-
-      this.reservaciones = res;
-
-    });
+    })
   }
-
-  getIdLast(idx){
-    let x=0;
-     this._reservaciones.getIdLast(idx).subscribe(res=>{
-      console.log("Este es el resultado de corte: ", res);
-       res.forEach(function (value){
-         console.log('ultimo folio',value.folio);
-         x=value.folio+1;
-       });
-       this.nuevoFolio=x;
-       console.log('nuevo folio: ',this.nuevoFolio);
-    });
-
-  }
-
-  guardarCorte(){
+  async getTotalesReservacion(idReservacionArray:any[]){
     
-    this._reservaciones.addCorte(this.fechaI, this.fechaF, this.comision1, this.comision2, this.sumatoria, this.idSucursal,this.propinaTotal, this.nuevoFolio);   
+    const totalesC = await this._reservaciones.getTotalesReservaciones(idReservacionArray);
+
+    console.log('totalesC', totalesC);
+    
+
+  }
+
+  getIdLast(idx) {
+    let x = 0;
+    this._reservaciones.getIdLast(idx).subscribe(res => {
+      console.log("Este es el resultado de corte: ", res);
+      res.forEach(function (value) {
+        console.log('ultimo folio', value.folio);
+        x = value.folio + 1;
+      });
+      this.nuevoFolio = x;
+      console.log('nuevo folio: ', this.nuevoFolio);
+    });
+
+  }
+
+  guardarCorte() {
+
+    this._reservaciones.addCorte(this.fechaI, this.fechaF, this.comision1, this.comision2, this.sumatoria, this.idSucursal, this.propinaTotal, this.nuevoFolio);
 
     this.presentAlert();
   }
 
-  suma(x){
+  suma(x) {
     //this.contador=this.contador+1;
     //console.log(this.contador);
-    console.log('idReservacion funcion',x);
+    console.log('idReservacion funcion', x);
   }
 
   presentAlert() {

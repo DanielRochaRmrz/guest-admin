@@ -7,6 +7,7 @@ import {
 import { Observable } from "rxjs/Observable";
 import { map } from "rxjs/operators";
 import * as moment from "moment";
+import { resolve } from "url";
 
 @Injectable()
 export class ReservacionProvider {
@@ -237,20 +238,20 @@ export class ReservacionProvider {
     });
     return new Promise((resolve, reject) => {
 
-    // BORRAMOS EL REGISTRO EN RESERVACIONES
-    this.af
-      .collection("reservaciones")
-      .doc(id)
-      .delete()
-      // .update({
-      //   estatus: "Cancelado"
-      // })
-      .then((reserva) => {
-        resolve({ success: true });
-      })
-      .catch((err) => {
-        reject(err);
-      });
+      // BORRAMOS EL REGISTRO EN RESERVACIONES
+      this.af
+        .collection("reservaciones")
+        .doc(id)
+        .delete()
+        // .update({
+        //   estatus: "Cancelado"
+        // })
+        .then((reserva) => {
+          resolve({ success: true });
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   }
 
@@ -382,32 +383,85 @@ export class ReservacionProvider {
   }
 
   public getReservaciones(idx: any, fecha1: String, fecha2: String) {
-    this.fechaI = fecha1;
 
+    this.fechaI = fecha1;
     this.fechaF = fecha2;
 
     const fechI = moment(this.fechaI).format("x");
-
     const fechF = moment(this.fechaF).format("x");
 
-    this.reservaciones = this.af.collection<any>("reservaciones", (ref) =>
-      ref
+    return new Promise((resolve, reject) => {
+
+      let corteReservacion = this.af.collection('reservaciones').ref;
+
+      corteReservacion
         .where("idSucursal", "==", idx)
-        .where("estatus", "==", "Pagado")
-        .where("estatus", "==", "Finalizado")
         .where("fechaR_", ">=", fechI)
         .where("fechaR_", "<=", fechF)
-    );
-    this._reservaciones = this.reservaciones.valueChanges();
-    return (this._reservaciones = this.reservaciones.snapshotChanges().pipe(
-      map((changes) => {
-        return changes.map((action) => {
-          const data = action.payload.doc.data() as any;
-          data.$key = action.payload.doc.id;
-          return data;
+        .where("estatus", 'in', ["Finalizado", "Pagado"])
+        .get()
+        .then((data) => {
+          const cortesArr = [];
+          data.forEach((cortes: any) => {
+            const cortesR = cortes.data();
+            // cortesR.id = cortes.id; 
+            cortesArr.push(cortesR);
+          });
+
+          resolve(cortesArr);
+
+        })
+        .catch((error) => {
+          console.log("Error en la consulta -->", error);
         });
-      })
-    ));
+    });
+  }
+
+  // CONSULTAR TABLA TOTALES PARA CORTES
+
+  public getTotalesReservaciones(idReservacionArray: any[]) {
+
+    // console.log('idReservacionArray', idReservacionArray);    
+
+    return new Promise((resolve, reject) => {
+
+      for (let index = 0; index < idReservacionArray.length; index++) {
+
+        const element = idReservacionArray[index];
+
+        // console.log('element', element);        
+
+        let totales = this.af.collection('totalesReserva').ref;
+
+        totales
+          .where('idReservacion', '==', element)
+          .get()
+          .then((data) => {
+
+            const totaleArr = [];
+
+            data.
+              forEach((totales: any) => {
+
+                const totalesR = totales.data();
+
+                totaleArr.push(totalesR);
+                console.log('totaleArr', totaleArr);
+              });    
+
+              resolve(totaleArr);
+
+          }).catch((error) => {
+
+            console.log("Error en la consulta -->", error);
+
+          });
+      }
+
+
+    })
+
+
   }
 
   public getIdLast(idx: any) {

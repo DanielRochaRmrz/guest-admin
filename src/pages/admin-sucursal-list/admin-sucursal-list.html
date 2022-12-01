@@ -35,39 +35,18 @@
     <hr>
     <!-- <ion-card-header class="" color="light"> <font color="black">  Lista de sucursales</font> </ion-card-header> -->
     <ion-list class="" *ngFor="let sucursal of sucursales">
-        <ion-card>
-            <div (click)="adminSucursal(sucursal.uid)">
-                <!-- <ion-thumbnail item-start>
-                <img [src]="sucursal.photoURL">
-            </ion-thumbnail> -->
-
-                <ion-row>
-
-                    <ion-col col-4>
-                        <img src="{{sucursal.photoURL}}" class="img" align="center">
-
-                    </ion-col>
-
-                    <ion-col col-6>
-
-                        <h3>{{sucursal.displayName}}</h3>
-                        <p> {{ sucursal.direccion }} </p>
-                        <p> {{ sucursal.ciudad }} </p>
-                    </ion-col>
-
-                </ion-row>
-
-            </div>
-        </ion-card>
+        <ion-item (click)="adminSucursal(sucursal.uid)">
+            <ion-avatar item-start>
+                <img src="{{sucursal.photoURL}}">
+            </ion-avatar>
+            <h2>{{sucursal.displayName}}</h2>
+            <h3>{{ sucursal.direccion }}</h3>
+            <p>{{ sucursal.ciudad }}</p>
+        </ion-item>
     </ion-list>
     <ion-fab left bottom>
         <button style="background-color: #e49602;" ion-fab color="light" (click)="mostrar_modal()">
             <ion-icon name="ios-create" style="color: #fff;" (click)="mostrar_modal()"></ion-icon>
         </button>
-        <!-- <ion-fab-list side="right">
-            <button ion-fab (click)="mostrar_modal()">
-              <ion-icon name="pin"></ion-icon>
-              </button>
-        </ion-fab-list> -->
     </ion-fab>
 </ion-content>
