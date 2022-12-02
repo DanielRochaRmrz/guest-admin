@@ -9,6 +9,7 @@ import { map } from "rxjs/operators";
 import { Observable } from "rxjs/internal/Observable";
 import { AlertController } from "ionic-angular";
 import { SucursalAltaProvider } from "../../providers/sucursal-alta/sucursal-alta";
+import { resolve } from "url";
 
 @Injectable()
 export class GestionReservacionesProvider {
@@ -39,7 +40,7 @@ export class GestionReservacionesProvider {
     public aFS: AngularFirestore,
     public alertCtrl: AlertController,
     public SucProv: SucursalAltaProvider
-  ) {}
+  ) { }
 
   getReservaciones(idx, fecha) {
     this.servicios = this.aFS.collection<any>(
@@ -174,17 +175,17 @@ export class GestionReservacionesProvider {
     ));
   }
 
-  getReservacionDetalle(idReservacion: string){
+  getReservacionDetalle(idReservacion: string) {
 
     return new Promise((resolve, reject) => {
       const reservaciones = this.aFS.collection(`reservaciones`).ref;
       reservaciones.where("idReservacion", "==", idReservacion).get()
-      .then((data) => {
-        data.forEach(resp => {
-          const reservacion = resp.data();
-          resolve(reservacion);
+        .then((data) => {
+          data.forEach(resp => {
+            const reservacion = resp.data();
+            resolve(reservacion);
+          })
         })
-      })
     })
 
   }
@@ -341,13 +342,43 @@ export class GestionReservacionesProvider {
   }
 
   getValorCupon(idCupon: string) {
-   return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.aFS.collection('cupones').doc(idCupon).get().subscribe(cupon => {
         const data = cupon.data();
-        const valorCupon  = data.valorCupon;
+        const valorCupon = data.valorCupon;
         resolve(valorCupon);
       })
-   });
+    });
+  }
+
+  getInfoContCodigosRP(codigoRP: string, idReservacion: string) {
+
+    return new Promise((resolve, reject) => {
+
+      let infoCodigo = this.aFS.collection('contCodigosRp').ref;
+
+      infoCodigo.where('codigoRpUser', '==', codigoRP)
+        .where('uidReservacion', '==', idReservacion)
+        .get()
+        .then((data) => {
+
+          data.forEach((doc) => {
+
+            resolve(doc.data());
+
+          });
+
+
+        }).catch((error) => {
+
+          console.log(error);
+
+        })
+
+      // this.aFS.collection('contCodigosRp', (ref) => ref+.where('codigoRP', '==', codigoRP))
+    })
+
+
   }
 
   mesaReservacion(reserva) {
