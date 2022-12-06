@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReservacionProvider } from '../../providers/reservacion/reservacion';
 import { ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @IonicPage()
 @Component({
@@ -30,6 +29,12 @@ export class CorteVentaPage {
   nombreSucursal: any;
   idSucursal: any;
   nuevoFolio: any;
+
+  public comision: any;
+  public iva: any;
+  public propinaRe: any;
+  public subTotal: any;
+  public totalNeto: any;
 
   @ViewChild(Content) content: Content;
 
@@ -81,28 +86,33 @@ export class CorteVentaPage {
 
   }
 
-   getReservaciones(idx, fechaI, fechaF) {
+  getReservaciones(idx, fechaI, fechaF) {
 
     this._reservaciones.getReservaciones(idx, fechaI, fechaF).then((data: any) => {
 
-      const idReservacionArray = [];
+      var sumaComision = 0;
+      var sumaIva = 0;
+      var sumaPropinaRe = 0;
+      var sumaSubTotal = 0;
+      var sumaTotalNeto = 0;
 
       data.forEach(element => {
 
-        idReservacionArray.push(element.idReservacion);
+        sumaComision += element.totales.comision;
+        sumaIva += element.totales.iva;
+        sumaPropinaRe += element.totales.propinaRe;
+        sumaSubTotal += element.totales.subTotal;
+        sumaTotalNeto += element.totales.totalNeto;
 
       });
-      this.getTotalesReservacion(idReservacionArray);
+
+      console.log('sumaComision', sumaComision);
+      console.log('sumaIva', sumaIva);
+      console.log('sumaPropinaRe', sumaPropinaRe);
+      console.log('sumaSubTotal', sumaSubTotal);
+      console.log('sumaTotalNeto', sumaTotalNeto);
 
     })
-  }
-  async getTotalesReservacion(idReservacionArray:any[]){
-    
-    const totalesC = await this._reservaciones.getTotalesReservaciones(idReservacionArray);
-
-    console.log('totalesC', totalesC);
-    
-
   }
 
   getIdLast(idx) {

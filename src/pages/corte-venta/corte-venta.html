@@ -19,11 +19,13 @@
         <ion-list>
             <ion-item>
                 <ion-label style="color: black;"> Fecha Inicio</ion-label>
-                <ion-datetime style="color: black;" formControlName="FechaInicio" displayFormat="DD/MM/YYYY" min="2018" max="2050-10-31" doneText=Aceptar cancelText=Cancelar> </ion-datetime>
+                <ion-datetime style="color: black;" formControlName="FechaInicio" displayFormat="DD/MM/YYYY" min="2018"
+                    max="2050-10-31" doneText=Aceptar cancelText=Cancelar> </ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label style="color: black;">Fecha Fin</ion-label>
-                <ion-datetime style="color: black;" formControlName="FechaFin" displayFormat="DD/MM/YYYY" min="2018" max="2050-10-31" doneText=Aceptar cancelText=Cancelar></ion-datetime>
+                <ion-datetime style="color: black;" formControlName="FechaFin" displayFormat="DD/MM/YYYY" min="2018"
+                    max="2050-10-31" doneText=Aceptar cancelText=Cancelar></ion-datetime>
             </ion-item>
         </ion-list>
 
@@ -31,94 +33,37 @@
             <button ion-button color="naranja" block type="submit" [disabled]="!myForm.valid">Generar Corte</button>
         </div>
     </form>
-
-
-    <ion-card class="" *ngIf="reservaciones != null ">
-        <ion-card-content class="">
-            <ion-card-title>
-                <h5 style="color: black;"> Resumen Corte {{ nombreSucursal }}</h5>
-
-            </ion-card-title>
-
-
-            <ion-item>
-                <a class="blanco_2"> {{ nombreSucursal }}</a>
-                <h4 class="blanco_1"></h4>
-                <ion-badge class="negro" item-end> {{ comision2 | currency}}</ion-badge>
-            </ion-item>
-            <ion-item class="card_atras">
-                <a class="blanco_2"> Guest (5.9%)</a>
-                <h4 class="blanco_1"></h4>
-                <ion-badge class="negro" item-end> {{ comision1 | currency}}</ion-badge>
-            </ion-item>
-
-
-            <ion-item class="card_atras">
-                <a class="blanco_2"> Propina</a>
-                <h4 class="blanco_1"></h4>
-                <ion-badge class="negro" item-end> {{ propinaTotal | currency }}</ion-badge>
-            </ion-item>
-
-            <ion-item class="card_atras">
-                <a class="blanco_2">Total</a>
-                <h4 class="blanco_1"></h4>
-                <ion-badge class="negro" item-end> {{ sumatoria | currency }} </ion-badge>
-            </ion-item>
-
-            <ion-item class="card_atras">
-                <a class="blanco_2">Total + propina</a>
-                <h4 class="blanco_1"></h4>
-                <ion-badge class="negro" item-end> {{ sumatoria + propinaTotal | currency }} </ion-badge>
-            </ion-item>
-
-            <ion-item class="card_atras">
-                <a (click)="accion1()"> Ver detalle </a>
-            </ion-item>
-
-            <button ion-button color="naranja" block (click)="guardarCorte()">Guardar</button>
-        </ion-card-content>
-    </ion-card>
-
-    <ion-card class="card_atras" *ngFor="let reserva of reservaciones">
-
-        <ion-card-content class="card_atras" *ngIf="ocultar1">
-            <ion-card-title>
-                <h4 class="blanco_2"> Folio: {{ reserva.folio }} </h4>
-            </ion-card-title>
-
-            <ion-item class="card_atras">
-                <img class="icon" src="../assets/imgs/icons/calendario.png" item-start>
-                <p class="blanco_2">Fecha de reservación</p>
-                <ion-badge class="negro" item-end>{{ reserva.fechaR | date : 'dd/MM/yyyy' }} </ion-badge>
-            </ion-item>
-            <ion-item class="card_atras">
-                <img class="icon" src="../assets/imgs/icons/time.png" item-start>
-                <a class="blanco_2">Estatus</a>
-                <ion-badge class="negro" item-end> {{ reserva.estatus }} </ion-badge>
-            </ion-item>
-
-            <ion-item class="card_atras">
-                <img class="icon" src="../assets/imgs/icons/billete.png" item-start>
-                <a class="blanco_2">Total</a>
-                <h4 class="blanco_1"></h4>
-                <ion-badge class="negro" item-end> {{ reserva.totalReservacion | currency}} </ion-badge>
-            </ion-item>
-
-            <ion-item class="card_atras" *ngIf="reserva.propina != null ">
-                <img class="icon" src="../assets/imgs/icons/billete.png" item-start>
-                <a class="blanco_2">Propina {{ reserva.propina * 100 }} % </a>
-                <ion-badge class="negro" item-end> {{ reserva.propina * reserva.totalReservacion | currency }} </ion-badge>
-            </ion-item>
-
-            <ion-item class="card_atras" *ngIf="reserva.propina != null ">
-                <img class="icon" src="../assets/imgs/icons/billete.png" item-start>
-                <a class="blanco_2">Total + propina</a>
-                <ion-badge class="negro" item-end> {{ reserva.propina * reserva.totalReservacion + reserva.totalReservacion | currency }} </ion-badge>
-            </ion-item>
-
-        </ion-card-content>
-
-    </ion-card>
-
-
+    <br>
+    <table style="width:100%">
+        <tr>
+            <th>Rubro</th>
+            <th>Cantidad</th>
+            <th>Detalle</th>
+        </tr>
+        <tr>
+            <td>Comisiones</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>IVA</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Propinas</td>
+            <td>Jackson</td>
+            <td>94</td>
+        </tr>
+        <tr>
+            <td>Subtotal</td>
+            <td>Doe</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td>Total neto</td>
+            <td>Doe</td>
+            <td>80</td>
+        </tr>
+    </table>
 </ion-content>

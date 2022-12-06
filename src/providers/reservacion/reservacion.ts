@@ -408,6 +408,8 @@ export class ReservacionProvider {
             cortesArr.push(cortesR);
           });
 
+          console.log('cortesArr ==>>', cortesArr);         
+
           resolve(cortesArr);
 
         })
@@ -415,53 +417,6 @@ export class ReservacionProvider {
           console.log("Error en la consulta -->", error);
         });
     });
-  }
-
-  // CONSULTAR TABLA TOTALES PARA CORTES
-
-  public getTotalesReservaciones(idReservacionArray: any[]) {
-
-    // console.log('idReservacionArray', idReservacionArray);    
-
-    return new Promise((resolve, reject) => {
-
-      for (let index = 0; index < idReservacionArray.length; index++) {
-
-        const element = idReservacionArray[index];
-
-        // console.log('element', element);        
-
-        let totales = this.af.collection('totalesReserva').ref;
-
-        totales
-          .where('idReservacion', '==', element)
-          .get()
-          .then((data) => {
-
-            const totaleArr = [];
-
-            data.
-              forEach((totales: any) => {
-
-                const totalesR = totales.data();
-
-                totaleArr.push(totalesR);
-                console.log('totaleArr', totaleArr);
-              });    
-
-              resolve(totaleArr);
-
-          }).catch((error) => {
-
-            console.log("Error en la consulta -->", error);
-
-          });
-      }
-
-
-    })
-
-
   }
 
   public getIdLast(idx: any) {
