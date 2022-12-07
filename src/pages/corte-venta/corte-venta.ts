@@ -35,6 +35,7 @@ export class CorteVentaPage {
   public propinaRe: any;
   public subTotal: any;
   public totalNeto: any;
+  public cortesLength: any;
 
   @ViewChild(Content) content: Content;
 
@@ -67,6 +68,7 @@ export class CorteVentaPage {
 
 
   public ocultar1: boolean = false;
+  
   accion1() {
     this.ocultar1 = !this.ocultar1;
   }
@@ -95,9 +97,11 @@ export class CorteVentaPage {
       var sumaPropinaRe = 0;
       var sumaSubTotal = 0;
       var sumaTotalNeto = 0;
+      
+      this.cortesLength = data.length;      
 
       data.forEach(element => {
-
+        
         sumaComision += element.totales.comision;
         sumaIva += element.totales.iva;
         sumaPropinaRe += element.totales.propinaRe;
@@ -106,11 +110,11 @@ export class CorteVentaPage {
 
       });
 
-      console.log('sumaComision', sumaComision);
-      console.log('sumaIva', sumaIva);
-      console.log('sumaPropinaRe', sumaPropinaRe);
-      console.log('sumaSubTotal', sumaSubTotal);
-      console.log('sumaTotalNeto', sumaTotalNeto);
+        this.comision = sumaComision ;
+        this.iva = sumaIva;
+        this.propinaRe = sumaPropinaRe;
+        this.subTotal = sumaSubTotal;
+        this.totalNeto = sumaTotalNeto;
 
     })
   }

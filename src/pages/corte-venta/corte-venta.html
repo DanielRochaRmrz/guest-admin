@@ -34,36 +34,62 @@
         </div>
     </form>
     <br>
-    <table style="width:100%">
-        <tr>
-            <th>Rubro</th>
-            <th>Cantidad</th>
-            <th>Detalle</th>
-        </tr>
-        <tr>
-            <td>Comisiones</td>
-            <td>Smith</td>
-            <td>50</td>
-        </tr>
-        <tr>
-            <td>IVA</td>
-            <td>Smith</td>
-            <td>50</td>
-        </tr>
-        <tr>
-            <td>Propinas</td>
-            <td>Jackson</td>
-            <td>94</td>
-        </tr>
-        <tr>
-            <td>Subtotal</td>
-            <td>Doe</td>
-            <td>80</td>
-        </tr>
-        <tr>
-            <td>Total neto</td>
-            <td>Doe</td>
-            <td>80</td>
-        </tr>
-    </table>
+    <hr>
+    <div *ngIf="subTotal">
+        <ion-col col-5>
+            <h2>
+                <b>Corte</b>
+                <div class="detalle">Detalle</div>
+            </h2>
+        </ion-col>
+        <hr>
+        <ion-list>
+            <ion-item>
+                <ion-avatar item-start>
+                    <img class="icon" src="../assets/imgs/icons/home-03.png" style="width:50px; height:50px;">
+                </ion-avatar>
+                <h2 class="textosCortes">{{ nombreSucursal }} </h2>
+                <h3 class="textosCortes">Fecha de inicio del corte: {{ fechaI | date }} </h3>
+                <h3 class="textosCortes">Fecha de final del corte: {{ fechaF | date }} </h3>
+            </ion-item>
+            <ion-item>
+                <ion-avatar item-start>
+                    <img class="icon" src="../assets/imgs/icons/bar-09.png" style="width:50px; height:50px;">
+                </ion-avatar>
+                <h2 class="textosCortes">No. reservaciones finalizadas: <b>{{ cortesLength }} </b> </h2>
+                <h3 class="textosCortes"></h3>
+            </ion-item>
+        </ion-list>
+        <table style="width:100%">
+            <tr>
+                <th>
+                    <h3>Rubro</h3>
+                </th>
+                <th>
+                    <h3>Cantidad</h3>
+                </th>
+            </tr>
+            <tr class="cantidadesStyle">
+                <td>Subtotal</td>
+                <td>{{ subTotal | currency }} </td>
+            </tr>
+            <tr class="cantidadesStyle">
+                <td>Comisiones</td>
+                <td>{{ comision | currency }} </td>
+            </tr>
+            <tr class="cantidadesStyle">
+                <td>IVA</td>
+                <td>{{ iva | currency }} </td>
+            </tr>
+            <tr class="cantidadesStyle">
+                <td>Propinas</td>
+                <td> {{ propinaRe | currency }} </td>
+            </tr>
+
+            <tr class="cantidadesStyle">
+                <td>Total neto</td>
+                <td> {{ totalNeto | currency }} </td>
+            </tr>
+        </table>
+    </div>
 </ion-content>
