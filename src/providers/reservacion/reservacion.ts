@@ -268,36 +268,20 @@ export class ReservacionProvider {
       });
   }
 
-  public addCorte(
-    fechaI,
-    fechaF,
-    comision1,
-    comision2,
-    suma,
-    idSucursal,
-    propina,
-    folio
-  ) {
-    console.log("****Provider add****");
-    console.log("fechaI", fechaI);
-    console.log("fechaF", fechaF);
-    console.log("comision1", comision1);
-    console.log("comision2", comision2);
-    console.log("suma", suma);
-    console.log("idSucursal", idSucursal);
+  public addCorte(fechaI, fechaF, comision, iva, propinaRe, subTotal, totalNeto, idSucursal ) {
 
     return new Promise((resolve, reject) => {
       this.af
-        .collection("corte")
+        .collection("cortes")
         .add({
           fecha_Inicio: fechaI,
           fecha_Fin: fechaF,
-          comision1: comision1,
-          comision2: comision2,
-          totalCorte: suma,
-          idSucursal: idSucursal,
-          propina: propina,
-          folio: folio,
+          comision: comision,
+          iva: iva,
+          propina: propinaRe,
+          subTotal: subTotal,
+          totalNeto: totalNeto,
+          idSucursal: idSucursal
         })
         .then((reserva) => {
           console.log("corteExitoso:", idSucursal);

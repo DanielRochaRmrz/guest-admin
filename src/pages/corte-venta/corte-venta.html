@@ -57,39 +57,53 @@
                     <img class="icon" src="../assets/imgs/icons/bar-09.png" style="width:50px; height:50px;">
                 </ion-avatar>
                 <h2 class="textosCortes">No. reservaciones finalizadas: <b>{{ cortesLength }} </b> </h2>
-                <h3 class="textosCortes"></h3>
+                <h2 class="textosCortesPlus"> <u>Ver más</u>  <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon></h2>
             </ion-item>
         </ion-list>
-        <table style="width:100%">
-            <tr>
-                <th>
-                    <h3>Rubro</h3>
-                </th>
-                <th>
-                    <h3>Cantidad</h3>
-                </th>
-            </tr>
-            <tr class="cantidadesStyle">
-                <td>Subtotal</td>
-                <td>{{ subTotal | currency }} </td>
-            </tr>
-            <tr class="cantidadesStyle">
-                <td>Comisiones</td>
-                <td>{{ comision | currency }} </td>
-            </tr>
-            <tr class="cantidadesStyle">
-                <td>IVA</td>
-                <td>{{ iva | currency }} </td>
-            </tr>
-            <tr class="cantidadesStyle">
-                <td>Propinas</td>
-                <td> {{ propinaRe | currency }} </td>
-            </tr>
+        <!-- INFO CORTES -->
 
-            <tr class="cantidadesStyle">
-                <td>Total neto</td>
-                <td> {{ totalNeto | currency }} </td>
-            </tr>
-        </table>
+        <ion-card>
+            <ion-card-content class="">
+
+                <ion-item class="card_atras">
+                    <a class="blanco_2"> Subtotal</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ subTotal | currency}}</ion-badge>
+                </ion-item>
+
+                <ion-item class="card_atras">
+                    <a class="blanco_2"> Comisiones</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ comision | currency }}</ion-badge>
+                </ion-item>
+
+                <ion-item class="card_atras">
+                    <a class="blanco_2">IVA</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ iva | currency }} </ion-badge>
+                </ion-item>
+
+                <ion-item class="card_atras">
+                    <a class="blanco_2">Propinas</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ propinaRe | currency }} </ion-badge>
+                </ion-item>
+
+                <ion-item class="card_atras">
+                    <a class="blanco_2">Total neto</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ totalNeto | currency }} </ion-badge>
+                </ion-item>
+
+                <br>
+
+                <button ion-button color="naranja" block (click)="guardarCorte()">Guardar corte</button>
+
+            </ion-card-content>
+        </ion-card>
+
+        <!-- /INFO CORTES -->
+
+
     </div>
 </ion-content>

@@ -68,7 +68,7 @@ export class CorteVentaPage {
 
 
   public ocultar1: boolean = false;
-  
+
   accion1() {
     this.ocultar1 = !this.ocultar1;
   }
@@ -135,7 +135,13 @@ export class CorteVentaPage {
 
   guardarCorte() {
 
-    this._reservaciones.addCorte(this.fechaI, this.fechaF, this.comision1, this.comision2, this.sumatoria, this.idSucursal, this.propinaTotal, this.nuevoFolio);
+    const newComision =parseFloat(this.comision).toFixed(2);
+    const newIva = parseFloat(this.iva).toFixed(2);
+    const newPropina = parseFloat(this.propinaRe).toFixed(2);
+    const newSubtotal = parseFloat(this.subTotal).toFixed(2);
+    const newTotalNeto = parseFloat(this.totalNeto).toFixed(2);
+
+    this._reservaciones.addCorte(this.fechaI, this.fechaF, newComision, newIva, newPropina, newSubtotal, newTotalNeto, this.idSucursal);
 
     this.presentAlert();
   }
