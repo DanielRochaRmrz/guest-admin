@@ -22,4 +22,14 @@ export class CorteReservacionesHistorialPage {
     console.log('ionViewDidLoad CorteReservacionesHistorialPage');
   }
 
+  scrollHandler(e) {
+
+    if (e === 'bottom') {
+
+      console.log(e);      
+
+      // this.page.moreHistorial(localStorage.getItem('uidSucursal'))
+    }
+  }
+
 }

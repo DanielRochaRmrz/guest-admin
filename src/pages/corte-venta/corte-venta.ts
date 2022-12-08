@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReservacionProvider } from '../../providers/reservacion/reservacion';
 import { ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
+import { CorteReservacionesHistorialPage } from '../corte-reservaciones-historial/corte-reservaciones-historial';
+
 
 @IonicPage()
 @Component({
@@ -159,6 +161,10 @@ export class CorteVentaPage {
       buttons: ['Aceptar']
     });
     alert.present();
+  }
+
+  goHistorial(){
+    this.navCtrl.push(CorteReservacionesHistorialPage);
   }
 
 }
