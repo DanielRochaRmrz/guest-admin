@@ -26,8 +26,14 @@
 </ion-header>
 <ion-content>
 
-  <ion-fab right top>
+  <ion-fab right top *ngIf="usuarioMaster == null">
     <button ion-fab color="primary" (click)="behind()">
+      <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-fab right top *ngIf="usuarioMaster != null">
+    <button ion-fab color="primary" (click)="cerrar_modal()">
       <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
     </button>
   </ion-fab>

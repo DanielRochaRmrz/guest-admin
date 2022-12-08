@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MonitoreoReservasProvider } from '../../providers/monitoreo-reservas/monitoreo-reservas';
 import { AdminMonitearReservPage } from '../admin-monitear-reserv/admin-monitear-reserv';
 import { SucursalAltaProvider } from "../../providers/sucursal-alta/sucursal-alta";
 import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
+import { CorteReservacionesHistorialPage } from '../corte-reservaciones-historial/corte-reservaciones-historial';
 
 @IonicPage()
 @Component({
@@ -34,14 +35,25 @@ export class AdminReservacionDetallePage {
   comision: any;
   totalNeto: any;
   subTotal: any;
+  usuarioMaster: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public monRes: MonitoreoReservasProvider,
-    public afs: AngularFirestore, public SucProv: SucursalAltaProvider) {
+    public afs: AngularFirestore, public SucProv: SucursalAltaProvider, private viewCtrl: ViewController,) {
 
     //recibe parametro de la reservacion
     this.idReservacion = this.navParams.get("idReservacion");
+
+    if (this.navParams.get("typeUser")) {
+
+      this.usuarioMaster = this.navParams.get("typeUser");
+
+    } else {
+
+      this.usuarioMaster = null;
+
+    }
 
     //Traer datos de la reservacion seleccionada
     this.afs.collection('reservaciones').doc(this.idReservacion).valueChanges().subscribe(reservacion => {
@@ -156,6 +168,10 @@ export class AdminReservacionDetallePage {
 
       this.navCtrl.setRoot(AdminMonitearReservPage);
     }
+  }
+
+  cerrar_modal() {
+    this.viewCtrl.dismiss();
   }
 
 

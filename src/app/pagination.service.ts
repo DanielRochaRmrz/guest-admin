@@ -150,7 +150,7 @@ export class PaginationService {
     }
   }
 
-  initHistorialCorte(path: string, field: string, opts?: any, idx?: string, fechaI?:any, fechaF?:any,) {
+  initHistorialCorte(path: string, field: string, opts?: any, idx?: string, fechaI?: any, fechaF?: any) {
     this.presentLoading();
     this.query = {
       path,
@@ -255,6 +255,22 @@ export class PaginationService {
         .where("idSucursal", "==", idx)
         .where("estatusFinal", "==", "rsv_copletada")
         .where("estatus", '==', "Finalizado")
+    })
+    this.mapAndUpdate(more)
+  }
+
+  moreHistorialCorte(idx, fechaI, fechaF) {
+    const cursor = this.getCursor()
+
+    const more = this.afs.collection(this.query.path, ref => {
+      return ref
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
+        .startAfter(cursor)
+        .where("idSucursal", "==", idx)
+        .where("fechaR_", ">=", fechaI)
+        .where("fechaR_", "<=", fechaF)
+        .where("estatus", 'in', ["Finalizado", "Pagado"])
     })
     this.mapAndUpdate(more)
   }

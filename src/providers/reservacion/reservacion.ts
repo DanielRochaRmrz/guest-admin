@@ -268,12 +268,13 @@ export class ReservacionProvider {
       });
   }
 
-  public addCorte(fechaI, fechaF, comision, iva, propinaRe, subTotal, totalNeto, idSucursal ) {
+  public addCorte(fechaI, fechaF, comision, iva, propinaRe, subTotal, totalNeto, idSucursal) {
 
     return new Promise((resolve, reject) => {
       this.af
         .collection("cortes")
         .add({
+          fechaCaptura: Date.now(),
           fecha_Inicio: fechaI,
           fecha_Fin: fechaF,
           comision: comision,
@@ -281,7 +282,7 @@ export class ReservacionProvider {
           propina: propinaRe,
           subTotal: subTotal,
           totalNeto: totalNeto,
-          idSucursal: idSucursal
+          idSucursal: idSucursal,
         })
         .then((reserva) => {
           console.log("corteExitoso:", idSucursal);
@@ -392,7 +393,7 @@ export class ReservacionProvider {
             cortesArr.push(cortesR);
           });
 
-          console.log('cortesArr ==>>', cortesArr);         
+          console.log('cortesArr ==>>', cortesArr);
 
           resolve(cortesArr);
 
@@ -636,5 +637,38 @@ export class ReservacionProvider {
         })
         .catch((error) => console.error("Sin resultados"));
     });
+  }
+
+  public getHistorialCorteSucursal(uidSucursal) {
+
+    return new Promise((resolve, reject) => {
+
+      let cortes = this.af.collection("cortes").ref;
+
+      cortes
+        .where("idSucursal", "==", uidSucursal)
+        .get()
+        .then((data) => {
+
+          const cortesList = [];
+
+          data.forEach((docs) => {            
+
+            cortesList.push(docs.data())
+            
+          })
+
+          console.log("CORTES", cortesList);
+
+          resolve(cortesList);
+
+
+        }).catch((error) => {
+
+          console.log(error);
+
+        })
+
+    })
   }
 }

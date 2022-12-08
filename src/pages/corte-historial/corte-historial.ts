@@ -6,6 +6,7 @@ import { SucursalAltaProvider } from '../../providers/sucursal-alta/sucursal-alt
 import { AuthProvider } from '../../providers/auth/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AdminHomePage } from '../admin-home/admin-home';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @IonicPage()
 @Component({
@@ -17,37 +18,46 @@ export class CorteHistorialPage {
   uid: any;
   idSucursal: any;
   admin: any;
-  type: any='n';
+  type: any = 'n';
   user: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    public sucProv: SucursalAltaProvider,
-    public _providerCorte: ReservacionProvider,  public authProvider: AuthProvider, public firebase: AngularFireAuth,) {
+  public cortesList: any; 
+  public ocultar: boolean = false;
 
-      this.user = this.firebase.auth.currentUser;
-      console.log("Esta es User: ", this.user.uid);
-    console.log('ionViewDidLoad CorteHistorialPage');
-    console.log('itemHistorialCorte',this.sucProv.selectedSucursalItem);
-    this.idSucursal=this.sucProv.selectedSucursalItem.uid;
-    if(this.idSucursal==undefined){
-      this.idSucursal=localStorage.getItem("uid");
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sucProv: SucursalAltaProvider, public _providerCorte: ReservacionProvider, public authProvider: AuthProvider, public firebase: AngularFireAuth,) {
+    
+
+    this.user = this.firebase.auth.currentUser;
+    // console.log("Esta es User: ", this.user.uid);
+    // console.log('ionViewDidLoad CorteHistorialPage');
+    // console.log('itemHistorialCorte', this.sucProv.selectedSucursalItem);
+    this.idSucursal = this.sucProv.selectedSucursalItem.uid;
+
+    if (this.idSucursal == undefined) {
+
+      this.idSucursal = localStorage.getItem("uid");
+
     }
-      //  this.type=this.sucProv.selectedSucursalItem.type;
-    console.log('idSucursal CorteHistorico', this.idSucursal);
+    //  this.type=this.sucProv.selectedSucursalItem.type;
+    // console.log('idSucursal CorteHistorico', this.idSucursal);
 
 
     //si es sucursal no tare nada
     this.authProvider.getUserAdmins(this.user.uid).subscribe(s => {
-      console.log('s',s);
-      if(s != null){
-        this.type=s.type;
-      // console.log('admin', this.admin);
-      console.log('type', this.type);
+      console.log('s', s);
+      if (s != null) {
+        this.type = s.type;
+        // console.log('admin', this.admin);
+        // console.log('type', this.type);
       }
 
 
     });
 
-    this.getCortes(this.idSucursal);
+    // this.getCortes(this.idSucursal);
+
+    this.getCortesHistorial(this.idSucursal);
   }
 
   ionViewDidLoad() {
@@ -55,22 +65,38 @@ export class CorteHistorialPage {
 
   }
 
-  getCortes(idx){
+  getCortes(idx) {
     console.log("funcion cortes: ", idx);
-    this._providerCorte.getCortes(idx).subscribe(res=>{
+    this._providerCorte.getCortes(idx).subscribe(res => {
       console.log("Este es el resultado de corte historico: ", res);
-      this.corteHistorico=res;
+      this.corteHistorico = res;
     });
   }
 
-  deleteCorte(id){
-    console.log('corte eliminado: '+id);
+  async getCortesHistorial(id) {
+
+    let cortes = await this._providerCorte.getHistorialCorteSucursal(id);
+
+    this.cortesList = cortes;
+
+    console.log("CORTES =>>", this.cortesList);
+    
+
+
+  }
+
+  deleteCorte(id) {
+    console.log('corte eliminado: ' + id);
     this._providerCorte.delete_corte(id);
 
   }
 
-  behind(){
+  behind() {
     this.navCtrl.setRoot(AdminHomePage);
+  }
+
+  ocultarAction() {
+    this.ocultar = !this.ocultar;
   }
 
 }

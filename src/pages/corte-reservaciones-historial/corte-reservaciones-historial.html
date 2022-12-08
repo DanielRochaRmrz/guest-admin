@@ -14,9 +14,73 @@
   </ion-col>
   <hr>
 
+  <ion-list>
+
+    <ion-item>
+      Corte de: <strong>{{ nombreSucursal }}</strong>
+    </ion-item>
+
+    <ion-item>
+      <b>Fecha de inicio:</b> {{ fechaI | date }}
+    </ion-item>
+
+    <ion-item>
+      <b>Fecha de fin:</b> {{ fechaF | date }}
+    </ion-item>
+
+  </ion-list>
+
   <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
 
     <div class="container">
+
+      <ion-item *ngFor="let reservacion of page.data | async">
+
+        <h2 style="text-transform: uppercase">
+          <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>
+          Nombre:
+          <b>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</b>
+        </h2>
+
+        <h3>
+          <ion-icon ios="ios-calendar" md="md-calendar" item-start style="color: #fcc04d"></ion-icon>
+          Fecha:
+          <b> {{ reservacion.fechaR | date: 'dd/MM/yyyy' }} </b>
+        </h3>
+
+        <p class="hora">
+          <ion-icon ios="ios-time" md="md-time" item-start style="color: #fcc04d"></ion-icon>Hora de
+          reservación: <b> {{ reservacion.hora }} </b>
+        </p>
+        <p class="hora" item-end>
+          <img src="./assets/content/Ellipse55.png" class="imgElli" alt=""> {{ reservacion.estatus }}
+        </p>
+
+        <ng-container *ngIf="reservacion.idevento != null">
+
+          <ng-container *ngFor="let event of infoEvento">
+
+            <ng-container *ngIf="reservacion.idevento == event.uid">
+
+              <p class="hora">
+                <ion-icon ios="ios-beer" md="md-beer" item-start style="color: #fcc04d"></ion-icon> {{
+                event.titulo }}
+              </p>
+
+            </ng-container>
+
+          </ng-container>
+
+        </ng-container>
+
+        <button ion-button block round class="btnDetalle" (click)="goDetalle(reservacion.idReservacion)">
+
+          Detalle
+
+        </button>
+
+      </ion-item>
+
     </div>
   </div>
 

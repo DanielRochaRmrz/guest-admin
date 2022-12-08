@@ -164,7 +164,7 @@ export class CorteVentaPage {
   }
 
   goHistorial(){
-    this.navCtrl.push(CorteReservacionesHistorialPage);
+    this.navCtrl.push(CorteReservacionesHistorialPage, {idSucursal: this.idSucursal, fechaI: this.fechaI, fechaF:this.fechaF, nombreSucursal:this.nombreSucursal});
   }
 
 }
