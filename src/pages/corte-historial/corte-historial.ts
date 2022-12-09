@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
 import { ReservacionProvider } from '../../providers/reservacion/reservacion';
 import { SucursalAltaProvider } from '../../providers/sucursal-alta/sucursal-alta';
@@ -7,6 +7,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AdminHomePage } from '../admin-home/admin-home';
 import { async } from 'rxjs/internal/scheduler/async';
+import { CorteDetalleReservacionPage } from '../corte-detalle-reservacion/corte-detalle-reservacion';
 
 @IonicPage()
 @Component({
@@ -20,13 +21,10 @@ export class CorteHistorialPage {
   admin: any;
   type: any = 'n';
   user: any;
-  public cortesList: any; 
-  public ocultar: boolean = false;
+  public cortesList: any;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sucProv: SucursalAltaProvider, public _providerCorte: ReservacionProvider, public authProvider: AuthProvider, public firebase: AngularFireAuth, private modalctrl: ModalController,) {
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sucProv: SucursalAltaProvider, public _providerCorte: ReservacionProvider, public authProvider: AuthProvider, public firebase: AngularFireAuth,) {
-    
 
     this.user = this.firebase.auth.currentUser;
     // console.log("Esta es User: ", this.user.uid);
@@ -80,8 +78,6 @@ export class CorteHistorialPage {
     this.cortesList = cortes;
 
     console.log("CORTES =>>", this.cortesList);
-    
-
 
   }
 
@@ -95,8 +91,12 @@ export class CorteHistorialPage {
     this.navCtrl.setRoot(AdminHomePage);
   }
 
-  ocultarAction() {
-    this.ocultar = !this.ocultar;
+  goDetalle(idCorte) {
+
+    let modal = this.modalctrl.create(CorteDetalleReservacionPage, { idCorte: idCorte });
+    modal.present();
+
   }
+
 
 }

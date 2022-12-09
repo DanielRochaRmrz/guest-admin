@@ -125,6 +125,7 @@ import { PaginationService } from './pagination.service';
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner';
 import { SliderPage } from '../pages/slider/slider';
 import { CorteReservacionesHistorialPage } from '../pages/corte-reservaciones-historial/corte-reservaciones-historial';
+import { CorteDetalleReservacionPage } from '../pages/corte-detalle-reservacion/corte-detalle-reservacion';
 
 
  firebase.initializeApp(firebaseConfig);
@@ -198,6 +199,7 @@ import { CorteReservacionesHistorialPage } from '../pages/corte-reservaciones-hi
     ChecklistPage,
     ChecklistNewPage,
     CorteReservacionesHistorialPage,
+    CorteDetalleReservacionPage,
   ],
   imports: [
     BrowserModule,
@@ -282,6 +284,7 @@ import { CorteReservacionesHistorialPage } from '../pages/corte-reservaciones-hi
     ChecklistPage,
     ChecklistNewPage,
     CorteReservacionesHistorialPage,
+    CorteDetalleReservacionPage,
   ],
   providers: [
     StatusBar,

@@ -274,6 +274,7 @@ export class ReservacionProvider {
       this.af
         .collection("cortes")
         .add({
+
           fechaCaptura: Date.now(),
           fecha_Inicio: fechaI,
           fecha_Fin: fechaF,
@@ -284,8 +285,19 @@ export class ReservacionProvider {
           totalNeto: totalNeto,
           idSucursal: idSucursal,
         })
-        .then((reserva) => {
+        .then((corte) => {
+
+          this.af
+            .collection("cortes")
+            .doc(corte.id)
+            .update({
+              idCorte: corte.id,
+            })
+            .then(() => { })
+            .catch(() => { });
+
           console.log("corteExitoso:", idSucursal);
+
           resolve({ success: true, idSucursal: idSucursal });
         })
         .catch((err) => {
@@ -652,10 +664,10 @@ export class ReservacionProvider {
 
           const cortesList = [];
 
-          data.forEach((docs) => {            
+          data.forEach((docs) => {
 
             cortesList.push(docs.data())
-            
+
           })
 
           console.log("CORTES", cortesList);
@@ -669,6 +681,30 @@ export class ReservacionProvider {
 
         })
 
+    })
+  }
+
+  public getDetalleCorte(id) {
+
+    return new Promise((resolve, reject) => {
+
+      let corte = this.af.collection("cortes").ref;
+
+      corte.where("idCorte", "==", id)
+        .get()
+        .then((data) => {
+
+          data.forEach((docCorte) => {
+
+            console.log("docCorte=>>", docCorte.data());
+            resolve(docCorte.data());
+            
+          })
+        }).catch((error) => {
+
+          console.log(error);
+
+        })
     })
   }
 }

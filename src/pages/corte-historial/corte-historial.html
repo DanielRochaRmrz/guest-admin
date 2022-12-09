@@ -38,50 +38,10 @@
     <hr>
 
     <ion-list>
-        <button ion-item *ngFor="let corte of cortesList" (click)="ocultarAction()">
+        <button ion-item *ngFor="let corte of cortesList" (click)="goDetalle(corte.idCorte)">
             <ion-icon ios="ios-cut" md="md-cut"></ion-icon>
-            Corte de la fecha: <strong>{{ corte.fechaCaptura?.seconds * 1000 | date: 'dd-MM-yyyy' }}</strong>
-            <ng-container *ngIf="ocultar">
-                <ion-card>
-                    <ion-card-content class="">
-
-                        <ion-item class="card_atras">
-                            <a class="blanco_2"> Subtotal</a>
-                            <h4 class="blanco_1"></h4>
-                            <ion-badge class="negro" item-end> {{ corte.subTotal | currency}}</ion-badge>
-                        </ion-item>
-
-                        <ion-item class="card_atras">
-                            <a class="blanco_2"> Comisiones</a>
-                            <h4 class="blanco_1"></h4>
-                            <ion-badge class="negro" item-end> {{ corte.comision | currency }}</ion-badge>
-                        </ion-item>
-
-                        <ion-item class="card_atras">
-                            <a class="blanco_2">IVA</a>
-                            <h4 class="blanco_1"></h4>
-                            <ion-badge class="negro" item-end> {{ corte.iva | currency }} </ion-badge>
-                        </ion-item>
-
-                        <ion-item class="card_atras">
-                            <a class="blanco_2">Propinas</a>
-                            <h4 class="blanco_1"></h4>
-                            <ion-badge class="negro" item-end> {{ corte.propina | currency }} </ion-badge>
-                        </ion-item>
-
-                        <ion-item class="card_atras">
-                            <a class="blanco_2">Total neto</a>
-                            <h4 class="blanco_1"></h4>
-                            <ion-badge class="negro" item-end> {{ corte.totalNeto | currency }} </ion-badge>
-                        </ion-item>
-
-                        <br>
-
-                    </ion-card-content>
-                </ion-card>
-            </ng-container>
+            Corte de la fecha: <strong>{{ corte.fechaCaptura | date }}</strong>
         </button>
-
     </ion-list>
 
 
