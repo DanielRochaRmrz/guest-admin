@@ -143,7 +143,7 @@ export class CorteVentaPage {
     const newSubtotal = parseFloat(this.subTotal).toFixed(2);
     const newTotalNeto = parseFloat(this.totalNeto).toFixed(2);
 
-    this._reservaciones.addCorte(this.fechaI, this.fechaF, newComision, newIva, newPropina, newSubtotal, newTotalNeto, this.idSucursal);
+    this._reservaciones.addCorte(this.fechaI, this.fechaF, newComision, newIva, newPropina, newSubtotal, newTotalNeto, this.cortesLength, this.idSucursal);
 
     this.presentAlert();
   }
