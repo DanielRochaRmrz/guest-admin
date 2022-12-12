@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { MonitoreoReservasProvider } from '../../providers/monitoreo-reservas/monitoreo-reservas';
 import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-reservacion-detalle';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -17,13 +17,16 @@ export class AdminHistorialReservacionesPage implements OnInit {
   reservaciones: any = [];
   sucursales: any;
   noReservaciones: any;
+  pageCorte: boolean = false;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public afs: AngularFirestore,
     public monRes: MonitoreoReservasProvider,
     public page: PaginationService,
+    private viewCtrl: ViewController,
   ) {
-
+    this.pageCorte = this.navParams.get("pageCorte");
     this.page.reset();
     this.getAllReservaciones();
   }
@@ -63,6 +66,10 @@ export class AdminHistorialReservacionesPage implements OnInit {
 
       this.page.moreHistorial(localStorage.getItem('uidSucursal'))
     }
+  }
+  
+  cerrar_modal(){
+    this.viewCtrl.dismiss();
   }
 
 }

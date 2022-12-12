@@ -12,10 +12,16 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="list-avatar-page ">
+<ion-content class="list-avatar-page">
 
-    <ion-fab right top>
+    <ion-fab right top *ngIf="!pageCorte">
         <button ion-fab color="primary" (click)="behind()">
+            <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-fab right top *ngIf="pageCorte == true">
+        <button ion-fab color="primary" (click)="cerrar_modal()">
             <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
         </button>
     </ion-fab>
