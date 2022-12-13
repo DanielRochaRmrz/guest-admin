@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar class="borde" hideBackButton>
+    <ion-row>
+      <ion-col col-1>
+        <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+      </ion-col>
+      <ion-col col-1 align="center">
+        <img src="./assets/content/line2.png" class="imgLi" alt="">
+      </ion-col>
+      <ion-col col-8>
+        <div class="AdminEvento">Cuentas consumos</div>
+      </ion-col>
+      <ion-col>
+        <div align='end'>
+          <img src="./assets/content/corona.png" style="width: 40%;" alt="">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col col-9>
+      <h2>
+        <b>Master</b>
+        <div class="detalle">Consumos</div>
+      </h2>
+    </ion-col>
+    <ion-col col-3>
+      <button (click)="goConsumo()" ion-button block>
+        <ion-icon class="iconoStyle" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <hr>
+
+  <ion-list>
+    <button ion-item *ngFor="let consumo of consumos" (click)="goDetalle(consumo.idConsumo)">
+      <ion-icon ios="ios-cut" md="md-cut"></ion-icon>
+      Corte de la fecha: <strong>{{ consumo.fechaCaptura | date }}</strong>
+    </button>
+  </ion-list>
+
+</ion-content>

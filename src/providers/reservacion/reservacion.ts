@@ -307,6 +307,43 @@ export class ReservacionProvider {
     });
   }
 
+  public addConsumo(fechaI, fechaF, comision, iva, propinaRe, subTotal, totalNeto, totalReservaciones) {
+
+    return new Promise((resolve, reject) => {
+      this.af
+        .collection("consumos")
+        .add({
+
+          fechaCaptura: Date.now(),
+          fecha_Inicio: fechaI,
+          fecha_Fin: fechaF,
+          comision: comision,
+          iva: iva,
+          propina: propinaRe,
+          subTotal: subTotal,
+          totalNeto: totalNeto,
+          totalReservaciones: totalReservaciones,
+        })
+        .then((consumo) => {
+
+          this.af
+            .collection("consumos")
+            .doc(consumo.id)
+            .update({
+              idConsumo: consumo.id,
+            })
+            .then(() => { })
+            .catch(() => { });
+
+          resolve({ success: true });
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+
   public getCortes(idx) {
     //return this.afiredatabase.object("sucursales/" + uid);
     console.log("idSucursal provider", idx);
@@ -394,6 +431,42 @@ export class ReservacionProvider {
 
       corteReservacion
         .where("idSucursal", "==", idx)
+        .where("fechaR_", ">=", fechI)
+        .where("fechaR_", "<=", fechF)
+        .where("estatus", 'in', ["Finalizado", "Pagado"])
+        .get()
+        .then((data) => {
+          const cortesArr = [];
+          data.forEach((cortes: any) => {
+            const cortesR = cortes.data();
+            // cortesR.id = cortes.id; 
+            cortesArr.push(cortesR);
+          });
+
+          console.log('cortesArr ==>>', cortesArr);
+
+          resolve(cortesArr);
+
+        })
+        .catch((error) => {
+          console.log("Error en la consulta -->", error);
+        });
+    });
+  }
+
+  public getReservacionesConsumos(fecha1: String, fecha2: String) {
+
+    this.fechaI = fecha1;
+    this.fechaF = fecha2;
+
+    const fechI = moment(this.fechaI).format("x");
+    const fechF = moment(this.fechaF).format("x");
+
+    return new Promise((resolve, reject) => {
+
+      let corteReservacion = this.af.collection('reservaciones').ref;
+
+      corteReservacion
         .where("fechaR_", ">=", fechI)
         .where("fechaR_", "<=", fechF)
         .where("estatus", 'in', ["Finalizado", "Pagado"])
@@ -685,13 +758,47 @@ export class ReservacionProvider {
     })
   }
 
-  public getDetalleCorte(id) {
+  public getHistorialConsumos() {
 
     return new Promise((resolve, reject) => {
 
-      let corte = this.af.collection("cortes").ref;
+      let cortes = this.af.collection("consumos").ref;
 
-      corte.where("idCorte", "==", id)
+      cortes
+        .orderBy("fechaCaptura", "desc")
+        .get()
+        .then((data) => {
+
+          const consumosList = [];
+
+          data.forEach((docs) => {
+
+            consumosList.push(docs.data())
+
+          })
+
+          console.log("CONSUMOS", consumosList);
+
+          resolve(consumosList);
+
+
+        }).catch((error) => {
+
+          console.log(error);
+
+        })
+
+    })
+  }
+
+  public getDetalleCorte(id, tabla, campo) {
+
+
+    return new Promise((resolve, reject) => {
+
+      let corte = this.af.collection(tabla).ref;
+
+      corte.where(campo, "==", id)
         .get()
         .then((data) => {
 
@@ -699,7 +806,7 @@ export class ReservacionProvider {
 
             console.log("docCorte=>>", docCorte.data());
             resolve(docCorte.data());
-            
+
           })
         }).catch((error) => {
 

@@ -126,6 +126,7 @@ import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-s
 import { SliderPage } from '../pages/slider/slider';
 import { CorteReservacionesHistorialPage } from '../pages/corte-reservaciones-historial/corte-reservaciones-historial';
 import { CorteDetalleReservacionPage } from '../pages/corte-detalle-reservacion/corte-detalle-reservacion';
+import { CuentasListPage } from '../pages/cuentas-list/cuentas-list';
 
 
  firebase.initializeApp(firebaseConfig);
@@ -200,6 +201,7 @@ import { CorteDetalleReservacionPage } from '../pages/corte-detalle-reservacion/
     ChecklistNewPage,
     CorteReservacionesHistorialPage,
     CorteDetalleReservacionPage,
+    CuentasListPage,
   ],
   imports: [
     BrowserModule,
@@ -285,6 +287,7 @@ import { CorteDetalleReservacionPage } from '../pages/corte-detalle-reservacion/
     ChecklistNewPage,
     CorteReservacionesHistorialPage,
     CorteDetalleReservacionPage,
+    CuentasListPage,
   ],
   providers: [
     StatusBar,

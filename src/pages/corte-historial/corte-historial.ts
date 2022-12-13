@@ -93,7 +93,7 @@ export class CorteHistorialPage {
 
   goDetalle(idCorte) {
 
-    let modal = this.modalctrl.create(CorteDetalleReservacionPage, { idCorte: idCorte });
+    let modal = this.modalctrl.create(CorteDetalleReservacionPage, { idCorte: idCorte, tabla:"cortes", campo:"idCorte"});
     modal.present();
 
   }

@@ -1,9 +1,9 @@
 <ion-header>
-    <ion-navbar class="borde" hideBackButton >
+    <ion-navbar class="borde" hideBackButton>
         <ion-row>
             <ion-col col-1>
                 <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
-                  </ion-col>
+            </ion-col>
             <ion-col col-1 align="center">
                 <img src="./assets/content/line2.png" class="imgLi" alt="">
             </ion-col>
@@ -23,92 +23,105 @@
 
 
 <ion-content padding>
+
+    <ion-col col-5>
+        <h2>
+            <b>Master</b>
+            <div class="detalle">Consumos</div>
+        </h2>
+    </ion-col>
+    <hr>
+
     <form [formGroup]="myForm" (ngSubmit)="saveData()">
         <ion-list>
             <ion-item>
-                <ion-label> <font color="black">  Fecha Inicio</font> </ion-label>
-                <ion-datetime  style="color: black;" formControlName="FechaInicio" displayFormat="DD/MM/YYYY" min="2018" max="2050-10-31" doneText=Aceptar cancelText=Cancelar> </ion-datetime>
+                <ion-label>
+                    <font color="black"> Fecha Inicio</font>
+                </ion-label>
+                <ion-datetime style="color: black;" formControlName="FechaInicio" displayFormat="DD/MM/YYYY" min="2018"
+                    max="2050-10-31" doneText=Aceptar cancelText=Cancelar> </ion-datetime>
             </ion-item>
             <ion-item>
-                <ion-label> <font color="black"> Fecha Fin  </font> </ion-label>
-                <ion-datetime  style="color: black;"  formControlName="FechaFin" displayFormat="DD/MM/YYYY" min="2018" max="2050-10-31" doneText=Aceptar cancelText=Cancelar></ion-datetime>
-            </ion-item>            
+                <ion-label>
+                    <font color="black"> Fecha Fin </font>
+                </ion-label>
+                <ion-datetime style="color: black;" formControlName="FechaFin" displayFormat="DD/MM/YYYY" min="2018"
+                    max="2050-10-31" doneText=Aceptar cancelText=Cancelar></ion-datetime>
+            </ion-item>
         </ion-list>
 
         <div padding>
-            <button ion-button  color="naranja" block type="submit" [disabled]="!myForm.valid" >Generar</button>
-          </div>
+            <button ion-button color="naranja" block type="submit" [disabled]="!myForm.valid">Generar</button>
+        </div>
     </form>
 
-   
-   <ion-card class="card_atras" *ngIf="reservaciones != null ">
-    <ion-card-content class="card_atras"  >
-        <ion-card-title> 
-            <h5 class="blanco_1"> Resumen</h5>
-                                     
-        </ion-card-title>
-
-        
-        <ion-item class="card_atras" >
-            <a class="blanco_2">Total</a>
-            <h4 class="blanco_1"  ></h4>
-            <ion-badge class="negro" item-end> {{ comision2 | currency}}</ion-badge>
-        </ion-item>
-        <ion-item class="card_atras" >
-                <a class="blanco_2"> Guest (5.6%)</a>
-                <h4 class="blanco_1"  ></h4>
-                <ion-badge class="negro" item-end> {{ comision1 | currency}}</ion-badge>
-        </ion-item>
-
-        
-        <ion-item class="card_atras" >
-            <a class="blanco_2"> Propina</a>
-            <h4 class="blanco_1"  ></h4>
-            <ion-badge class="negro" item-end> {{ propina | currency}}</ion-badge>
-        </ion-item>
-
-        <ion-item class="card_atras" >
-                <a class="blanco_2">Total</a>
-                <h4 class="blanco_1"  ></h4>
-                <ion-badge class="negro" item-end> {{ sumatoria | currency }} </ion-badge>
+    <div *ngIf="subTotal">
+        <ion-col col-5>
+            <h2>
+                <b>Corte</b>
+                <div class="detalle">Detalle</div>
+            </h2>
+        </ion-col>
+        <hr>
+        <ion-list>
+            <ion-item>
+                <ion-avatar item-start>
+                    <img class="icon" src="../assets/imgs/icons/home-03.png" style="width:50px; height:50px;">
+                </ion-avatar>
+                <!-- <h2 class="textosCortes">{{ nombreSucursal }} </h2> -->
+                <h3 class="textosCortes">Fecha de inicio del corte: {{ fechaI | date }} </h3>
+                <h3 class="textosCortes">Fecha de final del corte: {{ fechaF | date }} </h3>
             </ion-item>
-
-        <ion-item class="card_atras" >
-            <a  (click)="accion1()" > Ver detalle </a>
-        </ion-item>
-
-        <!-- <button ion-button color="naranja" block (click)="guardarCorte()">Guardar</button> -->
-    </ion-card-content>
-   </ion-card>
-   
-    <ion-card class="card_atras" *ngFor="let reserva of reservaciones" >
-
-        <ion-card-content class="card_atras"  *ngIf="ocultar1">
-            <ion-card-title> 
-            <p class="blanco_2">Reservacion: {{ reserva.folio}}</p>
-            </ion-card-title>
-
-            <ion-item class="card_atras">
-                <img class="icon" src="../assets/imgs/icons/calendario.png" item-start>
-                <p class="blanco_2">Fecha de reservación</p>
-                <ion-badge class="negro" item-end>{{ reserva.fechaR }} </ion-badge>
+            <ion-item>
+                <ion-avatar item-start>
+                    <img class="icon" src="../assets/imgs/icons/bar-09.png" style="width:50px; height:50px;">
+                </ion-avatar>
+                <h2 class="textosCortes">No. reservaciones finalizadas: <b>{{ cortesLength }} </b> </h2>
+                <h2 (click)="goHistorial()" class="textosCortesPlus"> <u>Ver más</u>  <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon></h2>
             </ion-item>
-            <ion-item class="card_atras">
-                <img class="icon" src="../assets/imgs/icons/time.png" item-start>
-                <a class="blanco_2">Estatus</a>
-                <ion-badge class="negro" item-end> {{ reserva.estatus }}  </ion-badge>
-            </ion-item>
+        </ion-list>
+         <!-- INFO CORTES -->
+        <ion-card>
+            <ion-card-content class="">
 
-            <ion-item class="card_atras" >
-                    <img class="icon" src="../assets/imgs/icons/billete.png" item-start>
-                    <a class="blanco_2">Total</a>
-                    <h4 class="blanco_1"  ></h4>
-                    <ion-badge class="negro" item-end> {{ reserva.totalReservacion | currency}} </ion-badge>
-            </ion-item>
+                <ion-item class="card_atras">
+                    <a class="blanco_2"> Subtotal</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ subTotal | currency}}</ion-badge>
+                </ion-item>
 
-        </ion-card-content>
-        
-    </ion-card>
+                <ion-item class="card_atras">
+                    <a class="blanco_2"> Comisiones</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ comision | currency }}</ion-badge>
+                </ion-item>
+
+                <ion-item class="card_atras">
+                    <a class="blanco_2">IVA</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ iva | currency }} </ion-badge>
+                </ion-item>
+
+                <ion-item class="card_atras">
+                    <a class="blanco_2">Propinas</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ propinaRe | currency }} </ion-badge>
+                </ion-item>
+
+                <ion-item class="card_atras">
+                    <a class="blanco_2">Total neto</a>
+                    <h4 class="blanco_1"></h4>
+                    <ion-badge class="negro" item-end> {{ totalNeto | currency }} </ion-badge>
+                </ion-item>
+
+                <br>
+
+                <button ion-button color="naranja" block (click)="guardarConsumo()">Guardar consumo</button>
+
+            </ion-card-content>
+        </ion-card>
+        <!-- /INFO CORTES -->
+    </div>
 
 
 </ion-content>

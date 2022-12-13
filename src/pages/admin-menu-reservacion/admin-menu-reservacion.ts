@@ -17,6 +17,7 @@ import { AdminLoginPage } from "../admin-login/admin-login";
 import { CuentasPage } from "../cuentas/cuentas";
 import { AdminHomePage } from "../admin-home/admin-home";
 import { AdminRpCodigoPage } from "../admin-rp-codigo/admin-rp-codigo";
+import { CuentasListPage } from "../cuentas-list/cuentas-list";
 
 @IonicPage()
 @Component({
@@ -112,10 +113,17 @@ export class AdminMenuReservacionPage {
     this.navCtrl.push(AdminHistorialReservacionesPage);
   }
   
-  goConsumo() {
-    console.log("consumo sucUID", this.sucursal);
+  // goConsumo() {
+  //   console.log("consumo sucUID", this.sucursal);
+  //   var obj = [{ uid: this.sucursal }];
+  //   this.navCtrl.push(CuentasPage, { uidSucursal: this.sucursal });
+  // }
+
+  goConsumoList(){
+
     var obj = [{ uid: this.sucursal }];
-    this.navCtrl.push(CuentasPage, { uidSucursal: this.sucursal });
+    this.navCtrl.push(CuentasListPage, { uidSucursal: this.sucursal });
+    
   }
 
   // IR A PAGINA DE CODIGO RP

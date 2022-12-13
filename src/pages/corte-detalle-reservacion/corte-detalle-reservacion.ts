@@ -12,10 +12,14 @@ export class CorteDetalleReservacionPage {
 
   public idCorte: any;
   public corte: any;
+  public tabla: any;
+  public campo: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _providerCorte: ReservacionProvider, private viewCtrl: ViewController, private modalctrl: ModalController,) {
 
     this.idCorte = this.navParams.get("idCorte");   
+    this.tabla = this.navParams.get("tabla");
+    this.campo = this.navParams.get("campo");
     
   }
 
@@ -27,7 +31,7 @@ export class CorteDetalleReservacionPage {
   
   async getDetalleCorte(){
   
-    this.corte = await this._providerCorte.getDetalleCorte(this.idCorte);
+    this.corte = await this._providerCorte.getDetalleCorte(this.idCorte, this.tabla, this.campo);
     console.log("this.corte", this.corte.subTotal);
     
   }
