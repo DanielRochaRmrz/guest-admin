@@ -182,6 +182,39 @@ export class PaginationService {
     }
   }
 
+  // PARA LOS CONSUMOS 
+
+  initHistorialConsumos(path: string, field: string, opts?: any, fechaI?: any, fechaF?: any) {
+    this.presentLoading();
+    this.query = {
+      path,
+      field,
+      limit: 5,
+      reverse: false,
+      prepend: false,
+      ...opts
+    }
+    var first = this.afs.collection(this.query.path, ref => {
+      return ref
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
+        .where("fechaR_", ">=", fechaI)
+        .where("fechaR_", "<=", fechaF)
+        .where("estatus", 'in', ["Finalizado", "Pagado"])
+
+    })
+    if (first) {
+      this.loadingDatos.dismiss();
+      this.mapAndUpdate(first)
+
+      // Create the observable array for consumption in components
+      this.data = this._data.asObservable()
+        .scan((acc, val) => {
+          return this.query.prepend ? val.concat(acc) : acc.concat(val)
+        })
+    }
+  }
+
   // PARA VER LAS RESERVACIONES/HISTORIAL DEL CORTE 
 
   initGestionReservaciones(path: string, field: string, opts?: any, idx?: string) {
@@ -268,6 +301,21 @@ export class PaginationService {
         .limit(this.query.limit)
         .startAfter(cursor)
         .where("idSucursal", "==", idx)
+        .where("fechaR_", ">=", fechaI)
+        .where("fechaR_", "<=", fechaF)
+        .where("estatus", 'in', ["Finalizado", "Pagado"])
+    })
+    this.mapAndUpdate(more)
+  }
+
+  moreHistorialConsumos(fechaI, fechaF) {
+    const cursor = this.getCursor()
+
+    const more = this.afs.collection(this.query.path, ref => {
+      return ref
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
+        .startAfter(cursor)
         .where("fechaR_", ">=", fechaI)
         .where("fechaR_", "<=", fechaF)
         .where("estatus", 'in', ["Finalizado", "Pagado"])

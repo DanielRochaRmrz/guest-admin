@@ -127,7 +127,7 @@ import { SliderPage } from '../pages/slider/slider';
 import { CorteReservacionesHistorialPage } from '../pages/corte-reservaciones-historial/corte-reservaciones-historial';
 import { CorteDetalleReservacionPage } from '../pages/corte-detalle-reservacion/corte-detalle-reservacion';
 import { CuentasListPage } from '../pages/cuentas-list/cuentas-list';
-
+import { CuentasHistorialListPage } from '../pages/cuentas-historial-list/cuentas-historial-list';
 
  firebase.initializeApp(firebaseConfig);
  //var secondaryConnection = firebase.initializeApp(firebaseConfig);
@@ -202,6 +202,7 @@ import { CuentasListPage } from '../pages/cuentas-list/cuentas-list';
     CorteReservacionesHistorialPage,
     CorteDetalleReservacionPage,
     CuentasListPage,
+    CuentasHistorialListPage,
   ],
   imports: [
     BrowserModule,
@@ -288,6 +289,7 @@ import { CuentasListPage } from '../pages/cuentas-list/cuentas-list';
     CorteReservacionesHistorialPage,
     CorteDetalleReservacionPage,
     CuentasListPage,
+    CuentasHistorialListPage,
   ],
   providers: [
     StatusBar,
