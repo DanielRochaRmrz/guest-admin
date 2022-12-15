@@ -268,7 +268,7 @@ export class ReservacionProvider {
       });
   }
 
-  public addCorte(fechaI, fechaF, comision, iva, propinaRe, subTotal, totalNeto, totalReservaciones, idSucursal) {
+  public addCorte(fechaI, fechaF, comision, iva, propinaRe, subTotal, totalNeto, totalReservaciones, idSucursal, nombreSucursal) {
 
     return new Promise((resolve, reject) => {
       this.af
@@ -285,6 +285,7 @@ export class ReservacionProvider {
           totalNeto: totalNeto,
           totalReservaciones: totalReservaciones,
           idSucursal: idSucursal,
+          nombreSucursal: nombreSucursal
         })
         .then((corte) => {
 

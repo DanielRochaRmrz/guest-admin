@@ -27,7 +27,7 @@
         <img class="icon" src="../assets/imgs/icons/bar-09.png" style="width:50px; height:50px;">
       </ion-avatar>
       <h2 class="textosCortes">No. reservaciones hechas: <b>{{ corte?.totalReservaciones }} </b> </h2>
-      <h2 (click)="goHistorial()" class="textosCortesPlus"> <u>Ver más</u>
+      <h2 (click)="goHistorial(corte?.idSucursal, corte?.fecha_Inicio, corte?.fecha_Fin, corte?.nombreSucursal)" class="textosCortesPlus"> <u>Ver más</u>
         <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
       </h2>
     </ion-item>

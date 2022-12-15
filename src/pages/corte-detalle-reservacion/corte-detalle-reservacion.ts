@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ReservacionProvider } from '../../providers/reservacion/reservacion';
-import { AdminHistorialReservacionesPage } from '../admin-historial-reservaciones/admin-historial-reservaciones';
+import { CorteReservacionesHistorialPage } from '../corte-reservaciones-historial/corte-reservaciones-historial';
 
 @IonicPage()
 @Component({
@@ -40,10 +40,15 @@ export class CorteDetalleReservacionPage {
     this.viewCtrl.dismiss();
   }
 
-  goHistorial(){
+  goHistorial(idSucursal: any, fechaI:any, fechaF:any, nombreSucursal:any){
 
-    let modal = this.modalctrl.create(AdminHistorialReservacionesPage, {pageCorte: true});
+    // let modal = this.modalctrl.create(AdminHistorialReservacionesPage, {pageCorte: true});
+    // modal.present();
+
+    let modal = this.modalctrl.create(CorteReservacionesHistorialPage, {idSucursal: idSucursal, fechaI: fechaI, fechaF:fechaF, nombreSucursal:nombreSucursal});
+
     modal.present();
+    // this.navCtrl.push(CorteReservacionesHistorialPage, {idSucursal: idSucursal, fechaI: fechaI, fechaF:fechaF, nombreSucursal:nombreSucursal});
 
     // this.navCtrl.push(AdminHistorialReservacionesPage);
     

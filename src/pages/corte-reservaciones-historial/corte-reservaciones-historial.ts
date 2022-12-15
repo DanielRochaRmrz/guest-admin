@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, ViewController } from 'ionic-angular';
 import * as moment from "moment";
 import { PaginationService } from '../../app/pagination.service';
 import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-reservacion-detalle';
@@ -17,7 +17,7 @@ export class CorteReservacionesHistorialPage implements OnInit {
   public fechaF: any;
   public nombreSucursal: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public page: PaginationService, private modalctrl: ModalController,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public page: PaginationService, private modalctrl: ModalController,private viewCtrl: ViewController,) {
 
     this.page.reset();
 
@@ -64,6 +64,10 @@ export class CorteReservacionesHistorialPage implements OnInit {
     modal.present();
     // this.navCtrl.push(AdminReservacionDetallePage, { idReservacion: idReservacion, typeUser: typeUser });
 
+  }
+
+  cerrar_modal(){
+    this.viewCtrl.dismiss();
   }
 
 }

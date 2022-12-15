@@ -8,6 +8,8 @@ import { ReservacionProvider } from '../../providers/reservacion/reservacion';
 import { ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
 import { CorteReservacionesHistorialPage } from '../corte-reservaciones-historial/corte-reservaciones-historial';
+import { CorteHistorialPage } from '../corte-historial/corte-historial';
+
 
 
 @IonicPage()
@@ -143,9 +145,11 @@ export class CorteVentaPage {
     const newSubtotal = parseFloat(this.subTotal).toFixed(2);
     const newTotalNeto = parseFloat(this.totalNeto).toFixed(2);
 
-    this._reservaciones.addCorte(this.fechaI, this.fechaF, newComision, newIva, newPropina, newSubtotal, newTotalNeto, this.cortesLength, this.idSucursal);
+    this._reservaciones.addCorte(this.fechaI, this.fechaF, newComision, newIva, newPropina, newSubtotal, newTotalNeto, this.cortesLength, this.idSucursal, this.nombreSucursal);
 
     this.presentAlert();
+
+    this.navCtrl.push(CorteHistorialPage);
   }
 
   suma(x) {
