@@ -28,7 +28,7 @@
         <ion-label class="blanco_1">Sucursal</ion-label>
           <ion-select [(ngModel)]="sucursal" multiple="false" cancelText="Cancelar" okText="Aceptar" name="sucursal" formControlName="sucursal">
              <div>
-               <ion-option *ngFor="let sucur of sucursales" [value]="sucur.uid">{{ sucur.displayName }}</ion-option>
+               <ion-option *ngFor="let sucur of sucursales" [value]="sucur">{{ sucur.displayName }}</ion-option>
              </div>
         </ion-select>
        </ion-item>

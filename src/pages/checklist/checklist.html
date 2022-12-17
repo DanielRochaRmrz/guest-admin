@@ -19,9 +19,58 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-fab left bottom>
-    <button ion-fab color="primary" (click)="checklistNew()">
-      <ion-icon name="md-add" style="color: #000000"></ion-icon>
+  <ion-fab bottom left>
+    <button ion-fab><ion-icon name="md-arrow-dropup"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button
+        ion-fab
+        color="dark"
+        tooltip="Mostrar y ocultar formulario checklist"
+        positionH="right"
+        arrow
+        mobileEvent="press"
+        (click)="hide = !hide"
+      >
+        <ion-icon [name]="hide ? 'eye-off' : 'eye'"></ion-icon>
+      </button>
+      <button
+        ion-fab
+        color="dark"
+        tooltip="Guardar checklist"
+        positionH="right"
+        arrow
+        mobileEvent="press"
+        (click)="checklistAdd()"
+      >
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+      <button
+        ion-fab
+        color="dark"
+        tooltip="Vaciar formulario"
+        positionH="right"
+        arrow
+        mobileEvent="press"
+        (click)="clearForm()"
+      >
+        <ion-icon name="md-trash"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-fab *ngIf="hide === false" center bottom>
+    <button
+      ion-fab
+      tooltip="Agregar actividad"
+      positionV="top"
+      leftOffset="-10"
+      arrow
+      mobileEvent="press"
+      ion-fab
+      mini
+      color="primary"
+      (click)="addActivity()"
+    >
+      <ion-icon ios="ios-add" md="md-add" style="color: #000000"></ion-icon>
     </button>
   </ion-fab>
   <ion-fab right bottom>
@@ -33,56 +82,241 @@
       ></ion-icon>
     </button>
   </ion-fab>
-  <div>
-    <ion-card (click)="toggleFunc();" class="accordion">
-      <ion-grid>
-        <ion-row>
-          <ion-col class="titulo" col-6>Titulo checklist</ion-col>
-          <ion-col class="fecha" col-6> fecha </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-    <div class="panel" [ngClass]="opened ? 'active' : ''">
-      <ion-grid>
-        <ion-row>
-          <ion-col class="tituloAdd" col-8>Registrar nueva actividad </ion-col>
-          <ion-col class="botonAdd" col-2>
-            <button ion-button color="dark" round small [disabled]="buttonAdd">
+
+  <div *ngIf="hide === false; then show"></div>
+  <ng-template #show>
+    <form autocomplete="off" [formGroup]="activityForm">
+      <ion-row>
+        <ion-col class="tituloAdd" col-12>
+          <div text-center>Nuevo checklist</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-input
+              placeholder="Titulo del checklist"
+              formControlName="checklistTitle"
+              clearInput
+            ></ion-input>
+          </ion-item>
+          <sub ion-text color="danger" *ngIf="campoNoValido('checklistTitle')"
+            >El campo titulo del checklis es requerido*</sub
+          >
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="tituloAdd" col-6>
+          <div text-center>Agregar atividad</div>
+        </ion-col>
+        <ion-col col-6>
+          <div text-center>
+            <button
+              ion-button
+              color="dark"
+              round
+              small
+              (click)="addActivity()"
+              [disabled]="hide"
+            >
               <ion-icon name="md-add"></ion-icon>
             </button>
-            <ion-col col-2></ion-col>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div formArrayName="replies">
+        <ng-container
+          *ngFor="let c of repliesControl.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-input
+                  placeholder="Actividad"
+                  formControlName="activity"
+                  clearInput
+                ></ion-input>
+              </ion-item>
+              <sub
+                ion-text
+                color="danger"
+                *ngIf="repliesControl.controls[i].invalid"
+                >El campo actividad es requerido*</sub
+              >
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-input
+                  placeholder="Responsable"
+                  formControlName="accountable"
+                  clearInput
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-item>
+                <ion-label>Completada</ion-label>
+                <ion-select formControlName="completed">
+                  <ion-option value="Si">Si</ion-option>
+                  <ion-option value="No">No</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-item>
+                <ion-textarea
+                  placeholder="Observaciones"
+                  formControlName="note"
+                ></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="tituloAdd" col-6>
+              <div text-center>Eliminar</div>
+            </ion-col>
+            <ion-col col-6>
+              <div text-center>
+                <button
+                  ion-button
+                  color="dark"
+                  round
+                  small
+                  (click)="deleteActivity(i)"
+                  [disabled]="hide"
+                >
+                  <ion-icon name="md-remove"></ion-icon>
+                </button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+      </div>
+    </form>
+  </ng-template>
+
+  <div *ngFor="let check of checkData; let i = index">
+    <ion-list no-lines>
+      <ion-item-sliding #item>
+        <ion-item no-lines>
+          <ion-card (click)="toggleFunc(i);" class="accordion">
+            <ion-grid>
+              <ion-row>
+                <ion-col class="titulo" col-6>
+                  <ion-icon name="md-checkbox-outline"></ion-icon>
+                  {{ check.titulo }}
+                </ion-col>
+                <ion-col class="fecha" col-6>
+                  <ion-icon name="md-calendar"></ion-icon>
+                  {{ check.FechaAdd.toMillis() | date }}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="deleteChecklist(check.id)">
+            <ion-icon name="md-trash"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <div *ngIf="num === i" class="panel" [ngClass]="opened ? 'active' : ''">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 class="textPDF"> Generar PDF </ion-col>
+          <ion-col col-6 class="buttonPDF">
+            <button
+              ion-button
+              color="dark"
+              round
+              small
+              (click)="downloadAsPDF(check.id)"
+            >
+              <ion-icon name="download"></ion-icon>
+            </button>
           </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col col-6>
-            <ion-item>
-              <ion-input
-                placeholder="Actividad"
-                clearInput
-                (keypress)="actividadAdd($event)"
-              ></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-input placeholder="Responsable" clearInput></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-card>
-            ACTIVIDAD
+        <ion-row *ngFor="let a of check.actividades">
+          <ion-card class="cardIos">
+            <ion-row>
+              <ion-col col-12>
+                <div text-center>
+                  <sub ion-text color="primary" class="subClass">
+                    <ion-icon name="md-clipboard"></ion-icon>
+                    Actividad
+                  </sub>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <div text-center>{{ a.activity }}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <div text-center>
+                  <sub ion-text color="primary" class="subClass">
+                    <ion-icon name="md-man"></ion-icon>
+                    Responsable
+                  </sub>
+                </div>
+              </ion-col>
+              <ion-col col-6>
+                <div text-center>
+                  <sub ion-text color="primary" class="subClass">
+                    <ion-icon name="md-checkbox-outline"></ion-icon>
+                    Concluida
+                  </sub>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <div text-center>{{ a.accountable }}</div>
+              </ion-col>
+              <ion-col col-6>
+                <div text-center>{{ a.completed }}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <div text-center>
+                  <sub ion-text color="primary" class="subClass">
+                    <ion-icon name="md-eye"></ion-icon>
+                    Observaciones
+                  </sub>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <div text-center>{{ a.note }}</div>
+              </ion-col>
+            </ion-row>
           </ion-card>
         </ion-row>
       </ion-grid>
-      <!-- <form  [formGroup]="form">
-      <ion-list style="margin-top: 15% !important" class="scroll">
-        <ion-item>
-            <ion-input class="input-field" name="firstName" type="text" placeholder="First Name"></ion-input>
-          </ion-item>
-              <button ion-button block class="login-button" (click)="search(form.value)">Search</button>                
-      </ion-list>
-      </form> -->
     </div>
   </div>
+
+  <ion-list *ngIf="checkData.length === 0 && hide === true">
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div>
+      <div align="center">
+        <img text-center class="adv2" src="./assets/content/advertencia.png" />
+        <p class="aviso">Aviso</p>
+        <p class="momento">Por el momento no hay checklist generados.</p>
+      </div>
+    </div>
+  </ion-list>
 </ion-content>

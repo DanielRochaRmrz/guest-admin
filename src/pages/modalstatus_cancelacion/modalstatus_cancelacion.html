@@ -62,12 +62,8 @@
     <form [formGroup]="myForm" novalidate class="card_atras" (ngSubmit)="saveData()">
         <div class="style1">
             <ion-row>
-                <ion-col text-left>
-                <label for="" style="color: red;">*</label>
-                    Motivo
-                </ion-col>
-                <!-- <ion-col text-left class="color2"> -->
                     <ion-item >
+                        <ion-label for="" style="color: red;">Motivo*</ion-label>
                         <ion-select [(ngModel)]="data.motivo" name="motivo" formControlName="motivo" >
                             <ion-option>Mesa no disponible</ion-option>                                
                             <ion-option>Nos reservamos derecho de admisión</ion-option>
@@ -75,23 +71,8 @@
                             <ion-option>Se agotaron los espacios para reservar</ion-option>
                         </ion-select>
                     </ion-item>
-                <!-- </ion-col> -->
             </ion-row>
         </div>    
-
-        <div class="style1" >
-            <ion-row>
-                <ion-col text-left>
-                    Estatus
-                </ion-col>
-                <!-- <ion-col text-left> -->
-                    <ion-item>                       
-                        <ion-label>Cancelado</ion-label>
-                        <ion-input type="hidden" [(ngModel)]="data.status"  name="status" formControlName="status" value="Cancelado"></ion-input>                      
-                    </ion-item>
-                <!-- </ion-col> -->
-            </ion-row>
-        </div>
 
             <button ion-button class="btnModal" type="submit" color="warning" [disabled]="!myForm.valid"> 
 

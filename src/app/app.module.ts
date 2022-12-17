@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+ 
+import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -95,6 +97,7 @@ import { OneSignal } from "@ionic-native/onesignal";
 import { CartaProvider } from '../providers/carta/carta';
 import { HttpModule } from '@angular/http';
 import { GestionReservacionesProvider } from '../providers/gestion-reservaciones/gestion-reservaciones';
+import { TooltipsModule, TooltipController } from 'ionic-tooltips';
 
 import { AdminMonitearReservPage } from '../pages/admin-monitear-reserv/admin-monitear-reserv';
 import { MonitoreoReservasProvider } from '../providers/monitoreo-reservas/monitoreo-reservas';
@@ -118,6 +121,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
 import { DeviceProvider } from '../providers/device/device';
 import { Device } from '@ionic-native/device';
+import { File } from '@ionic-native/file';
+import { FileOpener } from '@ionic-native/file-opener';
 // import { FCM } from '@ionic-native/fcm';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ScrollableDirective } from './scrollable.directive';
@@ -128,6 +133,10 @@ import { CorteReservacionesHistorialPage } from '../pages/corte-reservaciones-hi
 import { CorteDetalleReservacionPage } from '../pages/corte-detalle-reservacion/corte-detalle-reservacion';
 import { CuentasListPage } from '../pages/cuentas-list/cuentas-list';
 import { CuentasHistorialListPage } from '../pages/cuentas-historial-list/cuentas-historial-list';
+
+import localeEsMX from "@angular/common/locales/es-MX";
+import { registerLocaleData } from "@angular/common";
+registerLocaleData(localeEsMX, 'es-MX');
 
  firebase.initializeApp(firebaseConfig);
  //var secondaryConnection = firebase.initializeApp(firebaseConfig);
@@ -206,6 +215,8 @@ import { CuentasHistorialListPage } from '../pages/cuentas-historial-list/cuenta
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    TooltipsModule,
     IonicModule.forRoot(MyApp, {
       platforms: {
         ios: {
@@ -219,7 +230,7 @@ import { CuentasHistorialListPage } from '../pages/cuentas-historial-list/cuenta
     PipesModule,
     HttpModule,
     HttpClientModule,
-    ClipboardModule,
+    ClipboardModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -297,6 +308,7 @@ import { CuentasHistorialListPage } from '../pages/cuentas-historial-list/cuenta
     AngularFireDatabase,
     BarcodeScanner,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: LOCALE_ID, useValue: 'es-MX' },
     UsuarioProvider,
     AuthProvider,
     UserProvider,
@@ -323,6 +335,9 @@ import { CuentasHistorialListPage } from '../pages/cuentas-historial-list/cuenta
     // FCM,
     PaginationService,
     ToolsProvider,
+    File,
+    FileOpener,
+    TooltipController
   ]
 })
 export class AppModule {}

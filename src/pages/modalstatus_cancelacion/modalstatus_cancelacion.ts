@@ -60,7 +60,7 @@ export class Modalstatus_cancelacionPage {
     console.log('saveDataStatus: ',this.data.status);
     let info = {
       motivo: this.data.motivo,
-      status: this.data.status,
+      status: 'Cancelado',
       otro: "xxx",
     };
     this._providerReserva.cancelarStatus(this.idReserv, info).then((respuesta: any) => {

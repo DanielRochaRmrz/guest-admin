@@ -1,153 +1,184 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import * as firebase from "firebase/app";
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
-import { LoadingController } from 'ionic-angular';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+} from "@angular/fire/firestore";
+import { Observable } from "rxjs/internal/Observable";
+import { map } from "rxjs/operators";
+import { LoadingController } from "ionic-angular";
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { Stripe } from "@ionic-native/stripe";
+import * as moment from "moment";
 
 @Injectable()
 export class MonitoreoReservasProvider {
   db = firebase.firestore();
-// Reservaciones
-public  reservacionesCollection: AngularFirestoreCollection<any>;
-public  eventosCollection: AngularFirestoreCollection<any>;
-public reservaciones: Observable<any[]>;
-public eventos: Observable<any[]>;
-public  reservacionesCursoCollection: AngularFirestoreCollection<any>;
-public reservacionesCurso: Observable<any[]>;
-public  reservacionesAcepComCollection: AngularFirestoreCollection<any>;
-public reservacionesAcepCom: Observable<any[]>;
-public reservacionDoc: AngularFirestoreDocument<any>;
-public reservacion: Observable<any>;
-public areaDoc: AngularFirestoreDocument<any>;
-public area: Observable<any>;
-public zonaDoc: AngularFirestoreDocument<any>;
-public zona: Observable<any>;
-public eventoDoc: AngularFirestoreDocument<any>;
-public evento: Observable<any>;
-public tarjetaDoc: AngularFirestoreDocument<any>;
-public tarjeta: Observable<any>;
-public areas: AngularFirestoreCollection<any[]>;
-public _areas: Observable<any>;
+  // Reservaciones
+  public reservacionesCollection: AngularFirestoreCollection<any>;
+  public eventosCollection: AngularFirestoreCollection<any>;
+  public reservaciones: Observable<any[]>;
+  public eventos: Observable<any[]>;
+  public reservacionesCursoCollection: AngularFirestoreCollection<any>;
+  public reservacionesCurso: Observable<any[]>;
+  public reservacionesAcepComCollection: AngularFirestoreCollection<any>;
+  public reservacionesAcepCom: Observable<any[]>;
+  public reservacionDoc: AngularFirestoreDocument<any>;
+  public reservacion: Observable<any>;
+  public areaDoc: AngularFirestoreDocument<any>;
+  public area: Observable<any>;
+  public zonaDoc: AngularFirestoreDocument<any>;
+  public zona: Observable<any>;
+  public eventoDoc: AngularFirestoreDocument<any>;
+  public evento: Observable<any>;
+  public tarjetaDoc: AngularFirestoreDocument<any>;
+  public tarjeta: Observable<any>;
+  public areas: AngularFirestoreCollection<any[]>;
+  public _areas: Observable<any>;
 
-public cupones: AngularFirestoreCollection<any[]>;
-public _cupones: Observable<any>;
+  public cupones: AngularFirestoreCollection<any[]>;
+  public _cupones: Observable<any>;
 
-public reservaInfo2: AngularFirestoreCollection<any[]>;
-public _reservaInfo2: Observable<any>;
-public reservaInfo3: AngularFirestoreCollection<any[]>;
-public _reservaInfo3: Observable<any>;
+  public reservaInfo2: AngularFirestoreCollection<any[]>;
+  public _reservaInfo2: Observable<any>;
+  public reservaInfo3: AngularFirestoreCollection<any[]>;
+  public _reservaInfo3: Observable<any>;
 
   constructor(
     public afs: AngularFirestore,
     public loadinCtl: LoadingController,
     public http: Http,
-    public stripe: Stripe,
-    ) {
-    console.log('Hello MonitoreoReservasProvider Provider');
+    public stripe: Stripe
+  ) {
+    console.log("Hello MonitoreoReservasProvider Provider");
   }
-  getReservaciones(idSucursal: string,fechaActual) {
-    this.reservacionesCollection = this.afs.collection<any>("reservaciones", ref =>
-      ref.where("idSucursal", "==", idSucursal)
-          .where("estatus", '==', 'Aceptado')
-          //.where("estatus", '==', 'AceptadoCompartida')
-          //.where("fechaR", '>=', fechaActual)
+  getReservaciones(idSucursal: string, fechaActual) {
+    this.reservacionesCollection = this.afs.collection<any>(
+      "reservaciones",
+      (ref) =>
+        ref
+          .where("idSucursal", "==", idSucursal)
+          .where("estatus", "==", "Aceptado")
+      //.where("estatus", '==', 'AceptadoCompartida')
+      //.where("fechaR", '>=', fechaActual)
     );
     this.reservaciones = this.reservacionesCollection.valueChanges();
-    return (this.reservaciones = this.reservacionesCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
-          const data = action.payload.doc.data() as any;
-          data.uid = action.payload.doc.id;
-          return data;
-        });
-      })
-    ));
+    return (this.reservaciones = this.reservacionesCollection
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((action) => {
+            const data = action.payload.doc.data() as any;
+            data.uid = action.payload.doc.id;
+            return data;
+          });
+        })
+      ));
   }
 
-  getReservacionesAcepCom(idSucursal: string,fechaActual) {
-    this.reservacionesAcepComCollection = this.afs.collection<any>("reservaciones", ref =>
-      ref.where("idSucursal", "==", idSucursal)
+  getReservacionesAcepCom(idSucursal: string, fechaActual) {
+    this.reservacionesAcepComCollection = this.afs.collection<any>(
+      "reservaciones",
+      (ref) =>
+        ref
+          .where("idSucursal", "==", idSucursal)
           //.where("estatus", '==', 'Aceptado')
-          .where("estatus", '==', 'AceptadoCompartida')
-          .where("fechaR", '>=', fechaActual)
+          .where("estatus", "==", "AceptadoCompartida")
+          .where("fechaR", ">=", fechaActual)
     );
-    this.reservacionesAcepCom = this.reservacionesAcepComCollection.valueChanges();
-    return (this.reservacionesAcepCom = this.reservacionesAcepComCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
-          const data = action.payload.doc.data() as any;
-          data.uid = action.payload.doc.id;
-          return data;
-        });
-      })
-    ));
+    this.reservacionesAcepCom =
+      this.reservacionesAcepComCollection.valueChanges();
+    return (this.reservacionesAcepCom = this.reservacionesAcepComCollection
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((action) => {
+            const data = action.payload.doc.data() as any;
+            data.uid = action.payload.doc.id;
+            return data;
+          });
+        })
+      ));
   }
 
-  getReservacionesCurso(idSucursal: string,fechaActual) {
-    this.reservacionesCursoCollection = this.afs.collection<any>("reservaciones", ref =>
-      ref.where("idSucursal", "==", idSucursal)
-         .where("estatus", '==', 'Pagando')
-          .where("fechaR", '==', fechaActual)
+  getReservacionesCurso(idSucursal: string, fechaActual) {
+    this.reservacionesCursoCollection = this.afs.collection<any>(
+      "reservaciones",
+      (ref) =>
+        ref
+          .where("idSucursal", "==", idSucursal)
+          .where("estatus", "==", "Pagando")
+          .where("fechaR", "==", fechaActual)
     );
     this.reservacionesCurso = this.reservacionesCursoCollection.valueChanges();
-    return (this.reservacionesCurso = this.reservacionesCursoCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
-          const data = action.payload.doc.data() as any;
-          data.uid = action.payload.doc.id;
-          return data;
-        });
-      })
-    ));
+    return (this.reservacionesCurso = this.reservacionesCursoCollection
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((action) => {
+            const data = action.payload.doc.data() as any;
+            data.uid = action.payload.doc.id;
+            return data;
+          });
+        })
+      ));
   }
 
-  getReservacionesCursoSuc(idSucursal: string,fechaActual) {
-    this.reservacionesCursoCollection = this.afs.collection<any>("reservaciones", ref =>
-      ref.where("idSucursal", "==", idSucursal)
-         .where("estatus", '==', 'Pagando')
-          .where("fechaR", '==', fechaActual)
+  getReservacionesCursoSuc(idSucursal: string, fechaActual) {
+    this.reservacionesCursoCollection = this.afs.collection<any>(
+      "reservaciones",
+      (ref) =>
+        ref
+          .where("idSucursal", "==", idSucursal)
+          .where("estatus", "==", "Pagando")
+          .where("fechaR", "==", fechaActual)
     );
     this.reservacionesCurso = this.reservacionesCursoCollection.valueChanges();
-    return (this.reservacionesCurso = this.reservacionesCursoCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
-          const data = action.payload.doc.data() as any;
-          data.uid = action.payload.doc.id;
-          return data;
-        });
-      })
-    ));
+    return (this.reservacionesCurso = this.reservacionesCursoCollection
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((action) => {
+            const data = action.payload.doc.data() as any;
+            data.uid = action.payload.doc.id;
+            return data;
+          });
+        })
+      ));
   }
 
   getReservacionesDetalle(idReservacion) {
-    this.reservacionesCollection = this.afs.collection<any>("reservaciones", ref =>
-      ref.where("idReservacion", "==", idReservacion)
-         .orderBy('fechaR_', "asc")
+    this.reservacionesCollection = this.afs.collection<any>(
+      "reservaciones",
+      (ref) =>
+        ref
+          .where("idReservacion", "==", idReservacion)
+          .orderBy("fechaR_", "asc")
     );
     this.reservaciones = this.reservacionesCollection.valueChanges();
-    return (this.reservaciones = this.reservacionesCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
-          const data = action.payload.doc.data() as any;
-          data.uid = action.payload.doc.id;
-          return data;
-        });
-      })
-    ));
+    return (this.reservaciones = this.reservacionesCollection
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((action) => {
+            const data = action.payload.doc.data() as any;
+            data.uid = action.payload.doc.id;
+            return data;
+          });
+        })
+      ));
   }
   public getReserCom(idx) {
     // return this.afiredatabase.object("sucursales/" + uid);
     console.log("idReservacion", idx);
-    this.reservaInfo2 = this.afs.collection<any>("compartidas", ref =>
+    this.reservaInfo2 = this.afs.collection<any>("compartidas", (ref) =>
       ref.where("idReservacion", "==", idx)
     );
     this._reservaInfo2 = this.reservaInfo2.valueChanges();
     return (this._reservaInfo2 = this.reservaInfo2.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
+      map((changes) => {
+        return changes.map((action) => {
           const data = action.payload.doc.data() as any;
           data.$key = action.payload.doc.id;
           return data;
@@ -159,13 +190,13 @@ public _reservaInfo3: Observable<any>;
   public getInfo(idx) {
     // return this.afiredatabase.object("sucursales/" + uid);
     console.log("idReservacion", idx);
-    this.reservaInfo3 = this.afs.collection<any>("reservaciones", ref =>
+    this.reservaInfo3 = this.afs.collection<any>("reservaciones", (ref) =>
       ref.where("idReservacion", "==", idx)
     );
     this._reservaInfo3 = this.reservaInfo3.valueChanges();
     return (this._reservaInfo3 = this.reservaInfo3.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
+      map((changes) => {
+        return changes.map((action) => {
           const data = action.payload.doc.data() as any;
           data.$key = action.payload.doc.id;
           return data;
@@ -174,21 +205,26 @@ public _reservaInfo3: Observable<any>;
     ));
   }
   getReservacionesPagando(idSucursal: string) {
-    this.reservacionesCollection = this.afs.collection<any>("reservaciones", ref =>
-      ref.where("idSucursal", "==", idSucursal)
-         .where("estatus", '==', 'Finalizado')
-         .orderBy('fechaR_', "asc")
+    this.reservacionesCollection = this.afs.collection<any>(
+      "reservaciones",
+      (ref) =>
+        ref
+          .where("idSucursal", "==", idSucursal)
+          .where("estatus", "==", "Finalizado")
+          .orderBy("fechaR_", "asc")
     );
     this.reservaciones = this.reservacionesCollection.valueChanges();
-    return (this.reservaciones = this.reservacionesCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
-          const data = action.payload.doc.data() as any;
-          data.uid = action.payload.doc.id;
-          return data;
-        });
-      })
-    ));
+    return (this.reservaciones = this.reservacionesCollection
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((action) => {
+            const data = action.payload.doc.data() as any;
+            data.uid = action.payload.doc.id;
+            return data;
+          });
+        })
+      ));
   }
   getAllClientes(collection: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -196,9 +232,9 @@ public _reservaInfo3: Observable<any>;
         .collection(collection)
         .where("type", "==", "u")
         .get()
-        .then(querySnapshot => {
+        .then((querySnapshot) => {
           let arr = [];
-          querySnapshot.forEach(function(doc) {
+          querySnapshot.forEach(function (doc) {
             var obj = JSON.parse(JSON.stringify(doc.data()));
             obj.$key = doc.id;
             console.log(obj);
@@ -219,15 +255,15 @@ public _reservaInfo3: Observable<any>;
     });
   }
 
- //Sacr el total de productos de una reservacion
+  //Sacr el total de productos de una reservacion
   public getProductos(idx) {
-    this.areas = this.afs.collection<any>("productos", ref =>
+    this.areas = this.afs.collection<any>("productos", (ref) =>
       ref.where("idReservacion", "==", idx)
     );
     this._areas = this.areas.valueChanges();
     return (this._areas = this.areas.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(action => {
+      map((changes) => {
+        return changes.map((action) => {
           const data = action.payload.doc.data() as any;
           data.$key = action.payload.doc.id;
           return data;
@@ -240,12 +276,12 @@ public _reservaInfo3: Observable<any>;
     // this.afs.collection('reservaciones', ref => ref.where('idSucursal', '==', idSucursal)
     return new Promise((resolve, reject) => {
       this.db
-        .collection('reservaciones')
-        .orderBy('fechaR_', "asc")
+        .collection("reservaciones")
+        .orderBy("fechaR_", "asc")
         .get()
-        .then(querySnapshot => {
+        .then((querySnapshot) => {
           let arr = [];
-          querySnapshot.forEach(function(doc) {
+          querySnapshot.forEach(function (doc) {
             var obj = JSON.parse(JSON.stringify(doc.data()));
             obj.$key = doc.id;
             console.log(obj);
@@ -269,8 +305,9 @@ public _reservaInfo3: Observable<any>;
   getReservacion(idReservacion) {
     console.log(idReservacion);
     this.reservacionDoc = this.afs.doc<any>(`reservaciones/${idReservacion}`);
-      return this.reservacion = this.reservacionDoc.snapshotChanges().pipe(map(action => {
-        if ( action.payload.exists === false) {
+    return (this.reservacion = this.reservacionDoc.snapshotChanges().pipe(
+      map((action) => {
+        if (action.payload.exists === false) {
           return null;
         } else {
           const data = action.payload.data() as any;
@@ -278,293 +315,369 @@ public _reservaInfo3: Observable<any>;
           return data;
         }
       })
-      );
-}
-getArea(idArea) {
-  console.log(idArea);
-  this.areaDoc = this.afs.doc<any>(`areas/${idArea}`);
-    return this.area = this.areaDoc.snapshotChanges().pipe(map(action => {
-      if ( action.payload.exists === false) {
-        return null;
-      } else {
-        const data = action.payload.data() as any;
-        data.idReservacion = action.payload.id;
-        return data;
-      }
-    })
-    );
-}
-getZona(idZona) {
-  console.log(idZona);
-  this.zonaDoc = this.afs.doc<any>(`zonas/${idZona}`);
-    return this.area = this.zonaDoc.snapshotChanges().pipe(map(action => {
-      if ( action.payload.exists === false) {
-        return null;
-      } else {
-        const data = action.payload.data() as any;
-        data.idReservacion = action.payload.id;
-        return data;
-      }
-    })
-    );
-}
-getAllMesas(idReserv): Promise<any> {
-  return new Promise((resolve, reject) => {
-    this.db
-      .collection('reservaciones_mesas')
-      .where("idReservacion", "==", idReserv)
-      .get()
-      .then(querySnapshot => {
-        let arr = [];
-        querySnapshot.forEach(function(doc) {
-          var obj = JSON.parse(JSON.stringify(doc.data()));
-          obj.$key = doc.id;
-          console.log(obj);
-          arr.push(obj);
-        });
-
-        if (arr.length > 0) {
-          console.log("Document data:", arr);
-          resolve(arr);
+    ));
+  }
+  getArea(idArea) {
+    console.log(idArea);
+    this.areaDoc = this.afs.doc<any>(`areas/${idArea}`);
+    return (this.area = this.areaDoc.snapshotChanges().pipe(
+      map((action) => {
+        if (action.payload.exists === false) {
+          return null;
         } else {
-          console.log("No such document!");
-          resolve(null);
+          const data = action.payload.data() as any;
+          data.idReservacion = action.payload.id;
+          return data;
         }
       })
-      .catch((error: any) => {
-        reject(error);
-      });
-  });
-}
-getEvento(idEvento) {
-  console.log(idEvento);
-  this.eventoDoc = this.afs.doc<any>(`evento/${idEvento}`);
-    return this.area = this.eventoDoc.snapshotChanges().pipe(map(action => {
-      if ( action.payload.exists === false) {
-        return null;
-      } else {
-        const data = action.payload.data() as any;
-        data.idReservacion = action.payload.id;
-        return data;
-      }
-    })
+    ));
+  }
+  getZona(idZona) {
+    console.log(idZona);
+    this.zonaDoc = this.afs.doc<any>(`zonas/${idZona}`);
+    return (this.area = this.zonaDoc.snapshotChanges().pipe(
+      map((action) => {
+        if (action.payload.exists === false) {
+          return null;
+        } else {
+          const data = action.payload.data() as any;
+          data.idReservacion = action.payload.id;
+          return data;
+        }
+      })
+    ));
+  }
+  getAllMesas(idReserv): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection("reservaciones_mesas")
+        .where("idReservacion", "==", idReserv)
+        .get()
+        .then((querySnapshot) => {
+          let arr = [];
+          querySnapshot.forEach(function (doc) {
+            var obj = JSON.parse(JSON.stringify(doc.data()));
+            obj.$key = doc.id;
+            console.log(obj);
+            arr.push(obj);
+          });
+
+          if (arr.length > 0) {
+            console.log("Document data:", arr);
+            resolve(arr);
+          } else {
+            console.log("No such document!");
+            resolve(null);
+          }
+        })
+        .catch((error: any) => {
+          reject(error);
+        });
+    });
+  }
+  getEvento(idEvento) {
+    console.log(idEvento);
+    this.eventoDoc = this.afs.doc<any>(`evento/${idEvento}`);
+    return (this.area = this.eventoDoc.snapshotChanges().pipe(
+      map((action) => {
+        if (action.payload.exists === false) {
+          return null;
+        } else {
+          const data = action.payload.data() as any;
+          data.idReservacion = action.payload.id;
+          return data;
+        }
+      })
+    ));
+  }
+
+  getEventosSucucursal(uidSucursal) {
+    this.eventosCollection = this.afs.collection<any>("evento", (ref) =>
+      ref.where("uidSucursal", "==", uidSucursal)
     );
-}
 
-getEventosSucucursal(uidSucursal){
-  
-  this.eventosCollection = this.afs.collection<any>("evento", ref => ref.where("uidSucursal", "==", uidSucursal));
+    this.eventos = this.eventosCollection.valueChanges();
 
-  this.eventos = this.eventosCollection.valueChanges();
+    return (this.eventos = this.eventosCollection.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((action) => {
+          const data = action.payload.doc.data() as any;
 
-  return (this.eventos = this.eventosCollection.snapshotChanges().pipe(
-    
-    map(changes => {
-    
-      return changes.map(action => {
-    
-        const data = action.payload.doc.data() as any;
-    
-        data.uid = action.payload.doc.id;
-    
-        return data;
-    
-      });
-  
-    })
-  ));
+          data.uid = action.payload.doc.id;
 
-}
+          return data;
+        });
+      })
+    ));
+  }
 
-getEventoNamePipe(id:any){
-
-  return new Promise((resolve, reject) => {
-    let eventos = this.afs.collection("evento").doc(id);
-    eventos
-      .get()
-      .subscribe((evento) => {
+  getEventoNamePipe(id: any) {
+    return new Promise((resolve, reject) => {
+      let eventos = this.afs.collection("evento").doc(id);
+      eventos.get().subscribe((evento) => {
         const ev = evento.data();
-          resolve(JSON.stringify(ev));
+        resolve(JSON.stringify(ev));
       });
-  });
+    });
+  }
 
-}
-
-getZonaNamePipe(id:any){
-
-  return new Promise((resolve, reject) => {
-    let zonas = this.afs.collection("zonas").doc(id);
-    zonas
-      .get()
-      .subscribe((zona) => {
+  getZonaNamePipe(id: any) {
+    return new Promise((resolve, reject) => {
+      let zonas = this.afs.collection("zonas").doc(id);
+      zonas.get().subscribe((zona) => {
         const ev = zona.data();
-          resolve(JSON.stringify(ev));
+        resolve(JSON.stringify(ev));
       });
-  });
-
-}
-
-public getEstatusReservacion(idReseravcion: string){
-
-  return new Promise((resolve, reject) => {
-
-    let consul = this.afs.collection("reservaciones").ref;
-    consul.where("idReservacion", "==", idReseravcion).get().then((data) => {
-
-      data.forEach((doc) => {
-
-        const estatus = doc.data().estatus;
-
-        const idSucursal = doc.data().idSucursal;
-        
-        var info = [{ "estatus": estatus}, {"idSucursal": idSucursal}];
-
-        resolve(info);
-
-        console.log(info);        
-
-      });
-    }).catch((error) => {
-
-      console.log("Error en la consulta -->", error);
     });
-  });
+  }
 
-}
+  public getEstatusReservacion(idReseravcion: string) {
+    return new Promise((resolve, reject) => {
+      let consul = this.afs.collection("reservaciones").ref;
+      consul
+        .where("idReservacion", "==", idReseravcion)
+        .get()
+        .then((data) => {
+          data.forEach((doc) => {
+            const estatus = doc.data().estatus;
 
-public getEstatusReservacionCompartidas(idReseravcion: string, idCompartida: string){
+            const idSucursal = doc.data().idSucursal;
 
-  return new Promise((resolve, reject) => {
+            var info = [{ estatus: estatus }, { idSucursal: idSucursal }];
 
-    let consul = this.afs.collection("compartidas").ref;
-    consul.where("idReservacion", "==", idReseravcion).where("idCompartir", "==", idCompartida).get().then((data) => {
+            resolve(info);
 
-      data.forEach((doc) => {
-
-        const estatus_escaneo = doc.data().estatus_escaneo;
-
-        resolve(estatus_escaneo);      
-
-      });
-    }).catch((error) => {
-
-      console.log("Error en la consulta -->", error);
-    });
-  });
-
-}
-
-//OBTIENE LOS CUPONES DE LA SUCURSAL
-public getCupones(idx, uidCupon ) {
-  
-  this.cupones = this.afs.collection<any>("cupones", ref =>
-    ref.where("idSucursal", "==", idx).where("uid", "==", uidCupon )
-  );
-  this._cupones = this.cupones.valueChanges();
-  return (this._cupones = this.cupones.snapshotChanges().pipe(
-    map(changes => {
-      return changes.map(action => {
-        const data = action.payload.doc.data() as any;
-        data.$key = action.payload.doc.id;
-        return data;
-      });
-    })
-  ));
-}
-
-getAllProductos(idReserv): Promise<any> {
-  return new Promise((resolve, reject) => {
-    this.db
-      .collection('productos')
-      .where("idReservacion", "==", idReserv)
-      .get()
-      .then(querySnapshot => {
-        let arr = [];
-        querySnapshot.forEach(function(doc) {
-          var obj = JSON.parse(JSON.stringify(doc.data()));
-          obj.$key = doc.id;
-          console.log(obj);
-          arr.push(obj);
+            console.log(info);
+          });
+        })
+        .catch((error) => {
+          console.log("Error en la consulta -->", error);
         });
+    });
+  }
 
-        if (arr.length > 0) {
-          console.log("Document data:", arr);
-          resolve(arr);
+  public getEstatusReservacionCompartidas(
+    idReseravcion: string,
+    idCompartida: string
+  ) {
+    return new Promise((resolve, reject) => {
+      let consul = this.afs.collection("compartidas").ref;
+      consul
+        .where("idReservacion", "==", idReseravcion)
+        .where("idCompartir", "==", idCompartida)
+        .get()
+        .then((data) => {
+          data.forEach((doc) => {
+            const estatus_escaneo = doc.data().estatus_escaneo;
+
+            resolve(estatus_escaneo);
+          });
+        })
+        .catch((error) => {
+          console.log("Error en la consulta -->", error);
+        });
+    });
+  }
+
+  //OBTIENE LOS CUPONES DE LA SUCURSAL
+  public getCupones(idx, uidCupon) {
+    this.cupones = this.afs.collection<any>("cupones", (ref) =>
+      ref.where("idSucursal", "==", idx).where("uid", "==", uidCupon)
+    );
+    this._cupones = this.cupones.valueChanges();
+    return (this._cupones = this.cupones.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((action) => {
+          const data = action.payload.doc.data() as any;
+          data.$key = action.payload.doc.id;
+          return data;
+        });
+      })
+    ));
+  }
+
+  getAllProductos(idReserv): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection("productos")
+        .where("idReservacion", "==", idReserv)
+        .get()
+        .then((querySnapshot) => {
+          let arr = [];
+          querySnapshot.forEach(function (doc) {
+            var obj = JSON.parse(JSON.stringify(doc.data()));
+            obj.$key = doc.id;
+            console.log(obj);
+            arr.push(obj);
+          });
+
+          if (arr.length > 0) {
+            console.log("Document data:", arr);
+            resolve(arr);
+          } else {
+            console.log("No such document!");
+            resolve(null);
+          }
+        })
+        .catch((error: any) => {
+          reject(error);
+        });
+    });
+  }
+  getDatosTarjeta(idTarjeta) {
+    console.log(idTarjeta);
+    this.tarjetaDoc = this.afs.doc<any>(`tarjetas/${idTarjeta}`);
+    return (this.tarjeta = this.tarjetaDoc.snapshotChanges().pipe(
+      map((action) => {
+        if (action.payload.exists === false) {
+          return null;
         } else {
-          console.log("No such document!");
-          resolve(null);
+          const data = action.payload.data() as any;
+          data.idTarjeta = action.payload.id;
+          return data;
         }
       })
-      .catch((error: any) => {
-        reject(error);
-      });
-  });
-}
-getDatosTarjeta(idTarjeta) {
-  console.log(idTarjeta);
-  this.tarjetaDoc = this.afs.doc<any>(`tarjetas/${idTarjeta}`);
-    return this.tarjeta = this.tarjetaDoc.snapshotChanges().pipe(map(action => {
-      if ( action.payload.exists === false) {
-        return null;
-      } else {
-        const data = action.payload.data() as any;
-        data.idTarjeta = action.payload.id;
-        return data;
-      }
-    })
+    ));
+  }
+  cambiaPagando(
+    uidRerservacion,
+    numTarjeta,
+    mesExpiracion,
+    anioExpiracion,
+    cvc,
+    montoReservacion
+  ) {
+    console.log(
+      "llegaron a pagar",
+      uidRerservacion,
+      numTarjeta,
+      mesExpiracion,
+      anioExpiracion,
+      cvc,
+      montoReservacion
     );
-}
-cambiaPagando(uidRerservacion,numTarjeta,mesExpiracion,anioExpiracion,cvc,montoReservacion) {
-    console.log('llegaron a pagar',uidRerservacion,numTarjeta,mesExpiracion,anioExpiracion,cvc,montoReservacion);
     // Poppup de carga para procesar el metodo
     let loading = this.loadinCtl.create({
-    spinner: "bubbles",
-    content: "Procesando pago."
-    });//
+      spinner: "bubbles",
+      content: "Procesando pago.",
+    }); //
     loading.present();
     /* Cambiando estatus a la reservación  */
-    this.afs.collection('reservaciones').doc(uidRerservacion).update({
-      estatus: 'Pagando'
+    this.afs.collection("reservaciones").doc(uidRerservacion).update({
+      estatus: "Pagando",
     });
-    alert('Estatus actualizado');
+    alert("Estatus actualizado");
     //
-    this.stripe.setPublishableKey('pk_test_TWx1xbw2HExTUYjy2Hz44koG00nFNYC3J4');
+    this.stripe.setPublishableKey("pk_test_TWx1xbw2HExTUYjy2Hz44koG00nFNYC3J4");
     //
     let card = {
-      number: '4242424242424242',//numTarjeta
-      expMonth: 12,//mesExpiracion
-      expYear: 2020,//anioExpiracion
-      cvc: '220'//cvc
-     };
-   this.stripe.createCardToken(card)
-   .then(token => {
-    let headers = new Headers({
-      "Content-Type": "application/json"
-    });
-    let options = new RequestOptions({ headers: headers });
-    let url = "https://proyectosinternos.com/guest_pagos/stripe_config.php";
-    let data = JSON.stringify({
-      cardToken: token.id,
-      amount: '5000', //montoReservacion
-      accion: 'stripe_prueba'
-    });
-    this.http.post(url, data, options).subscribe(res => {
-      console.log('Este es el mensaje', JSON.stringify(res));
-      if (res.json().status == "succeeded") {
-        let title = "¡ Pago con exito !";
-        alert('Pago con exito!');
+      number: "4242424242424242", //numTarjeta
+      expMonth: 12, //mesExpiracion
+      expYear: 2020, //anioExpiracion
+      cvc: "220", //cvc
+    };
+    this.stripe
+      .createCardToken(card)
+      .then((token) => {
+        let headers = new Headers({
+          "Content-Type": "application/json",
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = "https://proyectosinternos.com/guest_pagos/stripe_config.php";
+        let data = JSON.stringify({
+          cardToken: token.id,
+          amount: "5000", //montoReservacion
+          accion: "stripe_prueba",
+        });
+        this.http.post(url, data, options).subscribe((res) => {
+          console.log("Este es el mensaje", JSON.stringify(res));
+          if (res.json().status == "succeeded") {
+            let title = "¡ Pago con exito !";
+            alert("Pago con exito!");
+            setTimeout(() => {
+              loading.dismiss();
+            }, 3000);
+          }
+        });
+      })
+      .catch((error) => {
+        alert("error!");
+        alert(error);
         setTimeout(() => {
           loading.dismiss();
         }, 3000);
-      }
-  });
-   })
-   .catch(error => {
-       alert('error!');
-     alert(error);
-     setTimeout(() => {
-      loading.dismiss();
-    }, 3000);
-    } );
-}
+      });
+  }
+
+  public cancelarStatus(id, info) {
+    // AGREGAMOS EL MOTIVO DE LA CANCELACION
+
+    const idUsuario = localStorage.getItem("uid");
+    const fecha = moment().format("x");
+
+    this.afs.collection("reservacionesCanceladas").add({
+      uidUser: idUsuario,
+      estatus: info.status,
+      motivoCancelacion: info.motivo,
+      uidReservacion: id,
+      fecha: fecha,
+    });
+
+    // BORRAMOS EL REGISTRO EN COMPARTIDAS
+
+    var query = this.afs
+      .collection("compartidas")
+      .ref.where("idReservacion", "==", id);
+
+    query.get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        doc.ref.delete();
+      });
+    });
+    return new Promise((resolve, reject) => {
+      // BORRAMOS EL REGISTRO EN RESERVACIONES
+      this.afs
+        .collection("reservaciones")
+        .doc(id)
+        .delete()
+        // .update({
+        //   estatus: "Cancelado"
+        // })
+        .then((reserva) => {
+          resolve({ success: true });
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  public borrarRegistroUsuarioCodigoRP(uidReservacion) {
+    this.afs
+      .collection("contCodigosRp")
+      .doc(uidReservacion)
+      .delete()
+      .then(() => {
+        console.log("Se borro regsitro en contCodigosRp");
+      })
+      .catch(function (error) {
+        console.log("No se pudo en contCodigosRp");
+      });
+  }
+
+  getMyUser(idUser) {
+    this.reservacionDoc = this.afs.doc(`users/${idUser}`);
+    // this.pedidoDoc = this.afs.collection<Servicios>('servicios').doc(`/${idPedido}`).collection<Pedidos>('pedidos');
+    return (this.reservacion = this.reservacionDoc.snapshotChanges().pipe(
+      map((action) => {
+        if (action.payload.exists === false) {
+          return null;
+        } else {
+          const data = action.payload.data();
+          data.uid = action.payload.id;
+          return data;
+        }
+      })
+    ));
+  }
 }

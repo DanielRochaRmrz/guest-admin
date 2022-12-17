@@ -170,7 +170,7 @@ export class AdminLeeQrPage {
           } else {
 
             const consul = this.afs.collection('compartidas').ref;
-            consul.where('idReservacion', '==', this.idReservacion2).get().then(data => {
+            consul.where('idReservacion', '==', this.idReservacion2).where('estatus_escaneo', '==', 'NO').get().then(data => {
 
               var count = [];
               data.forEach(res => {
@@ -180,11 +180,23 @@ export class AdminLeeQrPage {
 
               });
               const totalCompartidas = count.length;
+              console.log('totalCompartidas -->', totalCompartidas);
+              
               if (totalCompartidas == 1) {
 
                 this.afs.collection('reservaciones').doc(this.idReservacion2).update({
                   estatus: 'Finalizado'
                 });
+
+                let alerta = this.alertCtrl.create({
+                  title: "<div align='center'><img text-center class='adv2' src='./assets/content/ok.png'/></div> Reservación compartida aceptada:<br> Acesso permitido",
+                  buttons: [
+                    {
+                      text: "Aceptar"
+                    }
+                  ]
+                });
+                alerta.present();
 
               } else {
 

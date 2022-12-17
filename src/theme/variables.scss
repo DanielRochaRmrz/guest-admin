@@ -21,154 +21,206 @@ $app-direction: ltr;
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
-$colors: ( primary: #FFC149, secondary: #32db64, danger: #f53d3d, light: #f4f4f4, dark: #222, gold: #eccc68, naranja: #e49602, );
+$colors: (
+  primary: #ffc149,
+  secondary: #32db64,
+  danger: #f53d3d,
+  light: #f4f4f4,
+  dark: #222,
+  gold: #eccc68,
+  naranja: #e49602,
+);
 .home {
-    height: 25px;
-    width: 25px;
+  height: 25px;
+  width: 25px;
 }
 
 //Cabecera
 ion-navbar {
-    .toolbar-background {
-        background: #000;
-    }
-    .toolbar-title {
-        text-align: justify;
-        color: #fff;
-        font: bold;
-        font-weight: 200;
-    }
+  .toolbar-background {
+    background: #000;
+  }
+  .toolbar-title {
+    text-align: justify;
+    color: #fff;
+    font: bold;
+    font-weight: 200;
+  }
 }
 
 //Termina cabeca.
 //Tabs
-.tabs-md .tab-button[aria-selected=true] {
-    color: #0000;
-    /*your  text color */
-    background: #000;
-    /* your background color*/
+.tabs-md .tab-button[aria-selected="true"] {
+  color: #0000;
+  /*your  text color */
+  background: #000;
+  /* your background color*/
 }
 
 //admin-home
 .fondo_admin {
-    background-image: url('../assets/imgs/newFondo.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    position: relative;
-    border: none;
+  background-image: url("../assets/imgs/newFondo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  position: relative;
+  border: none;
 }
 
 .fondo2 {
-    background-image: url('../assets/imgs/fondoblanco2.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    position: relative;
-    border: none;
+  background-image: url("../assets/imgs/fondoblanco2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  position: relative;
+  border: none;
 }
 
 //termina tabs
 ion-menu {
-    .menu-content {
-        background-color: #FD9530;
-    }
-    .menu-list {
-        margin: 10vh 0px 0px !important;
-        .item {
-            background-color: #FD9530;
-            padding-right: 32px;
-            &:first-child {
-                border: #fff;
-            }
-            .item-inner {
-                font-size: 1.5rem;
-                font-weight: 300;
-                letter-spacing: 1px;
-                color: #fff;
-                position: center;
-            }
-            .item-icon {
-                color: #fff;
-                font-size: 3.4rem;
-            }
-            &.activated {
-                background-color: #fff;
-                transition-duration: 0ms;
-                .item-inner {
-                    color: #fff;
-                }
-                .item-icon {
-                    color: #fff;
-                }
-            }
+  .menu-content {
+    background-color: #fd9530;
+  }
+  .menu-list {
+    margin: 10vh 0px 0px !important;
+    .item {
+      background-color: #fd9530;
+      padding-right: 32px;
+      &:first-child {
+        border: #fff;
+      }
+      .item-inner {
+        font-size: 1.5rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+        color: #fff;
+        position: center;
+      }
+      .item-icon {
+        color: #fff;
+        font-size: 3.4rem;
+      }
+      &.activated {
+        background-color: #fff;
+        transition-duration: 0ms;
+        .item-inner {
+          color: #fff;
         }
+        .item-icon {
+          color: #fff;
+        }
+      }
     }
+  }
 }
 
 .warning {
-    background-color: #000;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px;
-    border-radius: 15px;
-    border-bottom-color: #eccc68;
+  background-color: #000;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 15px;
+  border-bottom-color: #eccc68;
 }
 
 .alert-ios .alert-input {
-    color: #000000;
+  color: #000000;
 }
 
 .alert-md .alert-input {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .alert-md .alert-head {
-    color: #FD9530;
-    text-align: center !important;
-    padding: 24px 24px 20px;
+  color: #fd9530;
+  text-align: center !important;
+  padding: 24px 24px 20px;
 }
 
 .alert-ios .alert-head {
-    color: #FD9530;
+  color: #fd9530;
 }
 
 .alert-md .alert-message {
-    text-align: center;
+  text-align: center;
 }
+
+.toastDanger {
+  .toast-wrapper {
+    background-color: #c0392b !important;
+    color: #f4f4f4;
+  }
+  .toast-message {
+    color: #f4f4f4 !important;
+    font-size: 1.8rem !important;
+  }
+}
+
+.toastWarning {
+  .toast-wrapper {
+    background-color: #f1c40f !important;
+    color: #f4f4f4;
+  }
+  .toast-message {
+    color: #f4f4f4 !important;
+    font-size: 1.8rem !important;
+  }
+}
+
+.toastInfo {
+  .toast-wrapper {
+    background-color: #2980b9 !important;
+    color: #f4f4f4;
+  }
+  .toast-message {
+    color: #f4f4f4 !important;
+    font-size: 1.8rem !important;
+  }
+}
+
+.toastSuccess {
+    .toast-wrapper {
+      background-color: #16a085 !important;
+      color: #f4f4f4;
+    }
+    .toast-message {
+      color: #f4f4f4 !important;
+      font-size: 1.8rem !important;
+    }
+  }
 
 ///SEGMENT
 //@Android
-$segment-button-md-background-color:#ffffff;
-$segment-button-md-background-color-activated:#FD9530;
-$segment-button-md-text-color:#ffffff;
+$segment-button-md-background-color: #ffffff;
+$segment-button-md-background-color-activated: #fd9530;
+$segment-button-md-text-color: #ffffff;
 //@IOS
-$segment-button-ios-background-color:#ffffff;
-$segment-button-ios-background-color-activated:#FD9530;
-$segment-button-ios-text-color:#ffffff;
+$segment-button-ios-background-color: #ffffff;
+$segment-button-ios-background-color-activated: #fd9530;
+$segment-button-ios-text-color: #ffffff;
 ///Termina el segment
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 // App Material Design Variables
-$select-ios-icon-color: #FD9530;
+$select-ios-icon-color: #fd9530;
 $select-ios-placeholder-color: #ffffff;
 $alert-ios-background: #ffffff;
-$alert-ios-button-text-color: #FD9530;
-$alert-ios-radio-label-text-color: #7E7C7C;
+$alert-ios-button-text-color: #fd9530;
+$alert-ios-radio-label-text-color: #7e7c7c;
 $alert-ios-message-text-color: #000;
 $alert-ios-message-text-align: center;
 $datetime-ios-placeholder-color: #000000;
 $picker-ios-background-color: #000000;
-$picker-ios-option-selected-color: #FD9530;
+$picker-ios-option-selected-color: #fd9530;
 $picker-ios-option-text-color: #ffffff;
-$picker-ios-button-text-color: #FD9530;
+$picker-ios-button-text-color: #fd9530;
 $card-ios-margin-left: 0px;
 $card-ios-margin-right: 0px;
 $alert-ios-checkbox-label-text-color: #959494;
-$toast-ios-background: #FFC149;
+$toast-ios-background: #ffc149;
 $toast-ios-title-color: #000000;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
@@ -183,7 +235,7 @@ $select-md-icon-color: #eccc68 !default;
 $select-md-placeholder-color: #000;
 $alert-md-background-color: #ffffff;
 $alert-md-button-text-color: #eccc68;
-$alert-md-radio-label-text-color: #7E7C7C;
+$alert-md-radio-label-text-color: #7e7c7c;
 $alert-md-message-text-color: #000;
 $alert-md-message-text-align: center;
 $picker-md-background-color: #000000;
@@ -192,7 +244,7 @@ $picker-md-option-text-color: #ffffff;
 $picker-md-button-text-color: #eccc68;
 $card-md-margin-left: 0px;
 $card-md-margin-right: 0px;
-$toast-md-background: #FFC149;
+$toast-md-background: #ffc149;
 $toast-md-title-color: #000000;
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can

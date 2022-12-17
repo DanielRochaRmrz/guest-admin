@@ -6,6 +6,7 @@ import { SucursalAltaProvider } from "../../providers/sucursal-alta/sucursal-alt
 import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 import { UserProvider } from '../../providers/user/user';
 import { CuponesSucursalPage } from '../cupones-sucursal/cupones-sucursal';
+import { DeviceProvider } from '../../providers/device/device';
 @IonicPage()
 @Component({
   selector: 'page-agregar-cupones',
@@ -29,6 +30,7 @@ export class AgregarCuponesPage {
               public afs: AngularFirestore,
               public platform: Platform,
               public _provderUser: UserProvider,
+              private sendNoti: DeviceProvider,
               public sucursalProv: SucursalAltaProvider) {
 
       //validar que los inputs del formulario no esten vacios
@@ -62,7 +64,7 @@ export class AgregarCuponesPage {
     const codigoCupon = Math.round(Math.random() * (999999 - 100000) + parseInt(a));
     //console.log("codigo",num);
     // this.sucursalProv.agregarCupon(codigoCupon,this.sucursal,this.valorCupon,this.numCupones,this.condicion,this.fechaExp,this.fechaActual);
-    this.sucursalProv.agregarCupon(codigoCupon,this.sucursal,this.valorCupon,this.numCupones,this.fechaExp,this.fechaActual);
+    this.sucursalProv.agregarCupon(codigoCupon,this.sucursal.uid,this.valorCupon,this.numCupones,this.fechaExp,this.fechaActual);
     //this.navCtrl.setRoot(CuponesSucursalPage);
    this.getUsersPusCupones();
     // this.navCtrl.push(CuponesSucursalPage);
@@ -72,56 +74,37 @@ export class AgregarCuponesPage {
 
 
   getUsersPusCupones() {
-    let data = [];
-    let data2 = this.users;
     this._provderUser.getAllUsers().subscribe(users => {
 
+      const options = { style: 'currency', currency: 'MXN' };
+      const numberFormat = new Intl.NumberFormat('es-MX', options);
+      const valorcupon = numberFormat.format(this.valorCupon);
+      // expected output: "$654,321.99"
 
       this.users = users;
       console.log('Esusuarios: ', this.users);
-      this.users.forEach(function (value) {
+      this.users.forEach((users: any) => {
 
-        data.push(value.playerID);
-        console.log('playe', value.playerID);
+        if (users.playerID != undefined) {
+
+          if (this.platform.is("cordova")) {
+          
+            const data = {
+              topic: users.playerID,
+              title: `Cupón de descuento de ${valorcupon}`,
+              body: `Aprovecha el cupón para la sucursal **${this.sucursal.displayName}** utilizalo antes de ${this.fechaExp}`,
+            };
+            this.sendNoti.sendPushNoti(data).then((resp: any) => {
+              console.log('Respuesta noti fcm', resp);
+            });
+
+          }else {
+            console.log("Solo funciona en dispositivos");
+          }
+
+        }
 
       });
-
-
-      let result = data.filter((item, index) => { return data.indexOf(item) === index; })
-
-      console.log("result: ", result);
-
-      for (var i = 0; i < result.length; i++) {
-        console.log("resullll", result[i]);
-
-
-        if (this.platform.is("cordova")) {
-
-          let noti = {
-            app_id: "de05ee4f-03c8-4ff4-8ca9-c80c97c5c0d9",
-            include_player_ids: result,
-            data: { foo: "bar" },
-            contents: {
-              en: " Nuevo Cupón "
-            }
-          };
-          console.log('notificacion');
-          window["plugins"].OneSignal.postNotification(
-            noti,
-            function (successResponse) {
-              console.log(
-                "Notification Post Success:",
-                successResponse
-              );
-            },
-            function (failedResponse: any) {
-              console.log("Notification Post Failed: ", failedResponse);
-            }
-          );
-        } else {
-          console.log("Solo funciona en dispositivos");
-        }
-      }
     });
 
   }

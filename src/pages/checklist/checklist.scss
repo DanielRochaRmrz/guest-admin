@@ -69,23 +69,76 @@ page-checklist {
     text-align: end;
     font-weight: bolder;
     font-size: small;
-  } 
+  }
 
   .tituloAdd {
-    text-align: end;
+    text-align: center;
     font-size: small;
     top: 1rem;
   }
 
-  .botonAdd {
-    text-align: end;
-  } 
+  ion-item {
+    padding-left: 0px !important;
+  }
+
+  ion-label {
+    font-size: small;
+  }
 
   ion-input {
     font-size: small;
   }
 
-  ion-item {
-    padding-left: 0px !important;
+  ion-select {
+    font-size: small;
+  }
+
+  ion-textarea {
+    font-size: small;
+  }
+
+  .bgcolor {
+    background: #cdcfd6;
+  }
+
+  .ion-col-t {
+    border: 2px solid #aeb7ca;
+  }
+
+  .buttonPDF {
+    text-align: start;
+  }
+
+  .textPDF {
+    text-align: end;
+    font-size: small;
+    top: 1rem;
+  }
+
+  .toastDanger {
+    .toast-wrapper {
+      background-color: red;
+    }
+  }
+
+  .subClass {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .list-ios > .item-wrapper:last-child .item-block {
+    border-bottom: 0px;
+  }
+
+  .list-ios {
+    margin: 0px;
+  }
+
+  .card-ios {
+    margin: 0px 0px;
+  }
+
+  .cardIos {
+    margin: 8px 0px;
   }
 }

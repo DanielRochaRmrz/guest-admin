@@ -26,24 +26,36 @@
       </ion-col>
     <div *ngFor="let cupon of cupones">
 
-        <ion-card>
-            <img src="../assets/imgs/Vector (3).png" />
-            <div class="card-subtitle">
-                Cupón de descuento {{ cupon.valorCupon | currency }}
-                <br> Código {{ cupon.codigoCupon }}
-                <br>
-                <ion-badge color="light">
-                    Disponibles {{ cupon.numCupones }}
-                </ion-badge>
-                <br>
-                <ion-badge *ngIf="cupon.estatus == 'Activo'" color="dark" (click)="updateStatus( cupon.estatus, cupon.uid)">
-                    {{ cupon.estatus }}
-                </ion-badge>
-                <ion-badge *ngIf="cupon.estatus == 'Inactivo'" color="red" (click)="updateStatus( cupon.estatus, cupon.uid)">
-                    {{ cupon.estatus }}
-                </ion-badge>
-            </div>
-        </ion-card>
+        <ion-list>
+            <ion-item-sliding #item>
+              <ion-item no-lines>
+                <ion-card>
+            
+                    <img src="../assets/imgs/Vector (3).png" />
+                    <div class="card-subtitle">
+                        Cupón de descuento {{ cupon.valorCupon | currency }}
+                        <br> Código {{ cupon.codigoCupon }}
+                        <br>
+                        <ion-badge color="light">
+                            Disponibles {{ cupon.numCupones }}
+                        </ion-badge>
+                        <br>
+                        <ion-badge *ngIf="cupon.estatus == 'Activo'" color="dark" (click)="updateStatus( cupon.estatus, cupon.uid)">
+                            {{ cupon.estatus }}
+                        </ion-badge>
+                        <ion-badge *ngIf="cupon.estatus == 'Inactivo'" color="red" (click)="updateStatus( cupon.estatus, cupon.uid)">
+                            {{ cupon.estatus }}
+                        </ion-badge>
+                    </div>
+                </ion-card>
+              </ion-item>
+              <ion-item-options side="right">
+                <button ion-button color="danger" (click)="deleteCupon(cupon.uid)">
+                    <ion-icon name="md-trash"></ion-icon>
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
     </div>
 
 </ion-content>

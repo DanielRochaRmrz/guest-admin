@@ -83,4 +83,22 @@ page-detalle-cupon {
         margin-top: -8px;
         text-transform: uppercase;
     }
+
+    .list-ios > .item-wrapper:last-child .item-block {
+        border-bottom: 0px;
+    }
+
+    .list-ios {
+        margin: 0px;
+    }
+
+    .card-ios {
+        margin: 5px 0px;
+        border-radius: 0px;
+        width: calc(100% - 0px);
+        font-size: 1.4rem;
+        background: #fff0;
+        box-shadow: 0 0px 0px;
+    }
+
 }
