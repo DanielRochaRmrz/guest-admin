@@ -124,7 +124,7 @@ export class ChecklistPage {
         array[i] = pdfOutput.charCodeAt(i);
       }
 
-      doc.save("check.pdf");
+      // doc.save("check.pdf");
       //This is where the PDF file will stored , you can change it as you like
       // for more information please visit https://ionicframework.com/docs/native/file/
       const directory = this.file.documentsDirectory;
