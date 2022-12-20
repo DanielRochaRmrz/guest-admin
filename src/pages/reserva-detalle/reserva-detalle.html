@@ -45,7 +45,14 @@
             <p>
                 Estos son los detalles de la reservación:
             </p>
+            
         </ion-card-content>
+
+        <ion-item>
+            <ion-icon ios="ios-beer" md="md-beer" item-start style="color: #fcc04d"></ion-icon>
+            Evento
+            <ion-badge item-end>({{ (reserv.idevento | getNameEvento | async)?.titulo }})</ion-badge>
+        </ion-item>
 
         <ion-item>
             <ion-icon ios="ios-contact" md="md-contact" item-start style="color: #fcc04d"></ion-icon>
@@ -114,7 +121,7 @@
                 <ion-col text-right>
                     <ion-icon ios="ios-barcode" md="md-barcode" item-start style="color: #fcc04d"></ion-icon>
                     <b>Precio</b>
-                </ion-col>                
+                </ion-col>
 
             </ion-row>
 
@@ -124,7 +131,7 @@
 
                 <ion-col>{{ produ.producto }} </ion-col>
 
-                <ion-col text-right>{{ produ.costo | currency }}</ion-col>                
+                <ion-col text-right>{{ produ.costo | currency }}</ion-col>
 
             </ion-row>
 
@@ -134,70 +141,70 @@
             <ion-grid>
 
                 <ion-row>
-    
+
                     <ion-col>
-    
+
                         <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
                         <b>Total</b>
-    
-                    </ion-col> 
-    
-                    <ion-col><b></b></ion-col>                
-    
+
+                    </ion-col>
+
+                    <ion-col><b></b></ion-col>
+
                     <ion-col text-right>{{ totalReserv | currency }}</ion-col>
-    
+
                 </ion-row>
-    
+
             </ion-grid>
         </ng-template>
         <ng-template #conCupon>
             <ion-grid>
 
                 <ion-row>
-    
+
                     <ion-col>
-    
+
                         <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
                         <b>Subtotal</b>
-    
-                    </ion-col> 
-    
-                    <ion-col><b></b></ion-col>                
-    
+
+                    </ion-col>
+
+                    <ion-col><b></b></ion-col>
+
                     <ion-col text-right>{{ totalReserv | currency }}</ion-col>
-    
+
                 </ion-row>
 
                 <ion-row>
-    
+
                     <ion-col>
-    
+
                         <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
                         <b>Cupon</b>
-    
-                    </ion-col> 
-    
-                    <ion-col><b></b></ion-col>                
-    
+
+                    </ion-col>
+
+                    <ion-col><b></b></ion-col>
+
                     <ion-col text-right>{{ valorCupon | currency }}</ion-col>
-    
+
                 </ion-row>
 
                 <ion-row>
-    
+
                     <ion-col>
-    
+
                         <ion-icon ios="logo-usd" md="logo-usd" item-start style="color: #fcc04d"></ion-icon>
                         <b>Total</b>
-    
-                    </ion-col> 
-    
-                    <ion-col><b></b></ion-col>                
-    
+
+                    </ion-col>
+
+                    <ion-col><b></b></ion-col>
+
                     <ion-col text-right>{{ totalReserv - valorCupon | currency }}</ion-col>
-    
+
                 </ion-row>
-    
+
             </ion-grid>
         </ng-template>
 

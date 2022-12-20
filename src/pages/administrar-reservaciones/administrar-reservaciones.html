@@ -63,6 +63,9 @@
                 <p *ngIf="reservacion.estatus == 'CreadaCompartida'" style="font-size: 9px">
                   (Reservación tipo compartida)
                 </p>
+                <p *ngIf="reservacion.idevento" style="font-size: 9px">
+                  Evento
+                </p>
               </ion-col>
             </ion-row>
           </ion-col>
