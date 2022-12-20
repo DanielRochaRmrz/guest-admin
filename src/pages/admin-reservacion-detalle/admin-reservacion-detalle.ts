@@ -6,6 +6,7 @@ import { AdminMonitearReservPage } from '../admin-monitear-reserv/admin-monitear
 import { SucursalAltaProvider } from "../../providers/sucursal-alta/sucursal-alta";
 import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 import { CorteReservacionesHistorialPage } from '../corte-reservaciones-historial/corte-reservaciones-historial';
+import { GestionReservacionesProvider } from '../../providers/gestion-reservaciones/gestion-reservaciones';
 
 @IonicPage()
 @Component({
@@ -36,11 +37,13 @@ export class AdminReservacionDetallePage {
   totalNeto: any;
   subTotal: any;
   usuarioMaster: any;
+  uidRp: string;
+  infoCodigoRP: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public monRes: MonitoreoReservasProvider,
-    public afs: AngularFirestore, public SucProv: SucursalAltaProvider, private viewCtrl: ViewController,) {
+    public afs: AngularFirestore, public SucProv: SucursalAltaProvider, private viewCtrl: ViewController, public _gestionReser: GestionReservacionesProvider,) {
 
     //recibe parametro de la reservacion
     this.idReservacion = this.navParams.get("idReservacion");
@@ -59,6 +62,8 @@ export class AdminReservacionDetallePage {
     this.afs.collection('reservaciones').doc(this.idReservacion).valueChanges().subscribe(reservacion => {
 
       this.reservaciones = reservacion;
+
+      this.getInfoCodigoRP(this.reservaciones.codigoRP, this.reservaciones.idReservacion);      
 
     });
 
@@ -152,6 +157,16 @@ export class AdminReservacionDetallePage {
       }
 
     });
+
+  }
+
+  async getInfoCodigoRP(codigoRP:string, idReservacion:string){
+
+    this.infoCodigoRP = await this._gestionReser.getInfoContCodigosRP(codigoRP, idReservacion);
+
+    this.uidRp = this.infoCodigoRP.uidRP;
+
+    console.log('infoCodigoRP--->', this.infoCodigoRP.uidRP);    
 
   }
 

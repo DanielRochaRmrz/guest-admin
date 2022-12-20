@@ -168,6 +168,14 @@
 
     </ion-item>
 
+    <!-- NOMBRE RP -->
+
+    <ion-item>
+      <ion-icon ios="ios-body" md="md-body" item-start style="color: #fcc04d"></ion-icon>
+      Nombre RP
+      <ion-note item-end>{{ (uidRp | getNameUser | async)?.displayName }}</ion-note>
+    </ion-item>
+
     <!-- MESA -->
 
     <ion-item>
