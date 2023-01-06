@@ -1,0 +1,26 @@
+page-master-reembolsos {
+
+    ion-content {
+        width: 100%;
+        position: relative;
+        border: none;
+    }
+
+    .toolbar-background {
+        background-image: url('../assets/imgs/proriat.png') !important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .detalle {
+        color: #cecece;
+        margin-top: -8px;
+        text-transform: uppercase;
+    }
+
+    .iconoStyle {
+
+        font-size: 25px;
+    }
+}

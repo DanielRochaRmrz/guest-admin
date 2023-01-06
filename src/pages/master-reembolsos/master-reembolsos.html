@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Reembolsos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row>
+    <ion-col col-9>
+      <h2>
+        <b>Master</b>
+        <div class="detalle">Reembolsos</div>
+      </h2>
+    </ion-col>
+    <ion-col col-3>
+      <button (click)="goConsumo()" ion-button block>
+        <ion-icon class="iconoStyle" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <hr>
+  <ion-list>
+    <button ion-item (click)="goDetalle(consumo.idConsumo)">
+      <!-- <button ion-item *ngFor="let consumo of consumos" (click)="goDetalle(consumo.idConsumo)"> -->
+      <ion-icon ios="ios-cut" md="md-cut"></ion-icon>
+      <!-- Corte de la fecha: <strong>{{ consumo.fechaCaptura | date }}</strong> -->
+      Corte de la fecha: <strong>Buenisima</strong>
+    </button>
+  </ion-list>
+</ion-content>

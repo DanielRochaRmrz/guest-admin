@@ -18,6 +18,7 @@ import { CuentasPage } from "../cuentas/cuentas";
 import { AdminHomePage } from "../admin-home/admin-home";
 import { AdminRpCodigoPage } from "../admin-rp-codigo/admin-rp-codigo";
 import { CuentasListPage } from "../cuentas-list/cuentas-list";
+import { MasterReembolsosPage } from "../master-reembolsos/master-reembolsos";
 
 @IonicPage()
 @Component({
@@ -111,6 +112,10 @@ export class AdminMenuReservacionPage {
   //ir a pagina de historial
   goReservacionHistorial() {
     this.navCtrl.push(AdminHistorialReservacionesPage);
+  }
+
+  goReembolso(){
+    this.navCtrl.push(MasterReembolsosPage);
   }
   
   // goConsumo() {
