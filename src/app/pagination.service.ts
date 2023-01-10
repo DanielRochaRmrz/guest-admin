@@ -422,6 +422,19 @@ export class PaginationService {
     this.mapAndUpdate(more)
   }
 
+  moreReservacionesReembolsado() {
+    const cursor = this.getCursor()
+
+    const more = this.afs.collection(this.query.path, ref => {
+      return ref
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
+        .startAfter(cursor)
+        .where("estatus", "==", "Reembolsado")
+    })
+    this.mapAndUpdate(more)
+  }
+
   // Determines the doc snapshot to paginate query 
   private getCursor() {
     const current = this._data.value

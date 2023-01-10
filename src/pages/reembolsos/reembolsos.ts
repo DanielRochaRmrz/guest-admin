@@ -29,7 +29,7 @@ export class ReembolsosPage {
   goAtras(){
 
     this.navCtrl.setRoot(MasterReembolsosPage);
-    
+
   }
 
   scrollHandler(e) {
@@ -38,7 +38,7 @@ export class ReembolsosPage {
 
       console.log(e);      
 
-      // this.page.moreHistorial(localStorage.getItem('uidSucursal'))
+      this.page.moreReservacionesReembolsado()
     }
   }
 
