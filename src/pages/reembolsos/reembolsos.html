@@ -1,57 +1,53 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Reembolsos</ion-title>
+    <ion-title>Admon. Reembolsos</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-row>
-    <ion-col col-9>
-      <h2>
-        <b>Master</b>
-        <div class="detalle">Admon. Reembolsos</div>
-      </h2>
-    </ion-col>
-    <ion-col col-3>
-      <button (click)="goHistorialReembolsados()" ion-button block>
-        <ion-icon ios="ios-list" md="md-list"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
-  <hr>
+  <ion-fab right top>
+    <button ion-fab color="primary" (click)="goAtras()">
+      <ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon>
+    </button>
+  </ion-fab>
 
+  <ion-col col-5>
+    <h2>
+      <b>Master</b>
+      <div class="detalle">Historial reembolsos</div>
+    </h2>
+  </ion-col>
+  <hr>
   <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
+
     <div class="container">
+
       <ion-list>
         <ion-item-sliding *ngFor="let reservacion of page.data | async">
           <ion-item>
             <ion-avatar item-start>
-              <ion-icon  style="color: #fcc04d" ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+              <ion-icon style="color: #fcc04d" ios="ios-arrow-dropright-circle"
+                md="md-arrow-dropright-circle"></ion-icon>
             </ion-avatar>
             <h2>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</h2>
             <p>UID reservación: {{ reservacion.idReservacion }} </p>
             <p>Fecha: {{ reservacion.fechaR | date: 'dd/MM/yyyy' }}</p>
           </ion-item>
 
-          <ion-item-options side="left">
+          <ion-item-options side="right">
             <button ion-button color="primary" (click)="goDetalleReserva(reservacion.idReservacion)">
               <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
               <span class="titulos">Detalle</span>
-            </button>
-          </ion-item-options>
-
-          <ion-item-options side="right">
-            <button ion-button color="secondary">
-              <ion-icon ios="ios-cash" md="md-cash"></ion-icon>
-              <span>Reembolsar</span>
             </button>
           </ion-item-options>
         </ion-item-sliding>
       </ion-list>
 
     </div>
+
   </div>
+
 
 
 </ion-content>

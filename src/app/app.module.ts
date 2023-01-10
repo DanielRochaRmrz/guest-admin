@@ -137,6 +137,7 @@ import { CuentasHistorialListPage } from '../pages/cuentas-historial-list/cuenta
 import localeEsMX from "@angular/common/locales/es-MX";
 import { registerLocaleData } from "@angular/common";
 import { MasterReembolsosPage } from '../pages/master-reembolsos/master-reembolsos';
+import { ReembolsosPage } from '../pages/reembolsos/reembolsos';
 registerLocaleData(localeEsMX, 'es-MX');
 
  firebase.initializeApp(firebaseConfig);
@@ -214,6 +215,7 @@ registerLocaleData(localeEsMX, 'es-MX');
     CuentasListPage,
     CuentasHistorialListPage,
     MasterReembolsosPage,
+    ReembolsosPage,
   ],
   imports: [
     BrowserModule,
@@ -304,6 +306,7 @@ registerLocaleData(localeEsMX, 'es-MX');
     CuentasListPage,
     CuentasHistorialListPage,
     MasterReembolsosPage,
+    ReembolsosPage,
   ],
   providers: [
     StatusBar,

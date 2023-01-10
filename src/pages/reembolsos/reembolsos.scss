@@ -1,11 +1,4 @@
-page-master-reembolsos {
-
-    ion-content {
-        // width: 100%;
-        // position: relative;
-        // border: none;
-    }
-
+page-reembolsos {
     .toolbar-background {
         background-image: url('../assets/imgs/proriat.png') !important;
         background-size: cover;
@@ -19,11 +12,6 @@ page-master-reembolsos {
         text-transform: uppercase;
     }
 
-    .iconoStyle {
-
-        font-size: 25px;
-    }
-
     .content {
         overflow: scroll;
         max-height: 100vh;
@@ -33,6 +21,6 @@ page-master-reembolsos {
 
     .container {
         height: 900px;
-        margin-right: 2em;
     }
+
 }

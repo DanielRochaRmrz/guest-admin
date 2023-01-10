@@ -39,6 +39,7 @@ export class AdminReservacionDetallePage {
   usuarioMaster: any;
   uidRp: string;
   infoCodigoRP: any;
+  reembolso: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -47,6 +48,19 @@ export class AdminReservacionDetallePage {
 
     //recibe parametro de la reservacion
     this.idReservacion = this.navParams.get("idReservacion");
+
+    // recibe de la vista de reembolsos
+    this.reembolso = this.navParams.get("reem");
+
+    if(this.reembolso == "Reembolso"){
+
+      this.reembolso = "Reem"
+
+    }else{
+      
+      this.reembolso = "null";
+    }
+
 
     if (this.navParams.get("typeUser")) {
 

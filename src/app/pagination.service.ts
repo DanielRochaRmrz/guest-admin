@@ -277,6 +277,63 @@ export class PaginationService {
         })
     }
   }
+
+  initReservacionesReembolsar(path: string, field: string, opts?: any) {
+    this.presentLoading();
+    this.query = {
+      path,
+      field,
+      limit: 10,
+      reverse: false,
+      prepend: false,
+      ...opts
+    }
+    var first = this.afs.collection(this.query.path, ref => {
+      return ref
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
+        .where("estatus", "==", "Reembolsar")
+
+    })
+    if (first) {
+      this.loadingDatos.dismiss();
+      this.mapAndUpdate(first)
+
+      // Create the observable array for consumption in components
+      this.data = this._data.asObservable()
+        .scan((acc, val) => {
+          return this.query.prepend ? val.concat(acc) : acc.concat(val)
+        })
+    }
+  }
+  initReservacionesReembolsados(path: string, field: string, opts?: any) {
+    this.presentLoading();
+    this.query = {
+      path,
+      field,
+      limit: 10,
+      reverse: false,
+      prepend: false,
+      ...opts
+    }
+    var first = this.afs.collection(this.query.path, ref => {
+      return ref
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
+        .where("estatus", "==", "Reembolsado")
+
+    })
+    if (first) {
+      this.loadingDatos.dismiss();
+      this.mapAndUpdate(first)
+
+      // Create the observable array for consumption in components
+      this.data = this._data.asObservable()
+        .scan((acc, val) => {
+          return this.query.prepend ? val.concat(acc) : acc.concat(val)
+        })
+    }
+  }
   moreHistorial(idx) {
     const cursor = this.getCursor()
 
@@ -352,6 +409,18 @@ export class PaginationService {
     this.mapAndUpdate(more)
   }
 
+  moreReservacionesReembolsar() {
+    const cursor = this.getCursor()
+
+    const more = this.afs.collection(this.query.path, ref => {
+      return ref
+        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+        .limit(this.query.limit)
+        .startAfter(cursor)
+        .where("estatus", "==", "Reembolsar")
+    })
+    this.mapAndUpdate(more)
+  }
 
   // Determines the doc snapshot to paginate query 
   private getCursor() {
