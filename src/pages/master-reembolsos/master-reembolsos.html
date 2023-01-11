@@ -41,7 +41,7 @@
             </button>
           </ion-item-options>
 
-          <ion-item-options side="right">
+          <ion-item-options side="right" (click)="functionReembolsar(reservacion.playerIDs, reservacion.idReservacion)">
             <button ion-button color="secondary">
               <ion-icon ios="ios-cash" md="md-cash"></ion-icon>
               <span>Reembolsar</span>

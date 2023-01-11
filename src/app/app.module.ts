@@ -138,6 +138,7 @@ import localeEsMX from "@angular/common/locales/es-MX";
 import { registerLocaleData } from "@angular/common";
 import { MasterReembolsosPage } from '../pages/master-reembolsos/master-reembolsos';
 import { ReembolsosPage } from '../pages/reembolsos/reembolsos';
+import { ReembolsosProvider } from '../providers/reembolsos/reembolsos';
 registerLocaleData(localeEsMX, 'es-MX');
 
  firebase.initializeApp(firebaseConfig);
@@ -343,7 +344,8 @@ registerLocaleData(localeEsMX, 'es-MX');
     ToolsProvider,
     File,
     FileOpener,
-    TooltipController
+    TooltipController,
+    ReembolsosProvider
   ]
 })
 export class AppModule {}

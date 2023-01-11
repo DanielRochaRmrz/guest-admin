@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, AlertController } from 'ionic-angular';
 import { PaginationService } from '../../app/pagination.service';
+import { ReembolsosProvider } from '../../providers/reembolsos/reembolsos';
 import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-reservacion-detalle';
 import { ReembolsosPage } from '../reembolsos/reembolsos';
-
 
 @IonicPage()
 @Component({
@@ -12,7 +12,7 @@ import { ReembolsosPage } from '../reembolsos/reembolsos';
 })
 export class MasterReembolsosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,  public page: PaginationService, private modalctrl: ModalController,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public page: PaginationService, private modalctrl: ModalController, public alerCtrl: AlertController, private proReem: ReembolsosProvider, ) {
 
     this.page.reset();
 
@@ -21,7 +21,7 @@ export class MasterReembolsosPage {
   ionViewDidLoad() {
 
     this.page.initReservacionesReembolsar('reservaciones', 'fechaR', { reverse: true, prepend: false });
-    
+
   }
 
   goHistorialReembolsados() {
@@ -32,11 +32,11 @@ export class MasterReembolsosPage {
 
   }
 
-  goDetalleReserva(idx){
+  goDetalleReserva(idx) {
 
     const reem = "Reembolso"
 
-    let modal = this.modalctrl.create(AdminReservacionDetallePage, {idReservacion: idx, reem: reem});
+    let modal = this.modalctrl.create(AdminReservacionDetallePage, { idReservacion: idx, reem: reem });
     modal.present();
 
   }
@@ -48,5 +48,31 @@ export class MasterReembolsosPage {
     if (e === 'bottom') {
       this.page.moreReservacionesReembolsar();
     }
+  }
+
+  functionReembolsar(idPlayerUser, idReservacion) {
+
+    let confirm = this.alerCtrl.create({
+      title: '¿Vas a reembolsar esta reservación?',
+      message: 'Cambiaras el estatus de la reservación a Reembolsado',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            // Actions
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            
+            this.proReem.reembolsarReservacion(idPlayerUser, idReservacion);
+            this.navCtrl.push(MasterReembolsosPage);
+          }
+        }
+      ]
+    });
+    confirm.present()
+
   }
 }
