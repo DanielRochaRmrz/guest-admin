@@ -1,5 +1,10 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
+    <ion-row>
+      <ion-col>
+        <ion-icon class="iconBh" name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+      </ion-col>
+    </ion-row>
     <ion-title>Reembolsos</ion-title>
   </ion-navbar>
 </ion-header>
@@ -19,6 +24,10 @@
       </button>
     </ion-col>
   </ion-row>
+
+  <!-- <ion-searchbar placeholder="Buscar reservación por folio" [animated]="true" (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-segment selectedIndex="1" [(ngModel)]="folio">
+  </ion-segment> -->
   <hr>
 
   <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
@@ -27,10 +36,12 @@
         <ion-item-sliding *ngFor="let reservacion of page.data | async">
           <ion-item>
             <ion-avatar item-start>
-              <ion-icon  style="color: #fcc04d" ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+              <ion-icon style="color: #fcc04d" ios="ios-arrow-dropright-circle"
+                md="md-arrow-dropright-circle"></ion-icon>
             </ion-avatar>
             <h2>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</h2>
             <p>UID reservación: {{ reservacion.idReservacion }} </p>
+            <p>Folio: {{ reservacion.folio }} </p>
             <p>Fecha: {{ reservacion.fechaR | date: 'dd/MM/yyyy' }}</p>
           </ion-item>
 

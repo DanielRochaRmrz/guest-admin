@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams, AlertController } from 'ionic-angular';
 import { PaginationService } from '../../app/pagination.service';
 import { ReembolsosProvider } from '../../providers/reembolsos/reembolsos';
+import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
 import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-reservacion-detalle';
 import { ReembolsosPage } from '../reembolsos/reembolsos';
 
@@ -11,6 +12,10 @@ import { ReembolsosPage } from '../reembolsos/reembolsos';
   templateUrl: 'master-reembolsos.html',
 })
 export class MasterReembolsosPage {
+
+  folio: string = 'R';
+  reservaciones: any;
+  folios: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public page: PaginationService, private modalctrl: ModalController, public alerCtrl: AlertController, private proReem: ReembolsosProvider, ) {
 
@@ -74,5 +79,32 @@ export class MasterReembolsosPage {
     });
     confirm.present()
 
+  }
+  behind(){
+
+    this.navCtrl.setRoot(AdminMenuReservacionPage);
+
+  }
+
+  initializeItems(): void {
+    
+    this.reservaciones = this.page.data;
+  }
+
+
+  getItems(evt) {
+    this.initializeItems();
+    const searchTerm = evt.srcElement.value;
+    if (!searchTerm) {
+      return;
+    }
+    this.reservaciones = this.reservaciones.filter(reservacion => {
+      if (reservacion.folio && searchTerm) {
+        if (reservacion.folio.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
   }
 }

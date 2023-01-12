@@ -32,6 +32,7 @@
             </ion-avatar>
             <h2>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</h2>
             <p>UID reservación: {{ reservacion.idReservacion }} </p>
+            <p>Folio: {{ reservacion.folio }} </p>
             <p>Fecha: {{ reservacion.fechaR | date: 'dd/MM/yyyy' }}</p>
           </ion-item>
 

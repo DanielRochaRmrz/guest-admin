@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, ViewController } from 'ionic-angular';
 import { PaginationService } from '../../app/pagination.service';
+import { AdminReservacionDetallePage } from '../admin-reservacion-detalle/admin-reservacion-detalle';
 import { MasterReembolsosPage } from '../master-reembolsos/master-reembolsos';
 
 @IonicPage()
@@ -10,7 +11,7 @@ import { MasterReembolsosPage } from '../master-reembolsos/master-reembolsos';
 })
 export class ReembolsosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public page: PaginationService,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public page: PaginationService, private modalctrl: ModalController,) {
 
     this.page.reset();
 
@@ -40,6 +41,13 @@ export class ReembolsosPage {
 
       this.page.moreReservacionesReembolsado()
     }
+  }
+
+  goDetalleReserva(idx) {
+
+    let modal = this.modalctrl.create(AdminReservacionDetallePage, { idReservacion: idx });
+    modal.present();
+
   }
 
 }

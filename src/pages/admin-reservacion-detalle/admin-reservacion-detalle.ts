@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MonitoreoReservasProvider } from '../../providers/monitoreo-reservas/monitoreo-reservas';
 import { AdminMonitearReservPage } from '../admin-monitear-reserv/admin-monitear-reserv';
 import { SucursalAltaProvider } from "../../providers/sucursal-alta/sucursal-alta";
-import { AdminMenuReservacionPage } from '../admin-menu-reservacion/admin-menu-reservacion';
-import { CorteReservacionesHistorialPage } from '../corte-reservaciones-historial/corte-reservaciones-historial';
 import { GestionReservacionesProvider } from '../../providers/gestion-reservaciones/gestion-reservaciones';
+import { ReembolsosProvider } from '../../providers/reembolsos/reembolsos';
+import { MasterReembolsosPage } from '../master-reembolsos/master-reembolsos';
 
 @IonicPage()
 @Component({
@@ -44,7 +44,7 @@ export class AdminReservacionDetallePage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public monRes: MonitoreoReservasProvider,
-    public afs: AngularFirestore, public SucProv: SucursalAltaProvider, private viewCtrl: ViewController, public _gestionReser: GestionReservacionesProvider,) {
+    public afs: AngularFirestore, public SucProv: SucursalAltaProvider, private viewCtrl: ViewController, public _gestionReser: GestionReservacionesProvider, public alerCtrl: AlertController, private proReem: ReembolsosProvider,) {
 
     //recibe parametro de la reservacion
     this.idReservacion = this.navParams.get("idReservacion");
@@ -201,6 +201,32 @@ export class AdminReservacionDetallePage {
 
   cerrar_modal() {
     this.viewCtrl.dismiss();
+  }
+
+  functionReembolsar(idPlayerUser, idReservacion) {
+
+    let confirm = this.alerCtrl.create({
+      title: '¿Vas a reembolsar esta reservación?',
+      message: 'Cambiaras el estatus de la reservación a Reembolsado',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            // Actions
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            
+            this.proReem.reembolsarReservacion(idPlayerUser, idReservacion);
+            this.navCtrl.push(MasterReembolsosPage);
+          }
+        }
+      ]
+    });
+    confirm.present()
+
   }
 
 

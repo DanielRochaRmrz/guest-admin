@@ -455,6 +455,6 @@
 
   </div>
 
-  <button *ngIf="reembolso != null" ion-button block>Reembolsar</button>
+  <button *ngIf="reembolso == 'Reem'" ion-button block (click)="functionReembolsar(reservaciones.playerIDs, reservaciones.idReservacion)">Reembolsar</button>
 
 </ion-content>
