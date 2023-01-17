@@ -40,19 +40,19 @@
                 md="md-arrow-dropright-circle"></ion-icon>
             </ion-avatar>
             <h2>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</h2>
-            <p>UID reservación: {{ reservacion.idReservacion }} </p>
+            <p>Total a reembolsar: {{ reservacion.totales.totalNeto * .10 | currency}} </p>
             <p>Folio: {{ reservacion.folio }} </p>
             <p>Fecha: {{ reservacion.fechaR | date: 'dd/MM/yyyy' }}</p>
           </ion-item>
 
           <ion-item-options side="left">
-            <button ion-button color="primary" (click)="goDetalleReserva(reservacion.idReservacion)">
+            <button ion-button color="primary" (click)="goDetalleReserva(reservacion.idReservacion, reservacion.totales.totalNeto)">
               <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
               <span class="titulos">Detalle</span>
             </button>
           </ion-item-options>
 
-          <ion-item-options side="right" (click)="functionReembolsar(reservacion.playerIDs, reservacion.idReservacion)">
+          <ion-item-options side="right" (click)="functionReembolsar(reservacion.playerIDs, reservacion.idReservacion, reservacion.totales.totalNeto)">
             <button ion-button color="secondary">
               <ion-icon ios="ios-cash" md="md-cash"></ion-icon>
               <span>Reembolsar</span>

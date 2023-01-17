@@ -40,6 +40,8 @@ export class AdminReservacionDetallePage {
   uidRp: string;
   infoCodigoRP: any;
   reembolso: any;
+  totalNeReembolso: any;
+  totalReembolso: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,9 +54,14 @@ export class AdminReservacionDetallePage {
     // recibe de la vista de reembolsos
     this.reembolso = this.navParams.get("reem");
 
+    
     if(this.reembolso == "Reembolso"){
-
+      
       this.reembolso = "Reem"
+      
+      this.totalNeReembolso = this.navParams.get('totalReem');
+
+      this.totalReembolso = this.totalNeReembolso * .10;
 
     }else{
       
@@ -90,10 +97,13 @@ export class AdminReservacionDetallePage {
 
       this.cuentasCompartidas = res11;
 
-      console.log("this.cuentasCompartidas -->", this.cuentasCompartidas);
+      // console.log("this.cuentasCompartidas -->", this.cuentasCompartidas);
 
 
       this.infoReserCom_num = this.infoReserCom.length;
+
+      console.log("this.infoReserCom_num", this.infoReserCom_num);
+      
 
 
     });

@@ -37,11 +37,11 @@ export class MasterReembolsosPage {
 
   }
 
-  goDetalleReserva(idx) {
+  goDetalleReserva(idx, total) {
 
     const reem = "Reembolso"
 
-    let modal = this.modalctrl.create(AdminReservacionDetallePage, { idReservacion: idx, reem: reem });
+    let modal = this.modalctrl.create(AdminReservacionDetallePage, { idReservacion: idx, reem: reem, totalReem: total });
     modal.present();
 
   }
@@ -55,7 +55,7 @@ export class MasterReembolsosPage {
     }
   }
 
-  functionReembolsar(idPlayerUser, idReservacion) {
+  functionReembolsar(idPlayerUser, idReservacion, reembolsar) {
 
     let confirm = this.alerCtrl.create({
       title: '¿Vas a reembolsar esta reservación?',
