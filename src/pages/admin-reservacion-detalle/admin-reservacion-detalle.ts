@@ -42,6 +42,7 @@ export class AdminReservacionDetallePage {
   reembolso: any;
   totalNeReembolso: any;
   totalReembolso: any;
+  restaReembolso: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -62,6 +63,9 @@ export class AdminReservacionDetallePage {
       this.totalNeReembolso = this.navParams.get('totalReem');
 
       this.totalReembolso = this.totalNeReembolso * .10;
+
+      this.restaReembolso = this.totalNeReembolso - this.totalReembolso;
+
 
     }else{
       

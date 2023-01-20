@@ -40,7 +40,7 @@
                 md="md-arrow-dropright-circle"></ion-icon>
             </ion-avatar>
             <h2>{{ (reservacion.idUsuario | getNameUser | async)?.displayName }}</h2>
-            <p>Total a reembolsar: {{ reservacion.totales.totalNeto * .10 | currency}} </p>
+            <p>Total a reembolsar al cliente: {{ reservacion.totales.totalNeto - (reservacion.totales.totalNeto * .10) | currency}} </p>
             <p>Folio: {{ reservacion.folio }} </p>
             <p>Fecha: {{ reservacion.fechaR | date: 'dd/MM/yyyy' }}</p>
           </ion-item>

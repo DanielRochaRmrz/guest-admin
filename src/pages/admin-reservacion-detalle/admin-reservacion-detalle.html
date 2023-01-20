@@ -324,7 +324,18 @@
         <ion-row *ngIf="reembolso == 'Reem'">
           <ion-col></ion-col>
           <ion-col><b></b></ion-col>
-          <ion-col><b>Total a reembolsar</b></ion-col>
+          <ion-col><b>Total a reembolsar a cliente</b></ion-col>
+          <ion-col>
+            <b>{{restaReembolso | currency}}
+            </b>
+          </ion-col>
+        </ion-row>
+
+        <!-- TOTAL REEMBOLSO guest -->
+        <ion-row *ngIf="reembolso == 'Reem'">
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col><b>Total del reembolso para guest</b></ion-col>
           <ion-col>
             <b>{{totalReembolso | currency}}
             </b>
@@ -395,6 +406,17 @@
           <ion-col><b></b></ion-col>
           <ion-col><b>Total a reembolsar</b></ion-col>
           <ion-col>
+            <b>{{restaReembolso | currency}}
+            </b>
+          </ion-col>
+        </ion-row>
+
+        <!-- TOTAL REEMBOLSO guest -->
+        <ion-row *ngIf="reembolso == 'Reem'">
+          <ion-col></ion-col>
+          <ion-col><b></b></ion-col>
+          <ion-col><b>Total del reembolso para guest</b></ion-col>
+          <ion-col>
             <b>{{totalReembolso | currency}}
             </b>
           </ion-col>
@@ -456,7 +478,9 @@
 
         <ion-note item-end>
 
-          {{ compartidas.estatus }}
+          <div *ngIf="reembolso != 'Reem'">
+
+            {{ compartidas.estatus }}
 
           <p *ngIf="compartidas.estatus_escaneo == 'NO'">
             <ion-icon ios="ios-close-circle" md="md-close-circle" item-start style="color: #F44336"></ion-icon>
@@ -466,7 +490,10 @@
             <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-start style="color: #CDDC39"></ion-icon>
           </p>
 
-          <p *ngIf="reembolso == 'Reem'">Reembolsar {{ totalReembolso / infoReserCom_num | currency }}</p>
+          </div>
+          
+
+          <p *ngIf="reembolso == 'Reem'">Para cliente {{ restaReembolso / infoReserCom_num | currency }}</p>
 
         </ion-note>
 
@@ -479,7 +506,7 @@
   </div>
 
   <button *ngIf="reembolso == 'Reem'" ion-button block
-    (click)="functionReembolsar(reservaciones.playerIDs, reservaciones.idReservacion)">Reembolsar {{ totalReembolso | currency
+    (click)="functionReembolsar(reservaciones.playerIDs, reservaciones.idReservacion)">Reembolsar {{ restaReembolso | currency
     }}</button>
 
 </ion-content>
