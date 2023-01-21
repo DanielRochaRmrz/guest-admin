@@ -268,7 +268,7 @@
 
         <div class="espacio">
             <ion-row>
-                <ion-col col-2 text-center>
+                <ion-col col-1 text-center>
                     <ion-icon ios="ios-person" md="md-person" style="color: #fcc04d"></ion-icon>
                 </ion-col>
                 <ion-col col-3 text-center>
@@ -278,8 +278,8 @@
                     <ion-icon ios="ios-call" md="md-call" item-start style="color: #fcc04d"></ion-icon>&nbsp;
                     {{ compartida.telefono }}
                 </ion-col>
-                <ion-col col-2 text-center>
-                    $ {{ compartida.totalDividido }}
+                <ion-col col-3 text-center>
+                    $ {{ compartida.totalDividido | currency  }}
                 </ion-col>
             </ion-row>
 
