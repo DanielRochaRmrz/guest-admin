@@ -450,6 +450,9 @@ export class SucursalAltaProvider {
               buttons: ["Aceptar"],
             })
             .present();
+            
+            this.UserProv.delete_user(idx);
+
           resolve(true);
         })
         .catch((err) => {

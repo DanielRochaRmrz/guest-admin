@@ -18,13 +18,11 @@ import { AdminSucursalEditperfilImagenPage } from "../admin-sucursal-editperfil-
 import { AdminSucursalCroquisPage } from "../admin-sucursal-croquis/admin-sucursal-croquis";
 import { ImagencroquisPage } from "../imagencroquis/imagencroquis";
 import { AngularFireDatabase } from "angularfire2/database";
-import { Observable } from "rxjs/Observable";
 
 import { CorteVentaPage } from "../corte-venta/corte-venta";
 import { CorteHistorialPage } from "../corte-historial/corte-historial";
 import { AdminSucursalListPage } from "../admin-sucursal-list/admin-sucursal-list";
 import { AdminHomePage } from "../admin-home/admin-home";
-// import { AdminmesasPage } from '../adminmesas/adminmesas';
 
 @IonicPage()
 @Component({
