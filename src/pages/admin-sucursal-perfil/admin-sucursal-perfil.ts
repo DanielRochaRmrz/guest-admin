@@ -57,39 +57,35 @@ export class AdminSucursalPerfilPage {
     public loadinCtl: LoadingController,
     public toastCtrl: ToastController
   ) {
+
     this.type = localStorage.getItem('type');
+
     this.sucursal = this.navParams.get("uid");
-    // this.sucursal = localStorage.getItem('uidSucursal')
-    console.log("uid sucursal", this.sucursal);
+
+    // console.log("uid sucursal", this.sucursal);
+
     this.usertipo = this.navParams.get("usertipo");
-    console.log("user tipo en perfil", this.usertipo);
+
+    // console.log("user tipo en perfil", this.usertipo);
+
     SucProv.getSucursal(this.sucursal).subscribe((s) => {
       this.sucursales = s;
-      console.log("sucursal", this.sucursales);
+      // console.log("sucursal", this.sucursales);
     });
+
     SucProv.getImagenSucursal(this.sucursal).subscribe((sucur) => {
       this.sucursal_croquis = sucur;
-      console.log("sucursal croquis", this.sucursal_croquis);
+      // console.log("sucursal croquis", this.sucursal_croquis);
     });
 
     this.usuario = localStorage.getItem("uid");
-    //this.usuario = this.navParams.get('usuario');
-    // this.areas = afDB.list('areas/'+this.sucursal+'/').snapshotChanges().map(data => {
-    //   return data.map(s => ({ key: s.payload.key, ...s.payload.val() }));
-
-    // });
-    // this.zonas = afDB.list('zonas/').snapshotChanges().map(data => {
-    //   return data.map(s => ({ key: s.payload.key, ...s.payload.val() }));
-    // });
 
     this.tipo = localStorage.getItem("type");
-    console.log("tipo de usuario", this.tipo);
+    // console.log("tipo de usuario", this.tipo);
   }
 
   ionViewDidLoad() {
-    console.log(this.sucursal);
-    // console.log(this.sucursalItem);
-    // console.log('ionViewDidLoad AdminSucursalPerfilPage');
+    // console.log(this.sucursal);
     this.getAreas();
     this.getZonas();
   }
@@ -98,22 +94,24 @@ export class AdminSucursalPerfilPage {
     this.authProvider.logout();
     this.navCtrl.setRoot(LoginPage);
   }
+
   goEditPerfil(sucursalItem: Credenciales) {
     this.navCtrl.push(
       AdminSucursalEditperfilPage,
       (this.SucProv.selectedSucursalItem = Object.assign({}, sucursalItem))
     );
-    console.log("sucursal item", sucursalItem);
+    // console.log("sucursal item", sucursalItem);
   }
+
   goCorteVentas(sucursalItem: Credenciales) {
     this.navCtrl.push(
       CorteVentaPage,
       (this.SucProv.selectedSucursalItem = Object.assign({}, sucursalItem))
     );
-    //console.log('sucursal item',sucursalItem);
   }
+
   goCorteHistorial(sucursalItem: Credenciales) {
-    console.log("Historial-Corte");
+    // console.log("Historial-Corte");
     this.navCtrl.push(
       CorteHistorialPage,
       (this.SucProv.selectedSucursalItem = Object.assign({}, sucursalItem))
@@ -123,6 +121,7 @@ export class AdminSucursalPerfilPage {
   goEditArquitectura(idSucursal) {
     this.navCtrl.push(AdminSucursalCroquisPage, { idSucursal: idSucursal });
   }
+
   goEditPerfilImagen(uid) {
     this.navCtrl.push(AdminSucursalEditperfilImagenPage, { uid: uid });
   }
@@ -145,7 +144,7 @@ export class AdminSucursalPerfilPage {
           text: "Cancelar",
           role: "cancel",
           handler: (data) => {
-            console.log("Cancel clicked");
+            // console.log("Cancel clicked");
           },
         },
         {
@@ -178,14 +177,14 @@ export class AdminSucursalPerfilPage {
       let longitud = this.areas.length;
       console.log("Esta es la longitud: ", longitud);
 
-      console.log("Areas JAJA: ", this.areas);
+      // console.log("Areas JAJA: ", this.areas);
     });
   }
 
   getZonas() {
     this.SucProv.getZonas(this.sucursal).subscribe((zonas) => {
       this.zonas = zonas;
-      console.log("Zonas: ", this.zonas);
+      // console.log("Zonas: ", this.zonas);
     });
   }
 
@@ -319,7 +318,7 @@ export class AdminSucursalPerfilPage {
           text: "Cancelar",
           role: "cancel",
           handler: (data) => {
-            console.log("Cancel clicked");
+            // console.log("Cancel clicked");
           },
         },
         {
@@ -345,7 +344,7 @@ export class AdminSucursalPerfilPage {
           text: "Cancelar",
           role: "cancel",
           handler: (data) => {
-            console.log("Cancel clicked");
+            // console.log("Cancel clicked");
             // this.navCtrl.setPages([{page:'AdminSucursalPerfilPage'}]);
           },
         },
@@ -369,7 +368,7 @@ export class AdminSucursalPerfilPage {
           text: "Cancelar",
           role: "cancel",
           handler: (data) => {
-            console.log("Cancel clicked");
+            // console.log("Cancel clicked");
             // this.navCtrl.setPages([{page:'AdminSucursalPerfilPage'}]);
           },
         },
@@ -383,8 +382,6 @@ export class AdminSucursalPerfilPage {
     });
     alert.present();
 
-    //this.navCtrl.setPages([{page:'AdminSucursalListPage'}]);
-    //  this.navCtrl.push(AdminSucursalListPage);
     this.navCtrl.setRoot(AdminSucursalListPage);
   }
 
@@ -435,7 +432,7 @@ export class AdminSucursalPerfilPage {
           text: "Cancelar",
           role: "cancel",
           handler: (data) => {
-            console.log("Cancel clicked");
+            // console.log("Cancel clicked");
           },
         },
         {
@@ -495,15 +492,15 @@ export class AdminSucursalPerfilPage {
   }
 
   behind() {
-    if (this.tipo == "a") {
+    if (this.tipo == "a" || this.tipo == "coordinacion") {
 
       this.navCtrl.setRoot(AdminHomePage);
 
     } else if (this.tipo == "master") {
 
       this.navCtrl.setRoot(AdminSucursalListPage);
-      
+
     }
-    
+
   }
 }

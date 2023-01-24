@@ -38,15 +38,21 @@
 
                 <ion-list>
 
-                    <div *ngIf="_sucursal?.type == 'a'">
-                        <button ion-item (click)="goPerfilSucursal(_userEmpleado?.uid)">
+                    <div *ngIf="_sucursal?.type == 'a' || _userEmpleado?.type == 'coordinacion'">
+                        <button *ngIf="_sucursal?.type == 'a'" ion-item (click)="goPerfilSucursal(_userEmpleado?.uid)">
+                            <p>
+                                <ion-icon ios="ios-cog" md="md-cog" style="color: #FD9530"></ion-icon> Config.
+                            </p>
+                        </button>
+
+                        <button *ngIf="_userEmpleado?.type == 'coordinacion'" ion-item (click)="goPerfilSucursal(_userEmpleado?.uidSucursal)">
                             <p>
                                 <ion-icon ios="ios-cog" md="md-cog" style="color: #FD9530"></ion-icon> Config.
                             </p>
                         </button>
                     </div>
 
-                    <div *ngIf="_userEmpleado?.type == 'e' || _userEmpleado?.type == 'master' ">
+                    <div *ngIf="_userEmpleado?.type == 'e' || _userEmpleado?.type == 'master'">
 
                         <button ion-item (click)="goPerfilEmpleado(_userEmpleado.uid)">
                             <p>
@@ -208,12 +214,12 @@
                 </ion-badge>
             </ion-item>
 
-            <ion-item (click)="goTools(this.sucursal)">
+            <!-- <ion-item (click)="goTools(this.sucursal)">
                 <img item-start class="imgRes4" src="./assets/content/icono3.png"> Herramientas
                 <ion-badge class="buttonColor" item-end>
                     <ion-icon ios="ios-arrow-forward" md="md-arrow-forward" style="color:white"></ion-icon>
                 </ion-badge>
-            </ion-item>
+            </ion-item> -->
 
         </div>
 

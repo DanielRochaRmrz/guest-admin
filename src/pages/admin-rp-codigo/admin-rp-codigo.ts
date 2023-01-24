@@ -71,7 +71,7 @@ export class AdminRpCodigoPage {
               .collection("users", (ref) =>
                 ref
                   .where("uidSucursal", "==", uidSucursal)
-                  .where("type", "==", "rp")
+                  .where("type", 'in', ['rp', 'coordinacion'])
               )
 
               .valueChanges()

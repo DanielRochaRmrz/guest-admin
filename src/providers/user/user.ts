@@ -54,7 +54,7 @@ export class UserProvider {
 
     // SI EL USUARIO SE REGISTRA COMO RP
 
-    if(newuser.type == "rp"){
+    if(newuser.type == "rp" || newuser.type == "coordinacion"){
 
      // REGISTRAMOS EN LA BD AL USUARIO TIPO RP
 
