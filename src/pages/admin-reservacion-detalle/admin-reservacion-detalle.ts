@@ -144,11 +144,12 @@ export class AdminReservacionDetallePage {
 
           this.subTotal = this.comision + this.total_final;
 
-          this.iva = this.subTotal * .16;
+          // this.iva = this.subTotal * .16;
 
           this.propinaRe2 = this.total_final * res2[0].propina;
 
-          this.totalNeto = this.subTotal + this.iva + this.propinaRe2;
+          // this.totalNeto = this.subTotal + this.iva + this.propinaRe2;
+          this.totalNeto = this.subTotal + this.propinaRe2;
 
         });
       } else {
@@ -173,11 +174,12 @@ export class AdminReservacionDetallePage {
 
           this.subTotal = this.comision + res2[0].totalReservacion;
 
-          this.iva = this.subTotal * .16;
+          // this.iva = this.subTotal * .16;
 
           this.propinaRe = this.subTotal * res2[0].propina;
 
-          this.totalNeto = this.subTotal + this.iva + this.propinaRe;
+          // this.totalNeto = this.subTotal + this.iva + this.propinaRe;
+          this.totalNeto = this.subTotal + this.propinaRe;
 
 
         });
