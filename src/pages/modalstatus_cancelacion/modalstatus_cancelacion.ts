@@ -42,7 +42,7 @@ export class Modalstatus_cancelacionPage {
 
     this.myForm = this.fb.group({     
       motivo: ["", [Validators.required]],
-      status: ["", [Validators.required]]
+      status: [""]
     });
 
      console.log("Motivo seleccionada: ", this.data.motivo);
