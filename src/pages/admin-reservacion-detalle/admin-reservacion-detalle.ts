@@ -43,6 +43,7 @@ export class AdminReservacionDetallePage {
   totalNeReembolso: any;
   totalReembolso: any;
   restaReembolso: any;
+  comisionMasIva; any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -140,7 +141,11 @@ export class AdminReservacionDetallePage {
 
           this.total_final = this.productos_total.reduce((acc, obj) => acc + obj.total, 0);
 
-          this.comision = this.total_final * .059;
+          this.comision = this.total_final * 0.059;
+
+          this.iva = this.comision * 0.16;
+
+          this.comisionMasIva = this.comision + this.iva;
 
           this.subTotal = this.comision + this.total_final;
 
@@ -148,8 +153,8 @@ export class AdminReservacionDetallePage {
 
           this.propinaRe2 = this.total_final * res2[0].propina;
 
-          // this.totalNeto = this.subTotal + this.iva + this.propinaRe2;
-          this.totalNeto = this.subTotal + this.propinaRe2;
+          this.totalNeto = this.subTotal + this.iva + this.propinaRe2;
+          // this.totalNeto = this.subTotal + this.propinaRe2;
 
         });
       } else {
@@ -170,7 +175,11 @@ export class AdminReservacionDetallePage {
 
           });
 
-          this.comision = res2[0].totalReservacion * .059;
+          this.comision = res2[0].totalReservacion * 0.059;
+
+          this.iva = this.comision * 0.16;
+
+          this.comisionMasIva = this.comision + this.iva;
 
           this.subTotal = this.comision + res2[0].totalReservacion;
 
@@ -178,8 +187,8 @@ export class AdminReservacionDetallePage {
 
           this.propinaRe = this.subTotal * res2[0].propina;
 
-          // this.totalNeto = this.subTotal + this.iva + this.propinaRe;
-          this.totalNeto = this.subTotal + this.propinaRe;
+          this.totalNeto = this.subTotal + this.iva + this.propinaRe;
+          // this.totalNeto = this.subTotal + this.propinaRe;
 
 
         });
