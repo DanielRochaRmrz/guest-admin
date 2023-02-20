@@ -456,11 +456,13 @@ export class GestionReservacionesProvider {
 
   aceptarReservacion(idx) {
     var promise = new Promise((resolve, reject) => {
+      const date_acept = firebase.firestore.FieldValue.serverTimestamp();
       this.db
         .collection("reservaciones")
         .doc(idx)
         .update({
           estatus: "Aceptado",
+          date_acept: date_acept
         })
         .then(() => {
           resolve(true);
@@ -486,11 +488,13 @@ export class GestionReservacionesProvider {
 
   aceptarReservacionCompartida(idx) {
     var promise = new Promise((resolve, reject) => {
+      const date_acept = firebase.firestore.FieldValue.serverTimestamp();
       this.db
         .collection("reservaciones")
         .doc(idx)
         .update({
           estatus: "AceptadoCompartida",
+          date_acept: date_acept
         })
         .then(() => {
           resolve(true);

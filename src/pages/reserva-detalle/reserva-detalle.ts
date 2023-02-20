@@ -167,18 +167,16 @@ export class ReservaDetallePage {
         this.estatusReser.forEach((data) => {
           if (data.estatus == "Creando") {
             this._gestionReser.aceptarReservacion(idReserv);
-
             this.navCtrl.setRoot(AdministrarReservacionesPage);
+            this.getUsersPushNotiAceptada();
           }
           if (data.estatus == "CreadaCompartida") {
             this._gestionReser.aceptarReservacionCompartida(idReserv);
-
             this.navCtrl.setRoot(AdministrarReservacionesPage);
+            this.getUsersPushNotiAceptada();
           }
         });
       });
-
-      this.getUsersPushNotiAceptada();
     } else {
       const alert = this.alertCtrl.create({
         title: "No se ha asignado una mesa a esta reservación",
@@ -200,7 +198,31 @@ export class ReservaDetallePage {
           const data = {
             topic: users.playerID,
             title: "Reservación aceptada",
-            body: "Hola " + users.displayName + " tu reservación fue aceptada.",
+            body: "Hola " + users.displayName + " tu reservación fue aceptada. ",
+          };
+          this.sendNoti.sendPushNoti(data).then((resp: any) => {
+            console.log("Respuesta noti fcm", resp);
+            this.pushNotiTime();
+          });
+        } else {
+          console.log("Solo funciona en dispositivos");
+        }
+      }
+    });
+  }
+
+  pushNotiTime() {
+    console.log("id rese", this.reserv.idUsuario);
+
+    this._gestionReser.getMyUser(this.reserv.idUsuario).subscribe((users) => {
+      this.users = users;
+
+      if (users.playerID != undefined) {
+        if (this.platform.is("cordova")) {
+          const data = {
+            topic: users.playerID,
+            title: `Reservación ${this.reserv.folio}`,
+            body: "Evita perder tu reservación, tienes 24 hora(s) para pagar",
           };
           this.sendNoti.sendPushNoti(data).then((resp: any) => {
             console.log("Respuesta noti fcm", resp);
