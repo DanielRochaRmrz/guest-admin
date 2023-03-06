@@ -837,6 +837,20 @@ export class SucursalAltaProvider {
     ));
     //console.log('Servicio getImagenSucursal Fin', identificador);
   }
+
+  getDataSucursal(idSucursal :string){
+    
+    return new Promise((resolve, reject) => {
+      let reservaciones = this.afs.collection("sucursales").doc(idSucursal);
+      reservaciones
+        .get()
+        .subscribe((user) => {
+          const us = user.data();
+            resolve(JSON.stringify(us));
+            
+        });
+    });
+  }
 }
 
 export class Credenciales {

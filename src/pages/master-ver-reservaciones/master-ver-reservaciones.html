@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-row>
+      <ion-col>
+        <ion-icon class="iconBh" name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-title>Reservaciones</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row>
+    <ion-col col-9>
+      <h3>
+        <b>Master</b>
+        <div class="detalle">Admon. Reservaciones</div>
+      </h3>
+    </ion-col>
+  </ion-row>
+
+  <hr>
+
+  <div class="content" scrollable (scrollPosition)="scrollHandler($event)">
+    <div class="container">
+      <ion-list *ngFor="let reservacion of page.data | async">
+        <ion-item (click)="goDetalle(reservacion.idReservacion)">
+          <ion-avatar item-start>
+            <img src="../../assets/imgs/icons/amarillo.png">
+          </ion-avatar>
+          <h2>{{ (reservacion.idSucursal | getsucursal | async)?.displayName }} (No. Personas: {{reservacion.numPersonas}})</h2>
+          <h3>Folio: {{ reservacion.folio }} </h3>
+          <p>fecha: {{reservacion.fechaR | date: 'dd-MM-yyyy'}}, Hora: {{reservacion.hora}} </p>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+
+
+</ion-content>

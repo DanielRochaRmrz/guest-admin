@@ -7,6 +7,7 @@ import { GetNameEventoPipe } from "./get-name-evento/get-name-evento";
 import { GetNameZonaPipe } from "./get-name-zona/get-name-zona";
 import { GetNamexphoneUserPipe } from "./get-namexphone-user/get-namexphone-user";
 import { GetCompartidasPipe } from './get-compartidas/get-compartidas';
+import { GetsucursalPipe } from './getsucursal/getsucursal';
 @NgModule({
   declarations: [
     PlaceHolderPipe,
@@ -16,7 +17,8 @@ import { GetCompartidasPipe } from './get-compartidas/get-compartidas';
     GetNameEventoPipe,
     GetNameZonaPipe,
     GetNamexphoneUserPipe,
-    GetCompartidasPipe
+    GetCompartidasPipe,
+    GetsucursalPipe
   ],
   imports: [],
   exports: [
@@ -27,7 +29,8 @@ import { GetCompartidasPipe } from './get-compartidas/get-compartidas';
     GetNameEventoPipe,
     GetNameZonaPipe,
     GetNamexphoneUserPipe,
-    GetCompartidasPipe
+    GetCompartidasPipe,
+    GetsucursalPipe
   ],
 })
 export class PipesModule {}

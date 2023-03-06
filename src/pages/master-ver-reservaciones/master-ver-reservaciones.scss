@@ -1,0 +1,27 @@
+page-master-ver-reservaciones {
+
+    .toolbar-background {
+        background-image: url('../assets/imgs/proriat.png') !important;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .detalle {
+        color: #cecece;
+        margin-top: -8px;
+        text-transform: uppercase;
+    }
+
+    .content {
+        overflow: scroll;
+        max-height: 100vh;
+        width: 100vw;
+        margin: auto;
+    }
+
+    .container {
+        height: 900px;
+        margin-right: 2em;
+    }
+}

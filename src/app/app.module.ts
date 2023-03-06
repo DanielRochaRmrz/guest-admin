@@ -139,6 +139,7 @@ import { registerLocaleData } from "@angular/common";
 import { MasterReembolsosPage } from '../pages/master-reembolsos/master-reembolsos';
 import { ReembolsosPage } from '../pages/reembolsos/reembolsos';
 import { ReembolsosProvider } from '../providers/reembolsos/reembolsos';
+import { MasterVerReservacionesPage } from '../pages/master-ver-reservaciones/master-ver-reservaciones';
 registerLocaleData(localeEsMX, 'es-MX');
 
  firebase.initializeApp(firebaseConfig);
@@ -217,6 +218,7 @@ registerLocaleData(localeEsMX, 'es-MX');
     CuentasHistorialListPage,
     MasterReembolsosPage,
     ReembolsosPage,
+    MasterVerReservacionesPage,
   ],
   imports: [
     BrowserModule,
@@ -308,6 +310,7 @@ registerLocaleData(localeEsMX, 'es-MX');
     CuentasHistorialListPage,
     MasterReembolsosPage,
     ReembolsosPage,
+    MasterVerReservacionesPage,
   ],
   providers: [
     StatusBar,

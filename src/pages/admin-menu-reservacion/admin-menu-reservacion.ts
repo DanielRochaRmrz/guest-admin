@@ -19,6 +19,7 @@ import { AdminHomePage } from "../admin-home/admin-home";
 import { AdminRpCodigoPage } from "../admin-rp-codigo/admin-rp-codigo";
 import { CuentasListPage } from "../cuentas-list/cuentas-list";
 import { MasterReembolsosPage } from "../master-reembolsos/master-reembolsos";
+import { MasterVerReservacionesPage } from "../master-ver-reservaciones/master-ver-reservaciones";
 
 @IonicPage()
 @Component({
@@ -138,6 +139,11 @@ export class AdminMenuReservacionPage {
     this.uids = localStorage.getItem("uidSucursal");
 
     this.navCtrl.push(AdminRpCodigoPage, { uidRp: this.uids });
+  }
+
+  goReservacionesGrals(){
+
+    this.navCtrl.push(MasterVerReservacionesPage);
   }
 
   salir() {
