@@ -1,10 +1,10 @@
 <ion-header>
 
-    <ion-navbar class="borde" hideBackButton >
+    <ion-navbar class="borde" hideBackButton>
         <ion-row>
             <ion-col col-1>
                 <!-- <ion-icon name="ios-arrow-back-outline" (click)="behind()" style="color:white"></ion-icon> -->
-                  </ion-col>
+            </ion-col>
             <ion-col col-1 align="center">
                 <img src="./assets/content/line2.png" class="imgLi" alt="">
             </ion-col>
@@ -26,7 +26,8 @@
 <ion-content padding>
 
     <ion-fab right top>
-        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back" style="color: #000000"></ion-icon></button>
+        <button ion-fab color="primary" (click)="behind()"><ion-icon ios="ios-arrow-back" md="md-arrow-back"
+                style="color: #000000"></ion-icon></button>
     </ion-fab>
 
     <ion-row>
@@ -52,11 +53,11 @@
             </ion-card>
             <ion-card class="descripcion">
                 <!-- <ion-item *ngFor="let evento of eventos | async" (click)=" selectEventoItem(evento)" no-line> -->
-                    <ion-item *ngFor="let evento of eventoss" (click)=" selectEventoItem(evento)" no-line>
+                <ion-item *ngFor="let evento of eventoss" (click)=" selectEventoItem(evento)" no-line>
                     <ion-avatar item-start>
                         <img [src]="evento.img">
                     </ion-avatar>
-                    
+
                     <h2>
                         {{evento.titulo}}</h2>
                     <p>{{evento.categoria}}</p>
@@ -66,19 +67,15 @@
         <ion-col col-1></ion-col>
     </ion-row>
 
-    <!-- <ion-list>
-
-        <ion-list-header>
-            Administración de eventos
-        </ion-list-header>
-        <ion-item *ngFor="let evento of eventos | async" (click)=" selectEventoItem(evento)">
+    <ion-list>
+        <ion-item *ngFor="let evento of eventos" (click)=" selectEventoItem(evento)">
             <ion-avatar item-start>
                 <img [src]="evento.img">
             </ion-avatar>
             <h2>{{evento.titulo}}</h2>
             <p>{{evento.categoria}}</p>
         </ion-item>
-    </ion-list> -->
+    </ion-list>
     <!-- <ion-fab left bottom>
         <button ion-fab color="light">
             <ion-icon name="arrow-dropright"></ion-icon>

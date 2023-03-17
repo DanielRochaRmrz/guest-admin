@@ -19,7 +19,7 @@ export class AdminEventoHomePage {
   //hayMas:boolean= true;
   // eventos: Observable<any[]>
   eventos: any;
-  eventoss:any;
+  eventoss: any;
   @ViewChild('myNav') nav: NavController;
   sucursal: any;
   uid: string;
@@ -36,40 +36,33 @@ export class AdminEventoHomePage {
   ) {
 
     this.sucursal = this.firebase.auth.currentUser;
-    console.log("sucursal acual");
-    console.log(this.sucursal);
-    console.log(this.sucursal.uid);
+
     if (this.sucursal != null) {
+
       this.uid = this.sucursal.uid;
+
       //Cuando es un usuario se saca el id de la sucursala ala que pertenece
+
       this.afs.collection('users', ref => ref.where('uid', '==', this.uid)).valueChanges().subscribe(data => {
+
         this.sucursales = data;
+
         this.sucursales.forEach(element => {
+
           const uidSucursal = element.uidSucursal;
-          console.log("sucursal acual del user");
-          console.log(uidSucursal);
-          //  this.eventos = this.afs.collection('evento', ref => ref.where('uidSucursal', '==', uidSucursal))
-          //  .valueChanges();
-          //  console.log("Estos son los eventos en primera funcion", this.eventos);
+
           this.afs.collection('evento', ref => ref.where('uidSucursal', '==', uidSucursal)).valueChanges().subscribe(data => {
             this.eventos = data;
-            console.log("Estos son los eventos en primera funcion", this.eventos);
           });
 
         });
       });
-      // this.eventos = this.afs.collection('evento', ref => ref.where('uidSucursal', '==', this.uid))
-      // .valueChanges();
-      // console.log("Estos son los eventos en seg funcion", this.eventos);
+
       this.afs.collection('evento', ref => ref.where('uidSucursal', '==', this.uid)).valueChanges().subscribe(data => {
         this.eventoss = data;
-        console.log("Estos son los eventos en segunda funcion", this.eventoss);
       });
 
     }
-
-    // this.eventos = afDB.list('evento').valueChanges();
-
 
   }
   // doInfinite(infiniteScroll) {
@@ -124,7 +117,7 @@ export class AdminEventoHomePage {
     }).present();
 
   }
-  behind(){
+  behind() {
     this.navCtrl.setRoot(AdminHomePage);
   }
 }
