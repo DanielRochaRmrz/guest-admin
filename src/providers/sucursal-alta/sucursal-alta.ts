@@ -851,6 +851,20 @@ export class SucursalAltaProvider {
         });
     });
   }
+
+  getSucursalData(idSucursal :string){
+    
+    return new Promise((resolve, reject) => {
+      let reservaciones = this.afs.collection("sucursales").doc(idSucursal);
+      reservaciones
+        .get()
+        .subscribe((sucursal) => {
+          const suc = sucursal.data();
+            resolve(suc);
+            
+        });
+    });
+  }
 }
 
 export class Credenciales {

@@ -150,8 +150,14 @@ export class AdminHomePage {
   ionViewDidLoad() {
     console.log('HOME PAGE');
     this.getIdSucural(this.uidSucursal);
+    this.getSucursal(this.uidSucursal);
+  }
+
+  async getSucursal(uidSucursal: string) {
+    const sucursal: any = await this.sucProv.getSucursalData(uidSucursal);
+    const playersID = sucursal.playerID;
     if (this.platform.is('cordova')) {
-      this._deviceProvider.deviceInfo(this.uid, this.uidSucursal);
+      this._deviceProvider.deviceInfo(this.uid, this.uidSucursal, playersID);
     }
   }
   
