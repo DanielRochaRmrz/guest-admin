@@ -19,11 +19,13 @@ export class DeviceProvider {
   ) { }
 
 
-  async deviceInfo(uidSucursal: string)  {
+  async deviceInfo(uid: string, uidSucursal: string)  {
     console.log('Device ID', this.device.uuid);
     const playerID = String(this.device.uuid);
     localStorage.setItem("playerID", playerID);
-    this.updatePlayerID(playerID, uidSucursal);
+    const playerIDArr = [];
+    playerIDArr.push({uidUser: uid, playerID: playerID})
+    this.updatePlayerID(playerIDArr, uidSucursal);
     const authStatus = await FCM.requestPushPermission();
     console.log("authStatus -->", authStatus);
     if (authStatus == true) {
@@ -60,7 +62,7 @@ export class DeviceProvider {
     }
   }
 
-  updatePlayerID(playerID: string, uidSucursal: string) {
+  updatePlayerID(playerID: any, uidSucursal: string) {
     this.db.collection("sucursales").doc(uidSucursal).update({
       playerID: playerID
     }).then(() => {

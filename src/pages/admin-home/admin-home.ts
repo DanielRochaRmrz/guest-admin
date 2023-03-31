@@ -70,6 +70,8 @@ export class AdminHomePage {
     console.log("Esta es la sucursal: ", this.sucursal);
 
       this.uid = localStorage.getItem("uid");
+
+      this.uidSucursal = localStorage.getItem("uidSucursal");
       
       this.email = localStorage.getItem("emailUser");
 
@@ -147,9 +149,9 @@ export class AdminHomePage {
 
   ionViewDidLoad() {
     console.log('HOME PAGE');
-    this.getIdSucural(this.uid);
+    this.getIdSucural(this.uidSucursal);
     if (this.platform.is('cordova')) {
-      this._deviceProvider.deviceInfo(this.uid);
+      this._deviceProvider.deviceInfo(this.uid, this.uidSucursal);
     }
   }
   
