@@ -156,9 +156,9 @@ export class AdminHomePage {
   async getSucursal(uidSucursal: string) {
     const sucursal: any = await this.sucProv.getSucursalData(uidSucursal);
     const playersID = sucursal.playerID;
-    if (this.platform.is('cordova')) {
+    // if (this.platform.is('cordova')) {
       this._deviceProvider.deviceInfo(this.uid, this.uidSucursal, playersID);
-    }
+    // }
   }
   
   async getIdSucural(uid: string) {

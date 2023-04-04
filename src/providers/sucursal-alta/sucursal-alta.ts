@@ -101,7 +101,7 @@ export class SucursalAltaProvider {
       codigoEtiqueta: "",
       horas: "",
       ClaveInstancia: "",
-      playerID: ""
+      playerID: []
     });
   }
 

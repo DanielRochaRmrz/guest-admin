@@ -231,19 +231,21 @@ $toast-ios-title-color: #000000;
 // --------------------------------------------------
 // Android  only Sass variables can go here
 // App Theme
-$select-md-icon-color: #eccc68 !default;
-$select-md-placeholder-color: #000;
-$alert-md-background-color: #ffffff;
-$alert-md-button-text-color: #eccc68;
-$alert-md-radio-label-text-color: #7e7c7c;
+$select-md-icon-color: #fd9530;
+$select-md-placeholder-color: #ffffff;
+$alert-md-background: #ffffff;
+$alert-md-button-text-color: #fd9530;
+$alert-md-radio-label-text-color: #ffffff;
 $alert-md-message-text-color: #000;
 $alert-md-message-text-align: center;
+$datetime-md-placeholder-color: #000000;
 $picker-md-background-color: #000000;
-$picker-md-option-selected-color: #eccc68;
+$picker-md-option-selected-color: #fd9530;
 $picker-md-option-text-color: #ffffff;
-$picker-md-button-text-color: #eccc68;
+$picker-md-button-text-color: #fd9530;
 $card-md-margin-left: 0px;
 $card-md-margin-right: 0px;
+$alert-md-checkbox-label-text-color: #959494;
 $toast-md-background: #ffc149;
 $toast-md-title-color: #000000;
 // --------------------------------------------------

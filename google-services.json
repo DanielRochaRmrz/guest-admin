@@ -95,6 +95,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853477386824:android:3868e2712889c0f2b0867d",
+        "android_client_info": {
+          "package_name": "com.guestvenues.guest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853477386824-kt4bl5ccfs8hgfm255i3384fhb6e50jq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxT8ST1ODjfCBA5fqQoXtH174X-n9KQro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853477386824-kt4bl5ccfs8hgfm255i3384fhb6e50jq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "853477386824-bttnoko079htcbp17dcfb4463ua97mq9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.guestreservations.guest03",
+                "app_store_id": "1526404114"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

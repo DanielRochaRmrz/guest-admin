@@ -18,66 +18,18 @@ export class DeviceProvider {
   ) {}
 
   async deviceInfo(uid: string, uidSucursal: string, playersId: any) {
-    console.log("playersId", playersId);
+    console.log("playersId", typeof playersId);
 
-    // Consultar si el uid de usuario ya existe en el arreglo
-    const existUidUser = playersId.map((d: any) => d.uidUser).includes(uid);
-
-    console.log("existUidUser -->", existUidUser);
-
-    if (existUidUser) {
-      // Consultar el indice del uid usuario
-      const getUidUserIndex = playersId.map((d: any) => d.uidUser).indexOf(uid);
-
-      console.log("getUidUserIndex -->", getUidUserIndex);
-
-      const playerID = String(this.device.uuid);
-      localStorage.setItem("playerID", playerID);
-      playersId[getUidUserIndex].playerID = playerID;
-      this.updatePlayerID(playersId, uidSucursal);
-
-      const authStatus = await FCM.requestPushPermission();
-      console.log("authStatus -->", authStatus);
-      if (authStatus == true) {
-        FCM.subscribeToTopic(playerID);
-
-        if (this.platform.is("ios")) {
-          let fcmToken = await FCM.getAPNSToken();
-          console.log("fcmToken -->", fcmToken);
-          localStorage.setItem("tokenPush", fcmToken);
-        }
-
-        if (this.platform.is("android")) {
-          let fcmToken = await FCM.getToken();
-          console.log("fcmToken -->", fcmToken);
-          localStorage.setItem("tokenPush", fcmToken);
-        }
-
-        FCM.onNotification().subscribe(
-          (data) => {
-            if (data.wasTapped) {
-              //cuando nuestra app esta en segundo plano
-              console.log("Estamos en segundo plano", JSON.stringify(data));
-            } else {
-              //ocurre cuando nuestra app esta en primer plano
-              console.log("Estamos en primer plano", JSON.stringify(data));
-            }
-          },
-          (error) => {
-            console.log("Error -->", error);
-          }
-        );
-      }
-    } else {
-      
-      const userInfo = {
+    if (typeof playersId === "string") {
+      const userInfoArr = [] 
+      const userInfo = [{
         playerID: String(this.device.uuid),
-        uidUser: uid
-      }
-      
-      playersId.push(userInfo);
+        uidUser: uid,
+      }];
 
-      this.updatePlayerID(playersId, uidSucursal);
+      userInfoArr.push(userInfo);
+
+      this.updatePlayerID(userInfo, uidSucursal);
 
       const authStatus = await FCM.requestPushPermission();
       console.log("authStatus -->", authStatus);
@@ -110,6 +62,100 @@ export class DeviceProvider {
             console.log("Error -->", error);
           }
         );
+      }
+    } else {
+      // Consultar si el uid de usuario ya existe en el arreglo
+      const existUidUser = playersId.map((d: any) => d.uidUser).includes(uid);
+
+      console.log("existUidUser -->", existUidUser);
+
+      if (existUidUser) {
+        // Consultar el indice del uid usuario
+        const getUidUserIndex = playersId
+          .map((d: any) => d.uidUser)
+          .indexOf(uid);
+
+        console.log("getUidUserIndex -->", getUidUserIndex);
+
+        const playerID = String(this.device.uuid);
+        localStorage.setItem("playerID", playerID);
+        playersId[getUidUserIndex].playerID = playerID;
+        this.updatePlayerID(playersId, uidSucursal);
+
+        const authStatus = await FCM.requestPushPermission();
+        console.log("authStatus -->", authStatus);
+        if (authStatus == true) {
+          FCM.subscribeToTopic(playerID);
+
+          if (this.platform.is("ios")) {
+            let fcmToken = await FCM.getAPNSToken();
+            console.log("fcmToken -->", fcmToken);
+            localStorage.setItem("tokenPush", fcmToken);
+          }
+
+          if (this.platform.is("android")) {
+            let fcmToken = await FCM.getToken();
+            console.log("fcmToken -->", fcmToken);
+            localStorage.setItem("tokenPush", fcmToken);
+          }
+
+          FCM.onNotification().subscribe(
+            (data) => {
+              if (data.wasTapped) {
+                //cuando nuestra app esta en segundo plano
+                console.log("Estamos en segundo plano", JSON.stringify(data));
+              } else {
+                //ocurre cuando nuestra app esta en primer plano
+                console.log("Estamos en primer plano", JSON.stringify(data));
+              }
+            },
+            (error) => {
+              console.log("Error -->", error);
+            }
+          );
+        }
+      } else {
+        const userInfo = {
+          playerID: String(this.device.uuid),
+          uidUser: uid,
+        };
+
+        playersId.push(userInfo);
+
+        this.updatePlayerID(playersId, uidSucursal);
+
+        const authStatus = await FCM.requestPushPermission();
+        console.log("authStatus -->", authStatus);
+        if (authStatus == true) {
+          FCM.subscribeToTopic(String(this.device.uuid));
+
+          if (this.platform.is("ios")) {
+            let fcmToken = await FCM.getAPNSToken();
+            console.log("fcmToken -->", fcmToken);
+            localStorage.setItem("tokenPush", fcmToken);
+          }
+
+          if (this.platform.is("android")) {
+            let fcmToken = await FCM.getToken();
+            console.log("fcmToken -->", fcmToken);
+            localStorage.setItem("tokenPush", fcmToken);
+          }
+
+          FCM.onNotification().subscribe(
+            (data) => {
+              if (data.wasTapped) {
+                //cuando nuestra app esta en segundo plano
+                console.log("Estamos en segundo plano", JSON.stringify(data));
+              } else {
+                //ocurre cuando nuestra app esta en primer plano
+                console.log("Estamos en primer plano", JSON.stringify(data));
+              }
+            },
+            (error) => {
+              console.log("Error -->", error);
+            }
+          );
+        }
       }
     }
   }
