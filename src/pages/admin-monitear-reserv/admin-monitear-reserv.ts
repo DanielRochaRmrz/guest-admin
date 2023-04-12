@@ -167,7 +167,7 @@ export class AdminMonitearReservPage {
 
     this.page.initMonitorReservaciones('reservaciones', 'fechaR', { reverse: true, prepend: false }, this.uidSucursal);
 
-    this.getUsersPushCancelar(usuarioID) 
+    // this.getUsersPushCancelar(usuarioID) 
     
   }
 

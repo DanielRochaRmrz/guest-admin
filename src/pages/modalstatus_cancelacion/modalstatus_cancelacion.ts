@@ -71,7 +71,7 @@ export class Modalstatus_cancelacionPage {
 
     this._providerReserva.borrarRegistroUsuarioCodigoRP(this.idReserv);
 
-    this.getUsersPushCancelar() 
+    // this.getUsersPushCancelar() 
 
     this.closeModal();
     

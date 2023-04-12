@@ -168,12 +168,12 @@ export class ReservaDetallePage {
           if (data.estatus == "Creando") {
             this._gestionReser.aceptarReservacion(idReserv);
             this.navCtrl.setRoot(AdministrarReservacionesPage);
-            this.getUsersPushNotiAceptada();
+            // this.getUsersPushNotiAceptada();
           }
           if (data.estatus == "CreadaCompartida") {
             this._gestionReser.aceptarReservacionCompartida(idReserv);
             this.navCtrl.setRoot(AdministrarReservacionesPage);
-            this.getUsersPushNotiAceptada();
+            // this.getUsersPushNotiAceptada();
           }
         });
       });
@@ -202,7 +202,7 @@ export class ReservaDetallePage {
           };
           this.sendNoti.sendPushNoti(data).then((resp: any) => {
             console.log("Respuesta noti fcm", resp);
-            this.pushNotiTime();
+            // this.pushNotiTime();
           });
         } else {
           console.log("Solo funciona en dispositivos");

@@ -66,7 +66,7 @@ export class AgregarCuponesPage {
     // this.sucursalProv.agregarCupon(codigoCupon,this.sucursal,this.valorCupon,this.numCupones,this.condicion,this.fechaExp,this.fechaActual);
     this.sucursalProv.agregarCupon(codigoCupon,this.sucursal.uid,this.valorCupon,this.numCupones,this.fechaExp,this.fechaActual);
     //this.navCtrl.setRoot(CuponesSucursalPage);
-   this.getUsersPusCupones();
+  //  this.getUsersPusCupones();
     // this.navCtrl.push(CuponesSucursalPage);
     this.navCtrl.setRoot(AdminMenuReservacionPage);
    

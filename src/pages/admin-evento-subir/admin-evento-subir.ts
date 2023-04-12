@@ -123,7 +123,7 @@ export class AdminEventoSubirPage {
       });
 
     // ENVIO DE NOTIFICVCION
-    this.getUsersPushEvento(archivo.titulo, archivo.lugar);
+    // this.getUsersPushEvento(archivo.titulo, archivo.lugar);
   }
 
   getUsersPushEvento(titulo, lugar) {

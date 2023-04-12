@@ -71,7 +71,7 @@ export class MasterReembolsosPage {
           text: 'Aceptar',
           handler: () => {
             
-            this.proReem.reembolsarReservacion(idPlayerUser, idReservacion);
+            // this.proReem.reembolsarReservacion(idPlayerUser, idReservacion);
             this.navCtrl.push(MasterReembolsosPage);
           }
         }

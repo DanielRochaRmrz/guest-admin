@@ -78,7 +78,7 @@ export class AdminSucursalSubirPage {
         content: 'Por favor, espere'
       });
       // loader.present();
-      this.getUsersPusSucursal(this.credentials.sucursal);
+      // this.getUsersPusSucursal(this.credentials.sucursal);
       this.ProSuc.newRegisters(this.credentials, this.sucursal);
 
       this.cerrar_modal();
