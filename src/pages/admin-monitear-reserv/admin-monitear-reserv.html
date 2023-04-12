@@ -138,7 +138,6 @@
             </ion-item>
 
             <ion-item-options
-              *ngIf="(reservaciona.fechaR <= fechaActual && reservaciona.estatus_pago != 'Pagado') || ((reservaciona.idReservacion| getCompartidas | async)?.estatus_pago != 'Pagado' && reservaciona.estatus == 'AceptadoCompartida' && reservaciona.fechaR <= fechaActual) "
               side="right"
             >
               <button
