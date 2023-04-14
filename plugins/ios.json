@@ -1,0 +1,52 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-androidx": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-stripe": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "phonegap-plugin-barcodescanner": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-fcm-with-dependecy-updated": {
+      "IOS_FIREBASE_MESSAGING_VERSION": "~> 7.4.0",
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    },
+    "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "com.guestadmin.guest"
+    }
+  },
+  "dependent_plugins": {}
+}

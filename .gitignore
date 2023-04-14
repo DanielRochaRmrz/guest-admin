@@ -1,6 +1,4 @@
 .sourcemaps
 node_modules
-platforms
-plugins
 www
 .DS_Store
