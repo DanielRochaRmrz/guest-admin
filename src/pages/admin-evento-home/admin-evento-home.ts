@@ -24,6 +24,7 @@ export class AdminEventoHomePage {
   sucursal: any;
   uid: string;
   sucursales: any;
+  uidSucursal: string;
 
   constructor(private modalctrl: ModalController,
     public navCtrl: NavController,
@@ -35,34 +36,44 @@ export class AdminEventoHomePage {
     public firebase: AngularFireAuth,
   ) {
 
-    this.sucursal = this.firebase.auth.currentUser;
+    // this.sucursal = this.firebase.auth.currentUser;
 
-    if (this.sucursal != null) {
+    this.uidSucursal = localStorage.getItem("uidSucursal");
 
-      this.uid = this.sucursal.uid;
+    this.afs.collection('evento', ref => ref.where('uidSucursal', '==', this.uidSucursal)).valueChanges().subscribe(data => {
+      this.eventos = data;
+    });
 
-      //Cuando es un usuario se saca el id de la sucursala ala que pertenece
 
-      this.afs.collection('users', ref => ref.where('uid', '==', this.uid)).valueChanges().subscribe(data => {
+    // if (this.sucursal != null) {
 
-        this.sucursales = data;
+    //   this.uid = this.sucursal.uid;
 
-        this.sucursales.forEach(element => {
+    //   console.log("this.sucursal.this.uid =>>", this.uid);
 
-          const uidSucursal = element.uidSucursal;
 
-          this.afs.collection('evento', ref => ref.where('uidSucursal', '==', uidSucursal)).valueChanges().subscribe(data => {
-            this.eventos = data;
-          });
+    //Cuando es un usuario se saca el id de la sucursala ala que pertenece
 
-        });
-      });
+    //   this.afs.collection('users', ref => ref.where('uid', '==', this.uid)).valueChanges().subscribe(data => {
 
-      this.afs.collection('evento', ref => ref.where('uidSucursal', '==', this.uid)).valueChanges().subscribe(data => {
-        this.eventoss = data;
-      });
+    //     this.sucursales = data;
 
-    }
+    //     this.sucursales.forEach(element => {
+
+    //       const uidSucursal = element.uidSucursal;
+
+    //       this.afs.collection('evento', ref => ref.where('uidSucursal', '==', uidSucursal)).valueChanges().subscribe(data => {
+    //         this.eventos = data;
+    //       });
+
+    //     });
+    //   });
+
+    //   this.afs.collection('evento', ref => ref.where('uidSucursal', '==', this.uid)).valueChanges().subscribe(data => {
+    //     this.eventoss = data;
+    //   });
+
+    // }
 
   }
   // doInfinite(infiniteScroll) {

@@ -53,7 +53,7 @@
             </ion-card>
             <ion-card class="descripcion">
                 <!-- <ion-item *ngFor="let evento of eventos | async" (click)=" selectEventoItem(evento)" no-line> -->
-                <ion-item *ngFor="let evento of eventoss" (click)=" selectEventoItem(evento)" no-line>
+                <ion-item *ngFor="let evento of eventos" (click)=" selectEventoItem(evento)" no-line>
                     <ion-avatar item-start>
                         <img [src]="evento.img">
                     </ion-avatar>
@@ -67,7 +67,7 @@
         <ion-col col-1></ion-col>
     </ion-row>
 
-    <ion-list>
+    <!-- <ion-list>
         <ion-item *ngFor="let evento of eventos" (click)=" selectEventoItem(evento)">
             <ion-avatar item-start>
                 <img [src]="evento.img">
@@ -75,7 +75,7 @@
             <h2>{{evento.titulo}}</h2>
             <p>{{evento.categoria}}</p>
         </ion-item>
-    </ion-list>
+    </ion-list> -->
     <!-- <ion-fab left bottom>
         <button ion-fab color="light">
             <ion-icon name="arrow-dropright"></ion-icon>
