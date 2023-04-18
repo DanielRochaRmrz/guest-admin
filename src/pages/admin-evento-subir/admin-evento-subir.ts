@@ -16,6 +16,7 @@ import { DeviceProvider } from '../../providers/device/device';
 export class AdminEventoSubirPage {
 
   titulo: string = "";
+  cover: any;
   fecha: string = "";
   hora: string = "";
   hora_fin: string = "";
@@ -105,6 +106,7 @@ export class AdminEventoSubirPage {
     let archivo = {
       img: this.imagen64,
       titulo: this.titulo,
+      cover: this.cover,
       fecha: this.fecha,
       hora: this.hora,
       hora_fin: this.hora_fin,
@@ -137,17 +139,17 @@ export class AdminEventoSubirPage {
         if (users.playerID != undefined) {
 
           if (this.platform.is("cordova")) {
-          
+
             const data = {
               topic: users.playerID,
-              title: "Nuevo evento en "+lugar,
-              body: "Para más información visita la app Guest y busca en la sección de eventos llamado "+ titulo + " para más información.",
+              title: "Nuevo evento en " + lugar,
+              body: "Para más información visita la app Guest y busca en la sección de eventos llamado " + titulo + " para más información.",
             };
             this.sendNoti.sendPushNoti(data).then((resp: any) => {
               console.log('Respuesta noti fcm', resp);
             });
 
-          }else {
+          } else {
             console.log("Solo funciona en dispositivos");
           }
 

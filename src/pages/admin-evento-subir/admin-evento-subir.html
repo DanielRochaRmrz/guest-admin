@@ -78,6 +78,12 @@
             <ion-label stacked >Título</ion-label>
             <ion-input type="text" class="letra" [(ngModel)]="titulo"></ion-input>
         </ion-item>
+
+        <ion-item>
+            <ion-label stacked >Cover</ion-label>
+            <ion-input type="number" class="letra" [(ngModel)]="cover"></ion-input>
+        </ion-item>
+
         <ion-item>
             <ion-label stacked>Fecha </ion-label>
             <ion-datetime item-end displayFormat="DD/MM/YYYY" [(ngModel)]="fecha" name="fecha" doneText="Aceptar" cancelText="Cancelar"></ion-datetime>

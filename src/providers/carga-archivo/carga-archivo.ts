@@ -94,6 +94,7 @@ cargar_imagen_firebase( archivo:ArchivoSubir  ){
             console.log('url', url);
             console.log('file.titulo', archivo.titulo);
             this.crear_post(archivo.titulo,
+                            archivo.cover,
                             archivo.fecha,
                             archivo.hora,
                             archivo.hora_fin,
@@ -112,6 +113,7 @@ cargar_imagen_firebase( archivo:ArchivoSubir  ){
 }
 
 private crear_post( titulo:string,
+                    cover:string,
                     fecha: string,
                     hora: string,
                     hora_fin: string,
@@ -125,6 +127,7 @@ private crear_post( titulo:string,
   let evento: ArchivoSubir = {
     img:url,
     titulo: titulo,
+    cover: cover,
     fecha: fecha,
     hora: hora,
     hora_fin: hora_fin,

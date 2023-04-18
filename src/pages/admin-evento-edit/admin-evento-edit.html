@@ -88,9 +88,15 @@
         </ion-list-header>
         <ion-input type="hidden" [(ngModel)]="_cap.selectedEventoItem.uid"></ion-input>
         <ion-input type="hidden" [(ngModel)]="_cap.selectedEventoItem.key"></ion-input>
+
         <ion-item>
             <ion-label floating>Nombre</ion-label>
             <ion-input type="text" class="letra" [(ngModel)]="_cap.selectedEventoItem.titulo"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Cover</ion-label>
+            <ion-input type="number" class="letra" [(ngModel)]="_cap.selectedEventoItem.cover"></ion-input>
         </ion-item>
 
         <ion-item>

@@ -28,6 +28,7 @@ export class AdminEventoEditPage {
     console.log(eventoItem);
    this.data ={
       titulo: this._cap.selectedEventoItem.titulo,
+      cover: this._cap.selectedEventoItem.cover,
       fecha: this._cap.selectedEventoItem.fecha,
       hora: this._cap.selectedEventoItem.hora,
       hora_fin: this._cap.selectedEventoItem.hora_fin,

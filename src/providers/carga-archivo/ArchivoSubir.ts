@@ -1,5 +1,6 @@
 export class ArchivoSubir {
   titulo: string;
+  cover: string;
   fecha: string;
   hora: string;
   hora_fin: string;
