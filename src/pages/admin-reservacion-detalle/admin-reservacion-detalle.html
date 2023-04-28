@@ -236,6 +236,48 @@
 
   <br>
 
+  <!-- Cover  -->
+
+  <div align="center" *ngIf="totalCover != 0">
+
+    <ion-icon ios="ios-list" md="md-list" item-start style="color: #fcc04d"></ion-icon>
+    <font size="2" color="#474646"> <b> Cover</b></font>
+
+    <br>
+
+  </div>
+
+  <ion-grid *ngIf="totalCover != 0">
+
+    <ion-row class="header-row">
+      <ion-col><b></b></ion-col>
+
+      <ion-col><b>No. Personas</b></ion-col>
+
+      <ion-col><b>Costo</b></ion-col>
+
+      <ion-col><b>Total cover</b></ion-col>
+
+    </ion-row>
+
+    <ion-row *ngFor="let pro of productos">
+
+      <ion-col></ion-col>
+
+      <ion-col>{{ noPersonas }} </ion-col>
+
+      <ion-col> {{ cover | currency }} </ion-col>
+
+      <ion-col> {{ totalCover | currency }} </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+  <!-- /Cover -->
+
+  <br>
+
   <!-- PRODUCTOS -->
 
   <div align="center">
@@ -291,7 +333,7 @@
           <ion-col></ion-col>
           <ion-col><b></b></ion-col>
           <ion-col>Comision</ion-col>
-          <ion-col>{{ comisionMasIva | currency}}</ion-col>
+          <ion-col>{{ comision | currency}}</ion-col>
         </ion-row>
 
         <!-- IVA -->
@@ -482,16 +524,17 @@
 
             {{ compartidas.estatus }}
 
-          <p *ngIf="compartidas.estatus_escaneo == 'NO'">
-            <ion-icon ios="ios-close-circle" md="md-close-circle" item-start style="color: #F44336"></ion-icon>
-          </p>
+            <p *ngIf="compartidas.estatus_escaneo == 'NO'">
+              <ion-icon ios="ios-close-circle" md="md-close-circle" item-start style="color: #F44336"></ion-icon>
+            </p>
 
-          <p *ngIf="compartidas.estatus_escaneo != 'NO'">
-            <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-start style="color: #CDDC39"></ion-icon>
-          </p>
+            <p *ngIf="compartidas.estatus_escaneo != 'NO'">
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-start
+                style="color: #CDDC39"></ion-icon>
+            </p>
 
           </div>
-          
+
 
           <p *ngIf="reembolso == 'Reem'">Para cliente {{ restaReembolso / infoReserCom_num | currency }}</p>
 
@@ -506,7 +549,8 @@
   </div>
 
   <button *ngIf="reembolso == 'Reem'" ion-button block
-    (click)="functionReembolsar(reservaciones.playerIDs, reservaciones.idReservacion)">Reembolsar {{ restaReembolso | currency
+    (click)="functionReembolsar(reservaciones.playerIDs, reservaciones.idReservacion)">Reembolsar {{ restaReembolso |
+    currency
     }}</button>
 
 </ion-content>

@@ -7,6 +7,7 @@ import { SucursalAltaProvider } from "../../providers/sucursal-alta/sucursal-alt
 import { GestionReservacionesProvider } from '../../providers/gestion-reservaciones/gestion-reservaciones';
 import { ReembolsosProvider } from '../../providers/reembolsos/reembolsos';
 import { MasterReembolsosPage } from '../master-reembolsos/master-reembolsos';
+import { log } from 'console';
 
 @IonicPage()
 @Component({
@@ -44,6 +45,9 @@ export class AdminReservacionDetallePage {
   totalReembolso: any;
   restaReembolso: any;
   comisionMasIva; any;
+  noPersonas: any;
+  cover: any;
+  totalCover: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -56,11 +60,11 @@ export class AdminReservacionDetallePage {
     // recibe de la vista de reembolsos
     this.reembolso = this.navParams.get("reem");
 
-    
-    if(this.reembolso == "Reembolso"){
-      
+
+    if (this.reembolso == "Reembolso") {
+
       this.reembolso = "Reem"
-      
+
       this.totalNeReembolso = this.navParams.get('totalReem');
 
       this.totalReembolso = this.totalNeReembolso * .10;
@@ -68,8 +72,8 @@ export class AdminReservacionDetallePage {
       this.restaReembolso = this.totalNeReembolso - this.totalReembolso;
 
 
-    }else{
-      
+    } else {
+
       this.reembolso = "null";
     }
 
@@ -89,7 +93,7 @@ export class AdminReservacionDetallePage {
 
       this.reservaciones = reservacion;
 
-      this.getInfoCodigoRP(this.reservaciones.codigoRP, this.reservaciones.idReservacion);      
+      this.getInfoCodigoRP(this.reservaciones.codigoRP, this.reservaciones.idReservacion);
 
     });
 
@@ -108,7 +112,7 @@ export class AdminReservacionDetallePage {
       this.infoReserCom_num = this.infoReserCom.length;
 
       console.log("this.infoReserCom_num", this.infoReserCom_num);
-      
+
 
 
     });
@@ -121,8 +125,10 @@ export class AdminReservacionDetallePage {
 
       this.uidCupon = res2[0].uidCupon;
 
-      // console.log("TABLA CUPON", res2);
+      this.cover = res2[0].cover;
 
+
+      this.noPersonas = res2[0].numPersonas;
 
       if (this.uidCupon == undefined) {
 
@@ -130,6 +136,15 @@ export class AdminReservacionDetallePage {
 
         // total de general dependiendo los productos que tenga la reservacio
         this.monRes.getProductos(this.idReservacion).subscribe(productos => {
+
+          if (this.cover == undefined) {
+
+            this.totalCover = 0;
+
+          } else {
+
+            this.totalCover = this.cover * this.noPersonas;
+          }
 
           this.productos_total = productos;
 
@@ -143,9 +158,9 @@ export class AdminReservacionDetallePage {
 
           this.comision = this.total_final * 0.059;
 
-          this.iva = this.comision * 0.16;
+          // this.iva = this.comision * 0.16;
 
-          this.comisionMasIva = this.comision + this.iva;
+          // this.comisionMasIva = this.comision + this.iva;
 
           this.subTotal = this.comision + this.total_final;
 
@@ -153,11 +168,21 @@ export class AdminReservacionDetallePage {
 
           this.propinaRe2 = this.total_final * res2[0].propina;
 
-          this.totalNeto = this.subTotal + this.iva + this.propinaRe2;
+          this.totalNeto = this.subTotal + this.totalCover + this.propinaRe2;
+          // this.totalNeto = this.subTotal + this.iva + this.propinaRe2;
           // this.totalNeto = this.subTotal + this.propinaRe2;
 
         });
       } else {
+
+        if (this.cover == undefined) {
+
+          this.totalCover = 0;
+
+        } else {
+
+          this.totalCover = this.cover * this.noPersonas;
+        }
 
         this.monRes.getProductos(this.idReservacion).subscribe(productos => {
 
@@ -177,9 +202,10 @@ export class AdminReservacionDetallePage {
 
           this.comision = res2[0].totalReservacion * 0.059;
 
-          this.iva = this.comision * 0.16;
+          // this.iva = this.comision * 0.16;
 
-          this.comisionMasIva = this.comision + this.iva;
+          // this.comisionMasIva = this.comision + this.iva;
+          this.comisionMasIva = this.comision;
 
           this.subTotal = this.comision + res2[0].totalReservacion;
 
@@ -187,7 +213,8 @@ export class AdminReservacionDetallePage {
 
           this.propinaRe = this.subTotal * res2[0].propina;
 
-          this.totalNeto = this.subTotal + this.iva + this.propinaRe;
+          this.totalNeto = this.subTotal + this.totalCover + this.propinaRe;
+          // this.totalNeto = this.subTotal + this.iva + this.propinaRe;
           // this.totalNeto = this.subTotal + this.propinaRe;
 
 
@@ -199,13 +226,13 @@ export class AdminReservacionDetallePage {
 
   }
 
-  async getInfoCodigoRP(codigoRP:string, idReservacion:string){
+  async getInfoCodigoRP(codigoRP: string, idReservacion: string) {
 
     this.infoCodigoRP = await this._gestionReser.getInfoContCodigosRP(codigoRP, idReservacion);
 
     this.uidRp = this.infoCodigoRP.uidRP;
 
-    console.log('infoCodigoRP--->', this.infoCodigoRP.uidRP);    
+    console.log('infoCodigoRP--->', this.infoCodigoRP.uidRP);
 
   }
 
@@ -243,7 +270,7 @@ export class AdminReservacionDetallePage {
         {
           text: 'Aceptar',
           handler: () => {
-            
+
             this.proReem.reembolsarReservacion(idPlayerUser, idReservacion);
             this.navCtrl.push(MasterReembolsosPage);
           }
