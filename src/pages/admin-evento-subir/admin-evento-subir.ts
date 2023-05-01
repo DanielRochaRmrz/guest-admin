@@ -16,7 +16,7 @@ import { DeviceProvider } from '../../providers/device/device';
 export class AdminEventoSubirPage {
 
   titulo: string = "";
-  cover: any;
+  cover: number = 0;
   fecha: string = "";
   hora: string = "";
   hora_fin: string = "";

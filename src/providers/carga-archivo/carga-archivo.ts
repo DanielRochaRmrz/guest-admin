@@ -113,7 +113,7 @@ cargar_imagen_firebase( archivo:ArchivoSubir  ){
 }
 
 private crear_post( titulo:string,
-                    cover:string,
+                    cover:number,
                     fecha: string,
                     hora: string,
                     hora_fin: string,

@@ -7,7 +7,6 @@ import { SucursalAltaProvider } from "../../providers/sucursal-alta/sucursal-alt
 import { GestionReservacionesProvider } from '../../providers/gestion-reservaciones/gestion-reservaciones';
 import { ReembolsosProvider } from '../../providers/reembolsos/reembolsos';
 import { MasterReembolsosPage } from '../master-reembolsos/master-reembolsos';
-import { log } from 'console';
 
 @IonicPage()
 @Component({
