@@ -134,7 +134,7 @@
             <ion-col></ion-col>
             <ion-col>
                 <!-- [disabled]="titulo.length <= 1 || imagenPreview.length <= 1" -->
-                <button class="btnimgs" ion-button (click)="crear_post(ciudadSucursal)">
+                <button class="btnimgs" ion-button [disabled]="titulo.length <= 1 || imagenPreview.length <= 1" (click)="crear_post(ciudadSucursal)">
                     Crear post
                 </button>
             </ion-col>
